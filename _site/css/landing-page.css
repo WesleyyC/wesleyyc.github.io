@@ -103,6 +103,12 @@ h6 {
     margin-bottom: 30px;
 }
 
+.category-heading {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+
 .section-heading-spacer {
     float: left;
     width: 200px;
