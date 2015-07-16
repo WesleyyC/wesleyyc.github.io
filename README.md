@@ -1,4 +1,4 @@
-# Personal Homepage: www.wesleywq.in
+# <a href="http://www.wesleywq.in">wesley.me</a>
 
 Build for http://wesleyyc.github.io/
 
