@@ -1,7 +1,7 @@
-# My Personal Site
+# <a href="http://www.wesleywq.in">wesley.me</a>
 
-http://wesleyyc.github.io/
+Build for http://wesleyyc.github.io/
 
-Jekyll theme based on [landing-page bootstrap theme ](http://startbootstrap.com/templates/landing-page/)
+CSS Template derived from <a href="http://startbootstrap.com/">Start Bootstrap</a> &sdot; Amazing Framework from <a href="http://jekyllrb.com/">Jekyll<a></p>
 
 
