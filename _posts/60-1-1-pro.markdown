@@ -1,0 +1,11 @@
+---
+layout: default
+img: 60-1-1-pro.png
+category: Projects
+title: "Perfect Tic Tac Toc Player"
+description: |
+---
+* Implement a [Tic Tac Toc game](https://github.com/WesleyyC/TicTacToe) and a perfect player who will never loose
+
+
+* The software is written in python and open source on Github

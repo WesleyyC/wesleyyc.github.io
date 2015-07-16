@@ -1,0 +1,14 @@
+---
+layout: default
+img: 10-1-1-exp.jpg
+category: Experiences
+title: Google CodeU Participant
+description: |
+---
+* CodeU is an exclusive development program for high potential candidates to strengthen their skills. 
+
+
+* Receive technical coaching and mentorship from a Google software engineer to prepare for future technical interviews and receive insights into the tech industry culture. 
+
+
+* Develop an Android application using Android Studio and present at Google HQ.
