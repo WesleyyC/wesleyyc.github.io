@@ -7,21 +7,18 @@
         <div class="content-section-a">
 
             <div class="container">
-
+                <div class="row">
+                    <h2 class="category-heading">{{ post.category }}</h2>
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                </div>
                 <div class="row">
                     <div class="col-lg-5 col-sm-6">
-                        <h2 class="category-heading">{{ post.category }}</h2>
-                        <hr class="section-heading-spacer">
-                        <div class="clearfix"></div>
                         <h2 class="section-heading">{{ post.title }}</h2>
                         <div class="lead">{{ post.content }}</div>
                     </div>
                     <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <img class="img-responsive" src="img/pro/{{ post.img }}" alt="">
+                        <img class="img-responsive center-block" src="img/pro/{{ post.img }}" alt="">
                     </div>
                 </div>
 
@@ -35,19 +32,18 @@
         <div class="content-section-b">
 
             <div class="container">
-
+                <div class="row">
+                    <h2 class="category-heading">{{ post.category }}</h2>
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                </div>
                 <div class="row">
                     <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
-                        <h2 class="category-heading">{{ post.category }}</h2>
-                        <hr class="section-heading-spacer">
-                        <div class="clearfix"></div>
                         <h2 class="section-heading">{{ post.title }}</h2>
                         <div class="lead">{{ post.content }}</div>
                     </div>
                     <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                        <br>
-                        <br>
-                        <img class="img-responsive" src="img/pro/{{ post.img }}" alt="">
+                        <img class="img-responsive center-block" src="img/pro/{{ post.img }}" alt="">
                     </div>
                 </div>
 

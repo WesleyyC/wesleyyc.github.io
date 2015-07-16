@@ -1,6 +1,6 @@
 ---
 layout: default
-img: 60-1-1-pro.png
+img: 60-1-1-pro.jpeg
 category: Projects
 title: "Perfect Tic Tac Toc Player"
 description: |
