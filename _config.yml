@@ -21,15 +21,18 @@ permalink: pretty
 # ----------------------- #
 
 social:
-  - icon: github-square
+  - icon: github
     title: github
     url: https://github.com/WesleyyC
   - icon: linkedin
     title: linkedin
     url: https://www.linkedin.com/in/wesleychin0919
+  - icon: pencil
+    title: blog
+    url: https://wesleyyc.github.io/blog
   - icon: envelope-o
     title: email
     url: mailto:wesley.chin0919@gmail.com
-  - icon: file-pdf-o
-    title: cv
-    url: https://www.dropbox.com/s/44y09thgggt4tqm/Resume_Wesley.pdf?dl=0
+  # - icon: file-pdf-o
+  #   title: cv
+  #   url: https://www.dropbox.com/s/44y09thgggt4tqm/Resume_Wesley.pdf?dl=0
