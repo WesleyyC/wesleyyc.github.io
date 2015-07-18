@@ -16,6 +16,9 @@ description: > # "Wesley Wei Qian's Personal Page"
 markdown: kramdown
 permalink: pretty
 
+gems:
+  - jekyll-sitemap
+
 # ----------------------- #
 #   3rd Party Settings    #
 # ----------------------- #
@@ -26,7 +29,7 @@ social:
     url: mailto:wesley.chin0919@gmail.com
   - icon: pencil
     title: blog
-    url: https://wesleyyc.github.io/blog
+    url: https://wesleyyc.github.io/blog/
   - icon: github
     title: github
     url: https://github.com/WesleyyC
