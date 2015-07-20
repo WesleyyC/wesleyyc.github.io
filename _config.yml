@@ -15,7 +15,7 @@ description: > # "Wesley Wei Qian's Personal Page"
 # Build settings
 markdown: kramdown
 permalink: pretty
-
+# Build sitemap
 gems:
   - jekyll-sitemap
 
@@ -24,12 +24,12 @@ gems:
 # ----------------------- #
 
 social:
-  - icon: envelope-o
-    title: email
-    url: mailto:wesley.chin0919@gmail.com
   - icon: pencil
     title: blog
     url: http://www.wesleyq.me/blog
+  - icon: envelope-o
+    title: email
+    url: mailto:wesley.chin0919@gmail.com
   - icon: github
     title: github
     url: https://github.com/WesleyyC

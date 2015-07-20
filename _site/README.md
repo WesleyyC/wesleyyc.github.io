@@ -1,4 +1,4 @@
-# <a href="http://www.wesleywq.in">wesley.me</a>
+# <a href="http://www.wesleyq.me>wesleyq.me</a>
 
 Build for http://wesleyyc.github.io/
 
