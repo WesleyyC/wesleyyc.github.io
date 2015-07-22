@@ -5,7 +5,7 @@ category: Projects
 title: Spatial Pattern Recognition
 description: |
 ---
-* Implement a probabilistic parametric model to automatically generalize spatial pattern similarity from sample attributed relational graphs(ARGs) and detect similar spatial pattern on new ARGs using such model using MATLAB OOP
+* Implement [a probabilistic parametric model](https://github.com/WesleyyC/SpatialPatternRecognition) to automatically generalize spatial pattern similarity from sample attributed relational graphs(ARGs) and detect similar spatial pattern on new ARGs using such model using MATLAB OOP
 
 
 * Generate auto-testing script for large scale testing on servers

@@ -8,4 +8,4 @@ description: |
 * Tackle the long-known NP-complete graph matching problem with a graduated assignment algorithm
 
 
-* Implement the algorithm using MATLAB OOP scheme, which can be further developed and used by other MATLAB community members
+* [Implement the algorithm](https://github.com/WesleyyC/SpatialPatternRecognition/tree/master/GraphMatching) using MATLAB OOP scheme, which can be further developed and used by other MATLAB community members
