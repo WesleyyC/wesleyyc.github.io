@@ -16,6 +16,9 @@
     <!-- Custom CSS -->
     <link href="css/landing-page.css" rel="stylesheet">
 
+    <!-- Instafeed.js -->
+    <script type="text/javascript" src="js/instafeed.min.js"></script>
+
     <!-- Custom Fonts -->
     <link href="font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
@@ -137,6 +140,26 @@ max-height:40px;" src="img/logo/logo.png" alt=""> &nbspWesley W. Q.</a>
         </div>
     </section>
 
+		<section id="instagram">
+	<div class="content-section-b">
+	    <div class="container">
+	        <div class="row">
+	            <h2 class="category-heading">Instagram&nbsp<a href="https://instagram.com/wesleyy.c"> <i class="fa fa-instagram"></i> </a></h2>
+	            <hr class="section-heading-spacer">
+	            <div class="clearfix"></div>
+	        </div>
+	        <div class="row">
+	            	<div id "insta_container" style="text-align:center">
+						<div id="instafeed">
+						      <a id="more_link"><img class"more_link" src="img/keyboard.jpg"/></a>
+						</div>
+
+					</div>
+	        </div>
+
+	    </div>
+	</div>
+</section>
 		<section id="experiences">
 <!-- Page Content -->
 
@@ -720,5 +743,37 @@ max-height:40px;" src="img/logo/logo.png" alt=""> &nbspWesley W. Q.</a>
   ga('send', 'pageview');
 
 </script>
+
+<!-- InstaFeed -->
+<script type="text/javascript">
+	var loadButton = document.getElementById('more_link');
+    var feed = new Instafeed({
+        clientId: '44022fd2ea504984a80df2abe018f800',
+        get: 'user',
+        userId: 314516572,
+        resolution: 'standard_resolution',
+        accessToken: '314516572.44022fd.6acc0507c0bd4e2eab90528714e67821',
+        sortBy:'random',
+        limit: 12,
+        after: function(){
+        	$('#more_link').appendTo('#instafeed');
+
+        	if (!this.hasNext()) {
+	      		loadButton.setAttribute('disabled', 'disabled');
+	    	}
+        }
+    });
+
+    // bind the load more button
+	loadButton.addEventListener('click', function() {
+	  feed.next();
+	});
+
+    feed.run();
+</script>
+<!-- <script type="text/javascript">
+	$('#banner').appendTo('#instafeed');
+</script> -->
+
 	</body>
 </html>
