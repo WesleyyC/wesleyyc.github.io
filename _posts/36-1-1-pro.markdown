@@ -1,0 +1,12 @@
+---
+layout: default
+img: 36-1-1-pro.jpg
+category: Projects
+title: "AquaLove"
+description: |
+---
+* Create a drinking water quality inspection project to raise people’s awareness of their drinking water by building a interesting water test kit and [a social networking application on android](https://github.com/WesleyyC/SEEDHack)
+
+* Build an Android application in Android Studio with Google Map API and Parse backend, forming a real time drinking water quality review and upload platform with data visualization on map.
+
+* [Video Demo](https://youtu.be/EN9ktS1mCvU)
