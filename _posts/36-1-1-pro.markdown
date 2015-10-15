@@ -9,4 +9,6 @@ description: |
 
 * Build an Android application in Android Studio with Google Map API and Parse backend, forming a real time drinking water quality review and upload platform with data visualization on map.
 
+* In addtion, we have also done a [crowdfunding](https://izhongchou.taobao.com/dreamdetail.htm?spm=a215p.1472805.0.0.PvCySB&id=10044937#) for this non-profit project in China.
+
 * [Video Demo](https://youtu.be/EN9ktS1mCvU)

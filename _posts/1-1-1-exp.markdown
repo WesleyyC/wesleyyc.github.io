@@ -2,16 +2,16 @@
 layout: default
 img: 1-1-1-exp.jpg
 category: Experiences
-title: Machine Learning <br>Summer Research Intern
+title: Machine Learning <br>Research Intern
 description: |
 ---
-* Conduct interdisciplinary research in computer science and neuroscience
 
+* Conduct interdisciplinary research in computer science and biology by using machine learning technique
 
-* Investigate different methodologies of different neurons using machine learning technique to analyze 3D images of neurons
+* Tackle the NP-complete graph matching problem with a graduated assignment algorithm
 
+* Implement a probabilistic parametric model to automatically generalize similar patterns from a set of sample attributed relational graphs(ARGs) and detect similar spatial pattern from new graph
 
-* Tackle the long-known NP-complete graph matching problem with a graduated assignment algorithm 
+* Innovate a new way to match proteins with 3D structure instead of the traditional sequence matching using the above pattern generalization algorithm 
 
-
-* Implement a probabilistic parametric model to automatically generalize spatial pattern similarity from sample attributed relational graphs(ARGs) and detect similar spatial pattern on new ARGs.
+* Implement the algorithm using MATLAB Machine Learning Toolbox and MATLAB OOP scheme, which can be further developed and used by other MATLAB community members
