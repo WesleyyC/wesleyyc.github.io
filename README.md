@@ -1,6 +1,6 @@
 
 # <a href="http://www.wesleyq.me"> wesleyq.me </a>
 
-Build for http://wesleyyc.github.io/
+This repository contains the code for my personal website.
 
-CSS Template derived from <a href="http://startbootstrap.com/">Start Bootstrap</a> &sdot; Amazing Framework from <a href="http://jekyllrb.com/">Jekyll<a></p>
+![preview](http://i.imgur.com/5rmnWcQ.jpg)
