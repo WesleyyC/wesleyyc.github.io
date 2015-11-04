@@ -36,6 +36,6 @@ social:
   - icon: linkedin
     title: linkedin
     url: https://www.linkedin.com/in/wesleychin0919
-  # - icon: file-pdf-o
-  #   title: cv
-  #   url: https://www.dropbox.com/s/44y09thgggt4tqm/Resume_Wesley.pdf?dl=0
+  - icon: file-pdf-o
+    title: cv
+    url: https://github.com/WesleyyC/wesleyyc.github.io/blob/master/rsc/Resume.pdf
