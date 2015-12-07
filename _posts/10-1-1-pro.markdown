@@ -1,6 +1,6 @@
 ---
 layout: default
-img: 10-1-1-pro.jpg
+img: 10-1-1-pro.png
 category: Projects
 title: Jeeves
 description: |
