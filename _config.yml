@@ -24,9 +24,9 @@ gems:
 # ----------------------- #
 
 social:
-  - icon: pencil
+  - icon: medium
     title: blog
-    url: https://medium.com/@wesleyyc
+    url: https://medium.com/@wesleyyc/latest
   - icon: envelope-o
     title: email
     url: mailto:wesley.chin0919@gmail.com
