@@ -1,0 +1,14 @@
+---
+layout: default
+img: 13-1-1-pro.png
+category: Projects
+title: Demandware Field Project:<br> The Next Generation Of<br> In-Store Shopping
+description: |
+---
+* Work with [Demandware Inc.](http://www.demandware.com/), a software technology company providing a cloud-based e-commerce platform for reatailers and brand manufactures, to define and narrow down problems in today's in-store shopping experience in the era of online shopping.
+
+* Research, propose and test solutions and features to enhance in-store shopping experience by bridging internet and physical store
+
+* Develop [two mobile application](https://github.com/BrandeisXDemandware), Android and iOS, to do a proof of concepts on some emerging technologies like beacons (notification and trilateration location), Google Indoor Map, etc
+
+* Write and pitch our project to the team with reports, presentations and [website](http://brandeisxdemandware.github.io/)
