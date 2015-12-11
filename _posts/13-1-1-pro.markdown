@@ -5,7 +5,7 @@ category: Projects
 title: Demandware Field Project:<br> The Next Generation Of<br> In-Store Shopping
 description: |
 ---
-* Work with [Demandware Inc.](http://www.demandware.com/), a software technology company providing a cloud-based e-commerce platform for reatailers and brand manufactures, to define and narrow down problems in today's in-store shopping experience in the era of online shopping.
+* Work with [Demandware Inc.](http://www.demandware.com/), a software technology company providing a cloud-based e-commerce platform for retailers and brand manufactures, to define and narrow down problems in today's in-store shopping experience in the era of online shopping.
 
 * Research, propose and test solutions and features to enhance in-store shopping experience by bridging internet and physical store
 
