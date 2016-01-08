@@ -137,12 +137,14 @@
 	            <div class="clearfix"></div>
 	        </div>
 	        <div class="row">
-	            	<div id "insta_container" style="text-align:center">
-						<div id="instafeed"> </div>
-					</div>
+            	<div id "insta_container" style="text-align:center">
+					<div id="instafeed"> </div>
+				</div>
 	        </div>
 	        <div class="row" align="center">
-	        	<a id="more_link" href="#" onClick="return false;"> <i class="fa fa-chevron-circle-right fa-5x" style="color:#517fa4" ></i></a>
+	        	<br>
+	        	<br>
+	        	<a id="more_link" href="#" onClick="return false;"> <div class="numberCircle">Load More</div></a>
 	        </div>
 
 	    </div>
@@ -827,9 +829,9 @@
         resolution: 'standard_resolution',
         accessToken: '314516572.44022fd.6acc0507c0bd4e2eab90528714e67821',
         sortBy:'random',
-        limit: 12,
+        limit: 15,
         after: function(){
-        	$('#more_link').appendTo('#instafeed');
+        	// $('#more_link').appendTo('#instafeed');
 
         	if (!this.hasNext()) {
 	      		loadButton.setAttribute('disabled', 'disabled');
