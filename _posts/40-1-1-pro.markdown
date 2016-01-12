@@ -5,7 +5,7 @@ category: Projects
 title: "Image Editor"
 description: |
 ---
-* Design an [image editor](https://github.com/WesleyyC/imageEditor) in terminal interface written in Java with flipping and cropping image, invert and reverse color functionality.
+* Design an [image editor](https://github.com/WesleyyC/imageEditor) in terminal interface written in Java with flipping and cropping image, invert and reverse color functionality
 
 
-* Color filter function are working in progress.
+* Color filter function are working in progress

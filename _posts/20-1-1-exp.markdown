@@ -5,13 +5,11 @@ category: Experiences
 title: Undergraduate <br> Teaching Assistant
 description: |
 ---
-* Selected by the instructors to give weekly lectures to students enrolled in an introductory computer science course including intro&advanced java, data structure and algorithm.
 
+* Held review section for computer science courses including intro&advanced java, data structure & algorithm, computer program interpreter
 
-* Explained complex concepts in small group setting
+* Explained complex concepts in small group setting for classes
 
+* Graded assignments with One-on-One interaction for classes
 
-* Graded assignments with One-on-One interaction 
-
-
-* Held weekly office hours for individual student discussion
+* Held weekly office hours for individual student discussion for classes

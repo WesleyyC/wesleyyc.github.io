@@ -5,7 +5,7 @@ category: Projects
 title: "Knightlife"
 description: |
 ---
-* A [young adult-focused tool](https://github.com/arikalfus/Knightlife) designed to help friends stay in contact at social events and nighttime gatherings. Designed to ensure safety and facilitate group communication.
+* A [young adult-focused tool](https://github.com/arikalfus/Knightlife) designed to help friends stay in contact at social events and nighttime gatherings. Designed to ensure safety and facilitate group communication
 
 
 * Features include: record GPS location in database, Google Maps and Facebook API integration, sending automated messages

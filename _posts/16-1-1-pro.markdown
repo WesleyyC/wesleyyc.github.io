@@ -1,0 +1,10 @@
+---
+layout: default
+img: 16-1-1-pro.png
+category: Projects
+title: Protein Domain Structure <br> Generalization Model
+description: |
+---
+* Innovate a new way to match proteins with 3D graph structure using the a probabilistic parametric model
+
+* Implement the algorithm using MATLAB Parallel Computing Toolbox

@@ -12,6 +12,6 @@ description: |
 
 * Implement a probabilistic parametric model to automatically generalize similar patterns from a set of sample attributed relational graphs(ARGs) and detect similar spatial pattern from new graph
 
-* Innovate a new way to match proteins with 3D structure instead of the traditional sequence matching using the above pattern generalization algorithm 
+* Innovate a new way to match proteins with 3D graph structure using the above pattern generalization algorithm
 
-* Implement the algorithm using MATLAB Machine Learning Toolbox and MATLAB OOP scheme, which can be further developed and used by other MATLAB community members
+* Implement the algorithm using MATLAB Machine Learning Toolbox, Parallel Computing Toolbox and MATLAB OOP scheme, which can be further developed and used by other MATLAB community members
