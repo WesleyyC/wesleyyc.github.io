@@ -6,7 +6,7 @@ title: Undergraduate <br> Teaching Assistant
 description: |
 ---
 
-* Held review section for computer science courses including intro&advanced java, data structure & algorithm, computer program interpreter
+* Held review section for computer science courses including intro & advanced java, data structure & algorithm, computer program structure and interpreter
 
 * Explained complex concepts in small group setting for classes
 
