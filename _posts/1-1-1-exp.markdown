@@ -6,12 +6,12 @@ title: Machine Learning <br>Research Assistant
 description: |
 ---
 
-* Conduct interdisciplinary research in computer science and biology by using machine learning technique
+* Conduct interdisciplinary research in computer science, biology and linguistic using statistic machine learning and deep learning approach with Professor Pengyu Hong at Brandeis University
 
-* Tackle the NP-complete graph matching problem with a graduated assignment algorithm
+* Tackle the NP-complete graph matching problem with a graduated assignment algorithm and implement a probabilistic parametric model to automatically generalize similar patterns from a set of sample attributed relational graphs(ARGs) and detect similar spatial pattern from new graph
 
-* Implement a probabilistic parametric model to automatically generalize similar patterns from a set of sample attributed relational graphs(ARGs) and detect similar spatial pattern from new graph
+* Apply the model above in biology domain and innovate a new way to match proteins with 3D graph structure
 
-* Innovate a new way to match proteins with 3D graph structure using the above pattern generalization algorithm
+* Implement computational linguistic models using word vector, neural network and other statistical tools to match sentences in the same conversational context
 
-* Implement the algorithm using MATLAB Machine Learning Toolbox, Parallel Computing Toolbox and MATLAB OOP scheme, which can be further developed and used by other MATLAB community members
+* Technology involves MATLAB Machine Learning Toolbox, Parallel Computing Toolbox and MATLAB OOP scheme, which can be further developed and used by other MATLAB community members
