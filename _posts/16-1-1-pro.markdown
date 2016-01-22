@@ -5,6 +5,10 @@ category: Projects
 title: Protein Domain Structure <br> Generalization Model
 description: |
 ---
-* Innovate a new way to match proteins with 3D graph structure using the a probabilistic parametric model
+* Apply a pattern recognition machine learning model and innovate a new way to match proteins in their tertiary structure(three dimension) instead of their primary(linear) structure
+
+* Preprocess biology data, specifically protein crystal structure data from protein data bank
+
+* Tune and customized a general machine learning model with high throughput protein data using parallel computing tools
 
 * Implement the algorithm using MATLAB Parallel Computing Toolbox
