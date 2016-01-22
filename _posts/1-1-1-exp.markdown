@@ -10,7 +10,7 @@ description: |
 
 * Tackle the NP-complete graph matching problem with a graduated assignment algorithm and implement a probabilistic parametric model to automatically generalize similar patterns from a set of sample attributed relational graphs(ARGs) and detect similar spatial pattern from new graph
 
-* Apply the model above in biology domain and innovate a new way to match proteins in their tertiary structure(three dimension) instead of their primary(linear) structure
+* Apply the model above in biology domain and innovate a new way to match proteins in their tertiary(three dimension) structure instead of their primary(linear) structure
 
 * Implement computational linguistic models using word vector, neural network and other statistical tools to match sentences in the same conversational context
 
