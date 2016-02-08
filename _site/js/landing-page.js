@@ -142,3 +142,5 @@ particlesJS('particles-js',
   },
   "retina_detect": true
 });
+
+$("#particles-header").insertAfter(".particles-js-canvas-el");
