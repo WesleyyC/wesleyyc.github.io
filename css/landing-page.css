@@ -33,12 +33,13 @@ h6 {
     color: #f8f8f8;
     /*background: url(../img/intro-bg.jpg) no-repeat center center;*/
     background-size: cover;
+    pointer-events: none
+
 }
 
 .intro-message {
     position: relative;
     padding-top: 20%;
-    padding-bottom: 20%;
 }
 
 .intro-message > h1 {
@@ -79,6 +80,15 @@ h6 {
     .intro-divider {
         width: 100%;
     }
+}
+
+.intro-social {
+    position: relative;
+    padding-bottom: 20%;
+}
+.social-click {
+    position: relative;
+    pointer-events: all
 }
 
 .network-name {
@@ -231,7 +241,7 @@ iframe {
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  position:relative
+  position:relative;
 }
 
 #particles-js canvas { position:absolute; top:0; left:0; z-index:0 }
