@@ -1,13 +1,14 @@
 ---
 layout: default
-img: 10-1-1-pro.png
+img: 50-1-1-pro.png
 category: Projects
-title: Jeeves
+title: "Knightlife"
 description: |
 ---
-* [Jeeves](https://github.com/arikalfus/Jeeves) is a voice-powered virtual assistant for everyday routines and **the Runner-Up of AVIOS Mobile Speech Application Contest 2015**
+* A [young adult-focused tool](https://github.com/arikalfus/Knightlife) designed to help friends stay in contact at social events and nighttime gatherings. Designed to ensure safety and facilitate group communication
 
 
-* Jeeves focuses on natural, conversational dialogue so the user doesn't have to remember a list of restricted commands. After a 5-week intensive course to learn the relevant technologies, Jeeves was imagined and realized in just another 5 weeks
+* Features include: record GPS location in database, Google Maps and Facebook API integration, sending automated messages
 
-* Features include: Reading email, current news, and weather, natural language understanding, dialogue management
+
+* Frameworks: AngularJS (client-side), NodeJS (server-side), MongoDB (database), Phonegap (android development)

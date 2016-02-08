@@ -1,0 +1,13 @@
+---
+layout: default
+img: 10-1-1-pro.png
+category: Projects
+title: Jeeves
+description: |
+---
+* [Jeeves](https://github.com/arikalfus/Jeeves) is a voice-powered virtual assistant for everyday routines and **the Runner-Up of AVIOS Mobile Speech Application Contest 2015**
+
+
+* Jeeves focuses on natural, conversational dialogue so the user doesn't have to remember a list of restricted commands. After a 5-week intensive course to learn the relevant technologies, Jeeves was imagined and realized in just another 5 weeks
+
+* Features include: Reading email, current news, and weather, natural language understanding, dialogue management
