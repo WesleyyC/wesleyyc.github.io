@@ -897,22 +897,41 @@
 <!-- InstaFeed -->
 <script type="text/javascript">
 	var loadButton = document.getElementById('more_link');
-    var feed = new Instafeed({
-        clientId: '44022fd2ea504984a80df2abe018f800',
-        get: 'user',
-        userId: 314516572,
-        resolution: 'standard_resolution',
-        accessToken: '314516572.44022fd.6acc0507c0bd4e2eab90528714e67821',
-        sortBy:'random',
-        limit: 15,
-        after: function(){
-        	// $('#more_link').appendTo('#instafeed');
+    if(typeof window.orientation !== 'undefined'){
+      var feed = new Instafeed({
+          clientId: '44022fd2ea504984a80df2abe018f800',
+          get: 'user',
+          userId: 314516572,
+          resolution: 'standard_resolution',
+          accessToken: '314516572.44022fd.6acc0507c0bd4e2eab90528714e67821',
+          sortBy:'random',
+          limit: 4,
+          after: function(){
+          	// $('#more_link').appendTo('#instafeed');
 
-        	if (!this.hasNext()) {
-	      		loadButton.setAttribute('disabled', 'disabled');
-	    	}
-        }
-    });
+          	if (!this.hasNext()) {
+  	      		loadButton.setAttribute('disabled', 'disabled');
+  	    	}
+          }
+      });
+    }else{
+      var feed = new Instafeed({
+          clientId: '44022fd2ea504984a80df2abe018f800',
+          get: 'user',
+          userId: 314516572,
+          resolution: 'standard_resolution',
+          accessToken: '314516572.44022fd.6acc0507c0bd4e2eab90528714e67821',
+          sortBy:'random',
+          limit: 15,
+          after: function(){
+            // $('#more_link').appendTo('#instafeed');
+
+            if (!this.hasNext()) {
+              loadButton.setAttribute('disabled', 'disabled');
+          }
+          }
+      });
+    }
 
     // bind the load more button
 	loadButton.addEventListener('click', function() {
