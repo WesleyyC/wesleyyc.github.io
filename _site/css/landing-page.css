@@ -209,11 +209,20 @@ width:200px;
 filter:alpha(opacity=80);
 }
 
+@media(max-width:800px) {
+    #instafeed img {
+        display:inline-block;
+        padding:5px;
+        opacity:0.9;
+        height:150px;
+        width:150px;
+        filter:alpha(opacity=80);
+    }
+
+}
+
 #instafeed img:hover {
-display:inline-block;
 opacity:1;
-height:200px;
-width:200px;
 filter:alpha(opacity=100);
 }
 
