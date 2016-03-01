@@ -2,7 +2,7 @@
 layout: default
 img: 1-1-1-exp.jpg
 category: Experiences
-title: Machine Learning <br>Research Assistant
+title: Machine Learning <br>Research Intern
 description: |
 ---
 

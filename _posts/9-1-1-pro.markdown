@@ -1,11 +1,12 @@
 ---
 layout: default
-img: 40-1-1-pro.png
+img: 40-1-1-pro.jpg
 category: Projects
 title: "Image Editor"
 description: |
 ---
 * Design an [image editor](https://github.com/WesleyyC/imageEditor) in terminal interface written in Java with flipping and cropping image, invert and reverse color functionality
 
-
 * Color filter function are working in progress
+
+* Working on resizing images with seam extraction instead of cropping or scaling
