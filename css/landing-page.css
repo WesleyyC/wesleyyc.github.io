@@ -27,13 +27,14 @@ h6 {
 }
 
 .intro-header {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-    padding-bottom: 50px;
+    padding-top: 40px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 40px;
     text-align: center;
     color: #f8f8f8;
     /*background: url(../img/intro-bg.jpg) no-repeat center center;*/
     background-size: cover;
-    pointer-events: none
+    pointer-events: none;
+    /*height: 600px;*/
 
 }
 
@@ -250,8 +251,8 @@ iframe {
 #particles-js{
   width: 100%;
   height: 100%;
-  background-color: #808B96;
-  background-image: url('');
+  /*background-color: #808B96;*/
+  background-image: url(../img/intro-brain.jpg);
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
