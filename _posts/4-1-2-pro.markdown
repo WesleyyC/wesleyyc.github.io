@@ -1,0 +1,15 @@
+---
+layout: default
+img: 16-1-2-pro.gif
+category: Projects
+title: SMS Dialogue Structure Modeling
+description: |
+---
+
+* Tackle dialogue structure modeling problem in chatting, especially group chatting where sentences are short and participants share more common senses outside of the conversation
+
+* Write python scripts for preprocessing Chinese data with word embedding, character tokenize and XML dialogue annotation
+
+* Implement traditional statistical approach using support vector machine with statistic like Jacquard index, word vector similarity
+
+* Implement neural network model using framework like [Tensorflow](https://www.tensorflow.org/) and [Keras](http://keras.io/)
