@@ -3,4 +3,4 @@
 
 This repository contains the code for my personal website.
 
-![preview](http://i.imgur.com/7U7V3TA.jpg)
+![preview](https://github.com/WesleyyC/wesleyyc.github.io/raw/master/img/screen.png)
