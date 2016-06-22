@@ -1,0 +1,17 @@
+---
+layout: default
+img: 1-1-2-exp.jpg
+category: Experiences
+title: Machine Learning <br>Research Intern
+description: |
+---
+
+* Conduct interdisciplinary research in computer science, biology and linguistic using statistic machine learning and deep learning approach with Professor Pengyu Hong at Brandeis University
+
+* Tackle the NP-complete graph matching problem with a graduated assignment implementation
+
+* Optimize automatic graph feature extraction and apply the model in biology domain involving proteins and neurons
+
+* Implement computational linguistic models using word vector, neural network and other statistical tools to match sentences in the same conversational context
+
+* Selected as 16'-17' Jerome A. Schiff Undergraduate Fellows for my innovative [research](http://www.cs.brandeis.edu/~weschin/Schiff-Proposal.pdf) in machine learning and biology

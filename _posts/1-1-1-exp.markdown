@@ -1,17 +1,15 @@
 ---
 layout: default
-img: 1-1-1-exp.jpg
+img: 1-1-1-exp.png
 category: Experiences
-title: Machine Learning <br>Research Intern
+title: Software Engineering Intern
 description: |
 ---
 
-* Conduct interdisciplinary research in computer science, biology and linguistic using statistic machine learning and deep learning approach with Professor Pengyu Hong at Brandeis University
+<br>
 
-* Tackle the NP-complete graph matching problem with a graduated assignment implementation
+* Work with the Mobile Infrastructure Team @ Uber to support in house mobile developer and release team to ensure the development efficiency as well as the app quality
 
-* Optimize automatic graph feature extraction and apply the model in biology domain involving proteins and neurons
+* Build internal tools for mobile developers to investigate test failures on Uber's continious intergration platform
 
-* Implement computational linguistic models using word vector, neural network and other statistical tools to match sentences in the same conversational context
-
-* Selected as 16'-17' Jerome A. Schiff Undergraduate Fellows for my innovative [research](http://www.cs.brandeis.edu/~weschin/Schiff-Proposal.pdf) in machine learning and biology
+* Engineer in full stack: React.js frontend and Python flask backend with test log parsing and server routing
