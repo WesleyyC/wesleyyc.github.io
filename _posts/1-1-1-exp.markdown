@@ -8,8 +8,9 @@ description: |
 
 <br>
 
-* Work with the Mobile Infrastructure Team @ Uber to support in house mobile developer and release team to ensure the development efficiency as well as the app quality
+* Work in the Mobile Infrastructure team at Uber to support in house mobile developers and the release team to ensure the development efficiency as well as the app quality on millions’ phones
 
-* Build internal tools for mobile developers to investigate test failures on Uber's continious intergration platform
+* Create and design an internal tool for mobile developers to investigate UI test failures on Uber’s
+Continuous Integration platform in full speed by aggregating and synchronizing logs and videos
 
-* Engineer in full stack: React.js frontend and Python flask backend with test log parsing and server routing
+* Engineer in full stack with React.js front-end and Python/Go back-end
