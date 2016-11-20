@@ -2,13 +2,17 @@
 layout: default
 img: 16-1-1-pro.png
 category: Projects
-title: Automatic Spatial Pattern Extraction with Application to Mining Protein Structures and Neuron Morphologies
+title: Automatic Spatial Pattern Extraction with Biology Application
 description: |
 ---
-* Apply a pattern recognition machine learning model and innovate a new way to match proteins in their tertiary(three dimension) structure instead of their primary(linear) structure
+* Implement and optimize attributed relation graph matching algorithm using graduate assignin
 
-* Preprocess biology data, specifically protein crystal structure data from protein data bank
+* Train a probabilistic parametric model based on the above algorithm to extract feature pattern from
+multiple graphs automatically using EM algorithm
 
-* Tune and customized a pattern extraction machine learning model with high throughput protein data using parallel computing tools and robust EM algorithm to handle a high level of protein sequence noise
+* Apply the above model in biology context and innovate a new way to match proteins in their tertiary
+(three dimension) structure instead of their primary (linear) structure
 
-* Optimize the implementation using MATLAB Parallel Computing Toolbox and visualize matching in 3D using biograph
+* Leverage techniques in word embedding and generate feature vector for each amino acid
+
+* Project is supported by Jerome A. Schiff Fellowship

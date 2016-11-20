@@ -5,10 +5,10 @@ category: Experiences
 title: Google CodeU Participant
 description: |
 ---
-* CodeU is an exclusive development program for high potential candidates to strengthen their skills
+* Participated CodeU, an exclusive dev program for high potential students to strengthen their skills
 
 
-* Receive technical coaching and mentorship from a Google software engineer to prepare for future technical interviews and receive insights into the tech industry culture
+* Worked with three other participants to create a contact transfer Android application that transfers users’ contact and social platform info with NFC or QR Code
 
 
-* Develop an Android application using Android Studio and present at Google HQ
+* Presented the application at Google Tech Corner and won the runner-up for Engineer’s Choice

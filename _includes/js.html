@@ -24,7 +24,7 @@
 
 <!-- InstaFeed -->
 <script type="text/javascript">
-	var loadButton = document.getElementById('more_link');
+	// var loadButton = document.getElementById('more_link');
     if(typeof window.orientation !== 'undefined'){
       var feed = new Instafeed({
           clientId: '44022fd2ea504984a80df2abe018f800',
@@ -37,9 +37,9 @@
           after: function(){
           	// $('#more_link').appendTo('#instafeed');
 
-          	if (!this.hasNext()) {
-  	      		loadButton.setAttribute('disabled', 'disabled');
-  	    	}
+          // 	if (!this.hasNext()) {
+  	      	// 	loadButton.setAttribute('disabled', 'disabled');
+  	    	  // }
           }
       });
     }else{
@@ -54,17 +54,17 @@
           after: function(){
             // $('#more_link').appendTo('#instafeed');
 
-            if (!this.hasNext()) {
-              loadButton.setAttribute('disabled', 'disabled');
-          }
+            // if (!this.hasNext()) {
+            //   loadButton.setAttribute('disabled', 'disabled');
+            // }
           }
       });
     }
 
-    // bind the load more button
-	loadButton.addEventListener('click', function() {
-	  feed.next();
-	});
+ //    // bind the load more button
+	// loadButton.addEventListener('click', function() {
+	//   feed.next();
+	// });
 
     feed.run();
 </script>

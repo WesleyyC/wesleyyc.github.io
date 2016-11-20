@@ -6,10 +6,6 @@ title: Undergraduate <br> Teaching Assistant
 description: |
 ---
 
-* Held review section for computer science courses including intro & advanced java, data structure & algorithm, computer program structure and interpreter
+* The role has differed from course to course, but duties consistently entail office hours, grading, test grading, holding recitations, and review sessions
 
-* Explained complex concepts in small group setting for classes
-
-* Graded assignments with One-on-One interaction for classes
-
-* Held weekly office hours for individual student discussion for classes
+* The courses are: Intro/Advanced Programing in Java, Data Structure, Structure and Interpretation of Computer Programs, and Operating System
