@@ -1,0 +1,13 @@
+---
+layout: default
+img: 4-1-3-pro.png
+category: Projects
+title: DT in the House
+description: |
+---
+
+* [Make Donal Trump speaks again](https://github.com/WesleyyC/DT-In-The-House)
+
+* Build a stack LSTM RNN that speaks like Donal Trump by learning his speech one character at a time
+
+* Develop with Keras and Tensorflow backend
