@@ -6,8 +6,6 @@ title: Software Engineering Intern
 description: |
 ---
 
-<br>
-
 * Worked in the Mobile Infrastructure team at Uber
 
 * Created and designed an internal tool for mobile developers to investigate UI test failures on Uber’s

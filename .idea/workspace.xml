@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c53adad3-85f6-4262-bbef-f9e5001a3af6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/about.html" afterPath="$PROJECT_DIR$/_includes/about.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/js.html" afterPath="$PROJECT_DIR$/_includes/js.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/1-1-1-exp.markdown" afterPath="$PROJECT_DIR$/_posts/2000-1-1-exp.markdown" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/1-1-1-pro.markdown" afterPath="$PROJECT_DIR$/_posts/1994-1-1-pro.markdown" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/1-1-2-exp.markdown" afterPath="$PROJECT_DIR$/_posts/2000-2-1-exp.markdown" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/11-1-1-pro.markdown" afterPath="$PROJECT_DIR$/_posts/1994-7-1-pro.markdown" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2-1-1-exp.markdown" afterPath="$PROJECT_DIR$/_posts/2000-3-1-exp.markdown" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/2-1-1-pro.markdown" afterPath="$PROJECT_DIR$/_posts/1994-2-1-pro.markdown" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/3-1-1-exp.markdown" afterPath="$PROJECT_DIR$/_posts/2000-4-1-exp.markdown" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/4-1-1-pro.markdown" afterPath="$PROJECT_DIR$/_posts/1994-3-1-pro.markdown" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/4-1-2-pro.markdown" afterPath="$PROJECT_DIR$/_posts/1994-4-1-pro.markdown" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/4-1-3-pro.markdown" afterPath="$PROJECT_DIR$/_posts/1994-5-1-pro.markdown" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/_posts/7-1-1-pro.markdown" afterPath="$PROJECT_DIR$/_posts/1994-6-1-pro.markdown" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/landing-page.css" afterPath="$PROJECT_DIR$/css/landing-page.css" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,7 +29,7 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="about.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="about.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_includes/about.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
@@ -28,67 +39,62 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/bootstrap.js">
+      <file leaf-file-name="1994-7-1-pro.markdown" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/1994-7-1-pro.markdown">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-31046">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="instafeed.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/instafeed.min.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="90">
+              <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="about_star_war.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_includes/about_star_war.html">
+      <file leaf-file-name="2000-1-1-exp.markdown" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/2000-1-1-exp.markdown">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="45" lean-forward="false" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
+            <state relative-caret-position="120">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rsc/about_star_war/index.html">
+      <file leaf-file-name="landing-page.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/css/landing-page.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+            <state relative-caret-position="266">
+              <caret line="137" column="15" lean-forward="false" selection-start-line="137" selection-start-column="15" selection-end-line="137" selection-end-column="15" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="landing-page.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/landing-page.js">
+      <file leaf-file-name="2000-4-1-exp.markdown" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_posts/2000-4-1-exp.markdown">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+            <state relative-caret-position="150">
+              <caret line="10" column="15" lean-forward="false" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="js.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_includes/js.html">
+      <file leaf-file-name="experiences.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_includes/experiences.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="95" column="0" lean-forward="true" selection-start-line="95" selection-start-column="0" selection-end-line="103" selection-end-column="13" />
-              <folding>
-                <marker date="1489124375000" expanded="true" signature="3063:3420" ph="..." />
-                <marker date="1489124375000" expanded="true" signature="3199:3402" ph="{...}" />
-              </folding>
+            <state relative-caret-position="540">
+              <caret line="36" column="56" lean-forward="false" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contact.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_includes/contact.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="18" lean-forward="true" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -108,7 +114,6 @@
         <option value="$PROJECT_DIR$/_posts/4-1-1-pro.markdown" />
         <option value="$PROJECT_DIR$/_posts/4-1-2-pro.markdown" />
         <option value="$PROJECT_DIR$/_includes/head.html" />
-        <option value="$PROJECT_DIR$/css/landing-page.css" />
         <option value="$PROJECT_DIR$/_includes/instagram.html" />
         <option value="$PROJECT_DIR$/_includes/experiences.html" />
         <option value="$PROJECT_DIR$/_includes/projects.html" />
@@ -117,6 +122,8 @@
         <option value="$PROJECT_DIR$/rsc/about_star_war/index.html" />
         <option value="$PROJECT_DIR$/_includes/js.html" />
         <option value="$PROJECT_DIR$/_includes/about.html" />
+        <option value="$PROJECT_DIR$/_posts/1-1-1-exp.markdown" />
+        <option value="$PROJECT_DIR$/css/landing-page.css" />
       </list>
     </option>
   </component>
@@ -627,17 +634,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/1-1-1-exp.markdown">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_site/css/landing-page.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="19" column="42" lean-forward="false" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+          <folding>
+            <marker date="1489125113000" expanded="true" signature="359:409" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="417:463" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="479:843" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="860:909" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="931:1015" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="1032:1134" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="1156:1205" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="1231:1590" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="1252:1288" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="1314:1345" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="1380:1460" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="1560:1588" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="1606:1658" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="1673:1724" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="1740:1842" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="1863:1918" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="1939:2036" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="2055:2083" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="2103:2216" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="2230:2255" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="2281:2354" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="2364:2523" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="2536:2620" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="2633:2658" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="2683:2723" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="2739:3036" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="3063:3150" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="3094:3148" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="3176:3491" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="3193:3293" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="3329:3409" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="3500:3555" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="3569:3594" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="3611:3715" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="3741:3921" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="3762:3918" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="3944:3985" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="3997:4036" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="4055:4119" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="4128:4184" ph="{...}" />
+            <marker date="1489125113000" expanded="true" signature="4199:4426" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -645,52 +688,59 @@
     <entry file="file://$PROJECT_DIR$/_posts/8-1-1-pro.markdown" />
     <entry file="file://$PROJECT_DIR$/_posts/9-1-1-pro.markdown" />
     <entry file="file://$PROJECT_DIR$/_posts/10-1-1-pro.markdown" />
-    <entry file="file://$PROJECT_DIR$/_posts/7-1-1-pro.markdown">
+    <entry file="file://$PROJECT_DIR$/_posts/1994-6-1-pro.markdown">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="28" lean-forward="false" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/4-1-3-pro.markdown">
+    <entry file="file://$PROJECT_DIR$/_posts/1994-5-1-pro.markdown">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/4-1-1-pro.markdown">
+    <entry file="file://$PROJECT_DIR$/_posts/1994-3-1-pro.markdown">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2-1-1-pro.markdown">
+    <entry file="file://$PROJECT_DIR$/_posts/1994-2-1-pro.markdown">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/4-1-2-pro.markdown">
+    <entry file="file://$PROJECT_DIR$/_posts/1994-4-1-pro.markdown">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="86" lean-forward="false" selection-start-line="14" selection-start-column="86" selection-end-line="14" selection-end-column="86" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/1-1-1-pro.markdown">
+    <entry file="file://$PROJECT_DIR$/_posts/1994-1-1-pro.markdown">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/1-1-2-exp.markdown">
+    <entry file="file://$PROJECT_DIR$/_posts/2000-2-1-exp.markdown">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -706,14 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
           <caret line="42" column="50" lean-forward="false" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/landing-page.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="136" column="1" lean-forward="false" selection-start-line="136" selection-start-column="1" selection-end-line="136" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -744,22 +786,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/contact.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_includes/experiences.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="36" column="56" lean-forward="false" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_includes/about_star_war.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -772,24 +798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
           <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/bootstrap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-31046">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/instafeed.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -817,6 +825,72 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="26" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/1994-7-1-pro.markdown">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/experiences.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="56" lean-forward="false" selection-start-line="36" selection-start-column="56" selection-end-line="36" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/instafeed.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-31046">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2000-4-1-exp.markdown">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="15" lean-forward="false" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_includes/contact.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="18" lean-forward="true" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2000-1-1-exp.markdown">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/landing-page.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="137" column="15" lean-forward="false" selection-start-line="137" selection-start-column="15" selection-end-line="137" selection-end-column="15" />
           <folding />
         </state>
       </provider>
