@@ -3,7 +3,8 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -14,16 +15,16 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">  
-            	<li>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
                     <a class="page-scroll" href="#about">About</a>
-                </li> 
+                </li>
                 <li>
                     <a class="page-scroll" href="#instagram">Life</a>
-                </li>  
+                </li>
                 <li>
                     <a class="page-scroll" href="#experiences">Experiences</a>
-                </li>           
+                </li>
                 <li>
                     <a class="page-scroll" href="#projects">Projects</a>
                 </li>
@@ -38,34 +39,36 @@
 </nav>
 
 <section id="home">
-<!-- Header -->
+    <!-- Header -->
     <div id="particles-js">
-    	<div id = "particles-header" class="intro-header alt-font">
-    		<div class="container">
-    			<div class="row">
-    				<div class="col-lg-12">
-    					<div class="intro-message">
-    						<h1 class="alt-font">{{ page.author}}</h1>
-    						<h3 class="alt-font">{{ page.description }}</h3>
-    						<hr class="intro-divider">
+        <div id="particles-header" class="intro-header alt-font">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="intro-message">
+                            <h1 class="alt-font">{{ page.author}}</h1>
+                            <h3 class="alt-font">{{ page.description }}</h3>
+                            <hr class="intro-divider">
                         </div>
                         <div class="intro-social">
-                            <div class = "social-click">
-    						<ul class="list-inline intro-social-buttons">
-    							{% for social in site.social %}
-    							<li>
-    								<a href="{{ social.url }}" target="_blank" class="btn btn-default btn-lg"><i class="fa fa-{{ social.icon }}"></i> &nbsp <span class="network-name">{{ social.title }}</span></a>
-    							</li>
-    							{% endfor %}
-    						</ul>
+                            <div class="social-click">
+                                <ul class="list-inline intro-social-buttons">
+                                    {% for social in site.social %}
+                                    <!--<li class="display-inline"><a href="{{ social.url }}" target="_blank" ><font color="white"><i class="fa fa-{{ social.icon }} fa-2x"></i></font></a></li>-->
+                                    <li>
+                                        <a href="{{ social.url }}" target="_blank" class="btn btn-default"><i
+                                                class="fa fa-{{ social.icon }}"></i> &nbsp <span class="network-name">{{ social.title }}</span></a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
                             </div>
-    					</div>
-    				</div>
+                        </div>
+                    </div>
                 </div>
-    		</div>
+            </div>
         </div>
     </div>
-    		<!-- /.container -->
-    	<!-- /.intro-header -->
+    <!-- /.container -->
+    <!-- /.intro-header -->
     <!-- /.partical-js -->
 </section>
