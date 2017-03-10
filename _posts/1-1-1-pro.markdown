@@ -5,8 +5,6 @@ category: Projects
 title: "Kaggle: <br> Restaurant Revenue Prediction"
 description: |
 ---
-* Predict restaurant revenue for TFI, the company behind some of the world's most well-known brands including Burger King and compete with other data scientist on Kaggle. 
-
 
 * **Rank top 2% among 2257 teams from all over the world**.
 

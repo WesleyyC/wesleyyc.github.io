@@ -12,6 +12,8 @@ description: |
 
 * Develop various neural network for sentence vector representation or sentence relation classification
 
+* Exam and improve word embedding with better semantic representation using dictionary
+
 * Implement neural network model using framework like [Tensorflow](https://www.tensorflow.org/) and [Keras](http://keras.io/)
 
 * Project is supported by Dean of Art and Science: Student/Faculty Collaborative Research Grant
