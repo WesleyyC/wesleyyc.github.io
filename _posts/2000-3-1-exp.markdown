@@ -8,7 +8,4 @@ description: |
 * Participated CodeU, an exclusive dev program for high potential students to strengthen their skills
 
 
-* Worked with three other participants to create a contact transfer Android application that transfers users’ contact and social platform info with NFC or QR Code
-
-
-* Presented the application at Google Tech Corner and won the runner-up for Engineer’s Choice
+* Built and presented the application at Google Tech Corner and won the runner-up for Engineer’s Choice

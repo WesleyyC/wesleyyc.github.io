@@ -1,0 +1,11 @@
+---
+layout: default
+img: 1-1-5-exp.png
+category: Experiences
+title: Software Engineering Intern
+description: |
+---
+
+* *Summer 2016:* created and designed an internal tool for mobile developers to investigate UI test failures in full speed by aggregating and synchronizing logs and videos with React.js front-end and Python/Go back-end
+
+* *Summer 2017:* built model to estimate the trip states (e.g. parking, waiting etc) for Uber Eats couriers, and developed a Kernel Conditional Random Field library drawing interest from multiple teams and won the first prize for Uber’s first internal machine learning poster session

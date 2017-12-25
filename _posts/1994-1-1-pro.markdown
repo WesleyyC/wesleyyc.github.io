@@ -6,10 +6,7 @@ title: "Kaggle: <br> Restaurant Revenue Prediction"
 description: |
 ---
 
-* **Rank top 2% among 2257 teams from all over the world**.
+* **Rank top 2% among 2257 teams from all over the world**
 
 
-* Build [multiple models](https://github.com/WesleyyC/RestaurantRevenuePrediction) using Ensemble, Linear Regression, Support Vector Machine, Regression Tree and Random Forest.
-
-
-* Run feature selection using Boruta and engineer data using techniques involving data imputation and data visualization. 
+* **Build** [multiple models](https://github.com/WesleyyC/RestaurantRevenuePrediction) using Ensemble, Linear Regression, Support Vector Machine, Regression Tree and Random Forest, **run** feature selection using Boruta, and **engineer** data using techniques involving data imputation and data visualization. 

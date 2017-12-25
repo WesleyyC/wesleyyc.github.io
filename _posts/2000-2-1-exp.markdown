@@ -1,13 +1,13 @@
 ---
 layout: default
-img: 1-1-2-exp.jpg
+img: 20-1-1-pro.png
 category: Experiences
-title: Machine Learning <br>Research Assistant
+title: Undergraduate <br> Research Assistant
 description: |
 ---
 
-* Conduct interdisciplinary research in computer science, biology and computational linguistic with Prof. Pengyu Hong
+* Conducted interdisciplinary research in computer science, biology and natural language processing with Prof. Pengyu Hong
 
 * Develop statistical machine learning model and engineer neural network to solve some challenging problems in protein structure understanding in biology and discourse parsing in linguistic
 
-* Selected as 16'-17' Jerome A. Schiff Undergraduate Fellows for my innovative [research](http://www.cs.brandeis.edu/~weschin/Schiff-Proposal.pdf) in machine learning and biology
+* Selected as Jerome A. Schiff Undergraduate Fellows for my [thesis](http://www.cs.brandeis.edu/~weschin/Schiff-Proposal.pdf)

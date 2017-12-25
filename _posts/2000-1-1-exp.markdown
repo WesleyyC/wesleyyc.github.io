@@ -1,14 +1,11 @@
 ---
 layout: default
-img: 1-1-1-exp.png
+img: 1-1-1-exp.jpg
 category: Experiences
-title: Software Engineering Intern
+title: Graduate Research Assistant
 description: |
 ---
 
-* Worked in the Mobile Infrastructure team at Uber
+* Work with Prof. Jian Peng on various tasks in machine learning and bioinformatics like secondary structure prediction, protein alignment, and domain fold prediction
 
-* Created and designed an internal tool for mobile developers to investigate UI test failures on Uber’s
-continuous integration platform in full speed by aggregating and synchronizing logs and videos
-
-* Engineered in full stack with React.js front-end and Python/Go back-end
+* Built and validate deep learning model like ConvNet, LSTM, ByteNet, and Auto Encoder, in Tensorflow and PyTorch

@@ -5,14 +5,6 @@ category: Projects
 title: Pattern Learning<br> and Protein Modeling
 description: |
 ---
-* Implement and optimize attributed relation graph matching algorithm using graduate assignin
+* Designed an efficient graph matching algorithm, and used EM algorithm to build a probablistic mixture model to represent the learned patterns from graph
 
-* Train a probabilistic parametric model based on the above algorithm to extract feature pattern from
-multiple graphs automatically using EM algorithm
-
-* Apply the above model in biology context and innovate a new way to match proteins in their tertiary
-(three dimension) structure instead of their primary (linear) structure
-
-* Leverage techniques in word embedding and generate feature vector for each amino acid
-
-* Project is supported by Jerome A. Schiff Fellowship
+* Project is supported by Jerome A. Schiff Fellowship for its application in protein 3d structure modeling

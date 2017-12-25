@@ -8,4 +8,4 @@ description: |
 
 * The role has differed from course to course, but duties consistently entail office hours, grading, test grading, holding recitations, and review sessions
 
-* The courses are: Intro/Advanced Programing in Java, Data Structure, Structure and Interpretation of Computer Programs, and Operating System
+* The courses are: Intro/Advanced Programing in Java, Data Structure, Structure and Interpretation of Computer Programs, Operating System, and Data Management System

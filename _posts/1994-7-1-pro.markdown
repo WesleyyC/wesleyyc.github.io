@@ -2,12 +2,12 @@
 layout: default
 img: 60-1-1-pro.png
 category: Projects
-title: "For more..."
+title: "For more please visit"
 description: |
 ---
 
-* Please visit my [GitHub repo](https://github.com/WesleyyC)
+* [GitHub Repo](https://github.com/WesleyyC)
 
-* Or visit my [LinkedIn profile](https://www.linkedin.com/in/wesleychin0919)
+* [LinkedIn Profile](https://www.linkedin.com/in/wesleychin0919)
 
-* Or read my [Medium blog](https://medium.com/thoughts-and-notes)
+* [Medium Blog](https://medium.com/thoughts-and-notes)
