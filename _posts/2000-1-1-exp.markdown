@@ -6,6 +6,8 @@ title: Graduate Research Assistant
 description: |
 ---
 
-* Work with Prof. Jian Peng on various tasks in machine learning and bioinformatics like secondary structure prediction, protein alignment, and domain fold prediction
+* Worked on various research topics in bioinformatics and computational chemistry using a data
+driven neural network approach with Prof. Jian Peng
 
-* Built and validate deep learning model like ConvNet, LSTM, ByteNet, and Auto Encoder, in Tensorflow and PyTorch
+* Research topics include protein sequence profiling, protein structure contact prediction, and graph
+based neural network for molecule property prediction and model interpretability
