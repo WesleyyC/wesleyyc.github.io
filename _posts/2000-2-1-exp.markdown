@@ -2,7 +2,7 @@
 layout: default
 img: 20-1-1-pro.png
 category: Experiences
-title: Undergraduate <br> Research Assistant
+title: Undergrad Research Assistant
 description: |
 ---
 
