@@ -69,12 +69,12 @@ h6 {
     .intro-message > h1 {
         font-size: 3em;
     }
-
+    
     ul.intro-social-buttons > li {
-        display: block;
-        margin-bottom: 20px;
+        display: inline;
         padding: 0;
     }
+
 
     ul.intro-social-buttons > li:last-child {
         margin-bottom: 0;
