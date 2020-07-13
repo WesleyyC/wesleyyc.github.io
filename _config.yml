@@ -24,15 +24,18 @@ gems:
 # ----------------------- #
 
 social:
-  - icon: medium
-    title: blog
-    url: https://medium.com/thoughts-and-notes
   - icon: envelope-o
     title: email
     url: mailto:wesley.chin0919@gmail.com
+  - icon: flask
+    title: scholar
+    url: https://scholar.google.com/citations?user=SZ5EErcAAAAJ&hl=en
   - icon: github
     title: github
     url: https://github.com/WesleyyC
+  - icon: medium
+    title: blog
+    url: https://medium.com/thoughts-and-notes
   - icon: linkedin
     title: linkedin
     url: https://www.linkedin.com/in/wesleychin0919
