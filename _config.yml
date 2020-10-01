@@ -24,21 +24,21 @@ gems:
 # ----------------------- #
 
 social:
-  - icon: envelope-o
-    title: email
-    url: mailto:wesley.chin0919@gmail.com
+  - icon: linkedin
+    title: linkedin
+    url: https://www.linkedin.com/in/wesleychin0919
   - icon: flask
     title: scholar
     url: https://scholar.google.com/citations?user=SZ5EErcAAAAJ&hl=en
   - icon: github
     title: github
     url: https://github.com/WesleyyC
-  - icon: medium
-    title: blog
-    url: https://medium.com/thoughts-and-notes
-  - icon: linkedin
-    title: linkedin
-    url: https://www.linkedin.com/in/wesleychin0919
+  - icon: instagram
+    title: life
+    url: https://www.instagram.com/wesleyy.c
   - icon: file-pdf-o
     title: resume
     url: http://www.wesleyq.me/rsc/resume.pdf
+  - icon: envelope-o
+    title: email
+    url: mailto:wesley.chin0919@gmail.com

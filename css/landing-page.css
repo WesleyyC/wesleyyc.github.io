@@ -276,10 +276,12 @@ iframe {
 #particles-js{
   width: 100%;
   height: 100%;
-  /*background-color: #808B96;*/
-  background-image: url(../img/intro-brain.jpg);
-  background-size: cover;
-  background-position: 50% 50%;
+  background: linear-gradient(
+          rgba(0, 0, 0, 0.75), 
+          rgba(0, 0, 0, 0.75)
+        ),url(../img/kegg.png);
+  /*background-size: 50%;*/
+  background-position: 50% 55%;
   background-repeat: no-repeat;
   position:relative;
 }
