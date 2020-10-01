@@ -2,7 +2,7 @@
 <script src="js/jquery-1.11.0.js"></script>
 
 <!-- Plugin JavaScript -->
-    <script src="{{ "js/jquery.easing.min.js" | prepend: site.baseurl }}"></script>
+<script src="{{ "js/jquery.easing.min.js" | prepend: site.baseurl }}"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
@@ -22,55 +22,6 @@
 
 </script>
 
-<!-- InstaFeed -->
-<script type="text/javascript">
-	// var loadButton = document.getElementById('more_link');
-    if(typeof window.orientation !== 'undefined'){
-      var feed = new Instafeed({
-          clientId: '44022fd2ea504984a80df2abe018f800',
-          get: 'user',
-          userId: 314516572,
-          resolution: 'standard_resolution',
-          accessToken: '314516572.44022fd.6acc0507c0bd4e2eab90528714e67821',
-          sortBy:'most-recent',
-          limit: 6,
-          after: function(){
-          	// $('#more_link').appendTo('#instafeed');
-
-          // 	if (!this.hasNext()) {
-  	      	// 	loadButton.setAttribute('disabled', 'disabled');
-  	    	  // }
-          }
-      });
-    }else{
-      var feed = new Instafeed({
-          clientId: '44022fd2ea504984a80df2abe018f800',
-          get: 'user',
-          userId: 314516572,
-          resolution: 'standard_resolution',
-          accessToken: '314516572.44022fd.6acc0507c0bd4e2eab90528714e67821',
-          sortBy:'most-recent',
-          limit: 15,
-          after: function(){
-            // $('#more_link').appendTo('#instafeed');
-
-            // if (!this.hasNext()) {
-            //   loadButton.setAttribute('disabled', 'disabled');
-            // }
-          }
-      });
-    }
-
- //    // bind the load more button
-	// loadButton.addEventListener('click', function() {
-	//   feed.next();
-	// });
-
-    feed.run();
-</script>
-<!-- <script type="text/javascript">
-	$('#banner').appendTo('#instafeed');
-</script> -->
  
 <!--Structured Data for Google -->
 <script type="application/ld+json">
@@ -93,15 +44,3 @@
       ]
     }
 </script>
-
-<!--<script type="text/javascript">-->
-  <!--var changeButton = document.getElementById('change_to_star_war');-->
-  <!--changeButton.addEventListener('click', function() {-->
-    <!--document.getElementById('about_change').innerHTML = -->
-    <!--'<iframe src="rsc/about_star_war/index.html"></iframe>'-->
-    <!--document.getElementById("about").className = "";-->
-  <!--});-->
-<!--</script>-->
-
-
-
