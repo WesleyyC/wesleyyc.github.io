@@ -1,27 +1,5 @@
-# ----------------------- #
-#      Main Configs       #
-# ----------------------- #
-
-url: http://DrQ.ai
-title: Wesley W. Q.
-email: wesley.chin0919@gmail.com
+title: Dr.Q
 author: Wesley Wei Qian
-description: > # "Wesley Wei Qian's Personal Page"
-
-# ----------------------- #
-#    Jekyll & Plugins     #
-# ----------------------- #
-
-# Build settings
-markdown: kramdown
-permalink: pretty
-# Build sitemap
-gems:
-  - jekyll-sitemap
-
-# ----------------------- #
-#   3rd Party Settings    #
-# ----------------------- #
 
 social:
   - icon: linkedin
@@ -38,7 +16,7 @@ social:
     url: https://twitter.com/WesleyQian
   - icon: file-pdf-o
     title: resume
-    url: http://drq.ai/rsc/resume.pdf
+    url: https://DrQ.ai/rsc/resume.pdf
   - icon: envelope-o
     title: email
     url: mailto:wesley.chin0919@gmail.com
