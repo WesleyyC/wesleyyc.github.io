@@ -1,4 +1,21 @@
-_site
-.idea/*
+# Jekyll build output
+_site/
 
-Gemfile.lock
+# Bundle cache
+vendor/
+.bundle/
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Note: Keep Gemfile.lock for consistent builds
