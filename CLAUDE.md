@@ -70,6 +70,13 @@ bundle update github-pages
 - **Responsive font sizing**: Name scales from 6.5em → 3.5em → 2.8em, always single line
 - **No divider line**: Clean minimal design
 
+#### Interactive Design
+- **Name hover effect**: Dramatic lift (8px up) + scale (1.05x) + enhanced shadow
+- **Button hover effects**: Subtle lift (2px up) + glow + enhanced shadow
+- **Smooth transitions**: 0.3s ease timing for all animations
+- **Z-index layering**: Particles (1) → Content (20+) → Interactive elements (25+)
+- **Non-blocking interactions**: Proper pointer-events management for particle overlay
+
 #### Social Links
 ```yaml
 social:
