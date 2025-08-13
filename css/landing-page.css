@@ -4,6 +4,13 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+/* Cross-browser compatibility fixes */
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
 body,
 html {
     width: 100%;
@@ -17,106 +24,296 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Quantico', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-weight: 700;
 }
 
-.alt-font {font-family: 'Quicksand', sans-serif !important;}
+.alt-font {
+    font-family: 'Indie Flower', cursive !important;
+}
 
 .lead {
     font-size: 18px;
     font-weight: 400;
 }
 
-.intro-header-backup {
-    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
-    padding-bottom: 50px;
-    text-align: center;
-    color: #f8f8f8;
-    background-size: cover;
-    pointer-events: none;
-
-}
-
 .intro-header {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  position: relative;
   color: #f8f8f8;
   text-align: center;
   background-size: cover;
   pointer-events: none;
+  z-index: 10;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .intro-message {
     position: relative;
-    padding-top: 20%;
+    padding-top: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
 }
 
 .intro-message > h1 {
-    margin: 0;
+    margin: 0 auto 15px auto;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-    font-size: 5em;
+    font-size: 6.5em;
+    text-align: center;
+    display: block;
+    width: 100%;
 }
 
 .intro-divider {
-    width: 500px;
+    width: 400px;
+    max-width: 80%;
+    margin: 20px auto;
     border-top: 1px solid #f8f8f8;
     border-bottom: 1px solid rgba(0,0,0,0.2);
+    display: none;
 }
 
 .intro-message > h3 {
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
 }
 
-@media(max-width:767px) {
+/* Mobile and Tablet specific adjustments */
+@media(max-width:991px) {
+    .content-wrapper {
+        max-width: 600px;
+        padding: 15px;
+    }
+    
     .intro-message {
-        padding-bottom: 15%;
+        padding-bottom: 0;
+        padding-top: 0;
+        margin-bottom: 8px;
+        text-align: center;
     }
 
     .intro-message > h1 {
-        font-size: 3em;
-    }
-    
-    ul.intro-social-buttons > li {
-        display: inline;
-        padding: 0;
-    }
-
-
-    ul.intro-social-buttons > li:last-child {
-        margin-bottom: 0;
+        font-size: 3.5em;
+        text-align: center;
+        margin: 0 auto;
+        white-space: nowrap;
     }
 
     .intro-divider {
+        width: 90%;
+        max-width: 300px;
+        margin: 15px auto;
+        text-align: center;
+    }
+    
+    .social-btn {
+        font-size: 11px;
+        padding: 8px 14px;
+        white-space: nowrap;
+        text-align: center;
         width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Phone-specific adjustments */
+@media(max-width:767px) {
+    .content-wrapper {
+        max-width: 350px;
+        padding: 10px;
+    }
+    
+    .intro-message > h1 {
+        font-size: 2.8em;
+        white-space: nowrap;
+    }
+    
+    .social-btn {
+        font-size: 10px;
+        padding: 6px 10px;
     }
 }
 
 .intro-social {
     position: relative;
-    padding-bottom: 20%;
+    padding-bottom: 0;
+    z-index: 20;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 .social-click {
     position: relative;
-    pointer-events: all
+    pointer-events: all;
+    z-index: 21;
 }
 
 .social-btn {
-  font-size: 12px;
-    padding: 6px 14px;
-  border: 0px solid transparent;
-  border-radius: 16px;
-  margin-bottom: 8px;
+    font-size: 14px;
+    padding: 6px 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff !important;
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 22;
+    white-space: nowrap;
+    min-height: 35px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.social-btn:hover,
+.social-btn:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .network-name {
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 2px;
+    font-family: 'Quantico', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    text-transform: lowercase;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-left: 5px;
+}
+
+/* Clean Responsive Social Buttons Layout */
+ul.intro-social-buttons {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 10px auto !important;
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    
+    /* Flexbox fallback for older browsers */
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* Modern browsers: CSS Grid override */
+@supports (display: grid) {
+    ul.intro-social-buttons {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr);
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+    }
+}
+
+ul.intro-social-buttons > li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Tablet: 2 buttons per row (2 rows total) */
+@media (max-width: 991px) and (min-width: 768px) {
+    @supports (display: grid) {
+        ul.intro-social-buttons {
+            grid-template-columns: repeat(2, 1fr) !important;
+            max-width: 400px;
+        }
+    }
+    
+    @supports not (display: grid) {
+        ul.intro-social-buttons > li {
+            width: calc(50% - 16px);
+            margin: 8px;
+        }
+    }
+}
+
+/* Mobile: 2 buttons per row (3 rows total) */
+@media (max-width: 767px) {
+    @supports (display: grid) {
+        ul.intro-social-buttons {
+            grid-template-columns: repeat(2, 1fr) !important;
+            max-width: 320px;
+        }
+    }
+    
+    @supports not (display: grid) {
+        ul.intro-social-buttons > li {
+            width: calc(50% - 16px);
+            margin: 8px;
+        }
+    }
+}
+
+/* Ensure buttons are always visible and clickable */
+.social-btn {
+    /* Force visibility */
+    visibility: visible !important;
+    opacity: 1 !important;
+    /* Ensure it's above other elements */
+    position: relative !important;
+    z-index: 999 !important;
+    /* Prevent being hidden by overflow */
+    overflow: visible !important;
+    /* Ensure proper display */
+    display: inline-block !important;
+    /* Minimum size for touch targets */
+    min-width: 44px;
+    min-height: 32px;
+}
+
+/* Fix for specific browser rendering issues */
+.social-click {
+    /* Ensure container is properly sized */
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    /* Clear any floats */
+    clear: both;
+    /* Force layer creation for better rendering */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    text-align: center;
 }
 
 
@@ -271,17 +468,38 @@ iframe {
     height:100vh;
 }
 
-#particles-js{
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-          rgba(0, 0, 0, 0.75), 
-          rgba(0, 0, 0, 0.75)
-        ),url(../img/kegg.png);
-  /*background-size: 50%;*/
-  background-position: 50% 55%;
-  background-repeat: no-repeat;
-  position:relative;
+#particles-js {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.75), 
+        rgba(0, 0, 0, 0.75)
+    ), url(../img/kegg.png);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-#particles-js canvas { position:absolute; top:0; left:0; z-index:0 }
+#particles-js canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1;
+}
+
+/* Fallback for browsers that don't support vh */
+@media screen and (max-height: 500px) {
+    #particles-js {
+        height: 500px;
+        min-height: 500px;
+    }
+}

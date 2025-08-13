@@ -1,38 +1,5 @@
-// jQuery for page scrolling feature - requires jQuery Easing plugin
-$(function() {
-    $('a.page-scroll').bind('click', function(event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: $($anchor.attr('href')).offset().top
-        }, 1500, 'easeInOutExpo');
-        event.preventDefault();
-    });
-});
-
-// Highlight the top nav as scrolling occurs
-$('body').scrollspy({
-    target: '.navbar-fixed-top'
-})
-
-// Closes the Responsive Menu on Menu Item Click
-$('.navbar-collapse ul li a').click(function() {
-    $('.navbar-toggle:visible').click();
-});
-
-$('div.modal').on('show.bs.modal', function() {
-	var modal = this;
-	var hash = modal.id;
-	window.location.hash = hash;
-	window.onhashchange = function() {
-		if (!location.hash){
-			$(modal).modal('hide');
-		}
-	}
-});
-
-/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
-particlesJS('particles-js',
-  {
+// Particles.js configuration for background animation
+particlesJS('particles-js', {
   "particles": {
     "number": {
       "value": 70,
@@ -52,11 +19,6 @@ particlesJS('particles-js',
       },
       "polygon": {
         "nb_sides": 5
-      },
-      "image": {
-        "src": "img/github.svg",
-        "width": 100,
-        "height": 100
       }
     },
     "opacity": {
@@ -121,17 +83,6 @@ particlesJS('particles-js',
           "opacity": 1
         }
       },
-      "bubble": {
-        "distance": 400,
-        "size": 40,
-        "duration": 2,
-        "opacity": 8,
-        "speed": 3
-      },
-      "repulse": {
-        "distance": 200,
-        "duration": 0.4
-      },
       "push": {
         "particles_nb": 4
       },
@@ -143,4 +94,5 @@ particlesJS('particles-js',
   "retina_detect": true
 });
 
+// Ensure particles header is positioned correctly
 $("#particles-header").insertAfter(".particles-js-canvas-el");

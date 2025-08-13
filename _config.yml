@@ -1,22 +1,26 @@
 title: Dr.Q
 author: Wesley Wei Qian
 
+# GitHub Pages configuration
+plugins:
+  - jekyll-feed
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
 social:
   - icon: linkedin
     title: linkedin
     url: https://www.linkedin.com/in/wesleyq
-  - icon: flask
+    brand: true
+  - icon: graduation-cap
     title: scholar
     url: https://scholar.google.com/citations?user=SZ5EErcAAAAJ&sortby=pubdate
-  - icon: github
-    title: github
-    url: https://github.com/WesleyyC
-  - icon: twitter
-    title: twitter
-    url: https://twitter.com/WesleyQian
-  - icon: file-pdf-o
+  - icon: file-text
     title: resume
     url: https://DrQ.ai/rsc/resume.pdf
-  - icon: envelope-o
+  - icon: envelope
     title: email
     url: mailto:wesley.chin0919@gmail.com
