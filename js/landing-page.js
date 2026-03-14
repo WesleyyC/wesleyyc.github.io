@@ -94,5 +94,19 @@ particlesJS('particles-js', {
   "retina_detect": true
 });
 
-// Ensure particles header is positioned correctly
-$("#particles-header").insertAfter(".particles-js-canvas-el");
+// Ensure particles header is positioned correctly behind canvas
+var canvas = document.querySelector('.particles-js-canvas-el');
+var header = document.getElementById('particles-header');
+if (canvas && header) {
+    canvas.parentNode.insertBefore(header, canvas.nextSibling);
+}
+
+// Easter egg for curious developers
+console.log(
+    '%c\ud83d\udd2c You found the lab!',
+    'font-size: 16px; font-weight: bold; color: #fff; background: #333; padding: 4px 8px; border-radius: 4px;'
+);
+console.log(
+    '%cWesley believes life is about experiencing \u2014\nnot just achieving status, but truly living each moment.\n\nIf you\'re inspecting this, we should probably talk.\nlinkedin.com/in/wesleyq',
+    'font-size: 12px; color: #999; line-height: 1.8;'
+);
