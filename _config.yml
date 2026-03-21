@@ -20,7 +20,7 @@ social:
     url: https://scholar.google.com/citations?user=SZ5EErcAAAAJ&sortby=pubdate
   - icon: file-lines
     title: resume
-    url: https://drq.ai/rsc/resume.pdf
+    url: /resume
   - icon: envelope
     title: email
     url: mailto:wesley.chin0919@gmail.com

@@ -1,0 +1,504 @@
+---
+layout: null
+permalink: /resume
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wesley Wei Qian - Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap&font-display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/img/logo/logo.ico">
+    <style>
+        /* --- Design Tokens --- */
+        :root {
+            --color-text: #2d2d2d;
+            --color-text-dark: #1a1a1a;
+            --color-text-muted: #666;
+            --color-text-light: #777;
+            --color-accent: #2AA198;
+            --color-accent-hover: #208a82;
+            --color-bg: #e4e4e4;
+            --color-page: #fff;
+            --color-bullet-muted: #888;
+            --color-author: #666;
+            --color-venue: #555;
+            --font-body: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* --- Reset & Base --- */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 10pt;
+            line-height: 1.4;
+            color: var(--color-text);
+            background: var(--color-bg);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 8.5in;
+            max-width: 100%;
+            min-height: 11in;
+            margin: 0.4in auto;
+            padding: 0.5in;
+            background: var(--color-page);
+            box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+        }
+
+        /* --- Accessibility --- */
+        a:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition: none !important; }
+        }
+
+        /* --- Header --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.08in;
+        }
+
+        .header h1 {
+            font-size: 28pt;
+            font-weight: 700;
+            color: var(--color-text-dark);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            transition: transform 0.2s var(--ease-out-quart), text-shadow 0.2s ease;
+            cursor: default;
+        }
+
+        .header h1:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 4px 12px rgba(42, 161, 152, 0.15);
+        }
+
+        .contact {
+            text-align: right;
+            font-size: 10pt;
+            line-height: 1.6;
+        }
+
+        .contact a {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.15s var(--ease-out-quart);
+        }
+
+        .contact a:hover { text-decoration: underline; }
+
+        .contact .links a { color: var(--color-accent); text-decoration: underline; }
+        .contact .links a:hover { color: var(--color-accent-hover); }
+
+        /* --- Section Headers --- */
+        h2 {
+            font-size: 11pt;
+            font-weight: 600;
+            color: var(--color-text);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-bottom: 2pt solid var(--color-accent);
+            padding-bottom: 3pt;
+            margin-top: 0.14in;
+            margin-bottom: 0.06in;
+        }
+
+        /* --- Entry Headers (Jobs, Education) --- */
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1pt;
+        }
+
+        .entry-title {
+            font-size: 11.5pt;
+            font-weight: 700;
+            color: #444;
+        }
+
+        .entry-title a {
+            color: var(--color-text-dark);
+            text-decoration: none;
+            transition: opacity 0.15s var(--ease-out-quart);
+        }
+
+        .entry-title a:hover { opacity: 0.7; }
+
+        /* Brand color overrides for entry links */
+        .entry-title a.deepmind-blue { color: #0F4ABE; font-weight: 700; }
+        .entry-title a.uiuc-orange { color: #E05500; }
+        .entry-title a.uiuc-orange:hover { color: #c04a00; }
+        .entry-title a.brandeis-blue { color: #003478; }
+        .entry-title a.brandeis-blue:hover { color: #002a60; }
+
+        .entry-date {
+            font-size: 10.5pt;
+            font-weight: 400;
+            white-space: nowrap;
+            color: #5a5a5a;
+            font-style: italic;
+        }
+
+        /* --- Brand Colors --- */
+        .google-g, .google-g2 { color: #4285F4; }
+        .google-o1, .google-e { color: #EA4335; }
+        .google-o2 { color: #E2A000; }
+        .google-l { color: #34A853; }
+        .deepmind-blue { color: #0F4ABE; }
+
+        /* --- Bullet Lists (Experience) --- */
+        .bullets {
+            list-style: none;
+            padding-left: 0.15in;
+            margin-bottom: 0.04in;
+        }
+
+        .bullets li {
+            position: relative;
+            padding-left: 0.15in;
+            margin-bottom: 1pt;
+            text-align: justify;
+        }
+
+        .bullets li::before {
+            content: "\25B8";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-size: 9pt;
+        }
+
+        .bullets a {
+            color: var(--color-text);
+            text-decoration: underline;
+            text-underline-offset: 1.5pt;
+            transition: color 0.15s var(--ease-out-quart);
+        }
+
+        .bullets a:hover { color: var(--color-accent); }
+
+        /* --- Education --- */
+        .edu-entry { margin-bottom: 0.04in; }
+        .edu-entry .degree { font-style: italic; }
+
+        /* --- Publications --- */
+        .pub {
+            margin-bottom: 0.05in;
+            padding-left: 0.15in;
+            position: relative;
+        }
+
+        .pub::before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: var(--color-bullet-muted);
+            font-size: 8pt;
+            top: 1pt;
+        }
+
+        .pub .pub-title { font-weight: 700; }
+
+        .pub .pub-venue {
+            font-style: italic;
+            color: var(--color-venue);
+        }
+
+        .pub .pub-venue a {
+            color: inherit;
+            text-decoration: underline;
+            text-underline-offset: 1.5pt;
+            transition: color 0.15s var(--ease-out-quart);
+        }
+
+        .pub .pub-venue a:hover { color: var(--color-accent); }
+
+        .pub .pub-year {
+            font-style: normal;
+            color: var(--color-venue);
+        }
+
+        .pub .pub-authors {
+            font-size: 9pt;
+            color: var(--color-author);
+            line-height: 1.3;
+        }
+
+        .pub .pub-authors .me {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .pub-note {
+            font-size: 9pt;
+            font-weight: 400;
+            color: var(--color-text-light);
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        /* --- Services (match publication indentation + grey bullets) --- */
+        .service-bullets { padding-left: 0; }
+        .service-bullets li { padding-left: 0.15in; }
+        .service-bullets li::before {
+            content: "\2022";
+            color: var(--color-bullet-muted);
+            font-size: 8pt;
+            top: 1pt;
+        }
+
+        /* --- Page Break Helpers --- */
+        .page-break-before { break-before: page; }
+        .no-break { break-inside: avoid; }
+
+        /* --- Print --- */
+        @page {
+            size: letter;
+            margin: 0;
+        }
+
+        @media print {
+            body { background: none; }
+
+            .page {
+                width: auto;
+                min-height: auto;
+                margin: 0;
+                padding: 0.5in;
+                box-shadow: none;
+            }
+
+            a { color: inherit; }
+            .contact a, .contact .links a { color: var(--color-text); }
+            .entry-title a { color: var(--color-text-dark); }
+            .entry-title a.deepmind-blue { color: #0F4ABE; }
+            .entry-title a.uiuc-orange { color: #E05500; }
+            .entry-title a.brandeis-blue { color: #003478; }
+
+            .page-break-before { padding-top: 0.5in; }
+
+            .header h1 { transition: none; }
+            .header h1:hover { transform: none; text-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <header class="header">
+            <h1>Wesley Wei Qian</h1>
+            <div class="contact">
+                <div><a href="mailto:wesley.chin0919@gmail.com">wesley.chin0919@gmail.com</a></div>
+                <div>617-637-5934</div>
+                <div class="links">
+                    <a target="_blank" rel="noopener noreferrer" href="https://drq.ai">DrQ.ai</a> &middot;
+                    <a target="_blank" rel="noopener noreferrer" href="https://scholar.google.com/citations?user=SZ5EErcAAAAJ&amp;sortby=pubdate">Scholar</a> &middot;
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/WesleyyC">GitHub</a>
+                </div>
+            </div>
+        </header>
+
+        <section aria-label="Experience">
+        <h2>Experience</h2>
+
+        <div class="no-break">
+            <div class="entry-header">
+                <div class="entry-title">Founding Team | <a target="_blank" rel="noopener noreferrer" href="https://www.osmo.ai/">Osmo</a></div>
+                <div class="entry-date">Sep 2022 - Present</div>
+            </div>
+            <ul class="bullets">
+                <li>Started as the first research engineer, I am now the VP of Engineering &amp; Research, leading a cross functional team around AI, human data, and software to build 0-to1 prototype and scale AI product.</li>
+                <li><strong>LLMs &amp; Agentic Systems:</strong> Architected a multi-modal RAG system <a target="_blank" rel="noopener noreferrer" href="https://www.osmo.ai/blog/turn-words-and-images-into-fragrances">converting text / image briefs into physical fragrance samples</a> (driving &gt;$100k in sales within 3 months). Fine-tuned a formulation LLM using SFT and RLHF with in-house perfumery tools to align outputs with expert preferences.</li>
+                <li><strong>0-1 ML Stack:</strong> Built the post-Google spinout ML stack using PyTorch, GCP, and W&amp;B. Engineered and productionized GNNs and an end-to-end odor intensity pipeline from data collection to deployment that increased discovery throughput by 10×, enabling partnerships with a Top 4 fragrance house.</li>
+                <li><strong>AI for Science:</strong> World in a specialized team of ML researchers and analytical chemists to successfully <a target="_blank" rel="noopener noreferrer" href="https://www.osmo.ai/blog/update-scent-teleportation-we-did-it">"teleport" a physical plum scent</a>; utilized GC-MS analytical data to translate chemical signatures into digital profiles for remote reconstruction — proving "reading scent" is possible.</li>
+                <li><strong>Leadership &amp; Product Impact:</strong> Leading a 10+ person cross functional team to build Studio, an AI-agentic fragrance creation platform enabling low-MOQ, rapid turnarounds. Secured a multi-million CPG partnership by demonstrating AI-driven cost reductions and safety improvements in fragrance.</li>
+            </ul>
+        </div>
+
+        <div class="no-break">
+            <div class="entry-header">
+                <div class="entry-title">Student Researcher | <a target="_blank" rel="noopener noreferrer" href="https://research.google/"><span class="google-g">G</span><span class="google-o1">o</span><span class="google-o2">o</span><span class="google-g2">g</span><span class="google-l">l</span><span class="google-e">e</span></a></div>
+                <div class="entry-date">May 2018 - Sep 2022</div>
+            </div>
+            <ul class="bullets">
+                <li><strong>Olfactory ML:</strong> Advanced receptor binding prediction and metabolic activity modeling, resulting in one utility patent and four publications featured <a target="_blank" rel="noopener noreferrer" href="https://ai.googleblog.com/2022/09/digitizing-smell-using-molecular-maps.html">in</a> <a target="_blank" rel="noopener noreferrer" href="https://www.quantamagazine.org/ai-model-links-smell-molecules-with-metabolic-processes-20221010/">major</a> <a target="_blank" rel="noopener noreferrer" href="https://www.scientificamerican.com/article/ai-predicts-what-chemicals-will-smell-like-to-a-human/">news</a> <a target="_blank" rel="noopener noreferrer" href="https://blog.google/technology/research/using-new-technology-and-old-books-to-combat-disease/">outlets</a>, catalyzing Osmo's spin out.</li>
+                <li><strong>Genomics &amp; Structural Variants:</strong> Proposed a combinatorial formulation for structural variant calling with ML-based filtering; engineered a ~100× faster read-alignment approach, filed as <a target="_blank" rel="noopener noreferrer" href="https://patents.google.com/patent/WO2022165430A1">a utility patent.</a></li>
+                <li><strong>Generative Cell Images:</strong> Developed a GAN to mitigate batch effects in high-content cell imaging; upstreamed implementations to the <a target="_blank" rel="noopener noreferrer" href="https://blog.tensorflow.org/2019/08/introducing-tf-gan-lightweight-gan.html">TF-GAN library</a> and published findings in Bioinformatics.</li>
+            </ul>
+        </div>
+
+        <div class="no-break">
+            <div class="entry-header">
+                <div class="entry-title">Intern | <a target="_blank" rel="noopener noreferrer" href="https://deepmind.google/" class="deepmind-blue">DeepMind</a></div>
+                <div class="entry-date">Sep 2021 - Dec 2021</div>
+            </div>
+            <ul class="bullets">
+                <li><strong>AlphaFold Team:</strong> Contributed to protein-folding research using JAX and core components of the AlphaFold2 codebase, focusing on representation learning for wide range of prediction tasks.</li>
+            </ul>
+        </div>
+
+        <div class="no-break">
+            <div class="entry-header">
+                <div class="entry-title">Software Engineering Intern | <a target="_blank" rel="noopener noreferrer" href="https://www.uber.com/en-US/blog/engineering/">Uber</a></div>
+                <div class="entry-date">Summer 2016 &amp; 2017</div>
+            </div>
+            <ul class="bullets">
+                <li><strong>[2017] Sensor &amp; Machine Learning:</strong> Built a Conditional Random Field (CRF) variant to infer Uber Eats delivery events from mobile sensor data. Won 1st place at Uber's internal ML poster session for identifying and resolving critical upstream data-quality issues.</li>
+                <li><strong>[2016] Mobile Dev. &amp; Engineering:</strong> Developed a web-based forensics tool for mobile UI testing that synchronized logs with video timestamps, reducing internal developer debugging time by ~50%.</li>
+            </ul>
+        </div>
+        </section>
+
+        <section aria-label="Education">
+        <h2>Education</h2>
+
+        <div class="edu-entry no-break">
+            <div class="entry-header">
+                <div class="entry-title"><a class="uiuc-orange" target="_blank" rel="noopener noreferrer" href="https://cs.illinois.edu/">University of Illinois Urbana Champaign</a></div>
+                <div class="entry-date">2017 - 2022</div>
+            </div>
+            <div class="degree">Doctor of Philosophy in Computer Science</div>
+            <div>Dissertation: Machine learning for drug discovery and beyond (advisor: <em>Jian Peng</em>)</div>
+            <div>GPA: 4.00 / 4.00 | University Fellowship | Richard T. Cheng Endowed Fellowship</div>
+        </div>
+
+        <div class="edu-entry no-break">
+            <div class="entry-header">
+                <div class="entry-title"><a class="brandeis-blue" target="_blank" rel="noopener noreferrer" href="https://www.brandeis.edu/">Brandeis University</a></div>
+                <div class="entry-date">2013 - 2017</div>
+            </div>
+            <div class="degree">Bachelor of Science in Computer Science and Neuroscience</div>
+            <div>GPA: 3.96 / 4.00 | Summa Cum Laude | Phi Beta Kappa (Junior) | Schiff Fellowship</div>
+        </div>
+        </section>
+
+        <section aria-label="Recent and Selected Publications">
+        <h2 class="page-break-before">Recent &amp; Selected Publications <span class="pub-note">(*equal contribution)</span></h2>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">New York Smells: A Large Multimodal Dataset for Olfaction</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://arxiv.org/abs/2511.20544">arXiv</a></span> <span class="pub-year">(2025)</span></div>
+            <div class="pub-authors">Ege Ozguroglu, Junbang Liang, Ruoshi Liu, Mia Chiquier, Michael DeTienne, <span class="me">Wesley W. Qian</span>, Alexandra Horowitz, Andrew Owens, Carl Vondrick</div>
+        </div>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">A deep learning and digital archaeology approach for mosquito repellent discovery</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://academic.oup.com/chemse/article/doi/10.1093/chemse/bjaf021/8180865">Chemical Science</a></span> <span class="pub-year">(2025)</span></div>
+            <div class="pub-authors">Jennifer N. Wei*, Carlos Ruiz*, Marnix Vlot*, Benjamin Sanchez-Lengeling, Brian K. Lee, Luuk Berning, Martijn W. Vos, Rob WM Henderson, <span class="me">Wesley W. Qian</span>, Jacob N. Sanders, D. Michael Ando, Kurt M. Groetsch, Richard C. Gerkin, Alexander B. Wiltschko, Jeffrey A. Riffell, Koen J. Dechering</div>
+        </div>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">A Principal Odor Map Unifies Diverse Tasks in Human Olfactory Perception</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://www.science.org/doi/10.1126/science.ade4401">Science</a></span> <span class="pub-year">(2023)</span></div>
+            <div class="pub-authors">Brian K. Lee*, Emily E Mayhew*, Benjamin Sanchez-Lengeling, Jennifer N. Wei, <span class="me">Wesley W. Qian</span>, Kelsie Little, Matthew Andres, Britney B. Nguyen, Theresa Moloy, Jacob Yasonik, Jane K. Parker, Richard C. Gerkin, Joel D. Mainland, Alexander B. Wiltschko</div>
+        </div>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">Metabolic activity organizes olfactory representations</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://elifesciences.org/articles/82502">eLife</a></span> <span class="pub-year">(2023)</span></div>
+            <div class="pub-authors"><span class="me">Wesley W. Qian</span>, Jennifer N. Wei, Benjamin Sanchez-Lengeling, Brian K. Lee, Yunan Luo, Marnix Vlot, Koen Dechering, Jian Peng, Richard C. Gerkin, Alexander B. Wiltschko</div>
+        </div>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">3D Equivariant Diffusion for Target-Aware Molecule Generation and Affinity Prediction</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://iclr.cc/virtual/2023/poster/11022">ICLR</a></span> <span class="pub-year">(2023)</span></div>
+            <div class="pub-authors">Jiaqi Guan*, <span class="me">Wesley W. Qian</span>*, Xingang Peng, Yufeng Su, Jian Peng, Jianzhu Ma</div>
+        </div>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">Energy-Inspired Molecular Conformation Optimization</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://iclr.cc/virtual/2022/poster/6692">ICLR</a></span> <span class="pub-year">(2022)</span></div>
+            <div class="pub-authors">Jiaqi Guan*, <span class="me">Wesley W. Qian</span>*, Qiang Liu, Wei-Ying Ma, Jianzhu Ma, Jian Peng</div>
+        </div>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">Integrating Deep Neural Networks and Symbolic Inference for Organic Reactivity Prediction</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://chemrxiv.org/doi/full/10.26434/chemrxiv.11659563.v1">ACS National Meeting</a></span> <span class="pub-year">(2021)</span></div>
+            <div class="pub-authors"><span class="me">Wesley W. Qian</span>*, Nathan T. Russell*, Claire L. W. Simons, Yunan Luo, Martin D. Burke, Jian Peng</div>
+        </div>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">Batch Equalization with a Generative Adversarial Network</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://academic.oup.com/bioinformatics/article/36/Supplement_2/i875/6055901">Bioinformatics</a></span> <span class="pub-year">(2020)</span></div>
+            <div class="pub-authors"><span class="me">Wesley W. Qian</span>, Cassandra Xia, Subhashini Venugopalan, Arunachalam Narayanaswamy, Michelle Dimon, George W. Ashdown, Jake Baum, Jian Peng, D Michael Ando</div>
+        </div>
+        </section>
+
+        <section aria-label="Other Publications">
+        <h2>Other Publication</h2>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">Pervasive mislocalization of pathogenic coding variants underlying human disorders</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://www.cell.com/cell/fulltext/S0092-8674(24)01021-3">Cell</a></span> <span class="pub-year">(2024)</span></div>
+            <div class="pub-authors">Jessica Lacoste, Marzieh Haghighi, Shahan Haider, Chloe Reno, Zhen-Yuan Lin, Dmitri Segal, <span class="me">Wesley W. Qian</span>, Xueting Xiong, Tanisha Teelucksingh, Esteban Miglietta, Hamdah Shafqat-Abbasi, Pearl V. Ryder, Rebecca Senft, Beth A. Cimini, Ryan R. Murray, Chantal Nyirakanani, Tong Hao, Gregory G. McClain, Frederick P. Roth, Michael A. Calderwood, David E. Hill, Marc Vidal, S Stephen Yi, Nidhi Sahni, Jian Peng, Anne-Claude Gingras, Shantanu Singh, Anne E. Carpenter, Mikko Taipale</div>
+        </div>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">A central chaperone-like role for 14-3-3 proteins in human cells</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://www.cell.com/molecular-cell/fulltext/S1097-2765(23)00121-1">Molecular Cell</a></span> <span class="pub-year">(2023)</span></div>
+            <div class="pub-authors">Dmitri Segal, Stefan Maier, Giovanni J Mastromarco, <span class="me">Wesley W. Qian</span>, Syed Nabeel-Shah, Hyunmin Lee, Gaelen Moore, Jessica Lacoste, Brett Larsen, Zhen-Yuan Lin, Abeeshan Selvabaskaran, Karen Liu, Craig Smibert, Zhaolei Zhang, Jack Greenblatt, Jian Peng, Hyun O Lee, Anne-Claude Gingras, Mikko Taipale</div>
+        </div>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">ECNet is an evolutionary context-integrated deep learning framework for protein engineering</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://www.nature.com/articles/s41467-021-25976-8">Nature Communication</a></span> <span class="pub-year">(2021)</span></div>
+            <div class="pub-authors">Yunan Luo, Guangde Jiang, Tianhao Yu, Yang Liu, Lam Vo, Hantian Ding, Yufeng Su, <span class="me">Wesley W. Qian</span>, Huimin Zhao, Jian Peng</div>
+        </div>
+
+        <div class="pub no-break page-break-before">
+            <div><span class="pub-title">Comprehensive interactome profiling of the human Hsp70 network highlights functional differentiation of J domains</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://www.cell.com/molecular-cell/fulltext/S1097-2765(21)00317-8">Molecular Cell</a></span> <span class="pub-year">(2021)</span></div>
+            <div class="pub-authors">Benjamin L. Piette, Nader Alerasool, Zhen-Yuan Lin, Jessica Lacoste, Mandy Hiu Yi Lam, <span class="me">Wesley W. Qian</span>, Stephanie Tran, Brett Larsen, Eric Campos, Jian Peng, Anne-Claude Gingras, Mikko Taipale</div>
+        </div>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">Evaluating Attribution for Graph Neural Networks</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://papers.nips.cc/paper/2020/hash/417fbbf2e9d5a28a855a11894b2e795a-Abstract.html">NeurIPS</a></span> <span class="pub-year">(2020)</span></div>
+            <div class="pub-authors">Benjamin Sanchez-Lengeling, Jennifer Wei, Brian Lee, Emily Reif, Peter Wang, <span class="me">Wesley W. Qian</span>, Kevin McCloskey, Lucy Colwell, Alexander B. Wiltschko</div>
+        </div>
+
+        <div class="pub no-break">
+            <div><span class="pub-title">Evolutionary context-integrated deep sequence modeling for protein engineering</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://dl.acm.org/doi/10.1007/978-3-030-45257-5_30">RECOMB</a></span> <span class="pub-year">(2020)</span></div>
+            <div class="pub-authors">Yunan Luo, Lam Vo, Hantian Ding, Yufeng Su, Yang Liu, <span class="me">Wesley W. Qian</span>, Huimin Zhao, Jian Peng</div>
+        </div>
+        </section>
+
+        <section aria-label="Services">
+        <h2>Services</h2>
+
+        <ul class="bullets service-bullets">
+            <li><strong>Reviewer</strong> for Nature Machine Intelligence (2025), ICML (2024), ICLR (2024), NeurIPS (2023), LoG (2022 &amp; 2023), RECOMB (2021), ISMB (2019 &amp; 2020)</li>
+            <li><strong>Program Committee</strong> for ICML - ML Interpretability for Scientific Discovery Workshop 2020</li>
+        </ul>
+        </section>
+    </main>
+    <!-- For the curious: this resume was hand-crafted in HTML, not exported from a PDF.
+         Wesley believes the best tools are the ones you build yourself. -->
+    <script>
+    if (typeof console !== 'undefined') {
+        console.log('%cHi there! %cCurious about how this resume was built?',
+            'font-size:14px;font-weight:700;color:#2AA198',
+            'font-size:14px;color:#2d2d2d');
+        console.log('%cIt\'s a single HTML file with pure CSS print styles. No frameworks, no build tools.',
+            'font-size:12px;color:#666');
+        console.log('%cSource: https://github.com/WesleyyC/wesleyyc.github.io/blob/master/resume.html',
+            'font-size:12px;color:#2AA198');
+    }
+    </script>
+</body>
+</html>
