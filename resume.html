@@ -113,7 +113,6 @@ permalink: /resume
         .entry-title a.deepmind-blue { color: #0F4ABE; }
         .entry-title a.teal-link { color: #2AA198; }
         .entry-title a.teal-link:hover { color: #208a82; }
-
         .entry-title a.uiuc-orange { color: #E05500; }
         .entry-title a.uiuc-orange:hover { color: #c04a00; }
         .entry-title a.brandeis-blue { color: #003478; }
@@ -182,7 +181,7 @@ permalink: /resume
 
         /* --- Publications --- */
         .pub {
-            margin-bottom: 0.06in;
+            margin-bottom: 0.05in;
             padding-left: 0.15in;
             position: relative;
         }
@@ -196,9 +195,12 @@ permalink: /resume
             top: 1pt;
         }
 
-        .pub .pub-title { font-weight: 700; font-size: 10.5pt; }
+        .pub .pub-title { font-weight: 700; }
 
-        .pub .pub-venue { font-style: italic; }
+        .pub .pub-venue {
+            font-style: italic;
+            color: #555;
+        }
 
         .pub .pub-venue a {
             color: inherit;
@@ -209,12 +211,15 @@ permalink: /resume
 
         .pub .pub-venue a:hover { color: #2AA198; }
 
-        .pub .pub-year { font-style: normal; }
+        .pub .pub-year {
+            font-style: normal;
+            color: #555;
+        }
 
         .pub .pub-authors {
-            font-size: 9.5pt;
-            color: #444;
-            line-height: 1.35;
+            font-size: 9pt;
+            color: #666;
+            line-height: 1.3;
         }
 
         .pub .pub-authors .me {
@@ -224,8 +229,15 @@ permalink: /resume
 
         .pub-note {
             font-size: 10pt;
-            font-weight: 300;
-            color: #666;
+            font-weight: 400;
+            color: #888;
+        }
+
+        /* --- Services (use grey bullets like publications) --- */
+        .service-bullets li::before {
+            content: "\2022";
+            color: #888;
+            font-size: 8pt;
         }
 
         /* --- Page Break Helpers --- */
@@ -258,6 +270,7 @@ permalink: /resume
             .teal-link { color: #2AA198; }
 
             .page-break-before { padding-top: 0.5in; }
+
         }
     </style>
 </head>
@@ -445,7 +458,7 @@ permalink: /resume
         <section aria-label="Services">
         <h2>Services</h2>
 
-        <ul class="bullets">
+        <ul class="bullets service-bullets">
             <li><strong>Reviewer</strong> for Nature Machine Intelligence (2025), ICML (2024), ICLR (2024), NeurIPS (2023), LoG (2022 &amp; 2023), RECOMB (2021), ISMB (2019 &amp; 2020)</li>
             <li><strong>Program Committee</strong> for ICML - ML Interpretability for Scientific Discovery Workshop 2020</li>
         </ul>
