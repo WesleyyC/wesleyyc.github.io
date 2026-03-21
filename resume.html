@@ -78,6 +78,13 @@ permalink: /resume
             color: var(--color-text-dark);
             line-height: 1.1;
             letter-spacing: -0.01em;
+            transition: transform 0.2s var(--ease-out-quart), text-shadow 0.2s ease;
+            cursor: default;
+        }
+
+        .header h1:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 4px 12px rgba(42, 161, 152, 0.15);
         }
 
         .contact {
@@ -189,6 +196,12 @@ permalink: /resume
             margin-bottom: 0.05in;
             padding-left: 0.15in;
             position: relative;
+            border-left: 2pt solid transparent;
+            transition: border-color 0.15s var(--ease-out-quart);
+        }
+
+        .pub:hover {
+            border-left-color: var(--color-accent);
         }
 
         .pub::before {
@@ -274,6 +287,11 @@ permalink: /resume
             .entry-title a.brandeis-blue { color: #003478; }
 
             .page-break-before { padding-top: 0.5in; }
+
+            .header h1 { transition: none; }
+            .header h1:hover { transform: none; text-shadow: none; }
+            .pub { border-left: none; }
+            .pub:hover { border-left: none; }
         }
     </style>
 </head>
@@ -467,5 +485,18 @@ permalink: /resume
         </ul>
         </section>
     </main>
+    <!-- For the curious: this resume was hand-crafted in HTML, not exported from a PDF.
+         Wesley believes the best tools are the ones you build yourself. -->
+    <script>
+    if (typeof console !== 'undefined') {
+        console.log('%cHi there! %cCurious about how this resume was built?',
+            'font-size:14px;font-weight:700;color:#2AA198',
+            'font-size:14px;color:#2d2d2d');
+        console.log('%cIt\'s a single HTML file with pure CSS print styles. No frameworks, no build tools.',
+            'font-size:12px;color:#666');
+        console.log('%cSource: https://github.com/WesleyyC/wesleyyc.github.io/blob/master/resume.html',
+            'font-size:12px;color:#2AA198');
+    }
+    </script>
 </body>
 </html>
