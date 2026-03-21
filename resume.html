@@ -10,7 +10,7 @@ permalink: /resume
     <title>resume_wesley_w_qian</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap&font-display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/img/logo/logo.ico">
     <style>
         /* --- Design Tokens --- */
@@ -18,7 +18,6 @@ permalink: /resume
             --color-text: #2d2d2d;
             --color-text-dark: #1a1a1a;
             --color-text-muted: #666;
-            --color-text-light: #777;
             --color-accent: #2AA198;
             --color-accent-hover: #208a82;
             --color-bg: #e4e4e4;
@@ -247,19 +246,17 @@ permalink: /resume
         .pub-note {
             font-size: 9pt;
             font-weight: 400;
-            color: var(--color-text-light);
+            color: var(--color-text-muted);
             text-transform: none;
             letter-spacing: normal;
         }
 
-        /* --- Services (match publication indentation + grey bullets) --- */
+        /* --- Services (grey bullets, match publication indent) --- */
         .service-bullets { padding-left: 0; }
-        .service-bullets li { padding-left: 0.15in; }
         .service-bullets li::before {
             content: "\2022";
             color: var(--color-bullet-muted);
             font-size: 8pt;
-            top: 1pt;
         }
 
         /* --- Page Break Helpers --- */
@@ -292,8 +289,6 @@ permalink: /resume
 
             .page-break-before { padding-top: 0.5in; }
 
-            .header h1 { transition: none; }
-            .header h1:hover { transform: none; text-shadow: none; }
         }
     </style>
 </head>
@@ -487,9 +482,14 @@ permalink: /resume
         </ul>
         </section>
     </main>
-    <!-- For the curious: this resume was hand-crafted in HTML, not exported from a PDF.
-         Wesley believes the best tools are the ones you build yourself. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2HPVMHTRR"></script>
     <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y2HPVMHTRR');
+    </script>
+<script>
     if (typeof console !== 'undefined') {
         console.log('%cHi there! %cCurious about how this resume was built?',
             'font-size:14px;font-weight:700;color:#2AA198',
