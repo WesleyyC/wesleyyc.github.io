@@ -8,12 +8,15 @@ permalink: /resume
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Wesley Wei Qian - Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/img/logo/logo.ico">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             font-size: 10pt;
             line-height: 1.4;
             color: #2d2d2d;
@@ -95,7 +98,7 @@ permalink: /resume
         }
 
         .entry-title {
-            font-size: 10pt;
+            font-size: 10.5pt;
             font-weight: 700;
         }
 
@@ -112,7 +115,7 @@ permalink: /resume
         .entry-title a.teal-link:hover { color: #208a82; }
 
         .entry-date {
-            font-size: 10pt;
+            font-size: 10.5pt;
             white-space: nowrap;
             color: #666;
         }
@@ -152,10 +155,11 @@ permalink: /resume
         }
 
         .bullets li::before {
-            content: "\2023";
+            content: "\25B8";
             position: absolute;
             left: 0;
-            color: #555;
+            color: #2AA198;
+            font-size: 9pt;
         }
 
         .bullets a {
@@ -179,10 +183,12 @@ permalink: /resume
         }
 
         .pub::before {
-            content: "\2023";
+            content: "\2022";
             position: absolute;
             left: 0;
-            color: #555;
+            color: #888;
+            font-size: 8pt;
+            top: 1pt;
         }
 
         .pub .pub-title { font-weight: 700; }
@@ -271,8 +277,8 @@ permalink: /resume
                 <div class="entry-title">Founding Team | <a target="_blank" rel="noopener noreferrer" href="https://www.osmo.ai/">Osmo</a></div>
                 <div class="entry-date">Sep 2022 - Present</div>
             </div>
-            <div style="margin-bottom:1pt">Started as the first research engineer, I am now the VP of Engineering &amp; Research, leading a cross functional team around AI, human data, and software to build 0-to1 prototype and scale AI product.</div>
             <ul class="bullets">
+                <li>Started as the first research engineer, I am now the VP of Engineering &amp; Research, leading a cross functional team around AI, human data, and software to build 0-to1 prototype and scale AI product.</li>
                 <li><strong>LLMs &amp; Agentic Systems:</strong> Architected a multi-modal RAG system <a target="_blank" rel="noopener noreferrer" href="https://www.osmo.ai/blog/turn-words-and-images-into-fragrances">converting text / image briefs into physical fragrance samples</a> (driving &gt;$100k in sales within 3 months). Fine-tuned a formulation LLM using SFT and RLHF with in-house perfumery tools to align outputs with expert preferences.</li>
                 <li><strong>0-1 ML Stack:</strong> Built the post-Google spinout ML stack using PyTorch, GCP, and W&amp;B. Engineered and productionized GNNs and an end-to-end odor intensity pipeline from data collection to deployment that increased discovery throughput by 10×, enabling partnerships with a Top 4 fragrance house.</li>
                 <li><strong>AI for Science:</strong> World in a specialized team of ML researchers and analytical chemists to successfully <a target="_blank" rel="noopener noreferrer" href="https://www.osmo.ai/blog/update-scent-teleportation-we-did-it">"teleport" a physical plum scent</a>; utilized GC-MS analytical data to translate chemical signatures into digital profiles for remote reconstruction — proving "reading scent" is possible.</li>
@@ -348,7 +354,7 @@ permalink: /resume
 
         <div class="pub no-break">
             <div><span class="pub-title">A deep learning and digital archaeology approach for mosquito repellent discovery</span></div>
-            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://pubs.rsc.org/en/content/articlelanding/2025/sc/d4sc06669e">Chemical Science</a></span> <span class="pub-year">(2025)</span></div>
+            <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://academic.oup.com/chemse/article/doi/10.1093/chemse/bjaf021/8180865">Chemical Science</a></span> <span class="pub-year">(2025)</span></div>
             <div class="pub-authors">Jennifer N. Wei*, Carlos Ruiz*, Marnix Vlot*, Benjamin Sanchez-Lengeling, Brian K. Lee, Luuk Berning, Martijn W. Vos, Rob WM Henderson, <span class="me">Wesley W. Qian</span>, Jacob N. Sanders, D. Michael Ando, Kurt M. Groetsch, Richard C. Gerkin, Alexander B. Wiltschko, Jeffrey A. Riffell, Koen J. Dechering</div>
         </div>
 
