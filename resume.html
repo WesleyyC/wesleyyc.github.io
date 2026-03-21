@@ -27,12 +27,11 @@ permalink: /resume
             max-width: 100%;
             min-height: 11in;
             margin: 0.4in auto;
-            padding: 0.5in 0.6in;
+            padding: 0.5in;
             background: #fff;
             box-shadow: 0 1px 6px rgba(0,0,0,0.12);
         }
 
-        /* --- Focus & Accessibility --- */
         a:focus-visible {
             outline: 2px solid #2AA198;
             outline-offset: 2px;
@@ -40,9 +39,7 @@ permalink: /resume
         }
 
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                transition: none !important;
-            }
+            *, *::before, *::after { transition: none !important; }
         }
 
         /* --- Header --- */
@@ -50,7 +47,7 @@ permalink: /resume
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 0.08in;
+            margin-bottom: 0.06in;
         }
 
         .header h1 {
@@ -75,11 +72,7 @@ permalink: /resume
 
         .contact a:hover { text-decoration: underline; }
 
-        .contact .links a {
-            color: #2AA198;
-            text-decoration: underline;
-        }
-
+        .contact .links a { color: #2AA198; text-decoration: underline; }
         .contact .links a:hover { color: #208a82; }
 
         /* --- Section Headers --- */
@@ -93,7 +86,7 @@ permalink: /resume
             margin-bottom: 0.06in;
         }
 
-        /* --- Job Entries --- */
+        /* --- Job / Education Entries --- */
         .entry-header {
             display: flex;
             justify-content: space-between;
@@ -106,9 +99,8 @@ permalink: /resume
             font-weight: 700;
         }
 
-        .entry-title .company { font-weight: 400; }
-
         .entry-title a {
+            color: #1a1a1a;
             text-decoration: none;
             transition: opacity 0.15s ease;
         }
@@ -131,13 +123,12 @@ permalink: /resume
 
         .deepmind-blue { color: #0F4ABE; }
 
-        .brand-link { text-decoration: none; font-weight: 400; }
+        .brand-link { text-decoration: none; }
         .brand-link-bold { text-decoration: none; font-weight: 700; }
 
         .teal-link {
             color: #2AA198;
             text-decoration: none;
-            font-weight: 700;
             transition: color 0.15s ease;
         }
         .teal-link:hover { color: #208a82; text-decoration: underline; }
@@ -192,9 +183,7 @@ permalink: /resume
 
         .pub .pub-title { font-weight: 700; }
 
-        .pub .pub-venue {
-            font-style: italic;
-        }
+        .pub .pub-venue { font-style: italic; }
 
         .pub .pub-venue a {
             color: inherit;
@@ -208,9 +197,9 @@ permalink: /resume
         .pub .pub-year { font-style: normal; }
 
         .pub .pub-authors {
-            padding-left: 0.12in;
             font-size: 9.5pt;
             color: #444;
+            line-height: 1.35;
         }
 
         .pub .pub-authors .me {
@@ -241,12 +230,13 @@ permalink: /resume
                 width: auto;
                 min-height: auto;
                 margin: 0;
-                padding: 0.5in 0.6in;
+                padding: 0.5in;
                 box-shadow: none;
             }
 
             a { color: inherit; }
             .contact a, .contact .links a { color: #2d2d2d; }
+            .entry-title a { color: #1a1a1a; }
             .teal-link { color: #2AA198; }
             .deepmind-blue { color: #0F4ABE; }
 
@@ -256,7 +246,6 @@ permalink: /resume
 </head>
 <body>
     <main class="page">
-        <!-- HEADER -->
         <header class="header">
             <h1>Wesley Wei Qian</h1>
             <div class="contact">
@@ -270,13 +259,12 @@ permalink: /resume
             </div>
         </header>
 
-        <!-- EXPERIENCE -->
         <section aria-label="Experience">
         <h2>Experience</h2>
 
         <div class="no-break">
             <div class="entry-header">
-                <div class="entry-title">Founding Team | <span class="company"><a target="_blank" rel="noopener noreferrer" href="https://www.osmo.ai/">Osmo</a></span></div>
+                <div class="entry-title">Founding Team | <a target="_blank" rel="noopener noreferrer" href="https://www.osmo.ai/">Osmo</a></div>
                 <div class="entry-date">Sep 2022 - Present</div>
             </div>
             <ul class="bullets">
@@ -290,7 +278,7 @@ permalink: /resume
 
         <div class="no-break">
             <div class="entry-header">
-                <div class="entry-title">Student Researcher | <span class="company"><a target="_blank" rel="noopener noreferrer" href="https://research.google/" class="brand-link"><span class="google-g">G</span><span class="google-o1">o</span><span class="google-o2">o</span><span class="google-g2">g</span><span class="google-l">l</span><span class="google-e">e</span></a></span></div>
+                <div class="entry-title">Student Researcher | <a target="_blank" rel="noopener noreferrer" href="https://research.google/" class="brand-link"><span class="google-g">G</span><span class="google-o1">o</span><span class="google-o2">o</span><span class="google-g2">g</span><span class="google-l">l</span><span class="google-e">e</span></a></div>
                 <div class="entry-date">May 2018 - Sep 2022</div>
             </div>
             <ul class="bullets">
@@ -302,7 +290,7 @@ permalink: /resume
 
         <div class="no-break">
             <div class="entry-header">
-                <div class="entry-title">Intern | <span class="company"><a target="_blank" rel="noopener noreferrer" href="https://deepmind.google/" class="deepmind-blue brand-link-bold">DeepMind</a></span></div>
+                <div class="entry-title">Intern | <a target="_blank" rel="noopener noreferrer" href="https://deepmind.google/" class="deepmind-blue brand-link-bold">DeepMind</a></div>
                 <div class="entry-date">Sep 2021 - Dec 2021</div>
             </div>
             <ul class="bullets">
@@ -312,7 +300,7 @@ permalink: /resume
 
         <div class="no-break">
             <div class="entry-header">
-                <div class="entry-title">Software Engineering Intern | <span class="company"><a target="_blank" rel="noopener noreferrer" href="https://www.uber.com/en-US/blog/engineering/">Uber</a></span></div>
+                <div class="entry-title">Software Engineering Intern | <a target="_blank" rel="noopener noreferrer" href="https://www.uber.com/en-US/blog/engineering/">Uber</a></div>
                 <div class="entry-date">Summer 2016 &amp; 2017</div>
             </div>
             <ul class="bullets">
@@ -322,7 +310,6 @@ permalink: /resume
         </div>
         </section>
 
-        <!-- EDUCATION -->
         <section aria-label="Education">
         <h2>Education</h2>
 
@@ -346,7 +333,6 @@ permalink: /resume
         </div>
         </section>
 
-        <!-- RECENT & SELECTED PUBLICATIONS -->
         <section aria-label="Recent and Selected Publications">
         <h2 class="page-break-before">Recent &amp; Selected Publications <span class="pub-note">(*equal contribution)</span></h2>
 
@@ -399,7 +385,6 @@ permalink: /resume
         </div>
         </section>
 
-        <!-- SERVICES -->
         <section aria-label="Services">
         <h2>Services</h2>
 
@@ -409,7 +394,6 @@ permalink: /resume
         </ul>
         </section>
 
-        <!-- OTHER PUBLICATION -->
         <section aria-label="Other Publications">
         <h2 class="page-break-before">Other Publication</h2>
 
