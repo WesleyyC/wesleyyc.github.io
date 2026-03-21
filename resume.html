@@ -10,26 +10,39 @@ permalink: /resume
     <title>Wesley Wei Qian - Resume</title>
     <link rel="shortcut icon" href="/img/logo/logo.ico">
     <style>
-        /* --- Reset & Base --- */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             font-size: 10pt;
             line-height: 1.4;
-            color: #333;
-            background: #e8e8e8;
+            color: #2d2d2d;
+            background: #e4e4e4;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
 
         .page {
             width: 8.5in;
+            max-width: 100%;
             min-height: 11in;
             margin: 0.4in auto;
             padding: 0.5in 0.6in;
             background: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+        }
+
+        /* --- Focus & Accessibility --- */
+        a:focus-visible {
+            outline: 2px solid #2AA198;
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition: none !important;
+            }
         }
 
         /* --- Header --- */
@@ -37,25 +50,27 @@ permalink: /resume
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 0.1in;
+            margin-bottom: 0.08in;
         }
 
         .header h1 {
             font-size: 24pt;
             font-weight: 700;
-            color: #222;
+            color: #1a1a1a;
             line-height: 1.1;
+            letter-spacing: -0.01em;
         }
 
         .contact {
             text-align: right;
             font-size: 10pt;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .contact a {
-            color: #333;
+            color: #2d2d2d;
             text-decoration: none;
+            transition: color 0.15s ease;
         }
 
         .contact a:hover { text-decoration: underline; }
@@ -65,11 +80,13 @@ permalink: /resume
             text-decoration: underline;
         }
 
+        .contact .links a:hover { color: #208a82; }
+
         /* --- Section Headers --- */
         h2 {
-            font-size: 16pt;
+            font-size: 15pt;
             font-weight: 300;
-            color: #333;
+            color: #2d2d2d;
             border-bottom: 1.5pt solid #2AA198;
             padding-bottom: 2pt;
             margin-top: 0.12in;
@@ -93,18 +110,21 @@ permalink: /resume
 
         .entry-title a {
             text-decoration: none;
+            transition: opacity 0.15s ease;
         }
+
+        .entry-title a:hover { opacity: 0.7; }
 
         .entry-date {
             font-size: 10pt;
             white-space: nowrap;
-            color: #555;
+            color: #666;
         }
 
-        /* Brand colors */
+        /* --- Brand Colors --- */
         .google-g { color: #4285F4; }
         .google-o1 { color: #EA4335; }
-        .google-o2 { color: #FBBC05; }
+        .google-o2 { color: #E2A000; }
         .google-g2 { color: #4285F4; }
         .google-l { color: #34A853; }
         .google-e { color: #EA4335; }
@@ -114,8 +134,13 @@ permalink: /resume
         .brand-link { text-decoration: none; font-weight: 400; }
         .brand-link-bold { text-decoration: none; font-weight: 700; }
 
-        .teal-link { color: #2AA198; text-decoration: none; font-weight: 700; }
-        .teal-link:hover { text-decoration: underline; }
+        .teal-link {
+            color: #2AA198;
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.15s ease;
+        }
+        .teal-link:hover { color: #208a82; text-decoration: underline; }
 
         /* --- Bullet Lists --- */
         .bullets {
@@ -135,23 +160,21 @@ permalink: /resume
             content: "\2023";
             position: absolute;
             left: 0;
+            color: #555;
         }
 
         .bullets a {
-            color: #333;
+            color: #2d2d2d;
             text-decoration: underline;
+            text-underline-offset: 1.5pt;
+            transition: color 0.15s ease;
         }
+
+        .bullets a:hover { color: #2AA198; }
 
         /* --- Education --- */
         .edu-entry { margin-bottom: 0.04in; }
-
-        .edu-entry .degree {
-            font-style: italic;
-        }
-
-        .edu-entry .details {
-            font-size: 10pt;
-        }
+        .edu-entry .degree { font-style: italic; }
 
         /* --- Publications --- */
         .pub {
@@ -164,49 +187,46 @@ permalink: /resume
             content: "\2023";
             position: absolute;
             left: 0;
+            color: #555;
         }
 
-        .pub .pub-title {
-            font-weight: 700;
-        }
+        .pub .pub-title { font-weight: 700; }
 
         .pub .pub-venue {
-            text-decoration: underline;
             font-style: italic;
         }
 
         .pub .pub-venue a {
             color: inherit;
             text-decoration: underline;
+            text-underline-offset: 1.5pt;
+            transition: color 0.15s ease;
         }
 
-        .pub .pub-year {
-            font-style: normal;
-        }
+        .pub .pub-venue a:hover { color: #2AA198; }
+
+        .pub .pub-year { font-style: normal; }
 
         .pub .pub-authors {
-            padding-left: 0.25in;
+            padding-left: 0.12in;
             font-size: 9.5pt;
+            color: #444;
         }
 
         .pub .pub-authors .me {
             font-weight: 700;
+            color: #2d2d2d;
         }
 
         .pub-note {
             font-size: 10pt;
-            color: #555;
-            margin-bottom: 0.08in;
+            font-weight: 300;
+            color: #666;
         }
 
         /* --- Page Break Helpers --- */
-        .page-break-before {
-            break-before: page;
-        }
-
-        .no-break {
-            break-inside: avoid;
-        }
+        .page-break-before { break-before: page; }
+        .no-break { break-inside: avoid; }
 
         /* --- Print Styles --- */
         @page {
@@ -215,9 +235,7 @@ permalink: /resume
         }
 
         @media print {
-            body {
-                background: none;
-            }
+            body { background: none; }
 
             .page {
                 width: auto;
@@ -228,20 +246,18 @@ permalink: /resume
             }
 
             a { color: inherit; }
-            .contact a, .contact .links a { color: #333; }
+            .contact a, .contact .links a { color: #2d2d2d; }
             .teal-link { color: #2AA198; }
             .deepmind-blue { color: #0F4ABE; }
 
-            .page-break-before {
-                padding-top: 0.3in;
-            }
+            .page-break-before { padding-top: 0.3in; }
         }
     </style>
 </head>
 <body>
-    <div class="page">
+    <main class="page">
         <!-- HEADER -->
-        <div class="header">
+        <header class="header">
             <h1>Wesley Wei Qian</h1>
             <div class="contact">
                 <div><a href="mailto:wesley.chin0919@gmail.com">wesley.chin0919@gmail.com</a></div>
@@ -252,9 +268,10 @@ permalink: /resume
                     <a target="_blank" rel="noopener noreferrer" href="https://github.com/WesleyyC">GitHub</a>
                 </div>
             </div>
-        </div>
+        </header>
 
         <!-- EXPERIENCE -->
+        <section aria-label="Experience">
         <h2>Experience</h2>
 
         <div class="no-break">
@@ -277,7 +294,7 @@ permalink: /resume
                 <div class="entry-date">May 2018 - Sep 2022</div>
             </div>
             <ul class="bullets">
-                <li><strong>Olfactory ML:</strong> Advanced receptor binding prediction and metabolic activity modeling, resulting in one <u>utility patent</u> and four publications featured <a target="_blank" rel="noopener noreferrer" href="https://ai.googleblog.com/2022/09/digitizing-smell-using-molecular-maps.html">in</a> <a target="_blank" rel="noopener noreferrer" href="https://www.quantamagazine.org/ai-model-links-smell-molecules-with-metabolic-processes-20221010/">major</a> <a target="_blank" rel="noopener noreferrer" href="https://www.scientificamerican.com/article/ai-predicts-what-chemicals-will-smell-like-to-a-human/">news</a> <a target="_blank" rel="noopener noreferrer" href="https://blog.google/technology/research/using-new-technology-and-old-books-to-combat-disease/">outlets</a>, catalyzing Osmo's spin out.</li>
+                <li><strong>Olfactory ML:</strong> Advanced receptor binding prediction and metabolic activity modeling, resulting in one utility patent and four publications featured <a target="_blank" rel="noopener noreferrer" href="https://ai.googleblog.com/2022/09/digitizing-smell-using-molecular-maps.html">in</a> <a target="_blank" rel="noopener noreferrer" href="https://www.quantamagazine.org/ai-model-links-smell-molecules-with-metabolic-processes-20221010/">major</a> <a target="_blank" rel="noopener noreferrer" href="https://www.scientificamerican.com/article/ai-predicts-what-chemicals-will-smell-like-to-a-human/">news</a> <a target="_blank" rel="noopener noreferrer" href="https://blog.google/technology/research/using-new-technology-and-old-books-to-combat-disease/">outlets</a>, catalyzing Osmo's spin out.</li>
                 <li><strong>Genomics &amp; Structural Variants:</strong> Proposed a combinatorial formulation for structural variant calling with ML-based filtering; engineered a ~100× faster read-alignment approach, filed as <a target="_blank" rel="noopener noreferrer" href="https://patents.google.com/patent/WO2022165430A1">a utility patent.</a></li>
                 <li><strong>Generative Cell Images:</strong> Developed a GAN to mitigate batch effects in high-content cell imaging; upstreamed implementations to the <a target="_blank" rel="noopener noreferrer" href="https://blog.tensorflow.org/2019/08/introducing-tf-gan-lightweight-gan.html">TF-GAN library</a> and published findings in Bioinformatics.</li>
             </ul>
@@ -303,8 +320,10 @@ permalink: /resume
                 <li><strong>[2016] Mobile Dev. &amp; Engineering:</strong> Developed a web-based forensics tool for mobile UI testing that synchronized logs with video timestamps, reducing internal developer debugging time by ~50%.</li>
             </ul>
         </div>
+        </section>
 
         <!-- EDUCATION -->
+        <section aria-label="Education">
         <h2>Education</h2>
 
         <div class="edu-entry no-break">
@@ -313,8 +332,8 @@ permalink: /resume
                 <div class="entry-date">2017 - 2022</div>
             </div>
             <div class="degree">Doctor of Philosophy in Computer Science</div>
-            <div class="details">Dissertation: Machine learning for drug discovery and beyond (advisor: <em>Jian Peng</em>)</div>
-            <div class="details">GPA: 4.00 / 4.00 | University Fellowship | Richard T. Cheng Endowed Fellowship</div>
+            <div>Dissertation: Machine learning for drug discovery and beyond (advisor: <em>Jian Peng</em>)</div>
+            <div>GPA: 4.00 / 4.00 | University Fellowship | Richard T. Cheng Endowed Fellowship</div>
         </div>
 
         <div class="edu-entry no-break">
@@ -323,16 +342,18 @@ permalink: /resume
                 <div class="entry-date">2013 - 2017</div>
             </div>
             <div class="degree">Bachelor of Science in Computer Science and Neuroscience</div>
-            <div class="details">GPA: 3.96 / 4.00 | Summa Cum Laude | Phi Beta Kappa (Junior) | Schiff Fellowship</div>
+            <div>GPA: 3.96 / 4.00 | Summa Cum Laude | Phi Beta Kappa (Junior) | Schiff Fellowship</div>
         </div>
+        </section>
 
         <!-- RECENT & SELECTED PUBLICATIONS -->
+        <section aria-label="Recent and Selected Publications">
         <h2 class="page-break-before">Recent &amp; Selected Publications <span class="pub-note">(*equal contribution)</span></h2>
 
         <div class="pub no-break">
             <div><span class="pub-title">New York Smells: A Large Multimodal Dataset for Olfaction</span></div>
             <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://arxiv.org/abs/2511.20544">arXiv</a></span> <span class="pub-year">(2025)</span></div>
-            <div class="pub-authors">Ege Ozguroglu, Junbang Liang, Ruoshi Liu, Mia Chiquier, Michael DeTienne, <span class="me">Wesley W.Qian</span>, Alexandra Horowitz, Andrew Owens, Carl Vondrick</div>
+            <div class="pub-authors">Ege Ozguroglu, Junbang Liang, Ruoshi Liu, Mia Chiquier, Michael DeTienne, <span class="me">Wesley W. Qian</span>, Alexandra Horowitz, Andrew Owens, Carl Vondrick</div>
         </div>
 
         <div class="pub no-break">
@@ -376,16 +397,20 @@ permalink: /resume
             <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://academic.oup.com/bioinformatics/article/36/Supplement_2/i875/6055901">Bioinformatics</a></span> <span class="pub-year">(2020)</span></div>
             <div class="pub-authors"><span class="me">Wesley W. Qian</span>, Cassandra Xia, Subhashini Venugopalan, Arunachalam Narayanaswamy, Michelle Dimon, George W. Ashdown, Jake Baum, Jian Peng, D Michael Ando</div>
         </div>
+        </section>
 
         <!-- SERVICES -->
+        <section aria-label="Services">
         <h2>Services</h2>
 
         <ul class="bullets">
             <li><strong>Reviewer</strong> for Nature Machine Intelligence (2025), ICML (2024), ICLR (2024), NeurIPS (2023), LoG (2022 &amp; 2023), RECOMB (2021), ISMB (2019 &amp; 2020)</li>
             <li><strong>Program Committee</strong> for ICML - ML Interpretability for Scientific Discovery Workshop 2020</li>
         </ul>
+        </section>
 
         <!-- OTHER PUBLICATION -->
+        <section aria-label="Other Publications">
         <h2 class="page-break-before">Other Publication</h2>
 
         <div class="pub no-break">
@@ -423,6 +448,7 @@ permalink: /resume
             <div><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://dl.acm.org/doi/10.1007/978-3-030-45257-5_30">RECOMB</a></span> <span class="pub-year">(2020)</span></div>
             <div class="pub-authors">Yunan Luo, Lam Vo, Hantian Ding, Yufeng Su, Yang Liu, <span class="me">Wesley W. Qian</span>, Huimin Zhao, Jian Peng</div>
         </div>
-    </div>
+        </section>
+    </main>
 </body>
 </html>
