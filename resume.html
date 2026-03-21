@@ -198,12 +198,6 @@ permalink: /resume
             margin-bottom: 0.05in;
             padding-left: 0.15in;
             position: relative;
-            border-left: 2pt solid transparent;
-            transition: border-color 0.15s var(--ease-out-quart);
-        }
-
-        .pub:hover {
-            border-left-color: var(--color-accent);
         }
 
         .pub::before {
@@ -255,11 +249,14 @@ permalink: /resume
             letter-spacing: normal;
         }
 
-        /* --- Services (grey bullets like publications) --- */
+        /* --- Services (match publication indentation + grey bullets) --- */
+        .service-bullets { padding-left: 0; }
+        .service-bullets li { padding-left: 0.15in; }
         .service-bullets li::before {
             content: "\2022";
             color: var(--color-bullet-muted);
             font-size: 8pt;
+            top: 1pt;
         }
 
         /* --- Page Break Helpers --- */
@@ -294,8 +291,6 @@ permalink: /resume
 
             .header h1 { transition: none; }
             .header h1:hover { transform: none; text-shadow: none; }
-            .pub { border-left: none; }
-            .pub:hover { border-left: none; }
         }
     </style>
 </head>
