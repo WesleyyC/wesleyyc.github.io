@@ -193,6 +193,41 @@ Implementation is accepted only after:
 - Adding Writing in this pass.
 - Adding Cameras or a Photo top navigation bar in this pass.
 - Live Instagram embedding or runtime dependency on Instagram.
-- Rewriting the résumé.
 - Adding a CMS, frontend framework, or build system beyond the current Jekyll setup.
 - Publishing or deploying before local verification and user review.
+
+## Approved Revision — August 23, 2026
+
+This revision supersedes the earlier Home, menu, Photo-selection, Publications, and résumé constraints where they conflict.
+
+### Home
+
+- Replace the greeting with the public name `Wesley Wei Qian`.
+- Reduce the desktop introduction to approximately 18px/29px with a 30px/36px heading so the copy and 300px portrait carry comparable visual weight.
+- Reduce phone copy to approximately 17px/28px with a 28px/34px heading.
+- Keep the approved biography text and add `Resume` to the inline LinkedIn, Scholar, and Email link group.
+
+### Floating Menu
+
+- The collapsed 82 × 48px Menu trigger uses flex alignment so its label is optically and mathematically centered.
+- The open state contains only Home, Work, Publications, and Photo. It has no divider and no Close row.
+- Opening the menu moves keyboard focus to the current link (or first link). Outside click and Escape dismiss the menu; Escape restores focus to the trigger.
+- The open menu remains a compact expansion from the same bottom-left anchor.
+
+### Photo Selection
+
+- Expand the local curated pool to at least 24 photographs.
+- A fresh page view selects 12 unique photographs from that pool and randomizes their presentation order.
+- The selection remains stable for that page view. There is still no runtime Instagram dependency.
+
+### Publications
+
+- Display all paper titles in sentence case while preserving proper nouns, acronyms, and scientific notation.
+- Add the 2025 arXiv paper `Foundation models for discovery and exploration in chemical space` with its canonical arXiv link.
+
+### Résumé
+
+- Preserve the existing professional and publication content, including the user's in-progress computational-life-sciences edits.
+- Rebuild `/resume` in the same quiet editorial system: native system type, achromatic semantic colors, restrained hierarchy, hairline structure, and screen light/dark themes.
+- Keep Letter-sized print output clean and comprehensive; screen-only navigation and controls disappear in print.
+- Include the shared floating menu on screen and add the new 2025 paper to the publication record.

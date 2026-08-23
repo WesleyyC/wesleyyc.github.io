@@ -45,7 +45,7 @@ class SiteContractTest < Minitest::Test
   end
 
   def test_global_navigation_is_exactly_the_approved_four_items
-    %w[index.html work/index.html publications/index.html photo/index.html].each do |route|
+    %w[index.html work/index.html publications/index.html photo/index.html resume.html].each do |route|
       assert_equal GLOBAL_NAV_LABELS, primary_nav_labels(read(route)), route
     end
   end
@@ -83,11 +83,13 @@ class SiteContractTest < Minitest::Test
 
   def test_home_uses_the_approved_copy_and_local_portrait
     html = read("index.html")
-    assert_includes html, "Hi, I’m Wesley."
+    assert_match(/<h1>Wesley Wei Qian<\/h1>/, html)
     assert_includes html, "I build machines that can smell"
     assert_includes html, "across AI, product engineering, science, and data operation."
     assert_includes html, "Previously, I worked on olfaction and genomics at Google"
     assert_match(%r{<img\b[^>]*src=["']/img/profile/wesley-home\.(?:jpe?g|webp)["'][^>]*>}, html)
+    links = html[/<p\b[^>]*class=["']home-intro__links["'][^>]*>(.*?)<\/p>/m, 1]
+    assert_equal ["LinkedIn", "Scholar", "Resume", "Email"], links.scan(/<a\b[^>]*>(.*?)<\/a>/m).flatten.map { |label| text_content(label) }
   end
 
   def test_work_contains_all_roles_education_and_resume_link
@@ -101,10 +103,32 @@ class SiteContractTest < Minitest::Test
     assert_match(/<h2\b[^>]*class=["'][^"']*visually-hidden[^"']*["'][^>]*>Professional experience<\/h2>/, html)
   end
 
-  def test_publications_retains_fourteen_source_entries
+  def test_publications_has_the_complete_sentence_case_record
     html = read("publications/index.html")
-    assert_equal 14, html.scan('data-publication="true"').length
+    assert_equal 15, html.scan('data-publication="true"').length
     assert_includes html, "Publications"
+    assert_includes html, "Foundation models for discovery and exploration in chemical space"
+    assert_includes html, "https://arxiv.org/abs/2510.18900"
+
+    expected_titles = [
+      "Foundation models for discovery and exploration in chemical space",
+      "A deep learning and digital archaeology approach for mosquito repellent discovery",
+      "New York Smells: a large multimodal dataset for olfaction",
+      "Pervasive mislocalization of pathogenic coding variants underlying human disorders",
+      "A principal odor map unifies diverse tasks in human olfactory perception",
+      "3D equivariant diffusion for target-aware molecule generation and affinity prediction",
+      "Metabolic activity organizes olfactory representations",
+      "A central chaperone-like role for 14-3-3 proteins in human cells",
+      "Energy-inspired molecular conformation optimization",
+      "ECNet is an evolutionary context-integrated deep learning framework for protein engineering",
+      "Integrating deep neural networks and symbolic inference for organic reactivity prediction",
+      "Comprehensive interactome profiling of the human Hsp70 network highlights functional differentiation of J domains",
+      "Evaluating attribution for graph neural networks",
+      "Batch equalization with a generative adversarial network",
+      "Evolutionary context-integrated deep sequence modeling for protein engineering"
+    ]
+    actual_titles = html.scan(/<a\b[^>]*data-paper-link="true"[^>]*>(.*?)<\/a>/m).flatten.map { |title| text_content(title) }
+    assert_equal expected_titles, actual_titles
 
     html.scan(/<a\b[^>]*data-paper-link="true"[^>]*>/).each do |tag|
       assert_includes tag, 'target="_blank"'
@@ -115,11 +139,12 @@ class SiteContractTest < Minitest::Test
   def test_photo_feed_has_a_local_curated_set_with_accessible_dimensions
     html = read("photo/index.html")
     feed_images = image_tags(html).select { |tag| tag.include?('data-feed-image="true"') }
-    assert_operator feed_images.length, :>=, 12
+    assert_operator feed_images.length, :>=, 24
     dimensions = []
 
     feed_images.each do |tag|
-      assert_match(%r{src=["']/img/photo/feed/}, tag)
+      assert_match(%r{data-src=["']/img/photo/feed/}, tag)
+      refute_match(/\ssrc=["']/, tag)
       assert_match(/alt=["'][^"']+["']/, tag)
       assert_match(/width=["']\d+["']/, tag)
       assert_match(/height=["']\d+["']/, tag)
@@ -148,17 +173,47 @@ class SiteContractTest < Minitest::Test
   def test_menu_script_exposes_keyboard_and_focus_behavior
     script = read("js/site.js")
     assert_includes script, "aria-expanded"
+    assert_includes script, 'trigger.setAttribute("aria-hidden", String(open))'
+    assert_includes script, "trigger.inert = open"
     assert_includes script, "Escape"
     assert_match(/\.focus\(\)/, script)
     assert_includes script, ".inert"
     assert_includes script, "outside"
-    assert_match(/const outside = \([^)]*\) => \{[^}]*closeMenu\(true\);[^}]*\};/m, script)
+    assert_match(/const outside = \([^)]*\) => \{[^}]*closeMenu\(\);[^}]*\};/m, script)
     assert_includes script, 'document.addEventListener("click", outside)'
+    assert_includes script, 'trigger?.addEventListener("keydown"'
+    assert_includes script, 'event.key === "Enter"'
+    assert_includes script, 'event.key === " "'
     assert_includes script, 'menu?.addEventListener("focusin"'
+    assert_includes script, "event.relatedTarget"
+    assert_includes script, "ignoreNextFocusout"
     assert_includes script, 'window.addEventListener("resize"'
     assert_includes script, 'image.loading = index === 0 ? "eager" : "lazy"'
     assert_includes script, 'image.setAttribute("fetchpriority", "high")'
+    assert_includes script, "image.src = source"
     assert_includes script, "data-photo-feed"
+    assert_includes script, "PhotoSelection.selectRandom"
+    refute_includes script, 'label.textContent = open ? "Close" : "Menu"'
+  end
+
+  def test_open_menu_contains_links_without_a_close_row
+    html = read("index.html")
+    nav = html[/<nav\b[^>]*aria-label=["']Primary["'][^>]*>(.*?)<\/nav>/m, 1]
+    assert_equal 4, nav.scan(/<a\b/).length
+    assert_equal 1, nav.scan(/<button\b/).length
+    refute_includes nav, "floating-menu__divider"
+    refute_match(/>Close</, nav)
+  end
+
+  def test_resume_uses_the_shared_editorial_shell_and_complete_content
+    html = read("resume.html")
+    assert_includes html, 'class="resume-document"'
+    assert_includes html, "Wesley Wei Qian"
+    assert_includes html, "Foundation models for discovery and exploration in chemical space"
+    assert_equal 15, html.scan(/<div class="pub no-break(?: page-break-before)?">/).length
+    refute_includes html, "Source Sans 3"
+    refute_includes html, "#2AA198"
+    assert_includes html, "@media print"
   end
 
   def test_canonical_runner_builds_a_fresh_temporary_site
@@ -179,6 +234,8 @@ class SiteContractTest < Minitest::Test
     assert_includes css, ":focus-visible"
     assert_includes css, "::selection"
     assert_match(/\.floating-menu__trigger\s*\{[^}]*width:\s*82px/m, css)
+    assert_match(/\.floating-menu__trigger\s*\{[^}]*display:\s*flex[^}]*align-items:\s*center[^}]*justify-content:\s*center/m, css)
+    assert_match(/\.home-intro__copy\s*\{[^}]*font-size:\s*18px[^}]*line-height:\s*29px/m, css)
     assert_includes css, "--muted: #707070"
     assert_includes css, "--menu-link: #555555"
     assert_includes css, "--menu-link: #aaaaaa"

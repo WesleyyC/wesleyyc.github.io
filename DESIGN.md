@@ -28,12 +28,14 @@ colors:
   menu-link-hover-dark: "#d0d0d0"
   menu-link-active-dark: "#dfdfdf"
   menu-border-dark: "rgba(255, 255, 255, 0.1)"
+  resume-shadow-ambient-light: "rgba(0, 0, 0, 0.09)"
+  resume-shadow-contact-light: "rgba(0, 0, 0, 0.05)"
 typography:
   display:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
-    fontSize: "36px"
+    fontSize: "30px"
     fontWeight: 700
-    lineHeight: "42px"
+    lineHeight: "36px"
     letterSpacing: "-0.025em"
   headline:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
@@ -43,9 +45,9 @@ typography:
     letterSpacing: "-0.025em"
   body-large:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
-    fontSize: "21px"
+    fontSize: "18px"
     fontWeight: 400
-    lineHeight: "34px"
+    lineHeight: "29px"
   body:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
     fontSize: "19px"
@@ -61,8 +63,25 @@ typography:
     fontSize: "16px"
     fontWeight: 400
     lineHeight: "26px"
+  home-display-mobile:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+    fontSize: "28px"
+    fontWeight: 700
+    lineHeight: "34px"
+  resume-display-mobile:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+    fontSize: "34px"
+    fontWeight: 700
+    lineHeight: "34px"
+  resume-body-mobile:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+    fontSize: "15px"
+    fontWeight: 400
+    lineHeight: "1.55"
 rounded:
+  focus-tight: "2px"
   image: "16px"
+  menu-focus: "20px"
   portrait: "24px"
   menu-collapsed: "25px"
   menu-open: "26px"
@@ -76,7 +95,7 @@ spacing:
   image-gap-desktop: "40px"
   section: "48px"
   home-gap: "64px"
-  home-gap-wide: "92px"
+  home-gap-wide: "72px"
   photo-bottom: "96px"
   editorial-top: "120px"
 components:
@@ -102,7 +121,7 @@ components:
     typography: "{typography.label}"
     rounded: "{rounded.menu-open}"
     width: "149px"
-    height: "257px"
+    height: "188px"
   menu-collapsed-dark:
     backgroundColor: "{colors.menu-surface-dark}"
     textColor: "{colors.menu-link-hover-dark}"
@@ -116,7 +135,7 @@ components:
     typography: "{typography.label}"
     rounded: "{rounded.menu-open}"
     width: "149px"
-    height: "257px"
+    height: "188px"
 ---
 
 # Design System: DrQ.ai Personal Archive
@@ -129,7 +148,7 @@ DrQ.ai is an experience-first editorial portfolio, not a résumé-first landing 
 
 The story is sequential but unforced: meet Wesley on Home, understand the work, verify it through Publications, then wander through a shuffled photographic notebook. The four primary routes are Home (`/`), Work (`/work/`), Publications (`/publications/`), and Photo (`/photo/`). Cameras and any Photo-specific top navigation are deliberately deferred; Photo keeps only the global floating menu.
 
-The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 486px editorial introduction, with the bottom-left Menu as the only persistent action. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of `_layouts/default.html`.
+The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the bottom-left Menu as the only persistent action. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of `_layouts/default.html`.
 
 **Key Characteristics:**
 
@@ -139,7 +158,7 @@ The first viewport is the system's clearest expression: a 300px monochrome portr
 - One shared, bottom-left navigation object across all four routes.
 - Native system typography and small, understandable Jekyll/CSS/vanilla-JavaScript primitives.
 
-**Reference baseline.** The final Impeccable re-review verdict is `READY`; the canonical runner builds Jekyll and currently passes 13 tests / 381 assertions with no failures. The redesigned content set has 13 rasters with 0 missing provenance records. Canonical review captures are in `.impeccable/review/`, including light/dark Home (`desktop.png`, `dark.png`) and Photo (`photo-desktop.png`, `photo-dark.png`) plus mobile captures.
+**Reference baseline.** The canonical runner currently passes 15 site contracts / 651 assertions plus 5 deterministic Photo-selection assertions. The redesigned content set has 25 rasters with 0 missing provenance records: one supplied portrait and a 24-image Photo pool. Canonical review captures remain in `.impeccable/review/`; refresh them whenever the visual system materially changes.
 
 ## Colors
 
@@ -175,12 +194,12 @@ The single family keeps the interface immediate and device-native. Hierarchy com
 
 - **Display:** `typography.display` is used by `.home-intro__copy h1` for the greeting.
 - **Headline:** `typography.headline` is used by `.editorial-main h1` and section headings; publication year headings intentionally step down to the body size at 600 weight.
-- **Large body:** `typography.body-large` is the desktop Home introduction, with a fixed 486px copy column.
+- **Large body:** `typography.body-large` is the desktop Home introduction, with a fixed 456px copy column.
 - **Reading body:** `typography.body` is the 680px Work/Publications column and the base mobile Home copy.
 - **Label:** `typography.label` is the floating menu's compact, calm control language.
 - **Metadata:** `typography.meta` is for venues and other supporting publication information.
 
-At 720px and below, Home and editorial prose use 19px/30px, while primary headings use 32px/40px. Links use a one-pixel underline with a 0.16em offset; publication titles suppress the underline until hover to keep long lists quiet.
+At 720px and below, Home uses 17px/28px with a 28px/34px name, while editorial prose uses 19px/30px and primary editorial headings use 32px/40px. Links use a one-pixel underline with a 0.16em offset; publication titles suppress the underline until hover to keep long lists quiet.
 
 **The One Family Rule.** Do not add a display face to manufacture personality. The voice comes from the writing, proportions, images, and motion.
 
@@ -188,7 +207,7 @@ At 720px and below, Home and editorial prose use 19px/30px, while primary headin
 
 The site uses three deliberate spatial modes, all defined in `css/site.css`:
 
-1. **Home (`.home-main`, `.home-intro`):** a vertically centered first viewport with an 850px maximum row, 300px portrait, 486px copy column, and 64px gap. At 1360px and wider the gap becomes 92px. At 880px and below, the composition stacks, aligns to the top, and gives the portrait `max(180px, 40%)` with a square aspect ratio.
+1. **Home (`.home-main`, `.home-intro`):** a vertically centered first viewport with an 820px maximum row, 300px portrait, 456px copy column, and 64px gap. At 1360px and wider the row becomes 828px with a 72px gap. At 880px and below, the composition stacks, aligns to the top, and gives the portrait `max(180px, 40%)` with a square aspect ratio.
 2. **Reading pages (`.editorial-main`):** a centered 680px measure, 120px top margin, 48px minimum side total, and generous bottom clearance for the floating menu. At 720px and below, the page uses 24px side gutters, 48px top spacing, and a shorter bottom tail.
 3. **Photo (`.photo-main`, `.image-feed`):** a 1240px shell containing images up to 1200px wide. The feed starts 32px from the top with 40px vertical gaps. At 1240px and below it keeps 16px outer gutters; at 720px and below the top inset and image gap both become 16px.
 
@@ -222,27 +241,27 @@ Shapes are soft but sparse. The desktop portrait uses `rounded.portrait` and red
 
 - **Content:** exactly Home, Work, Publications, and Photo, in that order. The current link uses `.active` plus `aria-current="page"`.
 - **Placement:** 32px from the desktop left/bottom edges, shifting to 12px left and 20px bottom at 720px and below. The open mobile menu sits 12px from the bottom.
-- **Size:** 82 × 48px collapsed and 149 × 257px open. Every row is 44px high; the trigger remains 48px high.
-- **State:** the label changes from Menu to Close. `aria-expanded`, `aria-hidden`, and `inert` keep the accessibility tree synchronized with the visual state.
-- **Dismissal:** trigger click toggles; Escape and outside click close and return focus to the trigger.
+- **Size:** 82 × 48px collapsed and 149 × 188px open. The four navigation rows are 44px high; the trigger remains 48px high while collapsed and is hidden when open.
+- **State:** the visible trigger always says Menu. `aria-expanded`, `aria-label`, `aria-hidden`, tab order, and `inert` keep the accessibility tree synchronized with the visual state; the trigger leaves both the visual and accessibility trees while the four links are open.
+- **Dismissal:** pointer activation opens without moving focus into the menu; keyboard activation focuses the active or first link. Outside click, focus leaving the control, and Escape close it; Escape returns focus to the trigger.
 - **Long Photo pages:** on mobile only, scrolling down past 120px hides a closed, unfocused menu with `.scroll-hidden`; scrolling up restores it. An open or keyboard-focused menu never auto-hides.
 - **Deferred surfaces:** do not add Cameras, albums, or a Photo top bar in this system revision.
 
 The opening morph uses `--spring`: width over 590ms and height over 428ms. Bottom position and radius settle over 300ms with `--ease-out`; links fade/translate over 180–260ms with 60–135ms stagger. This is physical, not ornamental—the control expands from the trigger's anchored corner.
 
-**The Tiny Spring Exception.** `.floating-menu` intentionally animates `width` and `height`, despite the detector's general preference for transform/opacity motion. This is a reviewed exception limited to the fixed 82 × 48px → 149 × 257px control; it creates the signature physical morph and does not reflow page content. Do not generalize it to panels, cards, page sections, or other large surfaces.
+**The Tiny Spring Exception.** `.floating-menu` intentionally animates `width` and `height`, despite the detector's general preference for transform/opacity motion. This is a reviewed exception limited to the fixed 82 × 48px → 149 × 188px control; it creates the signature physical morph and does not reflow page content. Do not generalize it to panels, cards, page sections, or other large surfaces.
 
 ### Home introduction
 
-`index.html` and `.home-intro` pair one supplied monochrome portrait with concise, playful professional copy. The heading owns the strongest contrast; body copy stays muted; LinkedIn, Scholar, and Email form a quiet inline row that may wrap on small screens.
+`index.html` and `.home-intro` pair one supplied monochrome portrait with concise, playful professional copy. The heading is simply “Wesley Wei Qian” and owns the strongest contrast; body copy stays muted; LinkedIn, Scholar, Resume, and Email form a quiet inline row that may wrap on small screens.
 
 ### Editorial entries
 
-`work.html` uses `.work-entry` and `.education-entry`; `publications.html` uses `.publication-year`, `.publication`, and `.publication-meta`. Entries rely on whitespace and type, not dividers or cards. External links open in a new tab with `noopener noreferrer`; the Work page ends with a restrained link to the unchanged `/resume` source.
+`work.html` uses `.work-entry` and `.education-entry`; `publications.html` uses `.publication-year`, `.publication`, and `.publication-meta`. Entries rely on whitespace and type, not dividers or cards. External links open in a new tab with `noopener noreferrer`; the Work page ends with a restrained link to `/resume`. The resume is now a first-class editorial route with the shared menu on screen, a paired dark theme, and a deliberately balanced three-page Letter print layout.
 
 ### Photo feed
 
-`photo/index.html` renders 12 locally hosted JPEGs as `.image-item` figures. `js/site.js` shuffles them once on each fresh page visit, then keeps that order stable for the view. All images are safe to declare as lazy in markup; after shuffling, the script promotes the actual first item to eager/high-priority loading and leaves the remainder lazy. Lazy images fade from zero opacity over 300ms when `.loaded` is applied. Intrinsic width/height prevents layout shift, and each image has descriptive alt text.
+`photo/index.html` supplies a pool of 24 locally hosted JPEGs as `.image-item` figures. Candidate URLs stay in `data-src`, so the browser cannot preload photographs that will not be shown. On each fresh visit, `js/photo-selection.js` chooses 12 unique images from the full pool; `js/site.js` removes the unselected figures, assigns `src` only to the 12 selected images, and preserves that stable set for the view. The script promotes the actual first item to eager/high-priority loading and leaves the remainder lazy. Lazy images fade from zero opacity over 300ms when `.loaded` is applied. Intrinsic width/height prevents layout shift, and each image has descriptive alt text.
 
 The feed photographs are local derivatives from Wesley's `@the.stoddard.temple` archive. Presentation mats were removed without changing the photographs; there is no runtime Instagram dependency and no AI-generated imagery. `img/photo/PROVENANCE.md` is authoritative for the portrait and all feed sources. Do not infer camera, lens, EXIF, place, or identity from visual style; add Cameras or metadata only when evidence is reliable and the deferred feature is explicitly resumed.
 

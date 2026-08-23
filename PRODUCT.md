@@ -26,10 +26,10 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 
 - Jekyll static site hosted through GitHub Pages.
 - Primary routes are Home, Work, Publications, and Photo.
-- Photo is a single immersive, shuffled feed with no secondary top navigation.
+- Photo is a single immersive feed that samples 12 unique images per visit from a 24-image local pool, with no secondary top navigation.
 - Writing is deferred to a later pass.
 - The photo feed uses locally hosted selections rather than a runtime Instagram dependency.
-- The existing self-contained `resume.html` must remain intact.
+- `resume.html` is the detailed, printable professional record and should share the site's quiet editorial aesthetic without sacrificing print clarity.
 - The custom domain, analytics, structured data, and relevant metadata must continue to work.
 
 ## Brand Commitments
@@ -45,7 +45,7 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 
 - Professional chronology, education, publication metadata, and publication links in `resume.html`.
 - Current professional copy and role descriptions from Wesley's LinkedIn profile.
-- Fourteen publication entries in the existing résumé.
+- Fifteen publication entries, including “Foundation models for discovery and exploration in chemical space.”
 - Supplied homepage portrait at the local attachment path recorded in the approved design specification.
 - Instagram archive at `@the.stoddard.temple`; its Leica post identifies the M10 and Summilux 35 lens.
 - No testimonials, customer logos, performance benchmarks, or commercial claims are available and none should be fabricated.

@@ -24,5 +24,17 @@ mats from the Instagram posts without changing the underlying photographs.
 - `feed/10.jpg` — https://www.instagram.com/the.stoddard.temple/p/CxepAQ3M877/
 - `feed/11.jpg` — https://www.instagram.com/the.stoddard.temple/p/CiIah4arQzb/
 - `feed/12.jpg` — https://www.instagram.com/the.stoddard.temple/p/CiIaf-fr8j5/
+- `feed/13.jpg` — https://www.instagram.com/the.stoddard.temple/p/DSOLOy9jXGI/
+- `feed/14.jpg` — https://www.instagram.com/the.stoddard.temple/p/DSOKhJ5jV2j/
+- `feed/15.jpg` — https://www.instagram.com/the.stoddard.temple/p/DSOKeMZDTMM/
+- `feed/16.jpg` — https://www.instagram.com/the.stoddard.temple/p/CxepHqiMLME/
+- `feed/17.jpg` — https://www.instagram.com/the.stoddard.temple/p/CxepD_DscMy/
+- `feed/18.jpg` — https://www.instagram.com/the.stoddard.temple/p/CiIajeZrQD2/
+- `feed/19.jpg` — https://www.instagram.com/the.stoddard.temple/p/CiIaGueLSbL/
+- `feed/20.jpg` — https://www.instagram.com/the.stoddard.temple/p/CiIaEFpLRVR/
+- `feed/21.jpg` — https://www.instagram.com/the.stoddard.temple/p/CiIaCm2rUUF/
+- `feed/22.jpg` — https://www.instagram.com/the.stoddard.temple/p/CYsDHGrLM0N/
+- `feed/23.jpg` — https://www.instagram.com/the.stoddard.temple/p/CYsDFCnLovM/
+- `feed/24.jpg` — https://www.instagram.com/the.stoddard.temple/p/CYsDBP0LGfl/
 
 No AI-generated images are shipped in the current site.

@@ -1,34 +1,66 @@
 (() => {
     const menu = document.querySelector("[data-floating-menu]");
     const trigger = menu?.querySelector("[data-menu-trigger]");
-    const label = menu?.querySelector("[data-menu-label]");
     const links = menu?.querySelector("[data-menu-links]");
     let lastScrollY = window.scrollY;
+    let ignoreNextFocusout = false;
 
-    const setMenu = (open, returnFocus = false) => {
-        if (!menu || !trigger || !label || !links) return;
+    const setMenu = (open, { focusLinks = false, returnFocus = false } = {}) => {
+        if (!menu || !trigger || !links) return;
         menu.classList.toggle("is-open", open);
         trigger.setAttribute("aria-expanded", String(open));
+        trigger.setAttribute("aria-label", open ? "Menu open" : "Open menu");
+        trigger.setAttribute("aria-hidden", String(open));
+        trigger.inert = open;
+        trigger.tabIndex = open ? -1 : 0;
         links.setAttribute("aria-hidden", String(!open));
         links.inert = !open;
-        label.textContent = open ? "Close" : "Menu";
+        if (focusLinks) {
+            const destination = links.querySelector(".active") || links.querySelector("a");
+            destination?.focus();
+        }
         if (returnFocus) trigger.focus();
     };
 
-    const closeMenu = (returnFocus = false) => setMenu(false, returnFocus);
+    const closeMenu = (returnFocus = false) => setMenu(false, { returnFocus });
     const revealMenu = () => menu?.classList.remove("scroll-hidden");
 
     const outside = (event) => {
         if (!menu?.classList.contains("is-open") || menu.contains(event.target)) return;
-        closeMenu(true);
+        closeMenu();
     };
 
-    trigger?.addEventListener("click", () => {
-        setMenu(!menu.classList.contains("is-open"));
+    trigger?.addEventListener("keydown", (event) => {
+        const opensMenu = event.key === "Enter" || event.key === " ";
+        if (!opensMenu || menu.classList.contains("is-open")) return;
+        event.preventDefault();
+        setMenu(true, { focusLinks: true });
+    });
+
+    trigger?.addEventListener("click", (event) => {
+        if (menu.classList.contains("is-open")) return;
+        const openedFromKeyboard = event.detail === 0;
+        if (!openedFromKeyboard) ignoreNextFocusout = true;
+        setMenu(true, { focusLinks: openedFromKeyboard });
+        if (!openedFromKeyboard) {
+            trigger.blur();
+            window.setTimeout(() => { ignoreNextFocusout = false; }, 0);
+        }
     });
 
     document.addEventListener("click", outside);
     menu?.addEventListener("focusin", revealMenu);
+    menu?.addEventListener("focusout", (event) => {
+        if (ignoreNextFocusout) {
+            ignoreNextFocusout = false;
+            return;
+        }
+        const nextFocus = event.relatedTarget;
+        if (nextFocus && menu.contains(nextFocus)) return;
+        window.setTimeout(() => {
+            if (menu.classList.contains("is-open") && !menu.contains(document.activeElement)) closeMenu();
+        }, 0);
+    });
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && menu?.classList.contains("is-open")) {
             closeMenu(true);
@@ -36,12 +68,13 @@
     });
 
     const photoFeed = document.querySelector("[data-photo-feed]");
-    if (photoFeed) {
-        const images = Array.from(photoFeed.children);
-        for (let index = images.length - 1; index > 0; index -= 1) {
-            const swapIndex = Math.floor(Math.random() * (index + 1));
-            [images[index], images[swapIndex]] = [images[swapIndex], images[index]];
-        }
+    if (photoFeed && window.PhotoSelection) {
+        const pool = Array.from(photoFeed.children);
+        const images = window.PhotoSelection.selectRandom(pool, 12);
+        const selected = new Set(images);
+        pool.forEach((item) => {
+            if (!selected.has(item)) item.remove();
+        });
         images.forEach((item, index) => {
             photoFeed.appendChild(item);
             const image = item.querySelector("img");
@@ -49,6 +82,11 @@
             image.loading = index === 0 ? "eager" : "lazy";
             if (index === 0) image.setAttribute("fetchpriority", "high");
             else image.removeAttribute("fetchpriority");
+            const source = image.dataset.src;
+            if (source) {
+                image.src = source;
+                image.removeAttribute("data-src");
+            }
         });
     }
 

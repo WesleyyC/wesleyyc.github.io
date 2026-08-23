@@ -5,7 +5,7 @@
 
 ## Implementation rules
 
-- Do not overwrite the user's existing `resume.html` changes.
+- Preserve and build on the user's existing `resume.html` content changes.
 - Add tests before the implementation they describe and confirm each test fails for the expected reason.
 - Use Jekyll-compatible HTML, Liquid, CSS, and vanilla JavaScript only.
 - Preserve `CNAME`, analytics, structured data, favicon, and safe external-link behavior.
@@ -62,3 +62,12 @@
 6. Run the prescribed finish review, apply its disposition, and recapture if required.
 7. Record the built system in `DESIGN.md` and ensure every raster has provenance.
 8. Run final verification, inspect the diff for accidental changes, and report remaining limitations honestly.
+
+## Approved Revision Tasks — August 23, 2026
+
+1. Add failing regression coverage for the renamed Home heading, Resume link, compact typography, links-only menu, 24-image pool with a 12-image random subset, sentence-case publication titles, the new arXiv paper, and the résumé's shared editorial shell.
+2. Adjust Home composition and rewrite the menu state model so outside click and Escape dismiss a links-only panel.
+3. Download and optimize 12 additional authorized Instagram photographs, extend provenance, and select 12 unique items per page view.
+4. Normalize Publications title casing and add `Foundation models for discovery and exploration in chemical space` to both Publications and résumé.
+5. Rebuild the résumé presentation without losing the user's in-progress copy changes; verify screen light/dark themes and Letter print output.
+6. Repeat desktop, mobile, keyboard, randomization, dark-theme, print, detector, independent review, and fresh-build validation.

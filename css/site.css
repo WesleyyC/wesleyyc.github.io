@@ -115,7 +115,7 @@ img {
 
 .home-intro {
     display: flex;
-    width: min(850px, 100%);
+    width: min(820px, 100%);
     align-items: flex-start;
     gap: 64px;
 }
@@ -130,23 +130,23 @@ img {
 }
 
 .home-intro__copy {
-    width: 486px;
+    width: 456px;
     color: var(--muted);
-    font-size: 21px;
-    line-height: 34px;
+    font-size: 18px;
+    line-height: 29px;
 }
 
 .home-intro__copy h1 {
-    margin: -5px 0 28px;
+    margin: -3px 0 22px;
     color: var(--heading);
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 700;
     letter-spacing: -0.025em;
-    line-height: 42px;
+    line-height: 36px;
 }
 
 .home-intro__copy p {
-    margin: 0 0 28px;
+    margin: 0 0 20px;
 }
 
 .home-intro__copy p:last-child {
@@ -155,7 +155,7 @@ img {
 
 .home-intro__links {
     display: flex;
-    gap: 24px;
+    gap: 20px;
 }
 
 .home-intro__links a {
@@ -305,7 +305,7 @@ img {
 .floating-menu.is-open {
     bottom: 24px;
     width: 149px;
-    height: 257px;
+    height: 188px;
     border-radius: 26px;
     background: var(--menu-open-surface);
     box-shadow: var(--shadow-menu-open);
@@ -316,32 +316,28 @@ img {
     right: 0;
     bottom: 0;
     width: 149px;
-    padding: 6px 0;
+    height: 100%;
 }
 
 .floating-menu__links {
     display: flex;
     flex-direction: column;
-}
-
-.floating-menu__links a,
-.floating-menu__trigger {
-    display: block;
-    width: 100%;
-    height: 44px;
-    padding: 8px 22px;
-    border: 0;
-    background: transparent;
-    color: var(--menu-link);
-    font: inherit;
-    font-size: 17px;
-    line-height: 28px;
-    text-align: left;
-    text-decoration: none;
-    white-space: nowrap;
+    padding: 6px 0;
 }
 
 .floating-menu__links a {
+    display: flex;
+    width: 100%;
+    height: 44px;
+    align-items: center;
+    padding: 0 22px;
+    color: var(--menu-link);
+    font: inherit;
+    font-size: 17px;
+    line-height: 1.2;
+    text-align: left;
+    text-decoration: none;
+    white-space: nowrap;
     opacity: 0;
     transform: translateY(8px);
     transition: color 264ms ease, opacity 180ms ease, transform 260ms var(--ease-out);
@@ -365,28 +361,31 @@ img {
     color: var(--menu-link-active);
 }
 
-.floating-menu__divider {
-    height: 1px;
-    margin: 10px 22px;
-    background: rgba(17, 17, 17, 0.1);
-    opacity: 0;
-    transition: opacity 180ms ease;
-}
-
-.floating-menu.is-open .floating-menu__divider {
-    opacity: 1;
-    transition-delay: 100ms;
-}
-
 .floating-menu__trigger {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
     width: 82px;
     height: 48px;
-    margin-left: auto;
-    padding-right: 0;
-    padding-left: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
     color: var(--menu-trigger);
+    font: inherit;
+    font-size: 17px;
+    line-height: 1;
     cursor: pointer;
     text-align: center;
+    transition: opacity 140ms ease, transform 220ms var(--ease-out);
+}
+
+.floating-menu.is-open .floating-menu__trigger {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
 }
 
 .floating-menu__trigger:focus-visible,
@@ -402,7 +401,8 @@ img {
 
 @media (min-width: 1360px) {
     .home-intro {
-        gap: 92px;
+        width: min(828px, 100%);
+        gap: 72px;
     }
 }
 
@@ -441,13 +441,16 @@ img {
 }
 
 @media (max-width: 720px) {
-    .home-intro__copy,
+    .home-intro__copy {
+        font-size: 17px;
+        line-height: 28px;
+    }
+
     .editorial-main {
         font-size: 19px;
         line-height: 30px;
     }
 
-    .home-intro__copy h1,
     .editorial-main h1,
     .editorial-main h2 {
         font-size: 32px;
@@ -455,7 +458,10 @@ img {
     }
 
     .home-intro__copy h1 {
+        margin-bottom: 20px;
         margin-top: 0;
+        font-size: 28px;
+        line-height: 34px;
     }
 
     .home-intro__links {
@@ -521,10 +527,6 @@ img {
 
     .floating-menu {
         border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .floating-menu__divider {
-        background: rgba(255, 255, 255, 0.1);
     }
 
 }
