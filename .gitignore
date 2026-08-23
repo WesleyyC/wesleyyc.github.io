@@ -1,5 +1,6 @@
 # Jekyll build output
 _site/
+.impeccable/
 
 # Bundle cache
 vendor/

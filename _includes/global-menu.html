@@ -1,0 +1,15 @@
+{% assign current_section = page.section | default: 'home' %}
+<nav class="floating-menu" aria-label="Primary" data-floating-menu>
+    <div class="floating-menu__inner">
+        <div class="floating-menu__links" aria-hidden="true" inert data-menu-links>
+            <a href="{{ '/' | relative_url }}"{% if current_section == 'home' %} class="active" aria-current="page"{% endif %}>Home</a>
+            <a href="{{ '/work/' | relative_url }}"{% if current_section == 'work' %} class="active" aria-current="page"{% endif %}>Work</a>
+            <a href="{{ '/publications/' | relative_url }}"{% if current_section == 'publications' %} class="active" aria-current="page"{% endif %}>Publications</a>
+            <a href="{{ '/photo/' | relative_url }}"{% if current_section == 'photo' %} class="active" aria-current="page"{% endif %}>Photo</a>
+        </div>
+        <div class="floating-menu__divider" aria-hidden="true"></div>
+        <button class="floating-menu__trigger" type="button" aria-label="Toggle menu" aria-expanded="false" data-menu-trigger>
+            <span data-menu-label>Menu</span>
+        </button>
+    </div>
+</nav>

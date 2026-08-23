@@ -1,5 +1,7 @@
-title: Dr.Q
+title: Wesley Qian
 author: Wesley Wei Qian
+description: Engineering, research, publications, and photographs by Wesley Wei Qian.
+url: https://drq.ai
 
 # GitHub Pages configuration
 plugins:
@@ -9,6 +11,20 @@ plugins:
 markdown: kramdown
 highlighter: rouge
 permalink: pretty
+
+exclude:
+  - .agents
+  - .claude
+  - .superpowers
+  - .impeccable
+  - docs
+  - output
+  - script
+  - test
+  - DESIGN.md
+  - PRODUCT.md
+  - AGENTS.md
+  - CLAUDE.md
 
 social:
   - icon: linkedin

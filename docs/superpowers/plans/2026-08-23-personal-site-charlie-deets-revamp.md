@@ -16,27 +16,26 @@
 
 1. Run the existing Jekyll build and record any baseline failures.
 2. Extract professional entries, education, publications, and links from `resume.html` without modifying it.
-3. Verify camera model facts against primary sources.
-4. Select and download a representative set of authorized Instagram photographs.
+3. Select and download a representative set of authorized Instagram photographs.
 
 ## Task 2 — Contract tests
 
 1. Add a dependency-free Ruby test suite that builds the site into a temporary directory.
 2. Assert required routes exist.
 3. Assert the global menu contains exactly Home, Work, Publications, and Photo.
-4. Assert only Photo pages contain the Feed/Cameras segmented navigation.
+4. Assert no page renders a top navigation bar.
 5. Assert the supplied homepage copy and portrait are present.
 6. Assert Work includes all four roles and both schools.
 7. Assert Publications contains all source entries and safe external links.
-8. Assert photo and camera images have dimensions, alt text, and local URLs.
+8. Assert photo images have dimensions, alt text, and local URLs.
 9. Assert JavaScript exposes the menu state and keyboard dismissal behavior.
 
 ## Task 3 — Shared editorial shell
 
 1. Create a shared Jekyll layout with the durable Impeccable direction contract as the first body child.
-2. Create reusable head, global menu, and Photo navigation includes.
+2. Create reusable head and global menu includes.
 3. Add the editorial stylesheet with shared tokens, system themes, responsive breakpoints, focus styles, and reduced-motion handling.
-4. Add a small JavaScript module for the floating menu, segmented thumb, feed shuffle, lazy-image reveal, and mobile scroll behavior.
+4. Add a small JavaScript module for the floating menu, feed shuffle, lazy-image reveal, and mobile scroll behavior.
 
 ## Task 4 — Home, Work, and Publications
 
@@ -53,18 +52,10 @@
 3. Render the reference-style full-width feed with stable per-view shuffle and lazy reveal.
 4. Verify no runtime request to Instagram is required.
 
-## Task 6 — Cameras
-
-1. Generate a consistent three-image studio series for the Contax T3, Leica M10 with Summilux-M 35mm, and Ricoh GR IV.
-2. Store generation prompts/provenance and optimized derivatives.
-3. Build the three-card Cameras grid.
-4. Build one detail page per camera with verified specifications and concise first-person copy.
-5. Include example photographs only when attribution is known.
-
-## Task 7 — Validation and finish
+## Task 6 — Validation and finish
 
 1. Run the test suite and Jekyll production build.
-2. Serve locally and capture desktop and mobile screenshots for Home, Work, Publications, Feed, Cameras, and one camera detail page.
+2. Serve locally and capture desktop and mobile screenshots for Home, Work, Publications, and Photo.
 3. Test the floating menu with keyboard, Escape, outside click, focus return, and active states.
 4. Test light, dark, reduced-motion, and mobile layouts.
 5. Run the Impeccable detector once over changed targets and fix mechanical findings.

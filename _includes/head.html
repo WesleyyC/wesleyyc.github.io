@@ -1,46 +1,34 @@
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
 
-    <!-- SEO Meta Tags -->
-    <title>{{site.title}} - {{site.author}}</title>
-    <meta name="description" content="Personal website of Dr. Wesley Wei Qian">
-    <meta name="author" content="{{site.author}}">
+    {% assign meta_title = page.title | default: site.title %}
+    {% assign meta_description = page.description | default: site.description %}
+    <title>{% if page.title %}{{ meta_title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta name="description" content="{{ meta_description }}">
+    <meta name="author" content="{{ site.author }}">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="{{site.title}} - {{site.author}}">
-    <meta property="og:description" content="Personal website of Dr. Wesley Wei Qian">
-    <meta property="og:url" content="https://drq.ai">
+    <meta property="og:title" content="{{ meta_title }}">
+    <meta property="og:description" content="{{ meta_description }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://raw.githubusercontent.com/WesleyyC/wesleyyc.github.io/master/img/profile.jpg">
+    <meta property="og:image" content="{{ '/img/profile/wesley-home.jpg' | absolute_url }}">
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="{{site.title}} - {{site.author}}">
-    <meta name="twitter:description" content="Personal website of Dr. Wesley Wei Qian">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/WesleyyC/wesleyyc.github.io/master/img/profile.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ meta_title }}">
+    <meta name="twitter:description" content="{{ meta_description }}">
+    <meta name="twitter:image" content="{{ '/img/profile/wesley-home.jpg' | absolute_url }}">
 
-    <!-- Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-
-    <!-- Custom CSS -->
-    <link href="css/landing-page.css" rel="stylesheet">
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
-
-    <!-- Favicon -->
+    <link href="{{ '/css/site.css' | relative_url }}" rel="stylesheet">
     <link rel="shortcut icon" href="/img/logo/logo.ico">
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2HPVMHTRR"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-Y2HPVMHTRR');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Y2HPVMHTRR');
     </script>
 </head>

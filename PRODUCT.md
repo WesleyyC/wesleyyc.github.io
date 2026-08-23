@@ -26,7 +26,7 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 
 - Jekyll static site hosted through GitHub Pages.
 - Primary routes are Home, Work, Publications, and Photo.
-- Photo contains Feed and Cameras subsections.
+- Photo is a single immersive, shuffled feed with no secondary top navigation.
 - Writing is deferred to a later pass.
 - The photo feed uses locally hosted selections rather than a runtime Instagram dependency.
 - The existing self-contained `resume.html` must remain intact.
@@ -37,10 +37,9 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 - Public name: Wesley Wei Qian; professional title may use Dr. Wesley Wei Qian where context calls for it.
 - Voice: playful, curious, technically precise, and not overly serious.
 - Approved homepage statement: “I lead engineering and research at Osmo, where my team works across AI, product engineering, science, and data operation.”
-- The visual and interaction reference is Charlie Deets's personal site, especially its restrained editorial layout, floating bottom menu, Photo navigation, and camera presentation.
+- The visual and interaction reference is Charlie Deets's personal site, especially its restrained editorial layout, floating bottom menu, and full-width Photo feed.
 - Homepage portrait: the supplied black-and-white photograph.
 - Photography source: Wesley's `@the.stoddard.temple` Instagram archive.
-- Cameras: Contax T3, Leica M10 with Summilux-M 35mm, and Ricoh GR IV.
 
 ## Evidence on Hand
 

@@ -2,11 +2,11 @@
 
 **Date:** August 23, 2026  
 **Branch:** `codex/personal-site-revamp`  
-**Status:** Approved direction; awaiting specification review before implementation
+**Status:** Approved and amended during implementation; Cameras and Photo top navigation deferred
 
 ## Purpose
 
-Revamp Dr. Wesley Wei Qian's personal site into a quiet, playful editorial portfolio closely matching the visual system and interaction model of [charliedeets.com](https://charliedeets.com/), while using Wesley's original biography, résumé, publications, photographs, and camera imagery.
+Revamp Dr. Wesley Wei Qian's personal site into a quiet, playful editorial portfolio closely matching the visual system and interaction model of [charliedeets.com](https://charliedeets.com/), while using Wesley's original biography, résumé, publications, and photographs.
 
 The reference governs layout, typography, spacing, navigation behavior, responsive behavior, light/dark presentation, and motion. Charlie Deets's prose, photographs, and source code are not project assets and will not be copied.
 
@@ -17,7 +17,6 @@ The reference governs layout, typography, spacing, navigation behavior, responsi
 - Present professional history and education in a concise editorial format.
 - Create a year-organized publication archive from the existing résumé content.
 - Turn selected Instagram photographs into a locally hosted, immersive photo feed.
-- Present Wesley's three cameras with consistent studio-style rendered imagery.
 - Preserve the existing self-contained résumé at `/resume` without rewriting or restyling it as part of this project.
 - Maintain responsive, accessible, fast, GitHub Pages-compatible output.
 
@@ -30,16 +29,7 @@ The global menu contains exactly four items:
 3. Publications — `/publications/`
 4. Photo — `/photo/`
 
-Photo is the only section with a fixed top segmented navigation:
-
-1. Feed — `/photo/`
-2. Cameras — `/photo/cameras/`
-
-Each camera card may open a dedicated detail page:
-
-- `/photo/cameras/contax-t3/`
-- `/photo/cameras/leica-m10/`
-- `/photo/cameras/ricoh-gr-iv/`
+Photo is a single full-width feed at `/photo/`. It has no secondary top navigation in this pass.
 
 Writing, Timeline, Albums, and Recipes are explicitly out of scope. Writing can be added later without changing the global navigation system.
 
@@ -63,7 +53,7 @@ Writing, Timeline, Albums, and Recipes are explicitly out of scope. Writing can 
 - Active page uses `aria-current="page"` and stronger text contrast.
 - The button exposes `aria-expanded` and an accessible `aria-label`.
 - Escape and outside click close the panel, returning focus to the trigger.
-- At 720px and below, the menu moves to bottom-center, 20px above the viewport edge; the expanded state sits 12px above the edge.
+- At 720px and below, the menu remains bottom-left with a 12px horizontal inset, 20px above the viewport edge; the expanded state sits 12px above the edge.
 - On long mobile photo pages, the control may hide while scrolling down and return while scrolling up, provided this behavior is reliable and does not harm keyboard access.
 
 ### Editorial content pages
@@ -140,11 +130,8 @@ Publications adapts the reference Writing archive without its category filter.
 
 ### Photo Feed
 
-- Fixed top segmented navigation, centered 32px from the top on desktop and 16px on mobile.
-- Track height: approximately 46px with 4px padding, translucent surface, 20px backdrop blur, white highlight border, and soft shadow.
-- Active segment uses a white sliding thumb with subtle shadow; labels are approximately 15px.
-- With only `Feed` and `Cameras`, the control uses content-fit widths rather than retaining the four-item reference width.
-- Main feed begins approximately 110px from the top.
+- The feed has no top navigation; only the global floating Menu remains.
+- Main feed begins 32px from the top on desktop and 16px on mobile.
 - Maximum image width: 1200px.
 - Desktop images use 16px corner radii and approximately 40px vertical spacing.
 - At 720px and below, feed spacing becomes 16px and the page uses 16px outer margins.
@@ -154,36 +141,12 @@ The feed uses a curated local set of Wesley's strongest photographs from the sup
 
 No EXIF panel is shown unless reliable metadata is available. Camera attribution must not be inferred solely from visual style.
 
-### Cameras
-
-The camera index uses the reference Cameras presentation:
-
-- 1200px maximum grid width.
-- Three columns on desktop with a 20px gap.
-- Two columns at 960px and below.
-- One column at 720px and below with a 16px gap.
-- Cards use a white or dark-gray surface, 16px corner radius, light shadow, and a 2px upward hover translation.
-- Product image area uses a 3:2 aspect ratio.
-- Camera name is approximately 20px with compact muted badges beneath.
-
-Cameras:
-
-1. Contax T3
-2. Leica M10 with Summilux-M 35mm lens, confirmed from Wesley's Instagram post
-3. Ricoh GR IV
-
-Camera art is generated as a consistent studio series: accurate product silhouette and controls, soft neutral surface, diffuse side light, restrained shadows, no hands, no decorative props, and enough negative space to crop consistently to 3:2. Generated images must not contain invented brand text or malformed engravings; visible labels are removed or corrected if generation cannot render them reliably.
-
-Each camera detail page follows the reference pattern: a large hero render, a 680px details column, concise specifications, a short first-person note, and a grid of example photographs when camera attribution is known. Product specifications are verified against current official manufacturer or authoritative archival sources before publication.
-
 ## Content and Asset Sources
 
 - Homepage biography and professional history: Wesley's LinkedIn profile and existing résumé.
 - Publication metadata and URLs: `resume.html`.
 - Homepage portrait: supplied local JPEG.
 - Photo feed: selected images from `@the.stoddard.temple`, downloaded with user authorization and stored in the repository in web-optimized formats.
-- Camera ownership and Leica lens: user-provided details plus the Instagram caption identifying `#m10 #summilux35`.
-- Camera product facts: verified separately before implementation.
 
 Downloaded social images are treated as content assets only. Instagram captions or page UI are not reproduced unless specifically selected and relevant.
 
@@ -191,19 +154,19 @@ Downloaded social images are treated as content assets only. Instagram captions 
 
 - Remain compatible with Jekyll and GitHub Pages.
 - Introduce a shared editorial layout for Home, Work, Publications, and Photo while keeping `resume.html` self-contained.
-- Use reusable includes for the global menu and Photo segmented navigation.
-- Use a small vanilla JavaScript module for menu state, Escape/outside-click handling, photo segment thumb positioning, and feed shuffling.
+- Use a reusable include for the global menu.
+- Use a small vanilla JavaScript module for menu state, Escape/outside-click handling, and feed shuffling.
 - Centralize visual tokens and responsive rules in a new site stylesheet.
-- Prefer Jekyll data files for work history, publications, photographs, and cameras when doing so makes content safer to update.
+- Prefer Jekyll data files for work history, publications, and photographs when doing so makes content safer to update.
 - Retain `CNAME`, analytics, structured data, favicon, and relevant social metadata.
 - Remove obsolete landing-page dependencies such as particles.js and Font Awesome only after confirming they are unused by all redesigned routes.
 
 ## Accessibility and Performance
 
 - Semantic `main`, `nav`, `section`, and heading structure.
-- Keyboard-operable menu and segmented navigation.
+- Keyboard-operable global menu.
 - Visible `focus-visible` treatment with sufficient contrast.
-- `aria-current="page"` for active global and Photo links.
+- `aria-current="page"` for the active global link.
 - `aria-expanded` and descriptive label on the Menu trigger.
 - Escape and outside-click dismissal.
 - Minimum 44px touch targets.
@@ -219,7 +182,7 @@ Implementation is accepted only after:
 1. Automated checks confirm all required routes, menu labels, active states, image alt attributes, and external-link safety.
 2. `bundle exec jekyll build` succeeds.
 3. Desktop visual QA at 1280 × 720 confirms the reference proportions.
-4. Mobile visual QA around 390 × 844 confirms stacking, menu centering, Photo navigation, and one-column camera cards.
+4. Mobile visual QA around 390 × 844 confirms stacking, the bottom-left menu inset, and Photo feed spacing.
 5. Keyboard QA confirms tab order, Menu open/close, Escape dismissal, outside-click dismissal, and visible focus.
 6. Light and dark theme screenshots are reviewed.
 7. Existing `/resume` content and custom-domain configuration remain intact.
@@ -228,6 +191,7 @@ Implementation is accepted only after:
 
 - Copying Charlie Deets's text, photographs, recipes, or personal content.
 - Adding Writing in this pass.
+- Adding Cameras or a Photo top navigation bar in this pass.
 - Live Instagram embedding or runtime dependency on Instagram.
 - Rewriting the résumé.
 - Adding a CMS, frontend framework, or build system beyond the current Jekyll setup.
