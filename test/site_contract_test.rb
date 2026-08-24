@@ -105,7 +105,7 @@ class SiteContractTest < Minitest::Test
     assert_match(%r{<a\b[^>]*href=["']https://drq\.ai/resume["'][^>]*>Resume<\/a>}, links)
   end
 
-  def test_home_credits_the_site_inspiration_without_repeating_it_elsewhere
+  def test_home_credits_the_site_inspiration_in_page_flow_without_repeating_it_elsewhere
     home = read("index.html")
     credit = home[/<p\b[^>]*class=["'][^"']*site-credit[^"']*["'][^>]*>(.*?)<\/p>/m, 1]
 
@@ -114,9 +114,15 @@ class SiteContractTest < Minitest::Test
     assert_match(%r{<a\b[^>]*href=["']https://charliedeets\.com/["'][^>]*>Charlie Deets<\/a>}, credit)
 
     css = read("css/site.css")
+    home_page_css = css[/\.home-page\s*\{(.*?)\}/m, 1]
     credit_css = css[/\.site-credit\s*\{(.*?)\}/m, 1]
-    assert_includes credit_css, "right: 32px"
-    refute_includes credit_css, "left:"
+    refute_nil home_page_css
+    assert_includes home_page_css, "display: grid"
+    assert_includes home_page_css, "grid-template-rows: 1fr auto"
+    assert_includes credit_css, "position: static"
+    assert_includes credit_css, "justify-self: end"
+    refute_includes credit_css, "position: fixed"
+    refute_match(/@media \(max-width: 720px\).*?\.site-credit\s*\{[^}]*\bbottom:/m, css)
     refute_includes css, ".floating-menu.is-open + .site-credit"
 
     %w[work/index.html papers/index.html photo/index.html resume.html].each do |route|

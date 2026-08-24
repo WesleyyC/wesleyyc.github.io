@@ -104,9 +104,15 @@ img {
 }
 
 /* Home */
+.home-page {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 1fr auto;
+}
+
 .home-main {
     display: flex;
-    min-height: 100vh;
+    min-height: 0;
     align-items: center;
     justify-content: center;
     padding: 64px 24px;
@@ -435,16 +441,14 @@ img {
 }
 
 .site-credit {
-    position: fixed;
-    z-index: 99;
-    bottom: 47px;
-    right: 32px;
+    position: static;
+    justify-self: end;
     margin: 0;
+    padding: 0 32px 32px;
     color: var(--muted);
     font-size: 12px;
     line-height: 18px;
     white-space: nowrap;
-    transition: opacity 120ms ease;
 }
 
 .site-credit a {
@@ -556,8 +560,8 @@ img {
     }
 
     .site-credit {
-        bottom: 35px;
-        right: 16px;
+        padding: 0 max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+        white-space: normal;
     }
 
 }

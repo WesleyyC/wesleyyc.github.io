@@ -148,7 +148,7 @@ DrQ.ai is an experience-first editorial portfolio, not a résumé-first landing 
 
 The story is sequential but unforced: meet Wesley on Home, understand the work, and verify it through Papers (`/papers/`). Those three routes form primary navigation; the former `/publications/` route redirects to Papers. The shuffled photographic notebook remains directly available at Photo (`/photo/`) while its menu entry, Cameras, and any Photo-specific top navigation are deliberately deferred.
 
-The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the Menu at bottom-left and a small linked Charlie Deets credit at bottom-right. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of `_layouts/default.html`.
+The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the Menu at bottom-left and a small linked Charlie Deets credit in the bottom-right footer row. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of `_layouts/default.html`.
 
 **Key Characteristics:**
 
@@ -256,7 +256,7 @@ Width and height use separate authored spring curves. Opening targets roughly 59
 
 ### Home introduction
 
-`index.html` and `.home-intro` pair one supplied monochrome portrait with concise, playful professional copy. The heading is simply “Wesley Wei Qian” and owns the strongest contrast; body copy stays muted; LinkedIn, Scholar, Resume, and Email form a quiet inline row that may wrap on small screens. A 12px fixed credit links Charlie Deets at bottom-right, balancing the Menu without competing for its opening space.
+`index.html` and `.home-intro` pair one supplied monochrome portrait with concise, playful professional copy. The heading is simply “Wesley Wei Qian” and owns the strongest contrast; body copy stays muted; LinkedIn, Scholar, Resume, and Email form a quiet inline row that may wrap on small screens. A 12px footer credit links Charlie Deets at bottom-right; it stays in document flow so short mobile viewports push it below the content instead of letting it overlap the copy.
 
 ### Editorial entries
 
