@@ -15,7 +15,7 @@ class SiteContractTest < Minitest::Test
     resume.html
   ].freeze
 
-  GLOBAL_NAV_LABELS = ["Home", "Work", "Publications", "Photo"].freeze
+  GLOBAL_NAV_LABELS = ["Home", "Work", "Publications"].freeze
 
   def read(relative_path)
     path = SITE_DIR.join(relative_path)
@@ -44,7 +44,7 @@ class SiteContractTest < Minitest::Test
     assert_empty missing, "Missing built routes: #{missing.join(', ')}"
   end
 
-  def test_global_navigation_is_exactly_the_approved_four_items
+  def test_global_navigation_is_exactly_the_approved_three_items
     %w[index.html work/index.html publications/index.html photo/index.html resume.html].each do |route|
       assert_equal GLOBAL_NAV_LABELS, primary_nav_labels(read(route)), route
     end
@@ -54,14 +54,18 @@ class SiteContractTest < Minitest::Test
     {
       "index.html" => "Home",
       "work/index.html" => "Work",
-      "publications/index.html" => "Publications",
-      "photo/index.html" => "Photo"
+      "publications/index.html" => "Publications"
     }.each do |route, expected|
       current = read(route).scan(/<a\b[^>]*aria-current=["']page["'][^>]*>(.*?)<\/a>/m)
                            .flatten
                            .map { |label| text_content(label) }
       assert_equal [expected], current, route
     end
+
+    photo_current = read("photo/index.html").scan(/<a\b[^>]*aria-current=["']page["'][^>]*>(.*?)<\/a>/m)
+                                            .flatten
+                                            .map { |label| text_content(label) }
+    assert_empty photo_current, "Photo remains available by URL without appearing in primary navigation"
   end
 
   def test_no_route_has_a_top_navigation_bar
@@ -86,21 +90,31 @@ class SiteContractTest < Minitest::Test
     assert_match(/<h1>Wesley Wei Qian<\/h1>/, html)
     assert_includes html, "I build machines that can smell"
     assert_includes html, "across AI, product engineering, science, and data operation."
-    assert_includes html, "Previously, I worked on olfaction and genomics at Google"
+    assert_includes html, "Previously, I worked on olfaction, genomics, and high-content cellular imaging at Google, protein structure at DeepMind, and machine learning on sensor data at Uber."
     assert_match(%r{<img\b[^>]*src=["']/img/profile/wesley-home\.(?:jpe?g|webp)["'][^>]*>}, html)
     links = html[/<p\b[^>]*class=["']home-intro__links["'][^>]*>(.*?)<\/p>/m, 1]
     assert_equal ["LinkedIn", "Scholar", "Resume", "Email"], links.scan(/<a\b[^>]*>(.*?)<\/a>/m).flatten.map { |label| text_content(label) }
   end
 
-  def test_work_contains_all_roles_education_and_resume_link
+  def test_work_contains_all_roles_and_education_without_a_duplicate_resume_link
     html = read("work/index.html")
     %w[Osmo Google DeepMind Uber].each { |name| assert_includes html, name }
     assert_includes html, "University of Illinois Urbana-Champaign"
     assert_includes html, "Brandeis University"
-    assert_match(%r{href=["']/resume["']}, html)
+    refute_match(%r{href=["']/resume["']}, html)
     assert_equal 4, html.scan('data-work-entry="true"').length
     assert_equal 2, html.scan('data-education-entry="true"').length
     assert_match(/<h2\b[^>]*class=["'][^"']*visually-hidden[^"']*["'][^>]*>Professional experience<\/h2>/, html)
+  end
+
+
+  def test_pages_link_the_local_rounded_square_favicon
+    %w[index.html work/index.html publications/index.html photo/index.html resume.html].each do |route|
+      assert_match(%r{<link\b[^>]*rel=["']icon["'][^>]*type=["']image/svg\+xml["'][^>]*href=["']/img/logo/favicon\.svg["']}, read(route), route)
+    end
+
+    favicon = PROJECT_DIR.join("img/logo/favicon.svg")
+    assert favicon.file?, "Expected the local SVG favicon to exist"
   end
 
   def test_publications_has_the_complete_sentence_case_record
@@ -199,7 +213,7 @@ class SiteContractTest < Minitest::Test
   def test_open_menu_contains_links_without_a_close_row
     html = read("index.html")
     nav = html[/<nav\b[^>]*aria-label=["']Primary["'][^>]*>(.*?)<\/nav>/m, 1]
-    assert_equal 4, nav.scan(/<a\b/).length
+    assert_equal 3, nav.scan(/<a\b/).length
     assert_equal 1, nav.scan(/<button\b/).length
     refute_includes nav, "floating-menu__divider"
     refute_match(/>Close</, nav)
@@ -211,6 +225,15 @@ class SiteContractTest < Minitest::Test
     assert_includes html, "Wesley Wei Qian"
     assert_includes html, "Foundation models for discovery and exploration in chemical space"
     assert_equal 15, html.scan(/<div class="pub no-break(?: page-break-before)?">/).length
+    assert_equal 4, html.scan('data-company-entry="true"').length
+    assert_equal 10, html.scan('data-role-step="true"').length
+    assert_match(%r{href=["']https://www\.linkedin\.com/in/wesleyq["']}, html)
+    header_css = html[/\.header\s*\{(.*?)\}/m, 1]
+    refute_includes header_css, "border-bottom"
+    assert_includes html, "--resume-osmo:"
+    assert_includes html, "--resume-deepmind:"
+    assert_includes html, "--resume-uiuc:"
+    assert_includes html, "--resume-brandeis:"
     refute_includes html, "Source Sans 3"
     refute_includes html, "#2AA198"
     assert_includes html, "@media print"
@@ -236,7 +259,9 @@ class SiteContractTest < Minitest::Test
     assert_match(/\.floating-menu__trigger\s*\{[^}]*width:\s*82px/m, css)
     assert_match(/\.floating-menu__trigger\s*\{[^}]*display:\s*flex[^}]*align-items:\s*center[^}]*justify-content:\s*center/m, css)
     assert_match(/\.home-intro__copy\s*\{[^}]*font-size:\s*18px[^}]*line-height:\s*29px/m, css)
-    assert_includes css, "--muted: #707070"
+    assert_includes css, "--background: #fafafa"
+    assert_match(/\.floating-menu\.is-open\s*\{[^}]*height:\s*144px/m, css)
+    assert_includes css, "--muted: #6e6e6e"
     assert_includes css, "--menu-link: #555555"
     assert_includes css, "--menu-link: #aaaaaa"
     refute_includes css, "left: 50%"

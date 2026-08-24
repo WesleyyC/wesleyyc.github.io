@@ -12,8 +12,10 @@ body_class: resume-page
     <title>resume_wesley_w_qian</title>
     <meta name="description" content="Experience, education, publications, and service by Wesley Wei Qian.">
     <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#171717" media="(prefers-color-scheme: dark)">
     <link href="/css/site.css" rel="stylesheet">
-    <link rel="shortcut icon" href="/img/logo/logo.ico">
+    <link rel="icon" type="image/svg+xml" href="/img/logo/favicon.svg">
     <style>
         /* --- Design Tokens --- */
         :root {
@@ -24,6 +26,14 @@ body_class: resume-page
             --resume-paper: #fafafa;
             --resume-hairline: rgba(17, 17, 17, 0.14);
             --resume-bullet: #8a8a8a;
+            --resume-osmo: #a83c33;
+            --resume-google-blue: #4285f4;
+            --resume-google-red: #c5221f;
+            --resume-google-yellow: #a15c00;
+            --resume-google-green: #188038;
+            --resume-deepmind: #0f4abe;
+            --resume-uiuc: #c44700;
+            --resume-brandeis: #003478;
             --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
@@ -67,8 +77,6 @@ body_class: resume-page
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 0.14in;
-            padding-bottom: 0.18in;
-            border-bottom: 1px solid var(--resume-hairline);
         }
 
         .header h1 {
@@ -135,9 +143,48 @@ body_class: resume-page
             color: var(--resume-muted);
         }
 
-        .google-g, .google-g2, .google-o1, .google-e, .google-o2, .google-l,
-        .deepmind-blue, .entry-title a.uiuc-orange, .entry-title a.brandeis-blue {
-            color: inherit;
+        .entry-title a.osmo-red { color: var(--resume-osmo); }
+        .google-g, .google-g2 { color: var(--resume-google-blue); }
+        .google-o1, .google-e { color: var(--resume-google-red); }
+        .google-o2 { color: var(--resume-google-yellow); }
+        .google-l { color: var(--resume-google-green); }
+        .deepmind-blue { color: var(--resume-deepmind); }
+        .entry-title a.uiuc-orange { color: var(--resume-uiuc); }
+        .entry-title a.brandeis-blue { color: var(--resume-brandeis); }
+
+        /* --- Company timeline --- */
+        .company-entry { margin-bottom: 0.1in; }
+
+        .company-entry > .entry-header { margin-bottom: 4pt; }
+
+        .role-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 4pt;
+            padding-left: 0.15in;
+        }
+
+        .role-step {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            column-gap: 10pt;
+            break-inside: avoid;
+        }
+
+        .role-step__title {
+            color: var(--resume-ink);
+            font-weight: 600;
+        }
+
+        .role-step__date {
+            color: var(--resume-muted);
+            font-size: 8.5pt;
+            white-space: nowrap;
+        }
+
+        .role-step__summary {
+            grid-column: 1 / -1;
+            color: var(--resume-text);
         }
 
         /* --- Bullet Lists (Experience) --- */
@@ -265,6 +312,9 @@ body_class: resume-page
             .contact { text-align: left; }
             .entry-date { margin-top: 2px; }
             .bullets { padding-left: 0; }
+            .role-timeline { padding-left: 0; }
+            .role-step { display: block; }
+            .role-step__date { margin: 1px 0 2px; }
         }
 
         @media (prefers-color-scheme: dark) {
@@ -276,6 +326,14 @@ body_class: resume-page
                 --resume-paper: #171717;
                 --resume-hairline: rgba(255, 255, 255, 0.13);
                 --resume-bullet: #8e8e8e;
+                --resume-osmo: #ff8174;
+                --resume-google-blue: #8ab4f8;
+                --resume-google-red: #f28b82;
+                --resume-google-yellow: #fdd663;
+                --resume-google-green: #81c995;
+                --resume-deepmind: #91b2ff;
+                --resume-uiuc: #ff9a62;
+                --resume-brandeis: #86a8ff;
             }
         }
 
@@ -293,6 +351,14 @@ body_class: resume-page
                 --resume-paper: #ffffff;
                 --resume-hairline: rgba(17, 17, 17, 0.14);
                 --resume-bullet: #888888;
+                --resume-osmo: #a83c33;
+                --resume-google-blue: #4285f4;
+                --resume-google-red: #c5221f;
+                --resume-google-yellow: #a15c00;
+                --resume-google-green: #188038;
+                --resume-deepmind: #0f4abe;
+                --resume-uiuc: #c44700;
+                --resume-brandeis: #003478;
             }
 
             body.resume-page {
@@ -310,7 +376,7 @@ body_class: resume-page
             }
 
             a { color: inherit; }
-            .contact a, .contact .links a, .entry-title a { color: inherit; }
+            .contact a, .contact .links a { color: inherit; }
             .floating-menu, .skip-link { display: none; }
 
             .page-break-before { padding-top: 0.35in; }
@@ -334,6 +400,7 @@ body_class: resume-page
                 <div><a href="mailto:wesley.chin0919@gmail.com">wesley.chin0919@gmail.com</a></div>
                 <div class="links">
                     <a target="_blank" rel="noopener noreferrer" href="https://drq.ai">DrQ.ai</a> &middot;
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/wesleyq">LinkedIn</a> &middot;
                     <a target="_blank" rel="noopener noreferrer" href="https://scholar.google.com/citations?user=SZ5EErcAAAAJ&amp;sortby=pubdate">Scholar</a> &middot;
                     <a target="_blank" rel="noopener noreferrer" href="https://github.com/WesleyyC">GitHub</a>
                 </div>
@@ -343,50 +410,90 @@ body_class: resume-page
         <section aria-label="Experience">
         <h2>Experience</h2>
 
-        <div class="no-break">
+        <div class="company-entry no-break" data-company-entry="true">
             <div class="entry-header">
-                <div class="entry-title">VP, Engineering &amp; Research (Founding Team) | <a target="_blank" rel="noopener noreferrer" href="https://www.osmo.ai/">Osmo</a></div>
+                <div class="entry-title"><a class="osmo-red" target="_blank" rel="noopener noreferrer" href="https://www.osmo.ai/">Osmo</a></div>
                 <div class="entry-date">Sep 2022 - Present</div>
             </div>
-            <ul class="bullets">
-                <li>I joined Osmo as its first research engineer and now lead engineering and research as VP while remaining hands-on in model development, scientific infrastructure, and experimental design. Our 10+ person team of software engineers, ML researchers, lab associates, and human-data experts takes AI-for-science from question to physical validation.</li>
-                <li><strong>Computational &amp; Experimental Science:</strong> Partnered with perfumers, lab scientists, and annotators to turn ambiguous formulation questions into models and experiments. Shipped cost-and-safety optimization for our formula model, anchoring a multi-million-dollar CPG enterprise deal. Built a GNN that predicts intensity from molecular structure, lifting our ingredient-discovery hit rate. Worked with analytical chemists to <a target="_blank" rel="noopener noreferrer" href="https://www.osmo.ai/blog/update-scent-teleportation-we-did-it">"teleport" a physical plum scent</a>, translating GC-MS signatures into digital profiles and validating the physical reconstruction end-to-end.</li>
-                <li><strong>Agents for Scientific Work:</strong> Architected Studio, an agentic platform that turns brand briefs into formulas and connects sales, manufacturing, and perfumery. Frontier LLMs, fine-tuned with SFT and RL, use tools exposed through MCP servers to access internal perfumery capabilities and chemical data. An active-learning loop turns perfumer feedback and failure cases into evaluations and training data.</li>
-                <li><strong>Scientific Data &amp; Infrastructure:</strong> Built the post-Google ML stack from scratch (PyTorch, GCP, W&amp;B), including data ingestion, workflow orchestration, experiment tracking, evaluation, and deployment. Unified molecular structures, fragrance materials, analytical instrument signals, and human-perception labels into interfaces used by researchers and AI agents.</li>
-            </ul>
-        </div>
-
-        <div class="no-break">
-            <div class="entry-header">
-                <div class="entry-title">Student Researcher | <a target="_blank" rel="noopener noreferrer" href="https://research.google/"><span class="google-g">G</span><span class="google-o1">o</span><span class="google-o2">o</span><span class="google-g2">g</span><span class="google-l">l</span><span class="google-e">e</span></a></div>
-                <div class="entry-date">May 2018 - Sep 2022</div>
+            <div class="role-timeline">
+                <div class="role-step" data-role-step="true">
+                    <div class="role-step__title">VP, Engineering &amp; Research</div>
+                    <div class="role-step__date">Jan 2026 - Present</div>
+                    <div class="role-step__summary">Lead engineering and research across AI, product engineering, science, and data operations; our systems power a robotic fragrance factory and its customer experience.</div>
+                </div>
+                <div class="role-step" data-role-step="true">
+                    <div class="role-step__title">Director, Applied Research</div>
+                    <div class="role-step__date">Jan 2025 - Jan 2026</div>
+                    <div class="role-step__summary">Led ML researchers and human-data experts to land Osmo's first multimillion-dollar enterprise program.</div>
+                </div>
+                <div class="role-step" data-role-step="true">
+                    <div class="role-step__title">Manager, Machine Learning</div>
+                    <div class="role-step__date">Jan 2024 - Jan 2025</div>
+                    <div class="role-step__summary">Invented scent prompting, taught an LLM to write fragrance formulas, and reconstructed the scent of a plum from GC-MS data with analytical chemists.</div>
+                </div>
+                <div class="role-step" data-role-step="true">
+                    <div class="role-step__title">Founding Research Engineer</div>
+                    <div class="role-step__date">Sep 2022 - Jan 2024</div>
+                    <div class="role-step__summary">Rebuilt the ML stack in PyTorch, PyG, W&amp;B, and GCP, and developed a GNN for molecular potency prediction.</div>
+                </div>
             </div>
-            <ul class="bullets">
-                <li><strong>Olfactory ML:</strong> Built receptor-binding and metabolic-activity models from molecular and biological data, helping catalyze Osmo's $60M spin-out. The work led to one utility patent and four publications featured <a target="_blank" rel="noopener noreferrer" href="https://ai.googleblog.com/2022/09/digitizing-smell-using-molecular-maps.html">in</a> <a target="_blank" rel="noopener noreferrer" href="https://www.quantamagazine.org/ai-model-links-smell-molecules-with-metabolic-processes-20221010/">major</a> <a target="_blank" rel="noopener noreferrer" href="https://www.scientificamerican.com/article/ai-predicts-what-chemicals-will-smell-like-to-a-human/">news</a> <a target="_blank" rel="noopener noreferrer" href="https://blog.google/technology/research/using-new-technology-and-old-books-to-combat-disease/">outlets</a>.</li>
-                <li><strong>Generative ML for Cell Imaging:</strong> First-authored a generative approach to batch-effect correction in high-content cellular imaging, published in Bioinformatics and open-sourced as part of Google's <a target="_blank" rel="noopener noreferrer" href="https://blog.tensorflow.org/2019/08/introducing-tf-gan-lightweight-gan.html">TF-GAN library</a>.</li>
-                <li><strong>Genomics &amp; Structural Variants:</strong> Built ML filtering for structural variant calling and a ~100× faster read-alignment method, filed as <a target="_blank" rel="noopener noreferrer" href="https://patents.google.com/patent/WO2022165430A1">a utility patent</a>.</li>
-            </ul>
         </div>
 
-        <div class="no-break">
+        <div class="company-entry no-break" data-company-entry="true">
             <div class="entry-header">
-                <div class="entry-title">Intern | <a target="_blank" rel="noopener noreferrer" href="https://deepmind.google/" class="deepmind-blue">DeepMind</a></div>
+                <div class="entry-title"><a target="_blank" rel="noopener noreferrer" href="https://research.google/"><span class="google-g">G</span><span class="google-o1">o</span><span class="google-o2">o</span><span class="google-g2">g</span><span class="google-l">l</span><span class="google-e">e</span></a></div>
+                <div class="entry-date">May 2018 - Aug 2022</div>
+            </div>
+            <div class="role-timeline">
+                <div class="role-step" data-role-step="true">
+                    <div class="role-step__title">Student Researcher, Olfaction</div>
+                    <div class="role-step__date">Jun 2020 - Aug 2022</div>
+                    <div class="role-step__summary">Developed machine learning for olfaction that helped seed Osmo, leading to four publications and a utility patent.</div>
+                </div>
+                <div class="role-step" data-role-step="true">
+                    <div class="role-step__title">Student Researcher, Genomics</div>
+                    <div class="role-step__date">May 2019 - May 2020</div>
+                    <div class="role-step__summary">Built a parallel structural-variant method about 100x faster than the prior state of the art.</div>
+                </div>
+                <div class="role-step" data-role-step="true">
+                    <div class="role-step__title">Research Intern, Cellular Imaging</div>
+                    <div class="role-step__date">May 2018 - Aug 2018</div>
+                    <div class="role-step__summary">Built a GAN to remove batch effects in high-content cellular imaging; published in Bioinformatics and released through TF-GAN.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="company-entry no-break" data-company-entry="true">
+            <div class="entry-header">
+                <div class="entry-title"><a target="_blank" rel="noopener noreferrer" href="https://deepmind.google/" class="deepmind-blue">DeepMind</a></div>
                 <div class="entry-date">Sep 2021 - Dec 2021</div>
             </div>
-            <ul class="bullets">
-                <li><strong>Structural Bioinformatics:</strong> Worked with the AlphaFold team to train and evaluate large-scale protein annotation models in JAX, transferring learned structure representations from AlphaFold2.</li>
-            </ul>
+            <div class="role-timeline">
+                <div class="role-step" data-role-step="true">
+                    <div class="role-step__title">Intern, AlphaFold</div>
+                    <div class="role-step__date">2021</div>
+                    <div class="role-step__summary">Trained protein annotation models in JAX using structural representations learned by AlphaFold2.</div>
+                </div>
+            </div>
         </div>
 
-        <div class="no-break">
+        <div class="company-entry no-break" data-company-entry="true">
             <div class="entry-header">
-                <div class="entry-title">Software Engineering Intern | <a target="_blank" rel="noopener noreferrer" href="https://www.uber.com/en-US/blog/engineering/">Uber</a></div>
-                <div class="entry-date">Summer 2016 &amp; 2017</div>
+                <div class="entry-title"><a target="_blank" rel="noopener noreferrer" href="https://www.uber.com/en-US/blog/engineering/">Uber</a></div>
+                <div class="entry-date">May 2016 - Aug 2017</div>
             </div>
-            <ul class="bullets">
-                <li><strong>[2017] Sensor &amp; Machine Learning:</strong> Built a CRF variant to infer Uber Eats delivery events from mobile sensor data. Won 1st place at Uber's internal ML poster session.</li>
-                <li><strong>[2016] Mobile Dev. &amp; Engineering:</strong> Built a web-based forensics tool for mobile UI testing that synchronized logs with video timestamps, cutting internal developer debugging time by ~50%.</li>
-            </ul>
+            <div class="role-timeline">
+                <div class="role-step" data-role-step="true">
+                    <div class="role-step__title">Software Engineer Intern, Machine Learning</div>
+                    <div class="role-step__date">Summer 2017</div>
+                    <div class="role-step__summary">Built a sequence model from mobile sensor data to infer Uber Eats delivery events; won first place at Uber's internal ML poster session.</div>
+                </div>
+                <div class="role-step" data-role-step="true">
+                    <div class="role-step__title">Software Engineering Intern, Mobile</div>
+                    <div class="role-step__date">Summer 2016</div>
+                    <div class="role-step__summary">Built a web forensics tool for mobile UI testing and an automated failure-report workflow.</div>
+                </div>
+            </div>
         </div>
         </section>
 

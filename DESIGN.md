@@ -7,7 +7,7 @@ colors:
   surface-soft-light: "#f5f5f5"
   heading-light: "#111111"
   text-light: "#2e2e2e"
-  muted-light: "#707070"
+  muted-light: "#6e6e6e"
   hairline-light: "rgba(17, 17, 17, 0.1)"
   menu-surface-light: "rgba(255, 255, 255, 0.88)"
   menu-open-surface-light: "rgba(244, 244, 244, 0.94)"
@@ -121,7 +121,7 @@ components:
     typography: "{typography.label}"
     rounded: "{rounded.menu-open}"
     width: "149px"
-    height: "188px"
+    height: "144px"
   menu-collapsed-dark:
     backgroundColor: "{colors.menu-surface-dark}"
     textColor: "{colors.menu-link-hover-dark}"
@@ -135,7 +135,7 @@ components:
     typography: "{typography.label}"
     rounded: "{rounded.menu-open}"
     width: "149px"
-    height: "188px"
+    height: "144px"
 ---
 
 # Design System: DrQ.ai Personal Archive
@@ -146,7 +146,7 @@ components:
 
 DrQ.ai is an experience-first editorial portfolio, not a résumé-first landing page. The thesis is that Wesley's technical and photographic practices meet in one quiet personal archive. The own-world is built from warm off-white and near-black system surfaces, restrained typography, large honest images, and translucent navigation with physical spring motion.
 
-The story is sequential but unforced: meet Wesley on Home, understand the work, verify it through Publications, then wander through a shuffled photographic notebook. The four primary routes are Home (`/`), Work (`/work/`), Publications (`/publications/`), and Photo (`/photo/`). Cameras and any Photo-specific top navigation are deliberately deferred; Photo keeps only the global floating menu.
+The story is sequential but unforced: meet Wesley on Home, understand the work, and verify it through Publications. Those three routes form primary navigation. The shuffled photographic notebook remains directly available at Photo (`/photo/`) while its menu entry, Cameras, and any Photo-specific top navigation are deliberately deferred.
 
 The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the bottom-left Menu as the only persistent action. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of `_layouts/default.html`.
 
@@ -155,10 +155,10 @@ The first viewport is the system's clearest expression: a 300px monochrome portr
 - Quiet, personal, and confident rather than conventionally corporate.
 - Achromatic interface chrome; photographs supply the color and visual surprise.
 - Generous negative space, narrow reading measures, and no decorative card grid.
-- One shared, bottom-left navigation object across all four routes.
+- One shared, bottom-left navigation object across the site, containing the three primary routes.
 - Native system typography and small, understandable Jekyll/CSS/vanilla-JavaScript primitives.
 
-**Reference baseline.** The canonical runner currently passes 15 site contracts / 651 assertions plus 5 deterministic Photo-selection assertions. The redesigned content set has 25 rasters with 0 missing provenance records: one supplied portrait and a 24-image Photo pool. Canonical review captures remain in `.impeccable/review/`; refresh them whenever the visual system materially changes.
+**Reference baseline.** The canonical runner currently passes 16 site contracts / 681 assertions plus 5 deterministic Photo-selection assertions. The redesigned content set has 25 rasters with 0 missing provenance records: one supplied portrait and a 24-image Photo pool. Canonical review captures remain in `.impeccable/review/`; refresh them whenever the visual system materially changes.
 
 ## Colors
 
@@ -170,13 +170,13 @@ The palette is deliberately achromatic. `css/site.css` defines semantic CSS prop
 
 ### Neutral
 
-- **Warm Paper:** `colors.background-light` is the light canvas; `colors.background-dark` is its dark-system counterpart.
+- **Warm Paper:** `colors.background-light` is the original soft white canvas; `colors.background-dark` is its dark-system counterpart.
 - **Quiet Body:** `colors.text-light` / `colors.text-dark` supports default prose.
 - **Supporting Gray:** `colors.muted-light` / `colors.muted-dark` carries biography copy, dates, degrees, and publication metadata.
 - **Frosted Menu:** the menu surface and open-surface tokens are intentionally translucent so imagery remains perceptible without compromising legibility.
 - **Hairline:** the light and dark hairlines are low-contrast structural marks, never text colors.
 
-The text pairs are contrast-safe against their intended page canvases: headings are 18.09:1 light and 13.45:1 dark; body text is 13.01:1 light and 6.94:1 dark; muted text is 4.74:1 light and 7.11:1 dark. Default menu labels are 7.46:1 against the nominal light surface and 6.51:1 against the dark menu base. Preserve or improve these ratios when changing tokens.
+The text pairs are contrast-safe against their intended page canvases: headings are 18.09:1 light and 13.45:1 dark; body text is 13.01:1 light and 6.94:1 dark; muted text is 4.89:1 light and 7.11:1 dark. Default menu labels remain comfortably above the 4.5:1 body-text threshold in both themes. Preserve or improve these ratios when changing tokens.
 
 **The Photographs Carry Color Rule.** Do not introduce a brand accent merely to make the interface feel more designed. The neutral frame is what lets the photography and portrait hold the page.
 
@@ -231,6 +231,8 @@ The system is flat everywhere except the floating menu. Page sections do not bec
 
 Shapes are soft but sparse. The desktop portrait uses `rounded.portrait` and reduces to `rounded.image` once stacked. Photo frames use `rounded.image`. The menu morphs from `rounded.menu-collapsed` to `rounded.menu-open`; the skip link uses the fully pill-shaped token. Content itself stays unboxed.
 
+The favicon reduces that shape language to one mark: an 18px Editorial Ink square with a 5px corner radius, centered on a 32px Warm Paper canvas. It has no letterform, border, or decorative detail.
+
 **The Honest Image Rule.** Round the frame, not the subject. Keep `object-fit: cover` only for the square portrait; preserve each feed photograph's natural aspect ratio.
 
 ## Components
@@ -239,9 +241,9 @@ Shapes are soft but sparse. The desktop portrait uses `rounded.portrait` and red
 
 `_includes/global-menu.html`, `.floating-menu`, and `js/site.js` jointly define the primary navigation contract.
 
-- **Content:** exactly Home, Work, Publications, and Photo, in that order. The current link uses `.active` plus `aria-current="page"`.
+- **Content:** exactly Home, Work, and Publications, in that order. The current link uses `.active` plus `aria-current="page"`; Photo has no active menu item while its route is deferred from navigation.
 - **Placement:** 32px from the desktop left/bottom edges, shifting to 12px left and 20px bottom at 720px and below. The open mobile menu sits 12px from the bottom.
-- **Size:** 82 × 48px collapsed and 149 × 188px open. The four navigation rows are 44px high; the trigger remains 48px high while collapsed and is hidden when open.
+- **Size:** 82 × 48px collapsed and 149 × 144px open. The three navigation rows are 44px high; the trigger remains 48px high while collapsed and is hidden when open.
 - **State:** the visible trigger always says Menu. `aria-expanded`, `aria-label`, `aria-hidden`, tab order, and `inert` keep the accessibility tree synchronized with the visual state; the trigger leaves both the visual and accessibility trees while the four links are open.
 - **Dismissal:** pointer activation opens without moving focus into the menu; keyboard activation focuses the active or first link. Outside click, focus leaving the control, and Escape close it; Escape returns focus to the trigger.
 - **Long Photo pages:** on mobile only, scrolling down past 120px hides a closed, unfocused menu with `.scroll-hidden`; scrolling up restores it. An open or keyboard-focused menu never auto-hides.
@@ -249,7 +251,7 @@ Shapes are soft but sparse. The desktop portrait uses `rounded.portrait` and red
 
 The opening morph uses `--spring`: width over 590ms and height over 428ms. Bottom position and radius settle over 300ms with `--ease-out`; links fade/translate over 180–260ms with 60–135ms stagger. This is physical, not ornamental—the control expands from the trigger's anchored corner.
 
-**The Tiny Spring Exception.** `.floating-menu` intentionally animates `width` and `height`, despite the detector's general preference for transform/opacity motion. This is a reviewed exception limited to the fixed 82 × 48px → 149 × 188px control; it creates the signature physical morph and does not reflow page content. Do not generalize it to panels, cards, page sections, or other large surfaces.
+**The Tiny Spring Exception.** `.floating-menu` intentionally animates `width` and `height`, despite the detector's general preference for transform/opacity motion. This is a reviewed exception limited to the fixed 82 × 48px → 149 × 144px control; it creates the signature physical morph and does not reflow page content. Do not generalize it to panels, cards, page sections, or other large surfaces.
 
 ### Home introduction
 
