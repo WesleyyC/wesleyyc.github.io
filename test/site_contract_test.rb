@@ -2,6 +2,7 @@
 
 require "minitest/autorun"
 require "pathname"
+require "rexml/document"
 
 class SiteContractTest < Minitest::Test
   SITE_DIR = Pathname.new(ENV.fetch("SITE_DIR")).expand_path
@@ -10,12 +11,13 @@ class SiteContractTest < Minitest::Test
   REQUIRED_ROUTES = %w[
     index.html
     work/index.html
+    papers/index.html
     publications/index.html
     photo/index.html
     resume.html
   ].freeze
 
-  GLOBAL_NAV_LABELS = ["Home", "Work", "Publications"].freeze
+  GLOBAL_NAV_LABELS = ["Home", "Work", "Papers"].freeze
 
   def read(relative_path)
     path = SITE_DIR.join(relative_path)
@@ -45,8 +47,14 @@ class SiteContractTest < Minitest::Test
   end
 
   def test_global_navigation_is_exactly_the_approved_three_items
-    %w[index.html work/index.html publications/index.html photo/index.html resume.html].each do |route|
+    %w[index.html work/index.html papers/index.html photo/index.html resume.html].each do |route|
       assert_equal GLOBAL_NAV_LABELS, primary_nav_labels(read(route)), route
+    end
+  end
+
+  def test_global_navigation_links_papers_to_the_canonical_route
+    %w[index.html work/index.html papers/index.html photo/index.html resume.html].each do |route|
+      assert_match(%r{<a\b[^>]*href=["']/papers/["'][^>]*>Papers</a>}, read(route), route)
     end
   end
 
@@ -54,7 +62,7 @@ class SiteContractTest < Minitest::Test
     {
       "index.html" => "Home",
       "work/index.html" => "Work",
-      "publications/index.html" => "Publications"
+      "papers/index.html" => "Papers"
     }.each do |route, expected|
       current = read(route).scan(/<a\b[^>]*aria-current=["']page["'][^>]*>(.*?)<\/a>/m)
                            .flatten
@@ -69,13 +77,13 @@ class SiteContractTest < Minitest::Test
   end
 
   def test_no_route_has_a_top_navigation_bar
-    %w[index.html work/index.html publications/index.html photo/index.html].each do |route|
+    %w[index.html work/index.html papers/index.html photo/index.html].each do |route|
       refute_includes read(route), 'aria-label="Photo sections"', route
     end
   end
 
   def test_shared_pages_emit_the_pinned_direction_contract
-    %w[index.html work/index.html publications/index.html photo/index.html].each do |route|
+    %w[index.html work/index.html papers/index.html photo/index.html].each do |route|
       html = read(route)
       assert_includes html, "THESIS:", route
       assert_includes html, "OWN-WORLD:", route
@@ -90,7 +98,7 @@ class SiteContractTest < Minitest::Test
     assert_match(/<h1>Wesley Wei Qian<\/h1>/, html)
     assert_includes html, "I build machines that can smell"
     assert_includes html, "across AI, product engineering, science, and data operation."
-    assert_includes html, "Previously, I worked on olfaction, genomics, and high-content cellular imaging at Google, protein structure at DeepMind, and machine learning on sensor data at Uber."
+    assert_includes html, "Previously, I worked on olfaction, genomics, and high-content cell imaging at Google, protein structure at DeepMind, and machine learning on sensor data at Uber."
     assert_match(%r{<img\b[^>]*src=["']/img/profile/wesley-home\.(?:jpe?g|webp)["'][^>]*>}, html)
     links = html[/<p\b[^>]*class=["']home-intro__links["'][^>]*>(.*?)<\/p>/m, 1]
     assert_equal ["LinkedIn", "Scholar", "Resume", "Email"], links.scan(/<a\b[^>]*>(.*?)<\/a>/m).flatten.map { |label| text_content(label) }
@@ -111,7 +119,7 @@ class SiteContractTest < Minitest::Test
     refute_includes credit_css, "left:"
     refute_includes css, ".floating-menu.is-open + .site-credit"
 
-    %w[work/index.html publications/index.html photo/index.html resume.html].each do |route|
+    %w[work/index.html papers/index.html photo/index.html resume.html].each do |route|
       refute_includes read(route), "site-credit", route
     end
   end
@@ -129,18 +137,25 @@ class SiteContractTest < Minitest::Test
 
 
   def test_pages_link_the_local_rounded_square_favicon
-    %w[index.html work/index.html publications/index.html photo/index.html resume.html].each do |route|
+    %w[index.html work/index.html papers/index.html photo/index.html resume.html].each do |route|
       assert_match(%r{<link\b[^>]*rel=["']icon["'][^>]*type=["']image/svg\+xml["'][^>]*href=["']/img/logo/favicon\.svg["']}, read(route), route)
     end
 
     favicon = PROJECT_DIR.join("img/logo/favicon.svg")
     assert favicon.file?, "Expected the local SVG favicon to exist"
+
+    document = REXML::Document.new(favicon.read)
+    rectangles = REXML::XPath.match(document, "//*[local-name()='rect']")
+
+    assert_equal 1, rectangles.length, "Favicon canvas must be transparent around the black rounded square"
+    assert_equal "#111111", rectangles.first.attributes["fill"]
+    assert_operator rectangles.first.attributes["rx"].to_f, :>, 0
   end
 
-  def test_publications_has_the_complete_sentence_case_record
-    html = read("publications/index.html")
+  def test_papers_has_the_complete_sentence_case_record
+    html = read("papers/index.html")
     assert_equal 15, html.scan('data-publication="true"').length
-    assert_includes html, "Publications"
+    assert_includes html, "Papers"
     assert_includes html, "Foundation models for discovery and exploration in chemical space"
     assert_includes html, "https://arxiv.org/abs/2510.18900"
 
@@ -168,6 +183,13 @@ class SiteContractTest < Minitest::Test
       assert_includes tag, 'target="_blank"'
       assert_match(/rel=["'][^"']*noopener[^"']*noreferrer[^"']*["']/, tag)
     end
+  end
+
+  def test_legacy_publications_route_redirects_to_papers
+    html = read("publications/index.html")
+
+    assert_match(/http-equiv=["']refresh["']/i, html)
+    assert_match(%r{https://drq\.ai/papers/|/papers/}, html)
   end
 
   def test_photo_feed_has_a_local_curated_set_with_accessible_dimensions
@@ -238,6 +260,7 @@ class SiteContractTest < Minitest::Test
 
   def test_resume_uses_the_shared_editorial_shell_and_complete_content
     html = read("resume.html")
+    assert_includes html, "<title>Resume</title>"
     assert_includes html, 'class="resume-document"'
     assert_includes html, "Wesley Wei Qian"
     assert_includes html, "Foundation models for discovery and exploration in chemical space"
@@ -254,6 +277,72 @@ class SiteContractTest < Minitest::Test
     refute_includes html, "Source Sans 3"
     refute_includes html, "#2AA198"
     assert_includes html, "@media print"
+  end
+
+  def test_resume_company_timelines_show_dates_only_for_individual_roles
+    html = read("resume.html")
+    company_headers = html.scan(%r{<div class="company-entry[^>]*data-company-entry="true"[^>]*>\s*<div class="entry-header">(.*?)</div>\s*<div class="role-timeline">}m).flatten
+
+    assert_equal 4, company_headers.length
+    company_headers.each { |header| refute_includes header, 'class="entry-date"' }
+    assert_equal 10, html.scan('class="role-step__date"').length
+    assert_includes html, '<div class="role-step__date">Sep 2021 - Dec 2021</div>'
+    assert_includes html, '<div class="role-step__date">May 2017 - Aug 2017</div>'
+    assert_includes html, '<div class="role-step__date">May 2016 - Aug 2016</div>'
+    assert_includes html, '<div class="role-step__title">Intern</div>'
+    refute_includes html, '<div class="role-step__title">Intern, AlphaFold</div>'
+  end
+
+  def test_resume_uses_linkedin_sourced_experience_copy
+    html = read("resume.html")
+
+    assert_includes html, "built a factory with many robots and turned scent prompting into a fragrance business"
+    assert_includes html, "2024 was a wild year for new capabilities"
+    assert_includes html, "finding &ldquo;drugs&rdquo; for the human nose sounded cool"
+    assert_includes html, "god-tier software engineers"
+    assert_includes html, "translate structural representations into functional predictions"
+    assert_includes html, "fused sensor data, gyroscope, GPS, and Wi-Fi"
+    assert_includes html, "I should have learned more about product management"
+  end
+
+  def test_resume_experience_copy_stays_compact_for_page_one
+    html = read("resume.html")
+    summaries = html.scan(%r{<div class="role-step__summary">(.*?)</div>}m)
+                    .flatten
+                    .map { |summary| text_content(summary) }
+
+    assert_equal 10, summaries.length
+    assert_operator summaries.sum(&:length), :<=, 1_800
+    summaries.each { |summary| assert_operator summary.length, :<=, 220 }
+  end
+
+  def test_resume_applies_deepmind_blue_to_the_company_link
+    html = read("resume.html")
+
+    assert_includes html, ".entry-title a.deepmind-blue { color: var(--resume-deepmind); }"
+    assert_match(%r{<a\b[^>]*href="https://deepmind\.google/"[^>]*class="deepmind-blue"[^>]*>DeepMind</a>}, html)
+  end
+
+  def test_resume_uses_osmos_current_heading_orange
+    html = read("resume.html")
+
+    assert_equal 2, html.scan("--resume-osmo: #ff763b;").length
+  end
+
+  def test_resume_uses_the_original_google_brand_palette
+    html = read("resume.html")
+
+    assert_includes html, "--resume-google-blue: #4285f4;"
+    assert_includes html, "--resume-google-red: #ea4335;"
+    assert_includes html, "--resume-google-yellow: #e2a000;"
+    assert_includes html, "--resume-google-green: #34a853;"
+  end
+
+  def test_resume_starts_page_three_with_the_graph_attribution_publication
+    html = read("resume.html")
+
+    assert_match(%r{<div class="pub no-break page-break-before">\s*<div><span class="pub-title">Evaluating attribution for graph neural networks</span>}m, html)
+    refute_match(%r{<div class="pub no-break page-break-before">\s*<div><span class="pub-title">ECNet is an evolutionary context-integrated deep learning framework for protein engineering</span>}m, html)
   end
 
   def test_canonical_runner_builds_a_fresh_temporary_site

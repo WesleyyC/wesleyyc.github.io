@@ -25,7 +25,7 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 ## Capabilities and Constraints
 
 - Jekyll static site hosted through GitHub Pages.
-- Primary navigation contains Home, Work, and Publications.
+- Primary navigation contains Home, Work, and Papers; Papers lives at `/papers/`, with `/publications/` retained as a legacy redirect.
 - Photo remains a directly addressable immersive feed that samples 12 unique images per visit from a 24-image local pool, but is intentionally absent from primary navigation and has no secondary top navigation.
 - Writing is deferred to a later pass.
 - The photo feed uses locally hosted selections rather than a runtime Instagram dependency.

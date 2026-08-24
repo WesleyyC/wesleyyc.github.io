@@ -1,11 +1,12 @@
 title: Wesley Qian
 author: Wesley Wei Qian
-description: Engineering, research, publications, and photographs by Wesley Wei Qian.
+description: Engineering, research, papers, and photographs by Wesley Wei Qian.
 url: https://drq.ai
 
 # GitHub Pages configuration
 plugins:
   - jekyll-feed
+  - jekyll-redirect-from
 
 # Build settings
 markdown: kramdown

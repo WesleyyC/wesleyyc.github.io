@@ -146,7 +146,7 @@ components:
 
 DrQ.ai is an experience-first editorial portfolio, not a résumé-first landing page. The thesis is that Wesley's technical and photographic practices meet in one quiet personal archive. The own-world is built from warm off-white and near-black system surfaces, restrained typography, large honest images, and translucent navigation with asymmetric spring motion.
 
-The story is sequential but unforced: meet Wesley on Home, understand the work, and verify it through Publications. Those three routes form primary navigation. The shuffled photographic notebook remains directly available at Photo (`/photo/`) while its menu entry, Cameras, and any Photo-specific top navigation are deliberately deferred.
+The story is sequential but unforced: meet Wesley on Home, understand the work, and verify it through Papers (`/papers/`). Those three routes form primary navigation; the former `/publications/` route redirects to Papers. The shuffled photographic notebook remains directly available at Photo (`/photo/`) while its menu entry, Cameras, and any Photo-specific top navigation are deliberately deferred.
 
 The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the Menu at bottom-left and a small linked Charlie Deets credit at bottom-right. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of `_layouts/default.html`.
 
@@ -195,7 +195,7 @@ The single family keeps the interface immediate and device-native. Hierarchy com
 - **Display:** `typography.display` is used by `.home-intro__copy h1` for the greeting.
 - **Headline:** `typography.headline` is used by `.editorial-main h1` and section headings; publication year headings intentionally step down to the body size at 600 weight.
 - **Large body:** `typography.body-large` is the desktop Home introduction, with a fixed 456px copy column.
-- **Reading body:** `typography.body` is the 680px Work/Publications column and the base mobile Home copy.
+- **Reading body:** `typography.body` is the 680px Work/Papers column and the base mobile Home copy.
 - **Label:** `typography.label` is the floating menu's compact, calm control language.
 - **Metadata:** `typography.meta` is for venues and other supporting publication information.
 
@@ -231,7 +231,7 @@ The system is flat everywhere except the floating menu. Page sections do not bec
 
 Shapes are soft but sparse. The desktop portrait uses `rounded.portrait` and reduces to `rounded.image` once stacked. Photo frames use `rounded.image`. The menu morphs from `rounded.menu-collapsed` to `rounded.menu-open`; the skip link uses the fully pill-shaped token. Content itself stays unboxed.
 
-The favicon reduces that shape language to one mark: an 18px Editorial Ink square with a 5px corner radius, centered on a 32px Warm Paper canvas. It has no letterform, border, or decorative detail.
+The favicon reduces that shape language to one mark: an 18px Editorial Ink square with a 5px corner radius, centered on a transparent 32px canvas. It has no letterform, border, or decorative detail.
 
 **The Honest Image Rule.** Round the frame, not the subject. Keep `object-fit: cover` only for the square portrait; preserve each feed photograph's natural aspect ratio.
 
@@ -241,10 +241,10 @@ The favicon reduces that shape language to one mark: an 18px Editorial Ink squar
 
 `_includes/global-menu.html`, `.floating-menu`, and `js/site.js` jointly define the primary navigation contract.
 
-- **Content:** exactly Home, Work, and Publications, in that order. The current link uses `.active` plus `aria-current="page"`; Photo has no active menu item while its route is deferred from navigation.
+- **Content:** exactly Home, Work, and Papers, in that order. The current link uses `.active` plus `aria-current="page"`; Photo has no active menu item while its route is deferred from navigation.
 - **Placement:** 32px from the desktop left/bottom edges, shifting to 12px left and 20px bottom at 720px and below. Opening lifts the surface 8px while its inner column counter-shifts into place.
 - **Size:** 82 × 48px collapsed and 149 × 216px open for the current three-route structure. The open height is measured from the real inner content so future route changes do not clip.
-- **Structure:** Home stands alone above a hairline; Work and Publications form the second group; a second hairline separates navigation from the bottom control.
+- **Structure:** Home stands alone above a hairline; Work and Papers form the second group; a second hairline separates navigation from the bottom control.
 - **State:** the same trigger reads Menu when collapsed and Close at the bottom of the open panel. `aria-expanded`, `aria-label`, and `inert` keep the accessibility tree synchronized with the visual state while the trigger remains keyboard-accessible in both states.
 - **Dismissal:** pointer activation opens without moving focus into the menu; keyboard activation focuses the active or first link. Outside click, focus leaving the control, and Escape close it; Escape returns focus to the trigger.
 - **Long Photo pages:** on mobile only, scrolling down past 120px hides a closed, unfocused menu with `.scroll-hidden`; scrolling up restores it. An open or keyboard-focused menu never auto-hides.
@@ -260,7 +260,7 @@ Width and height use separate authored spring curves. Opening targets roughly 59
 
 ### Editorial entries
 
-`work.html` uses `.work-entry` and `.education-entry`; `publications.html` uses `.publication-year`, `.publication`, and `.publication-meta`. Entries rely on whitespace and type, not dividers or cards. External links open in a new tab with `noopener noreferrer`. The resume is now a first-class editorial route with the shared menu on screen, a paired dark theme, and a deliberately balanced three-page Letter print layout.
+`work.html` uses `.work-entry` and `.education-entry`; `publications.html` uses `.publication-year`, `.publication`, and `.publication-meta`. Entries rely on whitespace and type, not dividers or cards. External links open in a new tab with `noopener noreferrer`. The resume is now a first-class editorial route with the shared menu on screen, a paired dark theme, and a deliberately controlled three-page Letter print layout whose third page begins with “Evaluating attribution for graph neural networks.”
 
 ### Photo feed
 
