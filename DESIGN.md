@@ -144,11 +144,11 @@ components:
 
 **Creative North Star: "The Quiet Personal Archive"**
 
-DrQ.ai is an experience-first editorial portfolio, not a résumé-first landing page. The thesis is that Wesley's technical and photographic practices meet in one quiet personal archive. The own-world is built from warm off-white and near-black system surfaces, restrained typography, large honest images, and translucent navigation with physical spring motion.
+DrQ.ai is an experience-first editorial portfolio, not a résumé-first landing page. The thesis is that Wesley's technical and photographic practices meet in one quiet personal archive. The own-world is built from warm off-white and near-black system surfaces, restrained typography, large honest images, and translucent navigation with asymmetric spring motion.
 
 The story is sequential but unforced: meet Wesley on Home, understand the work, and verify it through Publications. Those three routes form primary navigation. The shuffled photographic notebook remains directly available at Photo (`/photo/`) while its menu entry, Cameras, and any Photo-specific top navigation are deliberately deferred.
 
-The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the bottom-left Menu as the only persistent action. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of `_layouts/default.html`.
+The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the Menu at bottom-left and a small linked Charlie Deets credit at bottom-right. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of `_layouts/default.html`.
 
 **Key Characteristics:**
 
@@ -158,7 +158,7 @@ The first viewport is the system's clearest expression: a 300px monochrome portr
 - One shared, bottom-left navigation object across the site, containing the three primary routes.
 - Native system typography and small, understandable Jekyll/CSS/vanilla-JavaScript primitives.
 
-**Reference baseline.** The canonical runner currently passes 16 site contracts / 681 assertions plus 5 deterministic Photo-selection assertions. The redesigned content set has 25 rasters with 0 missing provenance records: one supplied portrait and a 24-image Photo pool. Canonical review captures remain in `.impeccable/review/`; refresh them whenever the visual system materially changes.
+**Reference baseline.** The canonical runner currently passes 17 site contracts / 724 assertions plus 5 deterministic Photo-selection assertions. The redesigned content set has 25 rasters with 0 missing provenance records: one supplied portrait and a 24-image Photo pool. Canonical review captures remain in `.impeccable/review/`; refresh them whenever the visual system materially changes.
 
 ## Colors
 
@@ -242,24 +242,25 @@ The favicon reduces that shape language to one mark: an 18px Editorial Ink squar
 `_includes/global-menu.html`, `.floating-menu`, and `js/site.js` jointly define the primary navigation contract.
 
 - **Content:** exactly Home, Work, and Publications, in that order. The current link uses `.active` plus `aria-current="page"`; Photo has no active menu item while its route is deferred from navigation.
-- **Placement:** 32px from the desktop left/bottom edges, shifting to 12px left and 20px bottom at 720px and below. The open mobile menu sits 12px from the bottom.
-- **Size:** 82 × 48px collapsed and 149 × 144px open. The three navigation rows are 44px high; the trigger remains 48px high while collapsed and is hidden when open.
-- **State:** the visible trigger always says Menu. `aria-expanded`, `aria-label`, `aria-hidden`, tab order, and `inert` keep the accessibility tree synchronized with the visual state; the trigger leaves both the visual and accessibility trees while the four links are open.
+- **Placement:** 32px from the desktop left/bottom edges, shifting to 12px left and 20px bottom at 720px and below. Opening lifts the surface 8px while its inner column counter-shifts into place.
+- **Size:** 82 × 48px collapsed and 149 × 216px open for the current three-route structure. The open height is measured from the real inner content so future route changes do not clip.
+- **Structure:** Home stands alone above a hairline; Work and Publications form the second group; a second hairline separates navigation from the bottom control.
+- **State:** the same trigger reads Menu when collapsed and Close at the bottom of the open panel. `aria-expanded`, `aria-label`, and `inert` keep the accessibility tree synchronized with the visual state while the trigger remains keyboard-accessible in both states.
 - **Dismissal:** pointer activation opens without moving focus into the menu; keyboard activation focuses the active or first link. Outside click, focus leaving the control, and Escape close it; Escape returns focus to the trigger.
 - **Long Photo pages:** on mobile only, scrolling down past 120px hides a closed, unfocused menu with `.scroll-hidden`; scrolling up restores it. An open or keyboard-focused menu never auto-hides.
 - **Deferred surfaces:** do not add Cameras, albums, or a Photo top bar in this system revision.
 
-The opening morph uses `--spring`: width over 590ms and height over 428ms. Bottom position and radius settle over 300ms with `--ease-out`; links fade/translate over 180–260ms with 60–135ms stagger. This is physical, not ornamental—the control expands from the trigger's anchored corner.
+Width and height use separate authored spring curves. Opening targets roughly 590ms horizontally and 428ms vertically; closing targets 655ms and 475ms with a softer overshoot. Each interaction varies those durations by ±15%, keeping the control tactile without changing its geometry. The inner column moves 4px horizontally and 8px vertically, while navigation and dividers reveal bottom-to-top on opening and disappear top-to-bottom on closing.
 
-**The Tiny Spring Exception.** `.floating-menu` intentionally animates `width` and `height`, despite the detector's general preference for transform/opacity motion. This is a reviewed exception limited to the fixed 82 × 48px → 149 × 144px control; it creates the signature physical morph and does not reflow page content. Do not generalize it to panels, cards, page sections, or other large surfaces.
+**The Tiny Layout Exception.** `.floating-menu` intentionally animates `width` and `height`, despite the detector's general preference for transform/opacity motion. This is a reviewed exception limited to the fixed bottom-corner control; `contain: layout paint` prevents page reflow and the measured height keeps the animation bounded. Do not generalize it to panels, cards, page sections, or other large surfaces.
 
 ### Home introduction
 
-`index.html` and `.home-intro` pair one supplied monochrome portrait with concise, playful professional copy. The heading is simply “Wesley Wei Qian” and owns the strongest contrast; body copy stays muted; LinkedIn, Scholar, Resume, and Email form a quiet inline row that may wrap on small screens.
+`index.html` and `.home-intro` pair one supplied monochrome portrait with concise, playful professional copy. The heading is simply “Wesley Wei Qian” and owns the strongest contrast; body copy stays muted; LinkedIn, Scholar, Resume, and Email form a quiet inline row that may wrap on small screens. A 12px fixed credit links Charlie Deets at bottom-right, balancing the Menu without competing for its opening space.
 
 ### Editorial entries
 
-`work.html` uses `.work-entry` and `.education-entry`; `publications.html` uses `.publication-year`, `.publication`, and `.publication-meta`. Entries rely on whitespace and type, not dividers or cards. External links open in a new tab with `noopener noreferrer`; the Work page ends with a restrained link to `/resume`. The resume is now a first-class editorial route with the shared menu on screen, a paired dark theme, and a deliberately balanced three-page Letter print layout.
+`work.html` uses `.work-entry` and `.education-entry`; `publications.html` uses `.publication-year`, `.publication`, and `.publication-meta`. Entries rely on whitespace and type, not dividers or cards. External links open in a new tab with `noopener noreferrer`. The resume is now a first-class editorial route with the shared menu on screen, a paired dark theme, and a deliberately balanced three-page Letter print layout.
 
 ### Photo feed
 

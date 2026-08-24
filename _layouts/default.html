@@ -4,15 +4,18 @@
     <body class="{{ page.body_class | default: 'editorial-page' }}">
         <!--
         THESIS: Wesley's technical and photographic practices meet in one quiet personal archive; it refuses the conventional résumé-first portfolio.
-        OWN-WORLD: Warm off-white and near-black system surfaces, restrained type, large honest images, and translucent navigation with physical spring motion.
+        OWN-WORLD: Warm off-white and near-black system surfaces, restrained type, large honest images, and translucent navigation with asymmetric spring motion.
         STORY: Meet Wesley, understand the work, and verify it through publications; the photographic notebook remains available outside primary navigation.
-        FIRST VIEWPORT: A 300px monochrome portrait sits beside a 456px editorial introduction; the only persistent action is the floating Menu at bottom-left.
+        FIRST VIEWPORT: A 300px monochrome portrait sits beside a 456px editorial introduction; a floating Menu anchors bottom-left and a small inspiration credit anchors bottom-right.
         FORM: User-pinned Charlie Deets editorial reference, superseding the direction roll; seed f7a69c56.
         FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
         -->
         <a class="skip-link" href="#main-content">Skip to content</a>
         {{ content }}
         {% include global-menu.html %}
+        {% if page.section == 'home' %}
+        <p class="site-credit">Site inspired by <a href="https://charliedeets.com/" target="_blank" rel="noopener noreferrer">Charlie Deets</a>.</p>
+        {% endif %}
         {% include js.html %}
     </body>
 </html>

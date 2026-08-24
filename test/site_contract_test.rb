@@ -94,6 +94,26 @@ class SiteContractTest < Minitest::Test
     assert_match(%r{<img\b[^>]*src=["']/img/profile/wesley-home\.(?:jpe?g|webp)["'][^>]*>}, html)
     links = html[/<p\b[^>]*class=["']home-intro__links["'][^>]*>(.*?)<\/p>/m, 1]
     assert_equal ["LinkedIn", "Scholar", "Resume", "Email"], links.scan(/<a\b[^>]*>(.*?)<\/a>/m).flatten.map { |label| text_content(label) }
+    assert_match(%r{<a\b[^>]*href=["']https://drq\.ai/resume["'][^>]*>Resume<\/a>}, links)
+  end
+
+  def test_home_credits_the_site_inspiration_without_repeating_it_elsewhere
+    home = read("index.html")
+    credit = home[/<p\b[^>]*class=["'][^"']*site-credit[^"']*["'][^>]*>(.*?)<\/p>/m, 1]
+
+    refute_nil credit
+    assert_equal "Site inspired by Charlie Deets.", text_content(credit).sub(/\s+\./, ".")
+    assert_match(%r{<a\b[^>]*href=["']https://charliedeets\.com/["'][^>]*>Charlie Deets<\/a>}, credit)
+
+    css = read("css/site.css")
+    credit_css = css[/\.site-credit\s*\{(.*?)\}/m, 1]
+    assert_includes credit_css, "right: 32px"
+    refute_includes credit_css, "left:"
+    refute_includes css, ".floating-menu.is-open + .site-credit"
+
+    %w[work/index.html publications/index.html photo/index.html resume.html].each do |route|
+      refute_includes read(route), "site-credit", route
+    end
   end
 
   def test_work_contains_all_roles_and_education_without_a_duplicate_resume_link
@@ -187,36 +207,33 @@ class SiteContractTest < Minitest::Test
   def test_menu_script_exposes_keyboard_and_focus_behavior
     script = read("js/site.js")
     assert_includes script, "aria-expanded"
-    assert_includes script, 'trigger.setAttribute("aria-hidden", String(open))'
-    assert_includes script, "trigger.inert = open"
+    assert_includes script, 'label.textContent = open ? "Close" : "Menu"'
+    assert_includes script, 'trigger.setAttribute("aria-label", open ? "Close menu" : "Open menu")'
     assert_includes script, "Escape"
-    assert_match(/\.focus\(\)/, script)
     assert_includes script, ".inert"
     assert_includes script, "outside"
     assert_match(/const outside = \([^)]*\) => \{[^}]*closeMenu\(\);[^}]*\};/m, script)
     assert_includes script, 'document.addEventListener("click", outside)'
-    assert_includes script, 'trigger?.addEventListener("keydown"'
-    assert_includes script, 'event.key === "Enter"'
-    assert_includes script, 'event.key === " "'
-    assert_includes script, 'menu?.addEventListener("focusin"'
-    assert_includes script, "event.relatedTarget"
-    assert_includes script, "ignoreNextFocusout"
+    assert_includes script, 'trigger?.addEventListener("click"'
+    assert_includes script, 'links?.addEventListener("click"'
+    assert_includes script, 'randomizeMenuTiming'
+    assert_includes script, 'measureMenu'
     assert_includes script, 'window.addEventListener("resize"'
     assert_includes script, 'image.loading = index === 0 ? "eager" : "lazy"'
     assert_includes script, 'image.setAttribute("fetchpriority", "high")'
     assert_includes script, "image.src = source"
     assert_includes script, "data-photo-feed"
     assert_includes script, "PhotoSelection.selectRandom"
-    refute_includes script, 'label.textContent = open ? "Close" : "Menu"'
   end
 
-  def test_open_menu_contains_links_without_a_close_row
+  def test_menu_contains_grouping_dividers_and_a_close_capable_trigger
     html = read("index.html")
     nav = html[/<nav\b[^>]*aria-label=["']Primary["'][^>]*>(.*?)<\/nav>/m, 1]
     assert_equal 3, nav.scan(/<a\b/).length
     assert_equal 1, nav.scan(/<button\b/).length
-    refute_includes nav, "floating-menu__divider"
-    refute_match(/>Close</, nav)
+    assert_equal 2, nav.scan(/floating-menu__divider/).length
+    assert_includes nav, "data-menu-label"
+    assert_match(/<button\b[^>]*data-menu-trigger[^>]*>.*?<span\b[^>]*data-menu-label[^>]*>Menu<\/span>.*?<\/button>/m, nav)
   end
 
   def test_resume_uses_the_shared_editorial_shell_and_complete_content
@@ -256,11 +273,29 @@ class SiteContractTest < Minitest::Test
     assert_includes css, "prefers-reduced-motion: reduce"
     assert_includes css, ":focus-visible"
     assert_includes css, "::selection"
-    assert_match(/\.floating-menu__trigger\s*\{[^}]*width:\s*82px/m, css)
-    assert_match(/\.floating-menu__trigger\s*\{[^}]*display:\s*flex[^}]*align-items:\s*center[^}]*justify-content:\s*center/m, css)
+    assert_match(/\.floating-menu\s*\{[^}]*--menu-collapsed-width:\s*82px/m, css)
+    assert_match(/\.floating-menu__links a,\s*\.floating-menu__trigger\s*\{[^}]*width:\s*100%[^}]*text-align:\s*left/m, css)
     assert_match(/\.home-intro__copy\s*\{[^}]*font-size:\s*18px[^}]*line-height:\s*29px/m, css)
     assert_includes css, "--background: #fafafa"
-    assert_match(/\.floating-menu\.is-open\s*\{[^}]*height:\s*144px/m, css)
+    open_menu_css = css[/\.floating-menu\.is-open\s*\{(.*?)\}/m, 1]
+    assert_includes open_menu_css, "--menu-width-duration-active: var(--menu-width-duration-expand)"
+    assert_includes open_menu_css, "height: var(--menu-open-height)"
+    assert_includes open_menu_css, "bottom: 24px"
+    assert_includes css, "--menu-width-duration-expand: 590ms"
+    assert_includes css, "--menu-height-duration-expand: 428ms"
+    assert_includes css, "--menu-width-duration-retract: 655ms"
+    assert_includes css, "--menu-height-duration-retract: 475ms"
+    assert_includes css, "--menu-width-spring-expand: linear("
+    assert_includes css, "--menu-height-spring-expand: linear("
+    assert_includes css, ".floating-menu__divider"
+    assert_match(/\.floating-menu\.is-open \.floating-menu__inner\s*\{[^}]*bottom:\s*8px/m, css)
+    assert_match(/\.floating-menu\.is-open \.floating-menu__links\s*>\s*\*\s*\{[^}]*opacity:\s*1/m, css)
+    trigger_focus_css = css[/\.floating-menu__trigger:focus-visible\s*\{(.*?)\}/m, 1]
+    assert_includes trigger_focus_css, "outline: none"
+    assert_includes trigger_focus_css, "color: var(--menu-link-active)"
+    refute_includes trigger_focus_css, "text-decoration: underline"
+    link_focus_css = css[/\.floating-menu__links a:focus-visible\s*\{(.*?)\}/m, 1]
+    assert_includes link_focus_css, "text-decoration: underline"
     assert_includes css, "--muted: #6e6e6e"
     assert_includes css, "--menu-link: #555555"
     assert_includes css, "--menu-link: #aaaaaa"

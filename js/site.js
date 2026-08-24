@@ -2,23 +2,34 @@
     const menu = document.querySelector("[data-floating-menu]");
     const trigger = menu?.querySelector("[data-menu-trigger]");
     const links = menu?.querySelector("[data-menu-links]");
+    const label = menu?.querySelector("[data-menu-label]");
+    const menuInner = menu?.querySelector(".floating-menu__inner");
     let lastScrollY = window.scrollY;
-    let ignoreNextFocusout = false;
+    let resizeTimer;
 
-    const setMenu = (open, { focusLinks = false, returnFocus = false } = {}) => {
-        if (!menu || !trigger || !links) return;
+    const randomizeMenuTiming = () => {
+        if (!menu) return;
+        const vary = () => 0.85 + (0.3 * Math.random());
+        menu.style.setProperty("--menu-width-duration-retract", `${Math.round(655 * vary())}ms`);
+        menu.style.setProperty("--menu-height-duration-retract", `${Math.round(475 * vary())}ms`);
+        menu.style.setProperty("--menu-width-duration-expand", `${Math.round(590 * vary())}ms`);
+        menu.style.setProperty("--menu-height-duration-expand", `${Math.round(428 * vary())}ms`);
+    };
+
+    const measureMenu = () => {
+        if (!menu || !menuInner) return;
+        menu.style.setProperty("--menu-open-height", `${menuInner.scrollHeight + 18}px`);
+    };
+
+    const setMenu = (open, { returnFocus = false } = {}) => {
+        if (!menu || !trigger || !links || !label) return;
+        randomizeMenuTiming();
         menu.classList.toggle("is-open", open);
+        label.textContent = open ? "Close" : "Menu";
         trigger.setAttribute("aria-expanded", String(open));
-        trigger.setAttribute("aria-label", open ? "Menu open" : "Open menu");
-        trigger.setAttribute("aria-hidden", String(open));
-        trigger.inert = open;
-        trigger.tabIndex = open ? -1 : 0;
+        trigger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
         links.setAttribute("aria-hidden", String(!open));
         links.inert = !open;
-        if (focusLinks) {
-            const destination = links.querySelector(".active") || links.querySelector("a");
-            destination?.focus();
-        }
         if (returnFocus) trigger.focus();
     };
 
@@ -30,42 +41,23 @@
         closeMenu();
     };
 
-    trigger?.addEventListener("keydown", (event) => {
-        const opensMenu = event.key === "Enter" || event.key === " ";
-        if (!opensMenu || menu.classList.contains("is-open")) return;
-        event.preventDefault();
-        setMenu(true, { focusLinks: true });
+    trigger?.addEventListener("click", () => {
+        setMenu(!menu.classList.contains("is-open"));
     });
 
-    trigger?.addEventListener("click", (event) => {
-        if (menu.classList.contains("is-open")) return;
-        const openedFromKeyboard = event.detail === 0;
-        if (!openedFromKeyboard) ignoreNextFocusout = true;
-        setMenu(true, { focusLinks: openedFromKeyboard });
-        if (!openedFromKeyboard) {
-            trigger.blur();
-            window.setTimeout(() => { ignoreNextFocusout = false; }, 0);
-        }
+    links?.addEventListener("click", (event) => {
+        if (event.target.closest("a")) closeMenu();
     });
 
     document.addEventListener("click", outside);
     menu?.addEventListener("focusin", revealMenu);
-    menu?.addEventListener("focusout", (event) => {
-        if (ignoreNextFocusout) {
-            ignoreNextFocusout = false;
-            return;
-        }
-        const nextFocus = event.relatedTarget;
-        if (nextFocus && menu.contains(nextFocus)) return;
-        window.setTimeout(() => {
-            if (menu.classList.contains("is-open") && !menu.contains(document.activeElement)) closeMenu();
-        }, 0);
-    });
     document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && menu?.classList.contains("is-open")) {
             closeMenu(true);
         }
     });
+
+    measureMenu();
 
     const photoFeed = document.querySelector("[data-photo-feed]");
     if (photoFeed && window.PhotoSelection) {
@@ -107,6 +99,10 @@
 
     window.addEventListener("scroll", handleLongPageScroll, { passive: true });
     window.addEventListener("resize", () => {
+        menu?.classList.add("floating-menu--no-motion");
+        measureMenu();
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(() => menu?.classList.remove("floating-menu--no-motion"), 150);
         if (window.innerWidth > 720) revealMenu();
     });
 })();

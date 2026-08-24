@@ -17,7 +17,6 @@
     --shadow-menu: 0 8px 36px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.04);
     --shadow-menu-open: 0 14px 60px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.05);
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-    --spring: linear(0, 0.011 1%, 0.045 2.1%, 0.17 4.3%, 0.7 9.6%, 1.03 13%, 1.13 16%, 1.11 20%, 1.02 29%, 0.99 39%, 1.003 52%, 1);
 }
 
 *,
@@ -281,12 +280,29 @@ img {
 
 /* Floating primary menu */
 .floating-menu {
+    --menu-open-width: 149px;
+    --menu-open-height: 216px;
+    --menu-collapsed-width: 82px;
+    --menu-collapsed-height: 48px;
+    --menu-width-spring-expand: linear(0, 0.03 5%, 0.12 10%, 0.45 20%, 0.82 33%, 1.08 44%, 1.15 52%, 1.08 68%, 1.01 84%, 1);
+    --menu-width-spring-retract: linear(0, 0.03 5%, 0.12 10%, 0.45 20%, 0.82 33%, 1.03 44%, 1.06 52%, 1.03 68%, 1.005 84%, 1);
+    --menu-height-spring-expand: linear(0, 0.02 6%, 0.14 12%, 0.3 18%, 0.5 24%, 0.69 30%, 0.86 36%, 0.97 42%, 1.025 48%, 1.04 58%, 1.025 70%, 1.008 84%, 1);
+    --menu-height-spring-retract: linear(0, 0.02 6%, 0.14 12%, 0.3 18%, 0.5 24%, 0.69 30%, 0.86 36%, 0.97 42%, 1.018 48%, 1.03 58%, 1.02 70%, 1.006 84%, 1);
+    --menu-width-duration-expand: 590ms;
+    --menu-height-duration-expand: 428ms;
+    --menu-width-duration-retract: 655ms;
+    --menu-height-duration-retract: 475ms;
+    --menu-width-spring-active: var(--menu-width-spring-retract);
+    --menu-height-spring-active: var(--menu-height-spring-retract);
+    --menu-width-duration-active: var(--menu-width-duration-retract);
+    --menu-height-duration-active: var(--menu-height-duration-retract);
     position: fixed;
     z-index: 100;
     bottom: 32px;
     left: 32px;
-    width: 82px;
-    height: 48px;
+    width: var(--menu-collapsed-width);
+    height: var(--menu-collapsed-height);
+    contain: layout paint;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.75);
     border-radius: 25px;
@@ -295,58 +311,81 @@ img {
     backdrop-filter: blur(20px) saturate(140%);
     -webkit-backdrop-filter: blur(20px) saturate(140%);
     transform: translateX(4px);
-    transition: width 590ms var(--spring), height 428ms var(--spring), bottom 300ms var(--ease-out), border-radius 300ms var(--ease-out), background 300ms ease, box-shadow 300ms ease, opacity 220ms ease;
+    will-change: width, height, transform, bottom;
+    transition: width var(--menu-width-duration-active) var(--menu-width-spring-active), height var(--menu-height-duration-active) var(--menu-height-spring-active), bottom var(--menu-height-duration-active) var(--menu-height-spring-active), transform var(--menu-width-duration-active) var(--menu-width-spring-active), border-radius 216ms cubic-bezier(0.2, 0, 0, 1), background 132ms ease, border-color 132ms ease, box-shadow 216ms ease, opacity 216ms ease;
 }
 
 .floating-menu.is-open {
+    --menu-width-spring-active: var(--menu-width-spring-expand);
+    --menu-height-spring-active: var(--menu-height-spring-expand);
+    --menu-width-duration-active: var(--menu-width-duration-expand);
+    --menu-height-duration-active: var(--menu-height-duration-expand);
     bottom: 24px;
-    width: 149px;
-    height: 144px;
+    width: var(--menu-open-width);
+    height: var(--menu-open-height);
     border-radius: 26px;
     background: var(--menu-open-surface);
     box-shadow: var(--shadow-menu-open);
+    transform: translateX(0);
+}
+
+.floating-menu.floating-menu--no-motion,
+.floating-menu.floating-menu--no-motion * {
+    transition: none !important;
 }
 
 .floating-menu__inner {
     position: absolute;
-    right: 0;
+    left: 0;
     bottom: 0;
-    width: 149px;
-    height: 100%;
+    display: flex;
+    width: var(--menu-open-width);
+    flex-direction: column;
+    padding: 6px 22px;
+    transform: translateX(-4px);
+    transition: transform var(--menu-width-duration-active) var(--menu-width-spring-active), bottom var(--menu-height-duration-active) var(--menu-height-spring-active);
+}
+
+.floating-menu.is-open .floating-menu__inner {
+    bottom: 8px;
+    transform: translateX(0);
 }
 
 .floating-menu__links {
-    display: flex;
-    flex-direction: column;
-    padding: 6px 0;
+    display: contents;
 }
 
-.floating-menu__links a {
-    display: flex;
+.floating-menu__links a,
+.floating-menu__trigger {
+    display: block;
     width: 100%;
-    height: 44px;
-    align-items: center;
-    padding: 0 22px;
+    padding: 4px 0;
     color: var(--menu-link);
     font: inherit;
     font-size: 17px;
-    line-height: 1.2;
+    font-weight: 400;
+    line-height: 28px;
     text-align: left;
     text-decoration: none;
     white-space: nowrap;
+    transition: color 264ms ease;
+}
+
+.floating-menu__links > :nth-last-child(1) { --menu-stagger-index: 0; }
+.floating-menu__links > :nth-last-child(2) { --menu-stagger-index: 1; }
+.floating-menu__links > :nth-last-child(3) { --menu-stagger-index: 2; }
+.floating-menu__links > :nth-last-child(4) { --menu-stagger-index: 3; }
+.floating-menu__links > :nth-last-child(5) { --menu-stagger-index: 4; }
+
+.floating-menu__links > * {
     opacity: 0;
-    transform: translateY(8px);
-    transition: color 264ms ease, opacity 180ms ease, transform 260ms var(--ease-out);
+    transition: opacity 200ms ease calc((4 - var(--menu-stagger-index, 0)) * 25ms), color 264ms ease;
 }
 
-.floating-menu.is-open .floating-menu__links a {
+.floating-menu.is-open .floating-menu__links > * {
     opacity: 1;
-    transform: translateY(0);
+    transition: opacity 200ms ease calc(var(--menu-stagger-index, 0) * 25ms), color 264ms ease;
 }
-
-.floating-menu.is-open .floating-menu__links a:nth-child(1) { transition-delay: 60ms; }
-.floating-menu.is-open .floating-menu__links a:nth-child(2) { transition-delay: 85ms; }
-.floating-menu.is-open .floating-menu__links a:nth-child(3) { transition-delay: 110ms; }
 
 .floating-menu__links a:hover {
     color: var(--menu-link-hover);
@@ -356,42 +395,64 @@ img {
     color: var(--menu-link-active);
 }
 
+.floating-menu__divider {
+    display: block;
+    height: 1px;
+    margin: 10px 0;
+    background: var(--hairline);
+}
+
 .floating-menu__trigger {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    width: 82px;
-    height: 48px;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
     border: 0;
     background: transparent;
-    color: var(--menu-trigger);
-    font: inherit;
-    font-size: 17px;
-    line-height: 1;
     cursor: pointer;
-    text-align: center;
-    transition: opacity 140ms ease, transform 220ms var(--ease-out);
 }
 
-.floating-menu.is-open .floating-menu__trigger {
-    opacity: 0;
+.floating-menu:not(.is-open) .floating-menu__trigger {
+    color: var(--menu-trigger);
+}
+
+.floating-menu:not(.is-open) .floating-menu__links > * {
     pointer-events: none;
-    transform: translateY(8px);
 }
 
-.floating-menu__trigger:focus-visible,
+.floating-menu__trigger:focus-visible {
+    outline: none;
+    color: var(--menu-link-active);
+}
+
 .floating-menu__links a:focus-visible {
-    border-radius: 20px;
-    outline-offset: -3px;
+    outline: none;
+    color: var(--menu-link-active);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.22em;
 }
 
 .floating-menu.scroll-hidden {
     opacity: 0;
     pointer-events: none;
+}
+
+.site-credit {
+    position: fixed;
+    z-index: 99;
+    bottom: 47px;
+    right: 32px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 18px;
+    white-space: nowrap;
+    transition: opacity 120ms ease;
+}
+
+.site-credit a {
+    color: inherit;
+}
+
+.site-credit a:hover {
+    color: var(--heading);
 }
 
 @media (min-width: 1360px) {
@@ -492,6 +553,11 @@ img {
 
     .floating-menu.is-open {
         bottom: 12px;
+    }
+
+    .site-credit {
+        bottom: 35px;
+        right: 16px;
     }
 
 }
