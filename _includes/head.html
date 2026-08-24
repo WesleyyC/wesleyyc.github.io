@@ -23,7 +23,7 @@
     <meta name="twitter:description" content="{{ meta_description }}">
     <meta name="twitter:image" content="{{ '/img/profile/wesley-home.jpg' | absolute_url }}">
 
-    <link href="{{ '/css/site.css' | relative_url }}" rel="stylesheet">
+    <link href="{{ '/css/site.css' | relative_url }}?v={{ site.time | date: '%s' }}" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="/img/logo/favicon.svg">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2HPVMHTRR"></script>

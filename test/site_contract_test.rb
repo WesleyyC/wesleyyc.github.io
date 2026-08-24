@@ -46,6 +46,12 @@ class SiteContractTest < Minitest::Test
     assert_empty missing, "Missing built routes: #{missing.join(', ')}"
   end
 
+  def test_all_styled_routes_version_the_shared_stylesheet
+    %w[index.html work/index.html papers/index.html photo/index.html resume.html].each do |route|
+      assert_match(%r{<link\b[^>]*href=["']/css/site\.css\?v=\d+["'][^>]*rel=["']stylesheet["']}, read(route), route)
+    end
+  end
+
   def test_global_navigation_is_exactly_the_approved_three_items
     %w[index.html work/index.html papers/index.html photo/index.html resume.html].each do |route|
       assert_equal GLOBAL_NAV_LABELS, primary_nav_labels(read(route)), route
