@@ -112,6 +112,39 @@ class SiteContractTest < Minitest::Test
     assert_match(%r{<a\b[^>]*href=["']https://drq\.ai/resume["'][^>]*>Resume<\/a>}, links)
   end
 
+  def test_home_serves_a_responsive_high_priority_portrait
+    html = read("index.html")
+    picture = html[/<picture\b[^>]*class=["'][^"']*home-intro__portrait-frame[^"']*["'][^>]*>(.*?)<\/picture>/m, 1]
+
+    refute_nil picture
+    assert_match(%r{<source\b[^>]*type=["']image/webp["'][^>]*srcset=["'][^"']*wesley-home-360\.webp 360w[^"']*wesley-home-720\.webp 720w[^"']*["']}, picture)
+    assert_match(%r{<img\b[^>]*src=["']/img/profile/wesley-home\.jpg["'][^>]*fetchpriority=["']high["'][^>]*decoding=["']async["']}, picture)
+
+    %w[360 720].each do |width|
+      path = SITE_DIR.join("img/profile/wesley-home-#{width}.webp")
+      assert path.file?, "Missing responsive portrait: #{path}"
+      assert_operator path.size, :<, 100_000, "Responsive portrait should remain a compact web asset: #{path}"
+    end
+  end
+
+  def test_photo_selection_helper_only_loads_on_the_photo_route
+    photo = read("photo/index.html")
+    assert_match(%r{<script\b[^>]*src=["']/js/photo-selection\.js["'][^>]*defer}, photo)
+
+    %w[index.html work/index.html papers/index.html resume.html].each do |route|
+      refute_match(%r{<script\b[^>]*src=["']/js/photo-selection\.js["']}, read(route), route)
+    end
+  end
+
+  def test_analytics_waits_for_idle_time_instead_of_competing_with_the_first_render
+    html = read("index.html")
+    head = html[/<head>(.*?)<\/head>/m, 1]
+
+    refute_match(%r{<script\b[^>]*src=["']https://www\.googletagmanager\.com/gtag/js}, head)
+    assert_includes html, "requestIdleCallback"
+    assert_includes html, "loadAnalytics"
+  end
+
   def test_home_credits_the_site_inspiration_in_page_flow_without_repeating_it_elsewhere
     home = read("index.html")
     credit = home[/<p\b[^>]*class=["'][^"']*site-credit[^"']*["'][^>]*>(.*?)<\/p>/m, 1]
@@ -232,6 +265,7 @@ class SiteContractTest < Minitest::Test
       assert_match(/height=["']\d+["']/, tag)
       refute_includes tag, "instagram.com"
       assert_includes tag, 'loading="lazy"'
+      assert_includes tag, 'decoding="async"'
       refute_includes tag, "fetchpriority"
       dimensions << [tag[/width=["'](\d+)["']/, 1].to_i, tag[/height=["'](\d+)["']/, 1].to_i]
     end
@@ -272,6 +306,8 @@ class SiteContractTest < Minitest::Test
     assert_includes script, "image.src = source"
     assert_includes script, "data-photo-feed"
     assert_includes script, "PhotoSelection.selectRandom"
+    assert_includes script, "IntersectionObserver"
+    assert_includes script, 'rootMargin: "600px 0px"'
   end
 
   def test_menu_contains_grouping_dividers_and_a_close_capable_trigger

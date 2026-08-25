@@ -64,6 +64,17 @@
         const pool = Array.from(photoFeed.children);
         const images = window.PhotoSelection.selectRandom(pool, 12);
         const selected = new Set(images);
+        const deferredImages = [];
+        const loadPhoto = (image) => {
+            const source = image.dataset.src;
+            if (!source) return;
+            const reveal = () => image.classList.add("loaded");
+            image.addEventListener("load", reveal, { once: true });
+            image.src = source;
+            image.removeAttribute("data-src");
+            if (image.complete && image.naturalWidth > 0) reveal();
+        };
+
         pool.forEach((item) => {
             if (!selected.has(item)) item.remove();
         });
@@ -72,21 +83,28 @@
             const image = item.querySelector("img");
             if (!image) return;
             image.loading = index === 0 ? "eager" : "lazy";
-            if (index === 0) image.setAttribute("fetchpriority", "high");
-            else image.removeAttribute("fetchpriority");
-            const source = image.dataset.src;
-            if (source) {
-                image.src = source;
-                image.removeAttribute("data-src");
+            if (index === 0) {
+                image.setAttribute("fetchpriority", "high");
+                loadPhoto(image);
+            } else {
+                image.removeAttribute("fetchpriority");
+                deferredImages.push(image);
             }
         });
-    }
 
-    document.querySelectorAll("img[loading='lazy']").forEach((image) => {
-        const reveal = () => image.classList.add("loaded");
-        if (image.complete) reveal();
-        else image.addEventListener("load", reveal, { once: true });
-    });
+        if ("IntersectionObserver" in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    loadPhoto(entry.target);
+                    observer.unobserve(entry.target);
+                });
+            }, { rootMargin: "600px 0px" });
+            deferredImages.forEach((image) => observer.observe(image));
+        } else {
+            deferredImages.forEach(loadPhoto);
+        }
+    }
 
     const handleLongPageScroll = () => {
         if (!menu || !document.body.classList.contains("photo-page") || window.innerWidth > 720) return;
