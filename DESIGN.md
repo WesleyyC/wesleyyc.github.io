@@ -3,8 +3,6 @@ name: "DrQ.ai Personal Portfolio"
 description: "A quiet editorial portfolio for engineering, research, and scientific work."
 colors:
   background-light: "#fafafa"
-  surface-light: "#ffffff"
-  surface-soft-light: "#f5f5f5"
   heading-light: "#111111"
   text-light: "#2e2e2e"
   muted-light: "#6e6e6e"
@@ -16,8 +14,6 @@ colors:
   menu-link-active-light: "#111111"
   menu-border-light: "rgba(255, 255, 255, 0.75)"
   background-dark: "#171717"
-  surface-dark: "#222222"
-  surface-soft-dark: "#2a2a2a"
   heading-dark: "#dfdfdf"
   text-dark: "#a1a1a1"
   muted-dark: "#a3a3a3"
@@ -63,6 +59,11 @@ typography:
     fontSize: "16px"
     fontWeight: 400
     lineHeight: "26px"
+  credit:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: "18px"
   home-display-mobile:
     fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
     fontSize: "28px"
@@ -97,7 +98,7 @@ spacing:
   editorial-top: "120px"
 components:
   home-portrait:
-    backgroundColor: "{colors.surface-light}"
+    backgroundColor: "{colors.background-light}"
     rounded: "{rounded.portrait}"
     width: "300px"
     height: "300px"
@@ -151,7 +152,7 @@ The first viewport is the system's clearest expression: a 300px monochrome portr
 - One shared, bottom-left navigation object across the site, containing the three primary routes.
 - Native system typography and small, understandable Jekyll/CSS/vanilla-JavaScript primitives.
 
-**Reference baseline.** The canonical runner covers every built route, the responsive portrait, navigation, analytics scheduling, content records, and resume print contracts. The only content image is Wesley's supplied portrait plus its responsive derivatives, documented in `img/profile/PROVENANCE.md`.
+**Reference baseline.** The canonical runner covers every built route, the responsive portrait, navigation, analytics scheduling, content records, resume print contracts, and a sub-500 KB production budget. The only content image is Wesley's supplied portrait plus its responsive derivatives, documented in `img/profile/PROVENANCE.md`; repository-only records and the unused post feed never ship.
 
 ## Colors
 

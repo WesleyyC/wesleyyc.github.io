@@ -1,174 +1,82 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file gives code agents a concise map of the current DrQ.ai portfolio.
 
-## Project Overview
+## Project
 
-This is a personal portfolio website for Dr. Wesley Wei Qian built with Jekyll and hosted on GitHub Pages. The site has two pages: a landing page with social links and particle.js animations, and a self-contained HTML resume with CSS print-to-PDF support.
+DrQ.ai is Wesley Wei Qian's Jekyll portfolio, hosted on GitHub Pages with the
+custom domain in `CNAME`. The visual system is a quiet editorial archive:
+native system type, a monochrome portrait, restrained prose, and one shared
+floating navigation control.
 
-**Last Updated:** March 2026 - Added HTML resume replacing PDF, multiple design passes
+Primary routes:
 
-## Development Commands
+- `/` — portrait, introduction, and LinkedIn / Scholar / Resume / Email links
+- `/work/` — work and education summary
+- `/papers/` — complete paper list
+- `/publications/` — legacy redirect to `/papers/`
+- `/resume` — detailed HTML resume with three-page print styling
 
-### Jekyll Development
+Photo is retired. Do not reintroduce a Photo route, feed, navigation item, or
+image archive without an explicit product decision.
+
+## Commands
+
 ```bash
-# Install dependencies
 bundle install
-
-# Serve locally for development
 bundle exec jekyll serve
-
-# Build for production
 bundle exec jekyll build
-
-# Update GitHub Pages gem
-bundle update github-pages
+./script/test-site
 ```
+
+`./script/test-site` is the canonical verification command. It builds into a
+fresh temporary directory before running the site contracts.
 
 ## Architecture
 
-### Site Structure
-- **Jekyll static site generator** with GitHub Pages deployment
-- **Landing page** (`index.html`): Single-page with particle.js background animations
-- **Resume page** (`resume.html`): Self-contained HTML resume with inline CSS, print-to-PDF support
-- **Responsive CSS Grid** for landing page layout (no framework dependencies)
-- **Liquid templating** for content rendering
-- **Modern font pairing**: Caveat + Space Grotesk (landing), Source Sans 3 (resume)
+- `_config.yml` — metadata, redirect plugin, and production exclusions
+- `_layouts/default.html` — shared shell for Home, Work, and Papers
+- `_includes/head.html` — metadata, versioned site CSS, SVG favicon, ICO fallback
+- `_includes/global-menu.html` — Home / Work / Papers floating navigation
+- `_includes/js.html` — structured data, menu JavaScript, idle-scheduled analytics
+- `index.html` — homepage copy and hard-coded social/contact links
+- `work.html` — work and education records
+- `publications.html` — canonical Papers content and legacy redirect metadata
+- `resume.html` — layout-free resume with inline resume/print CSS plus shared menu
+- `css/site.css` — shared light/dark responsive design system
+- `js/site.js` — menu measurement, motion, focus, and dismissal behavior
+- `assets/css/style.scss` — intentionally empty override for GitHub Pages' unused
+  Primer stylesheet
+- `img/profile/PROVENANCE.md` — source record for the portrait; excluded from the
+  production build
+- `test/site_contract_test.rb` — routes, content, accessibility, performance,
+  favicon, analytics, and print contracts
 
-### Key Files
-- `_config.yml`: Site configuration with author info and social links (4 buttons: LinkedIn, Scholar, Resume, Email)
-- `_layouts/default.html`: Main HTML structure template (landing page only)
-- `_includes/`: Reusable template components
-  - `head.html`: Meta tags, CSS, Font Awesome 6, Open Graph, and analytics setup
-  - `main.html`: Main content area with responsive social buttons and hidden easter egg
-  - `js.html`: JavaScript includes and structured data
-- `index.html`: Homepage with front matter pointing to default layout
-- `resume.html`: Self-contained HTML resume (`layout: null`, `permalink: /resume`)
-- `css/landing-page.css`: Landing page styles with CSS Grid and responsive design
-- `js/landing-page.js`: Particles.js configuration and DOM setup
-- `CNAME`: Custom domain configuration for drq.ai
+## Content and Design Rules
 
-### Dependencies
-- **Jekyll**: Static site generator
-- **GitHub Pages gem**: Hosting and deployment
-- **Font Awesome 6.4.0** (CDN): Icon fonts for social buttons (landing page only)
-- **Google Fonts**: Caveat + Space Grotesk (landing), Source Sans 3 (resume)
-- **particles.js**: Interactive background animations (self-hosted, landing page only)
-- **Google Analytics**: Traffic tracking (gtag.js) on both pages
+- Homepage social/contact links live directly in `index.html`; they are not
+  generated from `_config.yml`.
+- Primary navigation is exactly Home, Work, and Papers.
+- The HTML resume at `/resume` is the detailed source of truth and printable
+  artifact.
+- Keep external links on new tabs with `rel="noopener noreferrer"` where the
+  surrounding page follows that convention.
+- Preserve the shared 680px editorial measure, paired light/dark colors,
+  visible keyboard focus, 44px touch targets, and reduced-motion support.
+- The Charlie Deets credit remains in homepage document flow so it cannot
+  overlap content on short mobile viewports.
+- The rounded-square favicon uses a transparent canvas in both SVG and ICO.
+- Product and visual decisions live in `PRODUCT.md` and `DESIGN.md`.
 
-### Resume Page (`resume.html`)
+## Performance and Deployment
 
-#### Architecture
-- **Self-contained**: `layout: null` — no shared layout, all CSS inline in `<style>` block
-- **Source of truth**: Replaces the old PDF resume; print-to-PDF from Chrome for sharing
-- **Print-to-PDF**: `@page { margin: 0 }` eliminates Chrome headers/footers; `.page { padding: 0.5in }` creates margins
-- **No JavaScript dependencies**: Pure CSS for all styling and print behavior
-- **CSS design tokens**: All colors/easing in `:root` custom properties
-
-#### Design System (Resume)
-- **Font**: Source Sans 3 (warm, professional, weights: 400, 600, 700, italic 400)
-- **Name**: 28pt, weight 700, tight tracking (-0.02em)
-- **Section headers**: 11pt, weight 600, uppercase with letterspacing (0.08em), 2pt teal underline
-- **Entry titles**: 11.5pt, weight 700, color #444 (role) with brand-colored company links
-- **Body text**: 10pt, weight 400
-- **Author lists**: 9pt, color #666, Wesley's name in weight 600
-- **Accent color**: Teal `#2AA198` (CSS variable `--color-accent`)
-- **Easing**: `--ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1)` (shared with landing page)
-
-#### Brand Colors (Resume)
-- **Google**: Rainbow — G(#4285F4) o(#EA4335) o(#E2A000) g(#4285F4) l(#34A853) e(#EA4335)
-- **DeepMind**: Brand blue (#0F4ABE)
-- **UIUC**: Illini Orange (#E05500)
-- **Brandeis**: Brandeis Blue (#003478)
-- **Osmo / Uber**: Dark black (#1a1a1a)
-
-#### Bullet Styles
-- **Experience**: Teal right-pointing triangle `▸` (`\25B8`)
-- **Publications / Services**: Grey dot `•` (`\2022`)
-
-#### Page Break Strategy (Print)
-- **Page 1**: Header + Experience + Education
-- **Page 2**: Recent & Selected Publications + Other Publication (through ECNet)
-- **Page 3**: Remaining Other Publications + Services (break before "Comprehensive interactome")
-- `break-inside: avoid` on all entries
-- `.page-break-before { padding-top: 0.5in }` for consistent top margins
-
-#### Print Instructions
-- Chrome: Cmd+P → set Margins to "None" → Save as PDF
-- Default filename: `resume_wesley_w_qian.pdf` (set via `<title>` tag)
-- Brand colors preserved via `print-color-adjust: exact`
-
-#### Links
-- All external links: `target="_blank" rel="noopener noreferrer"`
-- Publication venues link to papers (URLs extracted from original PDF)
-- Company names link to company sites
-- Contact links: DrQ.ai, Google Scholar, GitHub
-
-### Design System (Landing Page)
-
-#### Typography
-- **Name**: Caveat (clean handwriting, confident, personal)
-- **Body/Buttons**: Space Grotesk (geometric, techy, precise)
-- **Philosophy**: Human-meets-tech aesthetic balancing approachability with technical expertise
-
-#### Layout
-- **Desktop**: Single row of 4 social buttons (max-width: 700px)
-- **Tablet**: 2x2 grid layout (max-width: 400px)
-- **Mobile**: 2x2 grid layout (max-width: 320px)
-- **Responsive font sizing**: Name scales from 6.5em → 3.5em → 2.8em, always single line
-- **Clean minimal design**: No divider lines
-
-#### Interactive Design
-- **Name hover effect**: Dramatic lift (8px up) + scale (1.05x) + enhanced shadow
-- **Button hover effects**: Subtle lift (2px up) + glow + enhanced shadow
-- **Focus-visible indicators**: Outline ring for keyboard navigation accessibility
-- **Smooth transitions**: 0.3s ease timing for specific properties (transform, background, etc.)
-- **Z-index layering**: Particles (1) → Content (20+) → Interactive elements (25+)
-- **Non-blocking interactions**: Proper pointer-events management for particle overlay
-
-#### Accessibility
-- **Touch targets**: Minimum 44x44px on all interactive elements
-- **Keyboard navigation**: Focus-visible outlines on social buttons and resume links
-- **Reduced motion**: Respects `prefers-reduced-motion` — disables transitions and hides particle canvas
-- **ARIA labels**: On all social buttons, navigation landmarks, and resume sections
-- **Semantic HTML**: Proper `<main>`, `<header>`, `<nav>`, `<section>` structure
-
-#### Social Links
-```yaml
-social:
-  - LinkedIn (fab fa-linkedin)
-  - Google Scholar (fa fa-graduation-cap)
-  - Resume HTML (fa fa-file-lines) → /resume
-  - Email (fa fa-envelope)
-```
-
-### Content Management
-- Social media links configured in `_config.yml` under `social` array
-- Brand icons use `brand: true` flag for `fab` class (Font Awesome brands)
-- Resume served as HTML at `/resume` (source of truth; print-to-PDF for sharing)
-- Custom domain `drq.ai` configured via CNAME file
-- Hidden easter egg in HTML comments for future LLMs about Wesley's life philosophy
-
-### Code Quality
-- **Zero framework dependencies**: No Bootstrap, jQuery, or other frameworks
-- **Clean CSS**: No vendor prefixes, no `!important`, consolidated selectors
-- **CSS design tokens**: Resume uses `:root` custom properties for all colors/easing
-- **Vanilla JavaScript**: No library dependencies for DOM manipulation
-- **No dead code**: All CSS selectors map to existing HTML elements
-- **Modern practices**: CSS Grid, semantic HTML5, `focus-visible`, `prefers-reduced-motion`
-
-### Performance
-- **Minimal dependencies**: Only essential fonts and scripts loaded
-- **CDN resources**: Font Awesome, Google Fonts (with `preconnect` hints)
-- **Optimized images**: Background image in WebP format (354KB vs 1.1MB PNG)
-- **Non-blocking scripts**: Analytics loaded async, particles.js at bottom of body
-- **Fast loading**: No framework overhead, clean codebase
-- **Resume**: Zero external CSS, system font fallback, no JavaScript required
-
-### Analytics & SEO
-- Google Analytics (gtag.js) on both pages
-- Structured Data (JSON-LD) for person schema
-- Open Graph and Twitter Card meta tags
-- Proper meta tags with updated description
-- Custom favicon served locally
-- Accessible design with proper ARIA labels
+- The production build must remain below 500,000 bytes.
+- Do not ship Gemfiles, design records, tests, provenance notes, retired media,
+  an empty feed, or the default Primer theme CSS.
+- The portrait uses 360px and 720px WebP sources with the original JPG as its
+  fallback and Open Graph image.
+- Google Analytics is created only by the shared idle-scheduled loader in
+  `_includes/js.html`.
+- GitHub Pages deploys from `master`; after pushing, verify the deployed commit,
+  `/favicon.ico`, the versioned `/css/site.css`, all primary routes, and mobile
+  geometry.

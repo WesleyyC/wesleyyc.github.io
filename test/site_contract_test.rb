@@ -46,6 +46,33 @@ class SiteContractTest < Minitest::Test
     assert_empty missing, "Missing built routes: #{missing.join(', ')}"
   end
 
+  def test_production_build_stays_small_and_excludes_repository_only_outputs
+    shipped_files = SITE_DIR.glob("**/*").select(&:file?)
+    shipped_bytes = shipped_files.sum(&:size)
+
+    assert_operator shipped_bytes, :<, 500_000,
+                    "Production build is #{shipped_bytes} bytes; expected less than 500 KB"
+
+    %w[
+      Gemfile
+      Gemfile.lock
+      feed.xml
+      img/profile/PROVENANCE.md
+      img/profile/PROVENANCE/index.html
+      img/kegg.png
+      img/kegg.webp
+      img/logo/logo.png
+      img/logo/logo.ico
+    ].each do |path|
+      refute SITE_DIR.join(path).exist?, "Repository-only or retired file shipped: #{path}"
+    end
+
+    primer_css = SITE_DIR.join("assets/css/style.css")
+    assert primer_css.file?, "Expected the GitHub Pages theme override to build"
+    assert_operator primer_css.size, :<, 512,
+                    "Default GitHub Pages theme CSS should remain neutralized"
+  end
+
   def test_all_styled_routes_version_the_shared_stylesheet
     %w[index.html work/index.html papers/index.html resume.html].each do |route|
       assert_match(%r{<link\b[^>]*href=["']/css/site\.css\?v=\d+["'][^>]*rel=["']stylesheet["']}, read(route), route)
@@ -138,12 +165,15 @@ class SiteContractTest < Minitest::Test
   end
 
   def test_analytics_waits_for_idle_time_instead_of_competing_with_the_first_render
-    html = read("index.html")
-    head = html[/<head>(.*?)<\/head>/m, 1]
+    %w[index.html work/index.html papers/index.html resume.html].each do |route|
+      html = read(route)
+      head = html[/<head>(.*?)<\/head>/m, 1]
 
-    refute_match(%r{<script\b[^>]*src=["']https://www\.googletagmanager\.com/gtag/js}, head)
-    assert_includes html, "requestIdleCallback"
-    assert_includes html, "loadAnalytics"
+      refute_match(%r{<script\b[^>]*src=["']https://www\.googletagmanager\.com/gtag/js}, head, route)
+      refute_match(%r{<script\b[^>]*src=["']https://www\.googletagmanager\.com/gtag/js}, html, route)
+      assert_includes html, "requestIdleCallback", route
+      assert_includes html, "loadAnalytics", route
+    end
   end
 
   def test_home_credits_the_site_inspiration_in_page_flow_without_repeating_it_elsewhere
@@ -198,7 +228,9 @@ class SiteContractTest < Minitest::Test
 
   def test_pages_link_the_local_rounded_square_favicon
     %w[index.html work/index.html papers/index.html resume.html].each do |route|
-      assert_match(%r{<link\b[^>]*rel=["']icon["'][^>]*type=["']image/svg\+xml["'][^>]*href=["']/img/logo/favicon\.svg["']}, read(route), route)
+      html = read(route)
+      assert_match(%r{<link\b[^>]*rel=["']icon["'][^>]*type=["']image/svg\+xml["'][^>]*href=["']/img/logo/favicon\.svg["']}, html, route)
+      assert_match(%r{<link\b[^>]*rel=["'](?:alternate )?icon["'][^>]*type=["']image/x-icon["'][^>]*href=["']/favicon\.ico["']}, html, route)
     end
 
     favicon = PROJECT_DIR.join("img/logo/favicon.svg")
@@ -210,6 +242,13 @@ class SiteContractTest < Minitest::Test
     assert_equal 1, rectangles.length, "Favicon canvas must be transparent around the black rounded square"
     assert_equal "#111111", rectangles.first.attributes["fill"]
     assert_operator rectangles.first.attributes["rx"].to_f, :>, 0
+
+    fallback = SITE_DIR.join("favicon.ico")
+    assert fallback.file?, "Expected the ICO fallback to ship at /favicon.ico"
+    assert_equal [0, 0, 1, 0], fallback.binread(4).bytes,
+                 "Expected a valid ICO header"
+    assert_operator fallback.size, :<, 10_000,
+                    "Fallback favicon should remain a compact local asset"
   end
 
   def test_papers_has_the_complete_sentence_case_record

@@ -1,8 +1,6 @@
 :root {
     color-scheme: light dark;
     --background: #fafafa;
-    --surface: #ffffff;
-    --surface-soft: #f5f5f5;
     --heading: #111111;
     --text: #2e2e2e;
     --muted: #6e6e6e;
@@ -13,7 +11,6 @@
     --menu-link-hover: #333333;
     --menu-link-active: #111111;
     --menu-trigger: #333333;
-    --shadow-soft: 0 8px 36px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
     --shadow-menu: 0 8px 36px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.04);
     --shadow-menu-open: 0 14px 60px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.05);
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -520,8 +517,6 @@ img {
 @media (prefers-color-scheme: dark) {
     :root {
         --background: #171717;
-        --surface: #222222;
-        --surface-soft: #2a2a2a;
         --heading: #dfdfdf;
         --text: #a1a1a1;
         --muted: #a3a3a3;
@@ -532,7 +527,6 @@ img {
         --menu-link-hover: #d0d0d0;
         --menu-link-active: #dfdfdf;
         --menu-trigger: #dfdfdf;
-        --shadow-soft: 0 8px 36px rgba(0, 0, 0, 0.24);
         --shadow-menu: 0 8px 36px rgba(0, 0, 0, 0.45);
         --shadow-menu-open: 0 14px 60px rgba(0, 0, 0, 0.55);
     }

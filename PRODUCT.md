@@ -25,6 +25,7 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 ## Capabilities and Constraints
 
 - Jekyll static site hosted through GitHub Pages.
+- The clean production build stays below 500 KB and excludes repository-only files, retired media, and an unused post feed.
 - Primary navigation contains Home, Work, and Papers; Papers lives at `/papers/`, with `/publications/` retained as a legacy redirect.
 - Writing is deferred to a later pass.
 - `resume.html` is the detailed, printable professional record and should share the site's quiet editorial aesthetic without sacrificing print clarity.

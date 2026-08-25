@@ -5,7 +5,6 @@ url: https://drq.ai
 
 # GitHub Pages configuration
 plugins:
-  - jekyll-feed
   - jekyll-redirect-from
 
 # Build settings
@@ -26,18 +25,6 @@ exclude:
   - PRODUCT.md
   - AGENTS.md
   - CLAUDE.md
-
-social:
-  - icon: linkedin
-    title: linkedin
-    url: https://www.linkedin.com/in/wesleyq
-    brand: true
-  - icon: graduation-cap
-    title: scholar
-    url: https://scholar.google.com/citations?user=SZ5EErcAAAAJ&sortby=pubdate
-  - icon: file-lines
-    title: resume
-    url: /resume
-  - icon: envelope
-    title: email
-    url: mailto:wesley.chin0919@gmail.com
+  - Gemfile
+  - Gemfile.lock
+  - img/profile/PROVENANCE.md
