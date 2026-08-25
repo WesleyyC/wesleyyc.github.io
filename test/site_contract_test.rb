@@ -157,8 +157,8 @@ class SiteContractTest < Minitest::Test
     end
 
     assert_equal "2018–2022 · Part-time", dates_by_company.fetch("Google")
-    assert_equal "2021 · Fall & Winter", dates_by_company.fetch("DeepMind")
-    assert_equal "2016 & 2017 · Summer", dates_by_company.fetch("Uber")
+    assert_equal "2021 · Fall & Winter Intern", dates_by_company.fetch("DeepMind")
+    assert_equal "2016 & 2017 · Summer Intern", dates_by_company.fetch("Uber")
   end
 
 
