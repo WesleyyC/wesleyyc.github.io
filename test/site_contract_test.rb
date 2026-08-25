@@ -3,6 +3,7 @@
 require "minitest/autorun"
 require "pathname"
 require "rexml/document"
+require "cgi"
 
 class SiteContractTest < Minitest::Test
   SITE_DIR = Pathname.new(ENV.fetch("SITE_DIR")).expand_path
@@ -145,6 +146,19 @@ class SiteContractTest < Minitest::Test
     assert_equal 4, html.scan('data-work-entry="true"').length
     assert_equal 2, html.scan('data-education-entry="true"').length
     assert_match(/<h2\b[^>]*class=["'][^"']*visually-hidden[^"']*["'][^>]*>Professional experience<\/h2>/, html)
+  end
+
+  def test_work_dates_include_commitment_and_season_context
+    html = read("work/index.html")
+    dates_by_company = html.scan(%r{<article class="work-entry" data-work-entry="true">(.*?)</article>}m).flatten.to_h do |article|
+      company = text_content(article[/<h3>(.*?)<\/h3>/m, 1])
+      date = CGI.unescapeHTML(text_content(article[/<div class="entry-date">(.*?)<\/div>/m, 1]))
+      [company, date]
+    end
+
+    assert_equal "2018–2022 · Part-time", dates_by_company.fetch("Google")
+    assert_equal "2021 · Fall & Winter", dates_by_company.fetch("DeepMind")
+    assert_equal "2016 & 2017 · Summer", dates_by_company.fetch("Uber")
   end
 
 
