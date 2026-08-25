@@ -1,6 +1,6 @@
 ---
-name: "DrQ.ai Personal Archive"
-description: "A quiet editorial portfolio where technical work and photography belong to the same person."
+name: "DrQ.ai Personal Portfolio"
+description: "A quiet editorial portfolio for engineering, research, and scientific work."
 colors:
   background-light: "#fafafa"
   surface-light: "#ffffff"
@@ -88,15 +88,12 @@ rounded:
   pill: "999px"
 spacing:
   mobile-inset: "12px"
-  image-gap-mobile: "16px"
   page-gutter: "24px"
   paragraph: "28px"
   menu-desktop-inset: "32px"
-  image-gap-desktop: "40px"
   section: "48px"
   home-gap: "64px"
   home-gap-wide: "72px"
-  photo-bottom: "96px"
   editorial-top: "120px"
 components:
   home-portrait:
@@ -104,10 +101,6 @@ components:
     rounded: "{rounded.portrait}"
     width: "300px"
     height: "300px"
-  photo-frame:
-    backgroundColor: "{colors.surface-light}"
-    rounded: "{rounded.image}"
-    width: "min(1200px, 100%)"
   menu-collapsed-light:
     backgroundColor: "{colors.menu-surface-light}"
     textColor: "{colors.menu-link-hover-light}"
@@ -144,21 +137,21 @@ components:
 
 **Creative North Star: "The Quiet Personal Archive"**
 
-DrQ.ai is an experience-first editorial portfolio, not a résumé-first landing page. The thesis is that Wesley's technical and photographic practices meet in one quiet personal archive. The own-world is built from warm off-white and near-black system surfaces, restrained typography, large honest images, and translucent navigation with asymmetric spring motion.
+DrQ.ai is an experience-first editorial portfolio, not a résumé-first landing page. The thesis is that Wesley's technical practice can feel personal without losing rigor. The own-world is built from warm off-white and near-black system surfaces, restrained typography, one honest portrait, and translucent navigation with asymmetric spring motion.
 
-The story is sequential but unforced: meet Wesley on Home, understand the work, and verify it through Papers (`/papers/`). Those three routes form primary navigation; the former `/publications/` route redirects to Papers. The shuffled photographic notebook remains directly available at Photo (`/photo/`) while its menu entry, Cameras, and any Photo-specific top navigation are deliberately deferred.
+The story is sequential but unforced: meet Wesley on Home, understand the work, and verify it through Papers (`/papers/`). Those three routes form primary navigation; the former `/publications/` route redirects to Papers, while `/resume` remains the printable professional record.
 
 The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the Menu at bottom-left and a small linked Charlie Deets credit in the bottom-right footer row. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of `_layouts/default.html`.
 
 **Key Characteristics:**
 
 - Quiet, personal, and confident rather than conventionally corporate.
-- Achromatic interface chrome; photographs supply the color and visual surprise.
+- Achromatic interface chrome; the monochrome portrait supplies the visual anchor.
 - Generous negative space, narrow reading measures, and no decorative card grid.
 - One shared, bottom-left navigation object across the site, containing the three primary routes.
 - Native system typography and small, understandable Jekyll/CSS/vanilla-JavaScript primitives.
 
-**Reference baseline.** The canonical runner currently passes 17 site contracts / 724 assertions plus 5 deterministic Photo-selection assertions. The redesigned content set has 25 rasters with 0 missing provenance records: one supplied portrait and a 24-image Photo pool. Canonical review captures remain in `.impeccable/review/`; refresh them whenever the visual system materially changes.
+**Reference baseline.** The canonical runner covers every built route, the responsive portrait, navigation, analytics scheduling, content records, and resume print contracts. The only content image is Wesley's supplied portrait plus its responsive derivatives, documented in `img/profile/PROVENANCE.md`.
 
 ## Colors
 
@@ -178,9 +171,9 @@ The palette is deliberately achromatic. `css/site.css` defines semantic CSS prop
 
 The text pairs are contrast-safe against their intended page canvases: headings are 18.09:1 light and 13.45:1 dark; body text is 13.01:1 light and 6.94:1 dark; muted text is 4.89:1 light and 7.11:1 dark. Default menu labels remain comfortably above the 4.5:1 body-text threshold in both themes. Preserve or improve these ratios when changing tokens.
 
-**The Photographs Carry Color Rule.** Do not introduce a brand accent merely to make the interface feel more designed. The neutral frame is what lets the photography and portrait hold the page.
+**The Portrait Holds Focus Rule.** Do not introduce a brand accent merely to make the interface feel more designed. The neutral frame lets the portrait and writing hold the page.
 
-**The Paired Theme Rule.** Any semantic color change must ship as a light/dark pair in `css/site.css` and be checked on both Home and Photo, where the menu sits over very different backgrounds.
+**The Paired Theme Rule.** Any semantic color change must ship as a light/dark pair in `css/site.css` and be checked on Home and the reading pages.
 
 ## Typography
 
@@ -205,13 +198,11 @@ At 720px and below, Home uses 17px/28px with a 28px/34px name, while editorial p
 
 ## Layout
 
-The site uses three deliberate spatial modes, all defined in `css/site.css`:
+The site uses two deliberate spatial modes, both defined in `css/site.css`:
 
 1. **Home (`.home-main`, `.home-intro`):** a vertically centered first viewport with an 820px maximum row, 300px portrait, 456px copy column, and 64px gap. At 1360px and wider the row becomes 828px with a 72px gap. At 880px and below, the composition stacks, aligns to the top, and gives the portrait `max(180px, 40%)` with a square aspect ratio.
 2. **Reading pages (`.editorial-main`):** a centered 680px measure, 120px top margin, 48px minimum side total, and generous bottom clearance for the floating menu. At 720px and below, the page uses 24px side gutters, 48px top spacing, and a shorter bottom tail.
-3. **Photo (`.photo-main`, `.image-feed`):** a 1240px shell containing images up to 1200px wide. The feed starts 32px from the top with 40px vertical gaps. At 1240px and below it keeps 16px outer gutters; at 720px and below the top inset and image gap both become 16px.
-
-The supported minimum viewport width is 320px. Breakpoints are behavioral, not device labels: 1360px widens the Home composition, 1240px releases Photo's inner padding, 880px stacks Home, and 720px applies compact typography, feed rhythm, editorial spacing, and menu insets.
+The supported minimum viewport width is 320px. Breakpoints are behavioral, not device labels: 1360px widens the Home composition, 880px stacks Home, and 720px applies compact typography, editorial spacing, and menu insets.
 
 **The One Reading Measure Rule.** New prose-heavy routes should start from `.editorial-main`; do not widen text to fill the viewport.
 
@@ -229,11 +220,11 @@ The system is flat everywhere except the floating menu. Page sections do not bec
 
 ## Shapes
 
-Shapes are soft but sparse. The desktop portrait uses `rounded.portrait` and reduces to `rounded.image` once stacked. Photo frames use `rounded.image`. The menu morphs from `rounded.menu-collapsed` to `rounded.menu-open`; the skip link uses the fully pill-shaped token. Content itself stays unboxed.
+Shapes are soft but sparse. The desktop portrait uses `rounded.portrait` and reduces to `rounded.image` once stacked. The menu morphs from `rounded.menu-collapsed` to `rounded.menu-open`; the skip link uses the fully pill-shaped token. Content itself stays unboxed.
 
 The favicon reduces that shape language to one mark: an 18px Editorial Ink square with a 5px corner radius, centered on a transparent 32px canvas. It has no letterform, border, or decorative detail.
 
-**The Honest Image Rule.** Round the frame, not the subject. Keep `object-fit: cover` only for the square portrait; preserve each feed photograph's natural aspect ratio.
+**The Honest Image Rule.** Round the frame, not the subject. Keep `object-fit: cover` only for the square portrait and preserve its supplied composition.
 
 ## Components
 
@@ -241,14 +232,12 @@ The favicon reduces that shape language to one mark: an 18px Editorial Ink squar
 
 `_includes/global-menu.html`, `.floating-menu`, and `js/site.js` jointly define the primary navigation contract.
 
-- **Content:** exactly Home, Work, and Papers, in that order. The current link uses `.active` plus `aria-current="page"`; Photo has no active menu item while its route is deferred from navigation.
+- **Content:** exactly Home, Work, and Papers, in that order. The current link uses `.active` plus `aria-current="page"`.
 - **Placement:** 32px from the desktop left/bottom edges, shifting to 12px left and 20px bottom at 720px and below. Opening lifts the surface 8px while its inner column counter-shifts into place.
 - **Size:** 82 × 48px collapsed and 149 × 216px open for the current three-route structure. The open height is measured from the real inner content so future route changes do not clip.
 - **Structure:** Home stands alone above a hairline; Work and Papers form the second group; a second hairline separates navigation from the bottom control.
 - **State:** the same trigger reads Menu when collapsed and Close at the bottom of the open panel. `aria-expanded`, `aria-label`, and `inert` keep the accessibility tree synchronized with the visual state while the trigger remains keyboard-accessible in both states.
 - **Dismissal:** pointer activation opens without moving focus into the menu; keyboard activation focuses the active or first link. Outside click, focus leaving the control, and Escape close it; Escape returns focus to the trigger.
-- **Long Photo pages:** on mobile only, scrolling down past 120px hides a closed, unfocused menu with `.scroll-hidden`; scrolling up restores it. An open or keyboard-focused menu never auto-hides.
-- **Deferred surfaces:** do not add Cameras, albums, or a Photo top bar in this system revision.
 
 Width and height use separate authored spring curves. Opening targets roughly 590ms horizontally and 428ms vertically; closing targets 655ms and 475ms with a softer overshoot. Each interaction varies those durations by ±15%, keeping the control tactile without changing its geometry. The inner column moves 4px horizontally and 8px vertically, while navigation and dividers reveal bottom-to-top on opening and disappear top-to-bottom on closing.
 
@@ -262,12 +251,6 @@ Width and height use separate authored spring curves. Opening targets roughly 59
 
 `work.html` uses `.work-entry` and `.education-entry`; `publications.html` uses `.publication-year`, `.publication`, and `.publication-meta`. Entries rely on whitespace and type, not dividers or cards. External links open in a new tab with `noopener noreferrer`. The resume is now a first-class editorial route with the shared menu on screen, a paired dark theme, and a deliberately controlled three-page Letter print layout whose third page begins with “Evaluating attribution for graph neural networks.”
 
-### Photo feed
-
-`photo/index.html` supplies a pool of 24 locally hosted JPEGs as `.image-item` figures. Candidate URLs stay in `data-src`, so the browser cannot preload photographs that will not be shown. On each fresh visit, `js/photo-selection.js` chooses 12 unique images from the full pool; `js/site.js` removes the unselected figures, assigns `src` only to the 12 selected images, and preserves that stable set for the view. The script promotes the actual first item to eager/high-priority loading and leaves the remainder lazy. Lazy images fade from zero opacity over 300ms when `.loaded` is applied. Intrinsic width/height prevents layout shift, and each image has descriptive alt text.
-
-The feed photographs are local derivatives from Wesley's `@the.stoddard.temple` archive. Presentation mats were removed without changing the photographs; there is no runtime Instagram dependency and no AI-generated imagery. `img/photo/PROVENANCE.md` is authoritative for the portrait and all feed sources. Do not infer camera, lens, EXIF, place, or identity from visual style; add Cameras or metadata only when evidence is reliable and the deferred feature is explicitly resumed.
-
 ### Accessibility primitives
 
 `_layouts/default.html` places `.skip-link` before main content. Global `:focus-visible` uses a 2px high-contrast outline with a 4px offset; menu focus moves the ring inward so it remains inside the clipped pill. Interactive menu rows meet the 44px touch-target floor. `@media (prefers-reduced-motion: reduce)` disables smooth scrolling and collapses transition/animation durations without hiding content.
@@ -276,18 +259,16 @@ The feed photographs are local derivatives from Wesley's `@the.stoddard.temple` 
 
 ### Do
 
-- **Do** preserve the four-route information architecture and the shared bottom-left menu.
+- **Do** preserve the Home, Work, Papers, and Resume information architecture and the shared bottom-left menu.
 - **Do** use the semantic tokens in `css/site.css` and verify every color change in light and dark system themes.
 - **Do** begin new reading surfaces with the 680px editorial measure and the established heading/body hierarchy.
 - **Do** give local images intrinsic dimensions, useful alt text, lazy loading below the first viewport, and a corresponding provenance entry.
 - **Do** preserve keyboard operation, focus return, 44px targets, active-page semantics, and reduced-motion behavior when changing navigation.
-- **Do** compare visual changes against the light/dark Home and Photo screenshots in `.impeccable/review/`.
+- **Do** compare visual changes against the light/dark Home and reading-page screenshots in `.impeccable/review/`.
 
 ### Don't
 
-- **Don't** add Cameras or any Photo top navigation until that deferred surface is deliberately designed and sourced.
-- **Don't** add bright accent colors, decorative card grids, broad shadows, or extra floating surfaces; the content and photography are the visual emphasis.
+- **Don't** reintroduce a Photo route or image-feed feature without an explicit product decision.
+- **Don't** add bright accent colors, decorative card grids, broad shadows, or extra floating surfaces; the content and portrait are the visual emphasis.
 - **Don't** widen prose beyond the editorial measure or crowd the first viewport with additional calls to action.
-- **Don't** replace the local photo feed with Instagram embeds or reproduce Instagram UI/captions by default.
-- **Don't** infer metadata or alter a photograph beyond documented presentation-crop cleanup.
 - **Don't** copy the menu's width/height animation exception into other components.

@@ -14,7 +14,6 @@ class SiteContractTest < Minitest::Test
     work/index.html
     papers/index.html
     publications/index.html
-    photo/index.html
     resume.html
   ].freeze
 
@@ -48,19 +47,19 @@ class SiteContractTest < Minitest::Test
   end
 
   def test_all_styled_routes_version_the_shared_stylesheet
-    %w[index.html work/index.html papers/index.html photo/index.html resume.html].each do |route|
+    %w[index.html work/index.html papers/index.html resume.html].each do |route|
       assert_match(%r{<link\b[^>]*href=["']/css/site\.css\?v=\d+["'][^>]*rel=["']stylesheet["']}, read(route), route)
     end
   end
 
   def test_global_navigation_is_exactly_the_approved_three_items
-    %w[index.html work/index.html papers/index.html photo/index.html resume.html].each do |route|
+    %w[index.html work/index.html papers/index.html resume.html].each do |route|
       assert_equal GLOBAL_NAV_LABELS, primary_nav_labels(read(route)), route
     end
   end
 
   def test_global_navigation_links_papers_to_the_canonical_route
-    %w[index.html work/index.html papers/index.html photo/index.html resume.html].each do |route|
+    %w[index.html work/index.html papers/index.html resume.html].each do |route|
       assert_match(%r{<a\b[^>]*href=["']/papers/["'][^>]*>Papers</a>}, read(route), route)
     end
   end
@@ -76,21 +75,16 @@ class SiteContractTest < Minitest::Test
                            .map { |label| text_content(label) }
       assert_equal [expected], current, route
     end
-
-    photo_current = read("photo/index.html").scan(/<a\b[^>]*aria-current=["']page["'][^>]*>(.*?)<\/a>/m)
-                                            .flatten
-                                            .map { |label| text_content(label) }
-    assert_empty photo_current, "Photo remains available by URL without appearing in primary navigation"
   end
 
   def test_no_route_has_a_top_navigation_bar
-    %w[index.html work/index.html papers/index.html photo/index.html].each do |route|
+    %w[index.html work/index.html papers/index.html].each do |route|
       refute_includes read(route), 'aria-label="Photo sections"', route
     end
   end
 
   def test_shared_pages_emit_the_pinned_direction_contract
-    %w[index.html work/index.html papers/index.html photo/index.html].each do |route|
+    %w[index.html work/index.html papers/index.html].each do |route|
       html = read(route)
       assert_includes html, "THESIS:", route
       assert_includes html, "OWN-WORLD:", route
@@ -127,13 +121,20 @@ class SiteContractTest < Minitest::Test
     end
   end
 
-  def test_photo_selection_helper_only_loads_on_the_photo_route
-    photo = read("photo/index.html")
-    assert_match(%r{<script\b[^>]*src=["']/js/photo-selection\.js["'][^>]*defer}, photo)
+  def test_photo_feature_is_removed_from_the_built_site_and_source_tree
+    refute SITE_DIR.join("photo/index.html").exist?
+    refute PROJECT_DIR.join("photo").exist?
+    refute PROJECT_DIR.join("img/photo").exist?
+    refute PROJECT_DIR.join("js/photo-selection.js").exist?
+    refute PROJECT_DIR.join("test/photo_selection_test.js").exist?
 
     %w[index.html work/index.html papers/index.html resume.html].each do |route|
-      refute_match(%r{<script\b[^>]*src=["']/js/photo-selection\.js["']}, read(route), route)
+      refute_match(%r{(?:href|src)=["'][^"']*/photo(?:/|-selection)}, read(route), route)
     end
+
+    refute_includes read("css/site.css"), ".photo-main"
+    refute_includes read("css/site.css"), ".image-feed"
+    refute_includes read("js/site.js"), "data-photo-feed"
   end
 
   def test_analytics_waits_for_idle_time_instead_of_competing_with_the_first_render
@@ -165,7 +166,7 @@ class SiteContractTest < Minitest::Test
     refute_match(/@media \(max-width: 720px\).*?\.site-credit\s*\{[^}]*\bbottom:/m, css)
     refute_includes css, ".floating-menu.is-open + .site-credit"
 
-    %w[work/index.html papers/index.html photo/index.html resume.html].each do |route|
+    %w[work/index.html papers/index.html resume.html].each do |route|
       refute_includes read(route), "site-credit", route
     end
   end
@@ -196,7 +197,7 @@ class SiteContractTest < Minitest::Test
 
 
   def test_pages_link_the_local_rounded_square_favicon
-    %w[index.html work/index.html papers/index.html photo/index.html resume.html].each do |route|
+    %w[index.html work/index.html papers/index.html resume.html].each do |route|
       assert_match(%r{<link\b[^>]*rel=["']icon["'][^>]*type=["']image/svg\+xml["'][^>]*href=["']/img/logo/favicon\.svg["']}, read(route), route)
     end
 
@@ -251,30 +252,6 @@ class SiteContractTest < Minitest::Test
     assert_match(%r{https://drq\.ai/papers/|/papers/}, html)
   end
 
-  def test_photo_feed_has_a_local_curated_set_with_accessible_dimensions
-    html = read("photo/index.html")
-    feed_images = image_tags(html).select { |tag| tag.include?('data-feed-image="true"') }
-    assert_operator feed_images.length, :>=, 24
-    dimensions = []
-
-    feed_images.each do |tag|
-      assert_match(%r{data-src=["']/img/photo/feed/}, tag)
-      refute_match(/\ssrc=["']/, tag)
-      assert_match(/alt=["'][^"']+["']/, tag)
-      assert_match(/width=["']\d+["']/, tag)
-      assert_match(/height=["']\d+["']/, tag)
-      refute_includes tag, "instagram.com"
-      assert_includes tag, 'loading="lazy"'
-      assert_includes tag, 'decoding="async"'
-      refute_includes tag, "fetchpriority"
-      dimensions << [tag[/width=["'](\d+)["']/, 1].to_i, tag[/height=["'](\d+)["']/, 1].to_i]
-    end
-
-    assert dimensions.any? { |width, height| width > height }, "Expected landscape photographs"
-    assert dimensions.any? { |width, height| height > width }, "Expected portrait photographs"
-    refute dimensions.any? { |width, height| width == height }, "Baked square mats should be cropped away"
-  end
-
   def test_content_images_are_local_and_described
     %w[index.html].each do |route|
       image_tags(read(route)).each do |tag|
@@ -301,13 +278,8 @@ class SiteContractTest < Minitest::Test
     assert_includes script, 'randomizeMenuTiming'
     assert_includes script, 'measureMenu'
     assert_includes script, 'window.addEventListener("resize"'
-    assert_includes script, 'image.loading = index === 0 ? "eager" : "lazy"'
-    assert_includes script, 'image.setAttribute("fetchpriority", "high")'
-    assert_includes script, "image.src = source"
-    assert_includes script, "data-photo-feed"
-    assert_includes script, "PhotoSelection.selectRandom"
-    assert_includes script, "IntersectionObserver"
-    assert_includes script, 'rootMargin: "600px 0px"'
+    refute_includes script, "data-photo-feed"
+    refute_includes script, "PhotoSelection"
   end
 
   def test_menu_contains_grouping_dividers_and_a_close_capable_trigger
