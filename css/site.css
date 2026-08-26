@@ -5,14 +5,14 @@
     --text: #2e2e2e;
     --muted: #6e6e6e;
     --hairline: rgba(17, 17, 17, 0.1);
-    --menu-surface: rgba(255, 255, 255, 0.88);
-    --menu-open-surface: rgba(244, 244, 244, 0.94);
+    --menu-surface: rgba(255, 255, 255, 0.75);
+    --menu-open-surface: rgba(244, 244, 244, 0.78);
     --menu-link: #555555;
     --menu-link-hover: #333333;
     --menu-link-active: #111111;
     --menu-trigger: #333333;
     --shadow-menu: 0 8px 36px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.04);
-    --shadow-menu-open: 0 14px 60px rgba(0, 0, 0, 0.16), 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-menu-open: 0 14px 60px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.04);
     --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -258,10 +258,10 @@ img {
     --menu-open-height: 216px;
     --menu-collapsed-width: 82px;
     --menu-collapsed-height: 48px;
-    --menu-width-spring-expand: linear(0, 0.03 5%, 0.12 10%, 0.45 20%, 0.82 33%, 1.08 44%, 1.15 52%, 1.08 68%, 1.01 84%, 1);
-    --menu-width-spring-retract: linear(0, 0.03 5%, 0.12 10%, 0.45 20%, 0.82 33%, 1.03 44%, 1.06 52%, 1.03 68%, 1.005 84%, 1);
-    --menu-height-spring-expand: linear(0, 0.02 6%, 0.14 12%, 0.3 18%, 0.5 24%, 0.69 30%, 0.86 36%, 0.97 42%, 1.025 48%, 1.04 58%, 1.025 70%, 1.008 84%, 1);
-    --menu-height-spring-retract: linear(0, 0.02 6%, 0.14 12%, 0.3 18%, 0.5 24%, 0.69 30%, 0.86 36%, 0.97 42%, 1.018 48%, 1.03 58%, 1.02 70%, 1.006 84%, 1);
+    --menu-width-spring-expand: linear(0, 0.0238 4.43%, 0.0917 8.86%, 0.3441 17.71%, 0.6533 26.57%, 0.9054 35.43%, 1.0638 41.51%, 1.1471 47.59%, 1.1629 50.92%, 1.1595 54.43%, 1.1389 60.69%, 1.0914 67.69%, 1.0452 73.96%, 1.0135 80.22%, 0.9975 87.04%, 0.9953 93.85%, 1);
+    --menu-width-spring-retract: linear(0, 0.0238 4.43%, 0.0917 8.86%, 0.3441 17.71%, 0.6533 26.57%, 0.9054 35.43%, 1.024 41.51%, 1.0551 47.59%, 1.0611 50.92%, 1.0599 54.43%, 1.0521 60.69%, 1.0343 67.69%, 1.017 73.96%, 1.0051 80.22%, 0.999 87.04%, 0.9983 93.85%, 1);
+    --menu-height-spring-expand: linear(0, 0.0089 2.95%, 0.0349 5.91%, 0.1366 11.81%, 0.2941 17.72%, 0.4884 23.62%, 0.685 29.53%, 0.8503 35.43%, 0.9683 41.34%, 1.0223 47.24%, 1.0402 53.15%, 1.0428 59.05%, 1.0366 64.96%, 1.0269 70.86%, 1.0174 76.77%, 1.0097 82.67%, 1.0046 88.58%, 1.0015 94.48%, 1);
+    --menu-height-spring-retract: linear(0, 0.0089 2.95%, 0.0349 5.91%, 0.1366 11.81%, 0.2941 17.72%, 0.4884 23.62%, 0.685 29.53%, 0.8503 35.43%, 0.9683 41.34%, 1.0167 47.24%, 1.0302 53.15%, 1.0321 59.05%, 1.0275 64.96%, 1.0202 70.86%, 1.0131 76.77%, 1.0073 82.67%, 1.0035 88.58%, 1.0011 94.48%, 1);
     --menu-width-duration-expand: 590ms;
     --menu-height-duration-expand: 428ms;
     --menu-width-duration-retract: 655ms;
@@ -271,7 +271,7 @@ img {
     --menu-width-duration-active: var(--menu-width-duration-retract);
     --menu-height-duration-active: var(--menu-height-duration-retract);
     position: fixed;
-    z-index: 100;
+    z-index: 9999;
     bottom: 32px;
     left: 32px;
     width: var(--menu-collapsed-width);
@@ -284,6 +284,7 @@ img {
     box-shadow: var(--shadow-menu);
     backdrop-filter: blur(20px) saturate(140%);
     -webkit-backdrop-filter: blur(20px) saturate(140%);
+    -webkit-font-smoothing: auto;
     transform: translateX(4px);
     will-change: width, height, transform, bottom;
     transition: width var(--menu-width-duration-active) var(--menu-width-spring-active), height var(--menu-height-duration-active) var(--menu-height-spring-active), bottom var(--menu-height-duration-active) var(--menu-height-spring-active), transform var(--menu-width-duration-active) var(--menu-width-spring-active), border-radius 216ms cubic-bezier(0.2, 0, 0, 1), background 132ms ease, border-color 132ms ease, box-shadow 216ms ease, opacity 216ms ease;
@@ -498,13 +499,43 @@ img {
 
     .floating-menu {
         right: auto;
-        bottom: 20px;
-        left: 12px;
-        transform: none;
+        bottom: max(20px, env(safe-area-inset-bottom));
+        left: 50%;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .floating-menu,
+    .floating-menu.is-open {
+        transform: translateX(-50%);
     }
 
     .floating-menu.is-open {
-        bottom: 12px;
+        bottom: max(12px, env(safe-area-inset-bottom));
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .floating-menu__inner {
+        right: auto;
+        left: 50%;
+    }
+
+    .floating-menu__inner,
+    .floating-menu.is-open .floating-menu__inner {
+        transform: translateX(-50%);
+    }
+
+    .floating-menu__links a,
+    .floating-menu__trigger {
+        text-align: center;
+    }
+
+    .floating-menu:not(.is-open) {
+        width: var(--menu-collapsed-fit, var(--menu-collapsed-width));
+    }
+
+    .floating-menu.scroll-hidden {
+        opacity: 0;
+        pointer-events: none;
     }
 
     .site-credit {
@@ -521,14 +552,14 @@ img {
         --text: #a1a1a1;
         --muted: #a3a3a3;
         --hairline: rgba(255, 255, 255, 0.1);
-        --menu-surface: rgba(38, 38, 38, 0.88);
-        --menu-open-surface: rgba(38, 38, 38, 0.92);
+        --menu-surface: rgba(28, 28, 28, 0.85);
+        --menu-open-surface: rgba(28, 28, 28, 0.78);
         --menu-link: #aaaaaa;
         --menu-link-hover: #d0d0d0;
         --menu-link-active: #dfdfdf;
         --menu-trigger: #dfdfdf;
-        --shadow-menu: 0 8px 36px rgba(0, 0, 0, 0.45);
-        --shadow-menu-open: 0 14px 60px rgba(0, 0, 0, 0.55);
+        --shadow-menu: 0 8px 36px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.3);
+        --shadow-menu-open: 0 14px 60px rgba(0, 0, 0, 0.55), 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     a {
@@ -537,6 +568,16 @@ img {
 
     .floating-menu {
         border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 720px) {
+        .floating-menu {
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+        }
+
+        .floating-menu.is-open {
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.55);
+        }
     }
 
 }

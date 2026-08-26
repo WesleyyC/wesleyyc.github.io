@@ -18,3 +18,4 @@ fi
 
 "$BUNDLE_BIN" exec jekyll build --destination "$SITE_TEST_DIR"
 SITE_DIR="$SITE_TEST_DIR" "$BUNDLE_BIN" exec "$RUBY_BIN" test/site_contract_test.rb
+node test/menu_scroll_behavior_test.js

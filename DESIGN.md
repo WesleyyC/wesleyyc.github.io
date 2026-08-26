@@ -233,13 +233,15 @@ The favicon reduces that shape language to one mark: an 18px Editorial Ink squar
 `_includes/global-menu.html`, `.floating-menu`, and `js/site.js` jointly define the primary navigation contract.
 
 - **Content:** exactly Home, Work, and Papers, in that order. The current link uses `.active` plus `aria-current="page"`.
-- **Placement:** 32px from the desktop left/bottom edges, shifting to 12px left and 20px bottom at 720px and below. Opening lifts the surface 8px while its inner column counter-shifts into place.
-- **Size:** 82 × 48px collapsed and 149 × 216px open for the current three-route structure. The open height is measured from the real inner content so future route changes do not clip.
+- **Placement:** 32px from the desktop left/bottom edges. At 720px and below the entire control centers horizontally, sits 20px above the bottom safe area when collapsed, and lowers to a 12px safe-area floor when open. The inner column and its labels center with the surface; wider landscape and desktop layouts remain left-aligned.
+- **Size:** 82 × 48px collapsed on desktop and 149 × 216px open for the current three-route structure. On mobile, the collapsed surface measures the actual Menu label and adds 46px of breathing room, matching the reference control instead of assuming a fixed label width. The open height is measured from the real inner content so future route changes do not clip.
 - **Structure:** Home stands alone above a hairline; Work and Papers form the second group; a second hairline separates navigation from the bottom control.
 - **State:** the same trigger reads Menu when collapsed and Close at the bottom of the open panel. `aria-expanded`, `aria-label`, and `inert` keep the accessibility tree synchronized with the visual state while the trigger remains keyboard-accessible in both states.
 - **Dismissal:** pointer activation opens without moving focus into the menu; keyboard activation focuses the active or first link. Outside click, focus leaving the control, and Escape close it; Escape returns focus to the trigger.
 
 Width and height use separate authored spring curves. Opening targets roughly 590ms horizontally and 428ms vertically; closing targets 655ms and 475ms with a softer overshoot. Each interaction varies those durations by ±15%, keeping the control tactile without changing its geometry. The inner column moves 4px horizontally and 8px vertically, while navigation and dividers reveal bottom-to-top on opening and disappear top-to-bottom on closing.
+
+On mobile, the closed menu remains visible for the first 80px of the page, fades after any further downward travel, and returns after 60px of continuous upward travel. Opening or keyboard focus always restores and pins the control; the hidden state is inert as well as pointer-inactive. Desktop keeps the menu persistently visible. Mobile material, shadows, label measurement, spring stops, centering, and reveal order deliberately track Charlie Deets's current menu in detail; the site's own reduced-motion and focus treatment remain authoritative.
 
 **The Tiny Layout Exception.** `.floating-menu` intentionally animates `width` and `height`, despite the detector's general preference for transform/opacity motion. This is a reviewed exception limited to the fixed bottom-corner control; `contain: layout paint` prevents page reflow and the measured height keeps the animation bounded. Do not generalize it to panels, cards, page sections, or other large surfaces.
 

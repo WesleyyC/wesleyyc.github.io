@@ -510,6 +510,8 @@ class SiteContractTest < Minitest::Test
     assert_includes css, "--muted: #6e6e6e"
     assert_includes css, "--menu-link: #555555"
     assert_includes css, "--menu-link: #aaaaaa"
-    refute_includes css, "left: 50%"
+    assert_match(/@media \(max-width: 720px\).*?\.floating-menu\s*\{[^}]*left:\s*50%/m, css)
+    assert_match(/@media \(max-width: 720px\).*?\.floating-menu,\s*\.floating-menu\.is-open\s*\{[^}]*transform:\s*translateX\(-50%\)/m, css)
+    assert_match(/@media \(max-width: 720px\).*?\.floating-menu\.scroll-hidden\s*\{[^}]*opacity:\s*0[^}]*pointer-events:\s*none/m, css)
   end
 end
