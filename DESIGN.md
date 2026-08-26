@@ -253,7 +253,7 @@ Width and height use separate authored spring curves. Opening targets roughly 59
 
 ### Standalone résumé
 
-`resume.html` is a complete document with inline CSS and no shared layout, menu, stylesheet, JavaScript, analytics, or dark theme. Screen and mobile presentations use a continuous white canvas; print remains a deliberately controlled three-page Letter layout whose third page begins with “Evaluating attribution for graph neural networks.” The separation is intentional: the résumé should feel like a focused professional artifact, not another portfolio page.
+`resume.html` is a complete document with inline CSS and no shared layout, menu, stylesheet, JavaScript, analytics, or dark theme. Screen and mobile presentations use a continuous white canvas. Company and school names use the primary entry-label role at 11.5pt/700, while role titles remain the secondary semibold label and dates remain muted metadata. Print remains a deliberately controlled three-page Letter layout whose third page begins with “Evaluating attribution for graph neural networks.” The separation is intentional: the résumé should feel like a focused professional artifact, not another portfolio page.
 
 ### Accessibility primitives
 

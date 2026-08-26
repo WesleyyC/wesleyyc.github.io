@@ -414,6 +414,30 @@ class SiteContractTest < Minitest::Test
     assert_match(%r{<a\b[^>]*href="https://deepmind\.google/"[^>]*class="deepmind-blue"[^>]*>DeepMind</a>}, html)
   end
 
+  def test_resume_company_and_school_names_outweigh_role_titles
+    html = read("resume.html")
+    body_size_match = html[/body\.resume-page\s*\{[^}]*font-size:\s*([\d.]+)pt/m, 1]
+    entry_size_match = html[/\.entry-title\s*\{[^}]*font-size:\s*([\d.]+)pt/m, 1]
+    entry_weight_match = html[/\.entry-title\s*\{[^}]*font-weight:\s*(\d+)/m, 1]
+    role_weight_match = html[/\.role-step__title\s*\{[^}]*font-weight:\s*(\d+)/m, 1]
+
+    refute_nil body_size_match
+    refute_nil entry_size_match
+    refute_nil entry_weight_match
+    refute_nil role_weight_match
+
+    body_size = body_size_match.to_f
+    entry_size = entry_size_match.to_f
+    entry_weight = entry_weight_match.to_i
+    role_weight = role_weight_match.to_i
+
+    assert_equal 11.5, entry_size
+    assert_equal 700, entry_weight
+    assert_equal 600, role_weight
+    assert_operator entry_size, :>, body_size
+    assert_operator entry_weight, :>, role_weight
+  end
+
   def test_resume_uses_osmos_current_heading_orange
     html = read("resume.html")
 
