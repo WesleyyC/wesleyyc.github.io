@@ -28,7 +28,7 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 - The clean production build stays below 500 KB and excludes repository-only files, retired media, and an unused post feed.
 - Primary navigation contains Home, Work, and Papers; Papers lives at `/papers/`, with `/publications/` retained as a legacy redirect.
 - Writing is deferred to a later pass.
-- `resume.html` is the detailed, printable professional record and should share the site's quiet editorial aesthetic without sacrificing print clarity.
+- `resume.html` is the detailed, printable professional record. It opens from Home in a new tab and remains a standalone, always-white document without portfolio navigation, analytics, or shared portfolio CSS/JavaScript.
 - The custom domain, analytics, structured data, and relevant metadata must continue to work.
 
 ## Brand Commitments
@@ -57,4 +57,4 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 
 ## Accessibility & Inclusion
 
-All routes must be keyboard-operable, responsive, readable in light and dark system themes, usable with reduced motion, and structured with semantic navigation and headings. Interactive targets must remain comfortable on touch screens and expose correct accessible state.
+All routes must be keyboard-operable, responsive, usable with reduced motion, and structured with semantic navigation and headings. Portfolio routes must remain readable in light and dark system themes; the standalone résumé deliberately remains white in every system theme. Interactive targets must remain comfortable on touch screens and expose correct accessible state.

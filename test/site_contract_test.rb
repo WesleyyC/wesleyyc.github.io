@@ -74,19 +74,19 @@ class SiteContractTest < Minitest::Test
   end
 
   def test_all_styled_routes_version_the_shared_stylesheet
-    %w[index.html work/index.html papers/index.html resume.html].each do |route|
+    %w[index.html work/index.html papers/index.html].each do |route|
       assert_match(%r{<link\b[^>]*href=["']/css/site\.css\?v=\d+["'][^>]*rel=["']stylesheet["']}, read(route), route)
     end
   end
 
   def test_global_navigation_is_exactly_the_approved_three_items
-    %w[index.html work/index.html papers/index.html resume.html].each do |route|
+    %w[index.html work/index.html papers/index.html].each do |route|
       assert_equal GLOBAL_NAV_LABELS, primary_nav_labels(read(route)), route
     end
   end
 
   def test_global_navigation_links_papers_to_the_canonical_route
-    %w[index.html work/index.html papers/index.html resume.html].each do |route|
+    %w[index.html work/index.html papers/index.html].each do |route|
       assert_match(%r{<a\b[^>]*href=["']/papers/["'][^>]*>Papers</a>}, read(route), route)
     end
   end
@@ -130,7 +130,10 @@ class SiteContractTest < Minitest::Test
     assert_match(%r{<img\b[^>]*src=["']/img/profile/wesley-home\.(?:jpe?g|webp)["'][^>]*>}, html)
     links = html[/<p\b[^>]*class=["']home-intro__links["'][^>]*>(.*?)<\/p>/m, 1]
     assert_equal ["LinkedIn", "Scholar", "Resume", "Email"], links.scan(/<a\b[^>]*>(.*?)<\/a>/m).flatten.map { |label| text_content(label) }
-    assert_match(%r{<a\b[^>]*href=["']https://drq\.ai/resume["'][^>]*>Resume<\/a>}, links)
+    resume_link = links[/<a\b[^>]*>Resume<\/a>/]
+    assert_match(%r{href=["']https://drq\.ai/resume["']}, resume_link)
+    assert_match(/target=["']_blank["']/, resume_link)
+    assert_match(/rel=["'][^"']*noopener[^"']*noreferrer[^"']*["']/, resume_link)
   end
 
   def test_home_serves_a_responsive_high_priority_portrait
@@ -165,7 +168,7 @@ class SiteContractTest < Minitest::Test
   end
 
   def test_analytics_waits_for_idle_time_instead_of_competing_with_the_first_render
-    %w[index.html work/index.html papers/index.html resume.html].each do |route|
+    %w[index.html work/index.html papers/index.html].each do |route|
       html = read(route)
       head = html[/<head>(.*?)<\/head>/m, 1]
 
@@ -331,9 +334,11 @@ class SiteContractTest < Minitest::Test
     assert_match(/<button\b[^>]*data-menu-trigger[^>]*>.*?<span\b[^>]*data-menu-label[^>]*>Menu<\/span>.*?<\/button>/m, nav)
   end
 
-  def test_resume_uses_the_shared_editorial_shell_and_complete_content
+  def test_resume_is_a_complete_standalone_document
     html = read("resume.html")
     assert_includes html, "<title>Resume</title>"
+    assert_includes html, '<meta name="color-scheme" content="light">'
+    assert_includes html, '<body class="resume-page">'
     assert_includes html, 'class="resume-document"'
     assert_includes html, "Wesley Wei Qian"
     assert_includes html, "Foundation models for discovery and exploration in chemical space"
@@ -350,6 +355,19 @@ class SiteContractTest < Minitest::Test
     refute_includes html, "Source Sans 3"
     refute_includes html, "#2AA198"
     assert_includes html, "@media print"
+    refute_match(/<nav\b/, html)
+    refute_match(/<script\b/, html)
+    refute_includes html, "floating-menu"
+    refute_includes html, "skip-link"
+    refute_includes html, "/css/site.css"
+    refute_includes html, "prefers-color-scheme: dark"
+
+    body_css = html[/body\.resume-page\s*\{(.*?)\}/m, 1]
+    document_css = html[/\.resume-document\s*\{(.*?)\}/m, 1]
+    assert_includes body_css, "background: #ffffff"
+    assert_includes document_css, "margin: 0 auto"
+    refute_includes document_css, "box-shadow"
+    assert_match(/@media screen and \(max-width: 760px\).*?\.resume-document\s*\{[^}]*width:\s*100%[^}]*margin:\s*0/m, html)
   end
 
   def test_resume_company_timelines_show_dates_only_for_individual_roles
@@ -416,6 +434,13 @@ class SiteContractTest < Minitest::Test
 
     assert_match(%r{<div class="pub no-break page-break-before">\s*<div><span class="pub-title">Evaluating attribution for graph neural networks</span>}m, html)
     refute_match(%r{<div class="pub no-break page-break-before">\s*<div><span class="pub-title">ECNet is an evolutionary context-integrated deep learning framework for protein engineering</span>}m, html)
+  end
+
+  def test_resume_print_page_breaks_use_a_consistent_top_inset
+    html = read("resume.html")
+
+    assert_includes html, ".page-break-before { padding-top: 0.35in; }"
+    assert_includes html, "h2.page-break-before { margin-top: 0; }"
   end
 
   def test_canonical_runner_builds_a_fresh_temporary_site

@@ -11,10 +11,8 @@ body_class: resume-page
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Resume</title>
     <meta name="description" content="Experience, education, publications, and service by Wesley Wei Qian.">
-    <meta name="color-scheme" content="light dark">
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#171717" media="(prefers-color-scheme: dark)">
-    <link href="/css/site.css?v={{ site.time | date: '%s' }}" rel="stylesheet">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#ffffff">
     <link rel="icon" type="image/svg+xml" href="/img/logo/favicon.svg">
     <link rel="alternate icon" type="image/x-icon" href="/favicon.ico">
     <style>
@@ -23,8 +21,7 @@ body_class: resume-page
             --resume-text: #303030;
             --resume-ink: #111111;
             --resume-muted: #6e6e6e;
-            --resume-page-bg: #ededeb;
-            --resume-paper: #fafafa;
+            --resume-paper: #ffffff;
             --resume-hairline: rgba(17, 17, 17, 0.14);
             --resume-bullet: #8a8a8a;
             --resume-osmo: #ff763b;
@@ -46,7 +43,7 @@ body_class: resume-page
             font-size: 10pt;
             line-height: 1.45;
             color: var(--resume-text);
-            background: var(--resume-page-bg);
+            background: #ffffff;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
@@ -55,10 +52,9 @@ body_class: resume-page
             width: 8.5in;
             max-width: 100%;
             min-height: 11in;
-            margin: 0.4in auto;
+            margin: 0 auto;
             padding: 0.58in 0.62in;
             background: var(--resume-paper);
-            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.09), 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         /* --- Accessibility --- */
@@ -299,7 +295,6 @@ body_class: resume-page
                 min-height: 100vh;
                 margin: 0;
                 padding: 40px 24px 120px;
-                box-shadow: none;
             }
 
             .header,
@@ -316,26 +311,6 @@ body_class: resume-page
             .role-timeline { padding-left: 0; }
             .role-step { display: block; }
             .role-step__date { margin: 1px 0 2px; }
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --resume-text: #c2c2c2;
-                --resume-ink: #e4e4e4;
-                --resume-muted: #a3a3a3;
-                --resume-page-bg: #101010;
-                --resume-paper: #171717;
-                --resume-hairline: rgba(255, 255, 255, 0.13);
-                --resume-bullet: #8e8e8e;
-                --resume-osmo: #ff8174;
-                --resume-google-blue: #8ab4f8;
-                --resume-google-red: #f28b82;
-                --resume-google-yellow: #fdd663;
-                --resume-google-green: #81c995;
-                --resume-deepmind: #91b2ff;
-                --resume-uiuc: #ff9a62;
-                --resume-brandeis: #86a8ff;
-            }
         }
 
         /* --- Print --- */
@@ -373,14 +348,13 @@ body_class: resume-page
                 min-height: auto;
                 margin: 0;
                 padding: 0.35in 0.5in;
-                box-shadow: none;
             }
 
             a { color: inherit; }
             .contact a, .contact .links a { color: inherit; }
-            .floating-menu, .skip-link { display: none; }
 
             .page-break-before { padding-top: 0.35in; }
+            h2.page-break-before { margin-top: 0; }
             .pub.page-break-before::before { top: calc(0.35in + 1pt); }
 
         }
@@ -388,12 +362,11 @@ body_class: resume-page
 </head>
 <body class="resume-page">
     <!--
-    THESIS: A comprehensive professional record presented as part of the same quiet personal archive.
-    OWN-WORLD: Editorial ink, warm paper, hairline structure, and native type replace résumé-template decoration.
+    THESIS: A comprehensive professional record that stands apart from the portfolio shell.
+    OWN-WORLD: Editorial ink, white paper, hairline structure, and native type replace résumé-template decoration.
     FIRST VIEWPORT: Wesley's name and contact details establish a calm header before the experience record begins.
     FORM: User-pinned Charlie Deets editorial reference; seed f7a69c56.
     -->
-    <a class="skip-link" href="#main-content">Skip to content</a>
     <main class="resume-document" id="main-content">
         <header class="header">
             <h1>Wesley Wei Qian</h1>
@@ -620,7 +593,5 @@ body_class: resume-page
         </ul>
         </section>
     </main>
-    {% include global-menu.html %}
-    {% include js.html %}
 </body>
 </html>
