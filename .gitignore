@@ -1,6 +1,7 @@
 # Jekyll build output
 _site/
 .impeccable/
+.worktrees/
 
 # Bundle cache
 vendor/
