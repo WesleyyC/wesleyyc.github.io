@@ -1,7 +1,13 @@
-# Jekyll build output
+# Generated site and review output
 _site/
 .impeccable/
 .worktrees/
+
+# Local agent and assistant state
+AGENTS.md
+.agents/
+.claude/
+.superpowers/
 
 # Bundle cache
 vendor/
@@ -15,9 +21,10 @@ vendor/
 .DS_Store
 Thumbs.db
 
+# Tailored resume exports; the canonical generic PDF remains tracked
+output/pdf/resume_wesley_w_qian_*.pdf
+
 # Temporary files
 *.tmp
 *.swp
 *~
-
-# Note: Keep Gemfile.lock for consistent builds
