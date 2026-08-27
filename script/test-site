@@ -1,21 +1,11 @@
 #!/bin/sh
 set -eu
 
-SITE_TEST_DIR=$(mktemp -d "${TMPDIR:-/tmp}/personal-page-test.XXXXXX")
-
-cleanup() {
-    rm -rf -- "$SITE_TEST_DIR"
-}
-trap cleanup EXIT
-
-if [ -x /opt/homebrew/opt/ruby/bin/bundle ]; then
-    BUNDLE_BIN=/opt/homebrew/opt/ruby/bin/bundle
+if [ -x /opt/homebrew/opt/ruby/bin/ruby ]; then
     RUBY_BIN=/opt/homebrew/opt/ruby/bin/ruby
 else
-    BUNDLE_BIN=$(command -v bundle)
     RUBY_BIN=$(command -v ruby)
 fi
 
-"$BUNDLE_BIN" exec jekyll build --destination "$SITE_TEST_DIR"
-SITE_DIR="$SITE_TEST_DIR" "$BUNDLE_BIN" exec "$RUBY_BIN" test/site_contract_test.rb
+"$RUBY_BIN" test/static_public_contract_test.rb
 node test/menu_scroll_behavior_test.js

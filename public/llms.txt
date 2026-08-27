@@ -1,0 +1,19 @@
+# Wesley Wei Qian
+
+Wesley Wei Qian leads engineering and research at Osmo. His public work spans olfaction, machine learning, scientific infrastructure, cellular imaging, genomics, and protein structure.
+
+## Canonical pages
+
+- Home: https://drq.ai/
+- Work and education: https://drq.ai/work/
+- Scientific papers: https://drq.ai/papers/
+- Resume: https://drq.ai/resume
+
+## Public profiles
+
+- LinkedIn: https://www.linkedin.com/in/wesleyq
+- Google Scholar: https://scholar.google.com/citations?user=SZ5EErcAAAAJ&sortby=pubdate
+- GitHub: https://github.com/WesleyyC
+- Osmo: https://www.osmo.ai/
+
+Visible HTML pages are authoritative. Use their canonical URLs when citing this site.

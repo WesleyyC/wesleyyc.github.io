@@ -140,7 +140,7 @@ DrQ.ai is an experience-first editorial portfolio, not a résumé-first landing 
 
 The story is sequential but unforced: meet Wesley on Home, understand the work, and verify it through Papers (`/papers/`). Those three routes form primary navigation; the former `/publications/` route redirects to Papers. The `/resume` route deliberately steps outside that shell as a standalone, always-white professional document opened from Home in a new tab.
 
-The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the Menu at bottom-left and a small linked Charlie Deets credit in the bottom-right footer row. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of `_layouts/default.html`.
+The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the Menu at bottom-left and a small linked Charlie Deets credit in the bottom-right footer row. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of each portfolio HTML document under `public/`.
 
 **Key Characteristics:**
 
@@ -148,13 +148,13 @@ The first viewport is the system's clearest expression: a 300px monochrome portr
 - Achromatic interface chrome; the monochrome portrait supplies the visual anchor.
 - Generous negative space, narrow reading measures, and no decorative card grid.
 - One shared, bottom-left navigation object across the three portfolio routes; the résumé has no portfolio chrome.
-- Native system typography and small, understandable Jekyll/CSS/vanilla-JavaScript primitives.
+- Native system typography and small, understandable static-HTML/CSS/vanilla-JavaScript primitives.
 
-**Reference baseline.** The canonical runner covers every built route, the responsive portrait, navigation, analytics scheduling, the standalone résumé boundary, content records, resume print contracts, and a sub-500 KB production budget. The only content image is Wesley's supplied portrait plus its responsive derivatives, documented in `img/profile/PROVENANCE.md`; repository-only records and the unused post feed never ship.
+**Reference baseline.** The canonical runner covers every shipped route, the responsive portrait, navigation, analytics placement, the standalone résumé boundary, content records, résumé print contracts, and a sub-500 KB production budget. The only content image is Wesley's supplied portrait plus its responsive derivatives, documented in `img/profile/PROVENANCE.md`; repository-only records and retired artifacts never ship.
 
 ## Colors
 
-The palette is deliberately achromatic. `css/site.css` defines semantic CSS properties on `:root` and overrides the same roles under `@media (prefers-color-scheme: dark)`; components must consume these semantic roles rather than branch on raw color values.
+The palette is deliberately achromatic. `public/css/site.css` defines semantic CSS properties on `:root` and overrides the same roles under `@media (prefers-color-scheme: dark)`; components must consume these semantic roles rather than branch on raw color values.
 
 ### Primary
 
@@ -172,7 +172,7 @@ The text pairs are contrast-safe against their intended page canvases: headings 
 
 **The Portrait Holds Focus Rule.** Do not introduce a brand accent merely to make the interface feel more designed. The neutral frame lets the portrait and writing hold the page.
 
-**The Paired Theme Rule.** Any semantic color change to the portfolio shell must ship as a light/dark pair in `css/site.css` and be checked on Home and the reading pages. The résumé is the intentional exception: its inline palette is fixed for white paper in both screen and print contexts.
+**The Paired Theme Rule.** Any semantic color change to the portfolio shell must ship as a light/dark pair in `public/css/site.css` and be checked on Home and the reading pages. The résumé is the intentional exception: its inline palette is fixed for white paper in both screen and print contexts.
 
 ## Typography
 
@@ -197,7 +197,7 @@ At 720px and below, Home uses 17px/28px with a 28px/34px name, while editorial p
 
 ## Layout
 
-The portfolio uses two deliberate spatial modes, both defined in `css/site.css`:
+The portfolio uses two deliberate spatial modes, both defined in `public/css/site.css`:
 
 1. **Home (`.home-main`, `.home-intro`):** a vertically centered first viewport with an 820px maximum row, 300px portrait, 456px copy column, and 64px gap. At 1360px and wider the row becomes 828px with a 72px gap. At 880px and below, the composition stacks, aligns to the top, and gives the portrait `max(180px, 40%)` with a square aspect ratio.
 2. **Reading pages (`.editorial-main`):** a centered 680px measure, 120px top margin, 48px minimum side total, and generous bottom clearance for the floating menu. At 720px and below, the page uses 24px side gutters, 48px top spacing, and a shorter bottom tail.
@@ -230,7 +230,7 @@ The favicon reduces that shape language to one mark: an 18px Editorial Ink squar
 
 ### Global floating menu
 
-`_includes/global-menu.html`, `.floating-menu`, and `js/site.js` jointly define the primary navigation contract.
+The repeated `.floating-menu` markup in the three portfolio pages and `public/js/site.js` jointly define the primary navigation contract. Contract tests keep the repeated labels, routes, and current-page state synchronized.
 
 - **Content:** exactly Home, Work, and Papers, in that order. The current link uses `.active` plus `aria-current="page"`.
 - **Placement:** 32px from the desktop left/bottom edges. At 720px and below the entire control centers horizontally, sits 20px above the bottom safe area when collapsed, and lowers to a 12px safe-area floor when open. The inner column and its labels center with the surface; wider landscape and desktop layouts remain left-aligned.
@@ -247,26 +247,26 @@ On mobile, the closed menu remains visible for the first 80px of the page, fades
 
 ### Home introduction
 
-`index.html` and `.home-intro` pair one supplied monochrome portrait with concise, playful professional copy. The heading is simply “Wesley Wei Qian” and owns the strongest contrast; body copy stays muted; LinkedIn, Scholar, Resume, and Email form a quiet inline row that may wrap on small screens. Resume opens the standalone `/resume` document in a new tab. A 12px footer credit links Charlie Deets at bottom-right; it stays in document flow so short mobile viewports push it below the content instead of letting it overlap the copy.
+`public/index.html` and `.home-intro` pair one supplied monochrome portrait with concise, playful professional copy. The heading is simply “Wesley Wei Qian” and owns the strongest contrast; body copy stays muted; LinkedIn, Scholar, Resume, and Email form a quiet inline row that may wrap on small screens. Resume opens the standalone `/resume` document in a new tab. A 12px footer credit links Charlie Deets at bottom-right; it stays in document flow so short mobile viewports push it below the content instead of letting it overlap the copy.
 
 ### Editorial entries
 
-`work.html` uses `.work-entry` and `.education-entry`; `publications.html` uses `.publication-year`, `.publication`, and `.publication-meta`. Entries rely on whitespace and type, not dividers or cards. External links open in a new tab with `noopener noreferrer`.
+`public/work/index.html` uses `.work-entry` and `.education-entry`; `public/papers/index.html` uses `.publication-year`, `.publication`, and `.publication-meta`. Entries rely on whitespace and type, not dividers or cards. External links open in a new tab with `noopener noreferrer`.
 
 ### Standalone résumé
 
-`resume.html` is a complete document with inline CSS and no shared layout, menu, stylesheet, JavaScript, analytics, or dark theme. Screen and mobile presentations use a continuous white canvas. Company and school names use the primary entry-label role at 11.5pt/700, while role titles remain the secondary semibold label and dates remain muted metadata. Print remains a deliberately controlled three-page Letter layout whose third page begins with “Evaluating attribution for graph neural networks.” The separation is intentional: the résumé should feel like a focused professional artifact, not another portfolio page.
+`public/resume/index.html` is a complete document with inline CSS and no shared layout, menu, stylesheet, JavaScript, analytics, or dark theme. Screen and mobile presentations use a continuous white canvas. Company and school names use the primary entry-label role at 11.5pt/700, while role titles remain the secondary semibold label and dates remain muted metadata. Print remains a deliberately controlled three-page Letter layout whose third page begins with “Evaluating attribution for graph neural networks.” The separation is intentional: the résumé should feel like a focused professional artifact, not another portfolio page.
 
 ### Accessibility primitives
 
-`_layouts/default.html` places `.skip-link` before main content. Global `:focus-visible` uses a 2px high-contrast outline with a 4px offset; menu focus moves the ring inward so it remains inside the clipped pill. Interactive menu rows meet the 44px touch-target floor. `@media (prefers-reduced-motion: reduce)` disables smooth scrolling and collapses transition/animation durations without hiding content.
+Each portfolio HTML document places `.skip-link` before main content. Global `:focus-visible` uses a 2px high-contrast outline with a 4px offset; menu focus moves the ring inward so it remains inside the clipped pill. Interactive menu rows meet the 44px touch-target floor. `@media (prefers-reduced-motion: reduce)` disables smooth scrolling and collapses transition/animation durations without hiding content.
 
 ## Do's and Don'ts
 
 ### Do
 
 - **Do** preserve Home, Work, and Papers as the shared portfolio navigation and keep Resume as a standalone new-tab document.
-- **Do** use the semantic tokens in `css/site.css` and verify portfolio color changes in light and dark system themes; keep résumé colors in its inline, always-white system.
+- **Do** use the semantic tokens in `public/css/site.css` and verify portfolio color changes in light and dark system themes; keep résumé colors in its inline, always-white system.
 - **Do** begin new reading surfaces with the 680px editorial measure and the established heading/body hierarchy.
 - **Do** give local images intrinsic dimensions, useful alt text, lazy loading below the first viewport, and a corresponding provenance entry.
 - **Do** preserve keyboard operation, focus return, 44px targets, active-page semantics, and reduced-motion behavior when changing navigation.

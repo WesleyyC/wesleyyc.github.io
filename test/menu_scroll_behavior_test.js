@@ -100,7 +100,7 @@ const fakeDocument = {
     },
 };
 
-const source = fs.readFileSync("js/site.js", "utf8");
+const source = fs.readFileSync("public/js/site.js", "utf8");
 vm.runInNewContext(source, {
     document: fakeDocument,
     window: fakeWindow,

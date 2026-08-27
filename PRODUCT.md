@@ -24,11 +24,11 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 
 ## Capabilities and Constraints
 
-- Jekyll static site hosted through GitHub Pages.
-- The clean production build stays below 500 KB and excludes repository-only files, retired media, and an unused post feed.
+- Plain static HTML hosted through a direct GitHub Pages artifact deployment; no site generator or runtime build is required.
+- The deploy artifact stays below 500 KB and excludes repository-only files, retired media, and obsolete routes.
 - Primary navigation contains Home, Work, and Papers; Papers lives at `/papers/`, with `/publications/` retained as a legacy redirect.
 - Writing is deferred to a later pass.
-- `resume.html` is the detailed, printable professional record. It opens from Home in a new tab and remains a standalone, always-white document without portfolio navigation, analytics, or shared portfolio CSS/JavaScript.
+- `public/resume/index.html` is the detailed, printable professional record. It opens from Home in a new tab and remains a standalone, always-white document without portfolio navigation, analytics, or shared portfolio CSS/JavaScript.
 - The custom domain, analytics, structured data, and relevant metadata must continue to work.
 
 ## Brand Commitments
@@ -41,7 +41,7 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 
 ## Evidence on Hand
 
-- Professional chronology, education, publication metadata, and publication links in `resume.html`.
+- Professional chronology, education, publication metadata, and publication links in `public/resume/index.html`.
 - Current professional copy and role descriptions from Wesley's LinkedIn profile.
 - Fifteen publication entries, including “Foundation models for discovery and exploration in chemical space.”
 - Supplied homepage portrait at the local attachment path recorded in the approved design specification.
