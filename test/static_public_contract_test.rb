@@ -247,11 +247,11 @@ class StaticPublicContractTest < Minitest::Test
       "A central chaperone-like role for 14-3-3 proteins in human cells",
       "Energy-inspired molecular conformation optimization",
       "ECNet is an evolutionary context-integrated deep learning framework for protein engineering",
-      "Integrating deep neural networks and symbolic inference for organic reactivity prediction",
       "Comprehensive interactome profiling of the human Hsp70 network highlights functional differentiation of J domains",
       "Evaluating attribution for graph neural networks",
       "Batch equalization with a generative adversarial network",
-      "Evolutionary context-integrated deep sequence modeling for protein engineering"
+      "Evolutionary context-integrated deep sequence modeling for protein engineering",
+      "Integrating deep neural networks and symbolic inference for organic reactivity prediction"
     ]
     papers = public_read("papers/index.html")
     actual_titles = papers.scan(/<a\b[^>]*data-paper-link="true"[^>]*>(.*?)<\/a>/m).flatten.map { |title| text_content(title) }
@@ -260,6 +260,35 @@ class StaticPublicContractTest < Minitest::Test
       assert_includes tag, 'target="_blank"'
       assert_match(/rel=["'][^"']*noopener[^"']*noreferrer[^"']*["']/, tag)
     end
+  end
+
+  def test_resume_uses_canonical_publication_authors_and_contribution_markers
+    resume = public_read("resume/index.html")
+
+    principal_odor_map = resume[/<div class="pub no-break">\s*<div><span class="pub-title">A principal odor map.*?<\/div>\s*<\/div>/m]
+    assert_includes principal_odor_map, "Emily J. Mayhew*"
+    assert_includes principal_odor_map, "Kelsie A. Little"
+    refute_includes principal_odor_map, "Emily E Mayhew"
+
+    ecnet = resume[/<div class="pub no-break">\s*<div><span class="pub-title">ECNet is an evolutionary context-integrated deep learning framework for protein engineering.*?<\/div>\s*<\/div>/m]
+    assert_includes ecnet, "Yunan Luo*, Guangde Jiang*"
+  end
+
+  def test_chemrxiv_preprint_and_acs_presentation_are_classified_consistently
+    papers = public_read("papers/index.html")
+    resume = public_read("resume/index.html")
+    title = "Integrating deep neural networks and symbolic inference for organic reactivity prediction"
+
+    papers_2020 = papers[/<section class="publication-year" aria-labelledby="year-2020">.*?<\/section>/m]
+    papers_2021 = papers[/<section class="publication-year" aria-labelledby="year-2021">.*?<\/section>/m]
+    assert_includes papers_2020, title
+    refute_includes papers_2021, title
+    assert_includes CGI.unescapeHTML(text_content(papers_2020)),
+                    "ChemRxiv · presented at ACS National Meeting (2021)"
+
+    resume_entry = resume[/<div class="pub no-break">\s*<div><span class="pub-title">#{Regexp.escape(title)}.*?<\/div>\s*<\/div>/m]
+    assert_includes CGI.unescapeHTML(text_content(resume_entry)),
+                    "ChemRxiv (2020) · presented at ACS National Meeting (2021)"
   end
 
   def test_favicon_and_shared_interface_contracts_are_preserved
