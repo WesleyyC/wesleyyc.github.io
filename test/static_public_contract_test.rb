@@ -213,11 +213,28 @@ class StaticPublicContractTest < Minitest::Test
     end
 
     credit = html[/<p\b[^>]*class=["'][^"']*site-credit[^"']*["'][^>]*>(.*?)<\/p>/m, 1]
-    assert_equal "Site inspired by Charlie Deets.", text_content(credit).sub(/\s+\./, ".")
+    assert_equal "Inspired by Charlie Deets.", text_content(credit).sub(/\s+\./, ".")
     assert_match(%r{href=["']https://charliedeets\.com/["']}, credit)
     css = public_read("css/site.css")
     assert_match(/\.home-page\s*\{[^}]*display:\s*grid[^}]*grid-template-rows:\s*1fr auto/m, css)
     assert_match(/\.site-credit\s*\{[^}]*position:\s*static[^}]*justify-self:\s*end/m, css)
+  end
+
+  def test_mobile_home_credit_follows_content_and_clears_the_centered_menu
+    html = public_read("index.html")
+    credit = html[/<p\b[^>]*class=["'][^"']*site-credit[^"']*["'][^>]*>(.*?)<\/p>/m, 1]
+    css = public_read("css/site.css")
+
+    assert_equal "Inspired by Charlie Deets.", text_content(credit).sub(/\s+\./, ".")
+    assert_match(/@media \(max-width: 720px\).*?\.home-page\s*\{[^}]*grid-template-rows:\s*auto auto[^}]*align-content:\s*start/m, css)
+    assert_match(/@media \(max-width: 720px\).*?\.home-main\s*\{[^}]*padding-bottom:\s*32px/m, css)
+    assert_match(/@media \(max-width: 720px\).*?\.site-credit\s*\{[^}]*justify-self:\s*stretch[^}]*margin:\s*0 24px max\(96px, calc\(72px \+ env\(safe-area-inset-bottom\)\)\)[^}]*padding:\s*0/m, css)
+  end
+
+  def test_every_shared_css_route_uses_the_current_deployment_cache_key
+    (PORTFOLIO_ROUTES.keys + ["404.html"]).each do |route|
+      assert_match(%r{href=["']/css/site\.css\?v=20260829["']}, head(public_read(route)), route)
+    end
   end
 
   def test_retired_photo_feature_and_duplicate_resume_link_stay_removed

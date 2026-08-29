@@ -140,7 +140,7 @@ DrQ.ai is an experience-first editorial portfolio, not a résumé-first landing 
 
 The story is sequential but unforced: meet Wesley on Home, understand the work, and verify it through Papers (`/papers/`). Those three routes form primary navigation; the retired `/publications/` route is intentionally absent. The `/resume` route deliberately steps outside that shell as a standalone, always-white professional document opened from Home in a new tab.
 
-The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the Menu at bottom-left and a small linked Charlie Deets credit in the bottom-right footer row. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of each portfolio HTML document under `public/`.
+The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the Menu at bottom-left and a small linked Charlie Deets credit in the bottom-right footer row. On compact Home viewports, the Menu centers at the bottom while the credit becomes a left-aligned footnote directly after the introduction, with its own navigation clearance. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of each portfolio HTML document under `public/`.
 
 **Key Characteristics:**
 
@@ -247,7 +247,7 @@ On mobile, the closed menu remains visible for the first 80px of the page, fades
 
 ### Home introduction
 
-`public/index.html` and `.home-intro` pair one supplied monochrome portrait with concise, playful professional copy. The heading is simply “Wesley Wei Qian” and owns the strongest contrast; body copy stays muted; LinkedIn, Scholar, Resume, and Email form a quiet inline row that may wrap on small screens. Resume opens the standalone `/resume` document in a new tab. A 12px footer credit links Charlie Deets at bottom-right; it stays in document flow so short mobile viewports push it below the content instead of letting it overlap the copy.
+`public/index.html` and `.home-intro` pair one supplied monochrome portrait with concise, playful professional copy. The heading is simply “Wesley Wei Qian” and owns the strongest contrast; body copy stays muted; LinkedIn, Scholar, Resume, and Email form a quiet inline row that may wrap on small screens. Resume opens the standalone `/resume` document in a new tab. A 12px credit links Charlie Deets. It stays at bottom-right on wider screens; at 720px and below it aligns with the introduction gutter immediately after the content and reserves enough trailing space for the centered floating Menu and device safe area.
 
 ### Editorial entries
 

@@ -460,6 +460,15 @@ img {
 }
 
 @media (max-width: 720px) {
+    .home-page {
+        grid-template-rows: auto auto;
+        align-content: start;
+    }
+
+    .home-main {
+        padding-bottom: 32px;
+    }
+
     .home-intro__copy {
         font-size: 17px;
         line-height: 28px;
@@ -539,7 +548,9 @@ img {
     }
 
     .site-credit {
-        padding: 0 max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+        justify-self: stretch;
+        margin: 0 24px max(96px, calc(72px + env(safe-area-inset-bottom)));
+        padding: 0;
         white-space: normal;
     }
 
