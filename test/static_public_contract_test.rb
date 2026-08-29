@@ -14,13 +14,13 @@ class StaticPublicContractTest < Minitest::Test
 
   PORTFOLIO_ROUTES = {
     "index.html" => ["Wesley Wei Qian", "https://drq.ai/", "Home"],
-    "work/index.html" => ["Work — Wesley Qian", "https://drq.ai/work/", "Work"],
+    "experience/index.html" => ["Experience — Wesley Qian", "https://drq.ai/experience/", "Experience"],
     "papers/index.html" => ["Papers — Wesley Qian", "https://drq.ai/papers/", "Papers"]
   }.freeze
 
   CANONICAL_SITEMAP_URLS = %w[
     https://drq.ai/
-    https://drq.ai/work/
+    https://drq.ai/experience/
     https://drq.ai/papers/
     https://drq.ai/resume
   ].freeze
@@ -55,7 +55,7 @@ class StaticPublicContractTest < Minitest::Test
   def test_public_tree_is_a_directly_deployable_site
     required = %w[
       index.html
-      work/index.html
+      experience/index.html
       papers/index.html
       resume/index.html
       404.html
@@ -74,6 +74,7 @@ class StaticPublicContractTest < Minitest::Test
 
     missing = required.reject { |path| PUBLIC_DIR.join(path).file? }
     assert_empty missing, "Missing public artifacts: #{missing.join(', ')}"
+    refute PUBLIC_DIR.join("work").exist?, "Retired /work/ route must not ship"
 
     shipped_bytes = PUBLIC_DIR.glob("**/*").select(&:file?).sum(&:size)
     assert_operator shipped_bytes, :<, 500_000,
@@ -97,7 +98,7 @@ class StaticPublicContractTest < Minitest::Test
       nav = html[/<nav\b[^>]*aria-label=["']Primary["'][^>]*>(.*?)<\/nav>/m, 1]
       refute_nil nav, route
       labels = nav.scan(/<a\b[^>]*>(.*?)<\/a>/m).flatten.map { |label| text_content(label) }
-      assert_equal ["Home", "Work", "Papers"], labels, route
+      assert_equal ["Home", "Experience", "Papers"], labels, route
       current = nav.scan(/<a\b[^>]*aria-current=["']page["'][^>]*>(.*?)<\/a>/m)
                    .flatten
                    .map { |label| text_content(label) }
@@ -107,7 +108,7 @@ class StaticPublicContractTest < Minitest::Test
 
   def test_portfolio_structured_data_uses_one_stable_person_identity
     home_data = structured_data(public_read("index.html"))
-    work_data = structured_data(public_read("work/index.html"))
+    experience_data = structured_data(public_read("experience/index.html"))
     papers_data = structured_data(public_read("papers/index.html"))
 
     assert_equal 1, home_data.length
@@ -117,8 +118,9 @@ class StaticPublicContractTest < Minitest::Test
     assert_equal PERSON_ID, person.fetch("@id")
     assert_equal "Wesley Wei Qian", person.fetch("name")
 
-    assert_equal "WebPage", work_data.first.fetch("@type")
-    assert_equal PERSON_ID, work_data.first.fetch("about").fetch("@id")
+    assert_equal 1, experience_data.length
+    assert_equal "WebPage", experience_data.first.fetch("@type")
+    assert_equal PERSON_ID, experience_data.first.fetch("about").fetch("@id")
 
     assert_equal "CollectionPage", papers_data.first.fetch("@type")
     assert_equal PERSON_ID, papers_data.first.fetch("about").fetch("@id")
@@ -243,23 +245,23 @@ class StaticPublicContractTest < Minitest::Test
       refute PUBLIC_DIR.join(path).exist?, "Retired Photo artifact shipped: #{path}"
     end
 
-    %w[index.html work/index.html papers/index.html resume/index.html].each do |route|
+    %w[index.html experience/index.html papers/index.html resume/index.html].each do |route|
       refute_match(%r{(?:href|src)=["'][^"']*/photo(?:/|-selection)}, public_read(route), route)
     end
     refute_includes public_read("css/site.css"), ".photo-main"
     refute_includes public_read("js/site.js"), "data-photo-feed"
-    refute_match(%r{href=["']/resume["']}, public_read("work/index.html"))
+    refute_match(%r{href=["']/resume["']}, public_read("experience/index.html"))
   end
 
-  def test_work_and_paper_records_preserve_approved_content
-    work = public_read("work/index.html")
-    assert_equal 4, work.scan('data-work-entry="true"').length
-    assert_equal 2, work.scan('data-education-entry="true"').length
-    %w[Osmo Google DeepMind Uber].each { |name| assert_includes work, name }
-    assert_includes work, "University of Illinois Urbana-Champaign"
-    assert_includes work, "Brandeis University"
+  def test_experience_and_paper_records_preserve_approved_content
+    experience = public_read("experience/index.html")
+    assert_equal 4, experience.scan('data-work-entry="true"').length
+    assert_equal 2, experience.scan('data-education-entry="true"').length
+    %w[Osmo Google DeepMind Uber].each { |name| assert_includes experience, name }
+    assert_includes experience, "University of Illinois Urbana-Champaign"
+    assert_includes experience, "Brandeis University"
 
-    dates_by_company = work.scan(%r{<article class="work-entry" data-work-entry="true">(.*?)</article>}m).flatten.to_h do |article|
+    dates_by_company = experience.scan(%r{<article class="work-entry" data-work-entry="true">(.*?)</article>}m).flatten.to_h do |article|
       company = text_content(article[/<h3>(.*?)<\/h3>/m, 1])
       date = CGI.unescapeHTML(text_content(article[/<div class="entry-date">(.*?)<\/div>/m, 1]))
       [company, date]
@@ -324,7 +326,7 @@ class StaticPublicContractTest < Minitest::Test
   end
 
   def test_favicon_and_shared_interface_contracts_are_preserved
-    %w[index.html work/index.html papers/index.html resume/index.html].each do |route|
+    %w[index.html experience/index.html papers/index.html resume/index.html].each do |route|
       html = public_read(route)
       assert_match(%r{<link\b[^>]*rel=["']icon["'][^>]*type=["']image/svg\+xml["'][^>]*href=["']/img/logo/favicon\.svg["']}, html, route)
       assert_match(%r{<link\b[^>]*rel=["'](?:alternate )?icon["'][^>]*type=["']image/x-icon["'][^>]*href=["']/favicon\.ico["']}, html, route)

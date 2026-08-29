@@ -26,7 +26,7 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 
 - Plain static HTML hosted through a direct GitHub Pages artifact deployment; no site generator or runtime build is required.
 - The deploy artifact stays below 500 KB and excludes repository-only files, retired media, and obsolete routes.
-- Primary navigation contains Home, Work, and Papers; Papers lives at `/papers/`, and the retired `/publications/` route is intentionally absent.
+- Primary navigation contains Home, Experience, and Papers; Experience lives at `/experience/`, Papers lives at `/papers/`, and the retired `/work/` and `/publications/` routes are intentionally absent.
 - Writing is deferred to a later pass.
 - `public/resume/index.html` is the detailed, printable professional record. It opens from Home in a new tab and remains a standalone, always-white document without portfolio navigation, analytics, or shared portfolio CSS/JavaScript.
 - The custom domain, analytics, structured data, and relevant metadata must continue to work.

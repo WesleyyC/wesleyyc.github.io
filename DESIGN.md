@@ -187,7 +187,7 @@ The single family keeps the interface immediate and device-native. Hierarchy com
 - **Display:** `typography.display` is used by `.home-intro__copy h1` for the greeting.
 - **Headline:** `typography.headline` is used by `.editorial-main h1` and section headings; publication year headings intentionally step down to the body size at 600 weight.
 - **Large body:** `typography.body-large` is the desktop Home introduction, with a fixed 456px copy column.
-- **Reading body:** `typography.body` is the 680px Work/Papers column and the base mobile Home copy.
+- **Reading body:** `typography.body` is the 680px Experience/Papers column and the base mobile Home copy.
 - **Label:** `typography.label` is the floating menu's compact, calm control language.
 - **Metadata:** `typography.meta` is for venues and other supporting publication information.
 
@@ -232,10 +232,10 @@ The favicon reduces that shape language to one mark: an 18px Editorial Ink squar
 
 The repeated `.floating-menu` markup in the three portfolio pages and `public/js/site.js` jointly define the primary navigation contract. Contract tests keep the repeated labels, routes, and current-page state synchronized.
 
-- **Content:** exactly Home, Work, and Papers, in that order. The current link uses `.active` plus `aria-current="page"`.
+- **Content:** exactly Home, Experience, and Papers, in that order. The current link uses `.active` plus `aria-current="page"`.
 - **Placement:** 32px from the desktop left/bottom edges. At 720px and below the entire control centers horizontally, sits 20px above the bottom safe area when collapsed, and lowers to a 12px safe-area floor when open. The inner column and its labels center with the surface; wider landscape and desktop layouts remain left-aligned.
 - **Size:** 82 × 48px collapsed on desktop and 149 × 216px open for the current three-route structure. On mobile, the collapsed surface measures the actual Menu label and adds 46px of breathing room, matching the reference control instead of assuming a fixed label width. The open height is measured from the real inner content so future route changes do not clip.
-- **Structure:** Home stands alone above a hairline; Work and Papers form the second group; a second hairline separates navigation from the bottom control.
+- **Structure:** Home stands alone above a hairline; Experience and Papers form the second group; a second hairline separates navigation from the bottom control.
 - **State:** the same trigger reads Menu when collapsed and Close at the bottom of the open panel. `aria-expanded`, `aria-label`, and `inert` keep the accessibility tree synchronized with the visual state while the trigger remains keyboard-accessible in both states.
 - **Dismissal:** pointer activation opens without moving focus into the menu; keyboard activation focuses the active or first link. Outside click, focus leaving the control, and Escape close it; Escape returns focus to the trigger.
 
@@ -251,7 +251,7 @@ On mobile, the closed menu remains visible for the first 80px of the page, fades
 
 ### Editorial entries
 
-`public/work/index.html` uses `.work-entry` and `.education-entry`; `public/papers/index.html` uses `.publication-year`, `.publication`, and `.publication-meta`. Entries rely on whitespace and type, not dividers or cards. External links open in a new tab with `noopener noreferrer`.
+`public/experience/index.html` uses `.work-entry` and `.education-entry`; `public/papers/index.html` uses `.publication-year`, `.publication`, and `.publication-meta`. Entries rely on whitespace and type, not dividers or cards. External links open in a new tab with `noopener noreferrer`.
 
 ### Standalone résumé
 
@@ -265,7 +265,7 @@ Each portfolio HTML document places `.skip-link` before main content. Global `:f
 
 ### Do
 
-- **Do** preserve Home, Work, and Papers as the shared portfolio navigation and keep Resume as a standalone new-tab document.
+- **Do** preserve Home, Experience, and Papers as the shared portfolio navigation and keep Resume as a standalone new-tab document.
 - **Do** use the semantic tokens in `public/css/site.css` and verify portfolio color changes in light and dark system themes; keep résumé colors in its inline, always-white system.
 - **Do** begin new reading surfaces with the 680px editorial measure and the established heading/body hierarchy.
 - **Do** give local images intrinsic dimensions, useful alt text, lazy loading below the first viewport, and source context in commit history.
