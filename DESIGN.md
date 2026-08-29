@@ -77,6 +77,11 @@ typography:
     fontSize: "15px"
     fontWeight: 400
     lineHeight: "1.55"
+  resume-meta-mobile:
+    fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+    fontSize: "13px"
+    fontWeight: 400
+    lineHeight: "1.4"
 rounded:
   focus-tight: "2px"
   image: "16px"
@@ -191,7 +196,7 @@ The single family keeps the interface immediate and device-native. Hierarchy com
 - **Label:** `typography.label` is the floating menu's compact, calm control language.
 - **Metadata:** `typography.meta` is for venues and other supporting publication information.
 
-At 720px and below, Home uses 17px/28px with a 28px/34px name, while editorial prose uses 19px/30px and primary editorial headings use 32px/40px. Links use a one-pixel underline with a 0.16em offset; publication titles suppress the underline until hover to keep long lists quiet.
+At 720px and below, Home uses 17px/28px with a 28px/34px name, while editorial prose uses 19px/30px and primary editorial headings use 32px/40px. The standalone résumé uses 15px/1.55 body text and a 13px/1.4 supporting-metadata step on compact screens. Links use a one-pixel underline with a 0.16em offset; publication titles suppress the underline until hover to keep long lists quiet.
 
 **The One Family Rule.** Do not add a display face to manufacture personality. The voice comes from the writing, proportions, images, and motion.
 

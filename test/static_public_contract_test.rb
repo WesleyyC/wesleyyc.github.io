@@ -52,6 +52,20 @@ class StaticPublicContractTest < Minitest::Test
     fragment.to_s.gsub(/<[^>]+>/, " ").gsub(/\s+/, " ").strip
   end
 
+  def relative_luminance(hex_color)
+    channels = hex_color.delete_prefix("#").scan(/../).map { |channel| channel.to_i(16) / 255.0 }
+    linear = channels.map do |channel|
+      channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055)**2.4
+    end
+
+    (0.2126 * linear[0]) + (0.7152 * linear[1]) + (0.0722 * linear[2])
+  end
+
+  def contrast_ratio(foreground, background = "#ffffff")
+    luminances = [relative_luminance(foreground), relative_luminance(background)].sort.reverse
+    (luminances[0] + 0.05) / (luminances[1] + 0.05)
+  end
+
   def test_public_tree_is_a_directly_deployable_site
     required = %w[
       index.html
@@ -157,19 +171,102 @@ class StaticPublicContractTest < Minitest::Test
     assert_match(/\.page-break-before\s*\{\s*padding-top:\s*0\.35in;\s*\}/, html)
   end
 
-  def test_resume_publications_and_services_are_flush_and_markerless
+  def test_resume_detail_rows_share_responsive_indent_and_compact_spacing
     html = public_read("resume/index.html")
 
-    assert_match(/\.pub\s*\{[^}]*margin-bottom:\s*0\.05in;[^}]*\}/m, html)
     refute_match(/\.pub\s*\{[^}]*padding-left:/m, html)
     refute_match(/\.pub::before\s*\{/, html)
 
-    assert_match(/\.bullets\s*\{[^}]*list-style:\s*none;[^}]*padding-left:\s*0;[^}]*\}/m, html)
-    refute_match(/\.bullets li\s*\{[^}]*padding-left:/m, html)
-    refute_match(/\.bullets li::before\s*\{/, html)
+    assert_match(/--resume-detail-indent:\s*0\.15in;/, html)
+    assert_match(/\.role-timeline\s*\{[^}]*padding-left:\s*var\(--resume-detail-indent\);[^}]*\}/m, html)
+    assert_match(/\.edu-details\s*\{[^}]*padding-left:\s*var\(--resume-detail-indent\);[^}]*\}/m, html)
+    assert_match(/\.edu-details\s*\{[^}]*margin-top:\s*1pt;[^}]*\}/m, html)
+    assert_match(/\.pub \.pub-meta\s*\{[^}]*padding-left:\s*var\(--resume-detail-indent\);[^}]*\}/m, html)
+    assert_match(/\.pub \.pub-meta\s*\{[^}]*margin-top:\s*1pt;[^}]*\}/m, html)
+    assert_match(/\.pub \.pub-authors\s*\{[^}]*padding-left:\s*var\(--resume-detail-indent\);[^}]*\}/m, html)
+    assert_match(/\.pub \.pub-authors\s*\{[^}]*margin-top:\s*1pt;[^}]*\}/m, html)
+    assert_equal 2, html.scan('<div class="edu-details">').length
+    assert_equal 15, html.scan('<div class="pub-meta">').length
 
-    assert_match(/\.role-timeline\s*\{[^}]*padding-left:\s*0\.15in;[^}]*\}/m, html)
-    assert_match(/<ul class="bullets service-bullets">/, html)
+    company_spacing = html[/\.company-entry\s*\{[^}]*margin-bottom:\s*([\d.]+)in;/m, 1].to_f
+    education_spacing = html[/\.edu-entry\s*\{[^}]*margin-bottom:\s*([\d.]+)in;/m, 1].to_f
+    publication_spacing = html[/\.pub\s*\{[^}]*margin-bottom:\s*([\d.]+)in;/m, 1].to_f
+    assert_in_delta 0.06, education_spacing, 0.001
+    assert_in_delta education_spacing, publication_spacing, 0.001
+    assert_operator company_spacing, :>, education_spacing
+
+    mobile_styles = html[/@media screen and \(max-width: 760px\)\s*\{(.*?)\/\* --- Print --- \*\//m, 1]
+    refute_nil mobile_styles
+    assert_match(/:root\s*\{[^}]*--resume-detail-indent:\s*8px;[^}]*\}/m, mobile_styles)
+    refute_match(/\.role-timeline,\s*\.edu-details,\s*\.pub \.pub-authors\s*\{\s*padding-left:\s*0;/m,
+                 mobile_styles)
+
+    assert_match(/\.service-list\s*\{[^}]*list-style:\s*none;[^}]*padding-left:\s*0;[^}]*\}/m, html)
+    assert_match(/\.service-entry\s*\{[^}]*margin-bottom:\s*2pt;[^}]*\}/m, html)
+    assert_match(/\.service-detail\s*\{[^}]*padding-left:\s*var\(--resume-detail-indent\);[^}]*\}/m, html)
+    assert_equal 2, html.scan('<li class="service-entry">').length
+  end
+
+  def test_resume_mobile_metadata_remains_legible_without_changing_print_scale
+    html = public_read("resume/index.html")
+    mobile_styles = html[/@media screen and \(max-width: 760px\)\s*\{(.*?)\/\* --- Print --- \*\//m, 1]
+
+    refute_nil mobile_styles
+    assert_match(/:root\s*\{[^}]*--resume-mobile-meta-size:\s*13px;/m, mobile_styles)
+    assert_match(/\.contact,\s*\.entry-date,\s*\.role-step__date,\s*\.pub-note\s*\{[^}]*font-size:\s*var\(--resume-mobile-meta-size\);/m,
+                 mobile_styles)
+    assert_match(/\.pub \.pub-authors\s*\{[^}]*font-size:\s*var\(--resume-mobile-meta-size\);[^}]*line-height:\s*1\.4;/m,
+                 mobile_styles)
+
+    print_styles = html[/@media print\s*\{(.*?)<\/style>/m, 1]
+    refute_nil print_styles
+    refute_match(/\.pub \.pub-authors\s*\{[^}]*font-size:\s*13px;/m, print_styles)
+  end
+
+  def test_resume_brand_text_colors_meet_wcag_contrast_on_white
+    html = public_read("resume/index.html")
+    tokens = %w[
+      --resume-osmo
+      --resume-google-blue
+      --resume-google-red
+      --resume-google-yellow
+      --resume-google-green
+      --resume-deepmind
+      --resume-uiuc
+      --resume-brandeis
+    ]
+
+    tokens.each do |token|
+      colors = html.scan(/#{Regexp.escape(token)}:\s*(#[0-9a-f]{6});/i).flatten
+      assert_equal 2, colors.length, "#{token} must match in screen and print tokens"
+      colors.each do |color|
+        assert_operator contrast_ratio(color), :>=, 4.5,
+                        "#{token} #{color} must meet 4.5:1 against white"
+      end
+    end
+  end
+
+  def test_resume_entries_expose_semantic_headings_and_services_share_detail_hierarchy
+    html = public_read("resume/index.html")
+
+    %w[experience education publications services].each do |section|
+      assert_match(/<section aria-labelledby="#{section}-heading">\s*<h2[^>]*id="#{section}-heading"/m, html)
+    end
+
+    assert_equal 4, html.scan(/<article class="company-entry no-break" data-company-entry="true">/).length
+    assert_equal 2, html.scan(/<article class="edu-entry no-break">/).length
+    assert_equal 15, html.scan(/<article class="pub no-break(?: page-break-before)?">/).length
+    assert_equal 6, html.scan('<h3 class="entry-title">').length
+    assert_equal 15, html.scan('<h3 class="pub-title">').length
+    assert_equal 2, html.scan('<h3 class="service-title">').length
+    assert_equal 2, html.scan('<div class="service-detail">').length
+  end
+
+  def test_resume_project_page_link_is_labeled_by_destination_type
+    html = public_read("resume/index.html")
+
+    assert_match(%r{href="https://smell\.cs\.columbia\.edu/">Project page</a>}, html)
+    refute_match(%r{href="https://smell\.cs\.columbia\.edu/">arXiv</a>}, html)
   end
 
   def test_every_internal_html_reference_resolves_inside_public
@@ -299,12 +396,12 @@ class StaticPublicContractTest < Minitest::Test
   def test_resume_uses_canonical_publication_authors_and_contribution_markers
     resume = public_read("resume/index.html")
 
-    principal_odor_map = resume[/<div class="pub no-break">\s*<div><span class="pub-title">A principal odor map.*?<\/div>\s*<\/div>/m]
+    principal_odor_map = resume[/<article class="pub no-break">\s*<h3 class="pub-title">A principal odor map.*?<\/article>/m]
     assert_includes principal_odor_map, "Emily J. Mayhew*"
     assert_includes principal_odor_map, "Kelsie A. Little"
     refute_includes principal_odor_map, "Emily E Mayhew"
 
-    ecnet = resume[/<div class="pub no-break">\s*<div><span class="pub-title">ECNet is an evolutionary context-integrated deep learning framework for protein engineering.*?<\/div>\s*<\/div>/m]
+    ecnet = resume[/<article class="pub no-break">\s*<h3 class="pub-title">ECNet is an evolutionary context-integrated deep learning framework for protein engineering.*?<\/article>/m]
     assert_includes ecnet, "Yunan Luo*, Guangde Jiang*"
   end
 
@@ -320,7 +417,7 @@ class StaticPublicContractTest < Minitest::Test
     assert_includes CGI.unescapeHTML(text_content(papers_2020)),
                     "ChemRxiv · presented at ACS National Meeting (2021)"
 
-    resume_entry = resume[/<div class="pub no-break">\s*<div><span class="pub-title">#{Regexp.escape(title)}.*?<\/div>\s*<\/div>/m]
+    resume_entry = resume[/<article class="pub no-break">\s*<h3 class="pub-title">#{Regexp.escape(title)}.*?<\/article>/m]
     assert_includes CGI.unescapeHTML(text_content(resume_entry)),
                     "ChemRxiv (2020) · presented at ACS National Meeting (2021)"
   end
@@ -350,7 +447,7 @@ class StaticPublicContractTest < Minitest::Test
   def test_resume_preserves_approved_content_hierarchy_and_brand_details
     html = public_read("resume/index.html")
 
-    assert_equal 15, html.scan(/<div class="pub no-break(?: page-break-before)?">/).length
+    assert_equal 15, html.scan(/<article class="pub no-break(?: page-break-before)?">/).length
     assert_equal 4, html.scan('data-company-entry="true"').length
     assert_equal 10, html.scan('data-role-step="true"').length
     assert_equal 10, html.scan('class="role-step__date"').length
@@ -374,14 +471,23 @@ class StaticPublicContractTest < Minitest::Test
     assert_operator summaries.sum(&:length), :<=, 1_800
     summaries.each { |summary| assert_operator summary.length, :<=, 220 }
 
-    assert_equal 2, html.scan("--resume-osmo: #ff763b;").length
-    %w[#4285f4 #ea4335 #e2a000 #34a853].each { |color| assert_includes html, color }
+    assert_equal 2, html.scan(/--resume-osmo:\s*#[0-9a-f]{6};/i).length
     assert_match(%r{href="https://deepmind\.google/"[^>]*class="deepmind-blue"[^>]*>DeepMind</a>}, html)
-    assert_match(%r{<div class="pub no-break page-break-before">\s*<div><span class="pub-title">Evaluating attribution for graph neural networks</span>}m, html)
+    assert_match(%r{<article class="pub no-break page-break-before">\s*<h3 class="pub-title">Evaluating attribution for graph neural networks</h3>}m, html)
 
     assert_equal "11.5", html[/\.entry-title\s*\{[^}]*font-size:\s*([\d.]+)pt/m, 1]
     assert_equal "700", html[/\.entry-title\s*\{[^}]*font-weight:\s*(\d+)/m, 1]
+    assert_equal "inherit", html[/\.entry-title\s*\{[^}]*line-height:\s*([^;]+);/m, 1]
     assert_equal "600", html[/\.role-step__title\s*\{[^}]*font-weight:\s*(\d+)/m, 1]
+
+    section_size = html[/h2\s*\{[^}]*font-size:\s*([\d.]+)pt/m, 1].to_f
+    entry_size = html[/\.entry-title\s*\{[^}]*font-size:\s*([\d.]+)pt/m, 1].to_f
+    section_weight = html[/h2\s*\{[^}]*font-weight:\s*(\d+)/m, 1].to_i
+    entry_weight = html[/\.entry-title\s*\{[^}]*font-weight:\s*(\d+)/m, 1].to_i
+
+    assert_operator section_size, :>, entry_size
+    assert_operator section_weight, :>=, entry_weight
+    assert_equal "1.2", html[/h2\s*\{[^}]*line-height:\s*([\d.]+)/m, 1]
   end
 
   def test_search_and_agent_discovery_allow_all_crawlers_and_publish_only_canonical_routes
