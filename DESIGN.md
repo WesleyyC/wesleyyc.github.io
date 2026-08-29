@@ -138,7 +138,7 @@ components:
 
 DrQ.ai is an experience-first editorial portfolio, not a résumé-first landing page. The thesis is that Wesley's technical practice can feel personal without losing rigor. The own-world is built from warm off-white and near-black system surfaces, restrained typography, one honest portrait, and translucent navigation with asymmetric spring motion.
 
-The story is sequential but unforced: meet Wesley on Home, understand the work, and verify it through Papers (`/papers/`). Those three routes form primary navigation; the former `/publications/` route redirects to Papers. The `/resume` route deliberately steps outside that shell as a standalone, always-white professional document opened from Home in a new tab.
+The story is sequential but unforced: meet Wesley on Home, understand the work, and verify it through Papers (`/papers/`). Those three routes form primary navigation; the retired `/publications/` route is intentionally absent. The `/resume` route deliberately steps outside that shell as a standalone, always-white professional document opened from Home in a new tab.
 
 The first viewport is the system's clearest expression: a 300px monochrome portrait beside a 456px editorial introduction, with the Menu at bottom-left and a small linked Charlie Deets credit in the bottom-right footer row. This direction is the user-pinned Charlie Deets editorial form recorded by seed `f7a69c56`; the durable contract lives in the opening comment of each portfolio HTML document under `public/`.
 
@@ -150,7 +150,7 @@ The first viewport is the system's clearest expression: a 300px monochrome portr
 - One shared, bottom-left navigation object across the three portfolio routes; the résumé has no portfolio chrome.
 - Native system typography and small, understandable static-HTML/CSS/vanilla-JavaScript primitives.
 
-**Reference baseline.** The canonical runner covers every shipped route, the responsive portrait, navigation, analytics placement, the standalone résumé boundary, content records, résumé print contracts, and a sub-500 KB production budget. The only content image is Wesley's supplied portrait plus its responsive derivatives, documented in `img/profile/PROVENANCE.md`; repository-only records and retired artifacts never ship.
+**Reference baseline.** The canonical runner covers every shipped route, the responsive portrait, navigation, analytics placement, the standalone résumé boundary, content records, résumé print contracts, and a sub-500 KB production budget. The only content image is Wesley's supplied portrait plus its responsive derivatives under `public/img/profile/`; repository-only records and retired artifacts never ship.
 
 ## Colors
 
@@ -268,9 +268,9 @@ Each portfolio HTML document places `.skip-link` before main content. Global `:f
 - **Do** preserve Home, Work, and Papers as the shared portfolio navigation and keep Resume as a standalone new-tab document.
 - **Do** use the semantic tokens in `public/css/site.css` and verify portfolio color changes in light and dark system themes; keep résumé colors in its inline, always-white system.
 - **Do** begin new reading surfaces with the 680px editorial measure and the established heading/body hierarchy.
-- **Do** give local images intrinsic dimensions, useful alt text, lazy loading below the first viewport, and a corresponding provenance entry.
+- **Do** give local images intrinsic dimensions, useful alt text, lazy loading below the first viewport, and source context in commit history.
 - **Do** preserve keyboard operation, focus return, 44px targets, active-page semantics, and reduced-motion behavior when changing navigation.
-- **Do** compare visual changes against the light/dark Home and reading-page screenshots in `.impeccable/review/`.
+- **Do** compare visual changes against fresh light/dark Home and reading-page browser captures.
 
 ### Don't
 

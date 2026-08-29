@@ -57,7 +57,6 @@ class StaticPublicContractTest < Minitest::Test
       index.html
       work/index.html
       papers/index.html
-      publications/index.html
       resume/index.html
       404.html
       css/site.css
@@ -350,12 +349,13 @@ class StaticPublicContractTest < Minitest::Test
     end
   end
 
-  def test_publications_compatibility_page_points_only_to_papers
-    html = public_read("publications/index.html")
-    assert_match(%r{<link\b[^>]*rel=["']canonical["'][^>]*href=["']https://drq\.ai/papers/["']}, html)
-    assert_match(%r{<meta\b[^>]*http-equiv=["']refresh["'][^>]*content=["']0;\s*url=/papers/["']}, html)
-    assert_match(%r{<a\b[^>]*href=["']/papers/["'][^>]*>}, html)
-    refute_includes html, GA_ID
+  def test_retired_publications_route_stays_removed
+    refute PUBLIC_DIR.join("publications").exist?
+
+    PUBLIC_DIR.glob("**/*.{html,css,js,txt,xml}").each do |path|
+      refute_match(%r{(?:href|src)=["']/publications(?:/|["'])}, path.read,
+                   path.relative_path_from(PUBLIC_DIR).to_s)
+    end
   end
 
   def test_github_pages_workflow_deploys_public_without_a_generator

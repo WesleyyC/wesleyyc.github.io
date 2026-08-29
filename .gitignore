@@ -1,17 +1,15 @@
-# Generated site and review output
-_site/
+# Generated and review output
 .impeccable/
 .worktrees/
+output/
+docs/superpowers/
+img/profile/
 
 # Local agent and assistant state
 AGENTS.md
 .agents/
 .claude/
 .superpowers/
-
-# Bundle cache
-vendor/
-.bundle/
 
 # IDE files
 .idea/
@@ -20,9 +18,6 @@ vendor/
 # OS files
 .DS_Store
 Thumbs.db
-
-# Tailored resume exports; the canonical generic PDF remains tracked
-output/pdf/resume_wesley_w_qian_*.pdf
 
 # Temporary files
 *.tmp
