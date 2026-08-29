@@ -262,11 +262,17 @@ class StaticPublicContractTest < Minitest::Test
     assert_equal 2, html.scan('<div class="service-detail">').length
   end
 
-  def test_resume_project_page_link_is_labeled_by_destination_type
-    html = public_read("resume/index.html")
+  def test_project_page_destination_is_labeled_consistently_across_resume_and_papers
+    resume = public_read("resume/index.html")
+    papers = public_read("papers/index.html")
 
-    assert_match(%r{href="https://smell\.cs\.columbia\.edu/">Project page</a>}, html)
-    refute_match(%r{href="https://smell\.cs\.columbia\.edu/">arXiv</a>}, html)
+    assert_match(%r{href="https://smell\.cs\.columbia\.edu/">Project page</a>}, resume)
+    refute_match(%r{href="https://smell\.cs\.columbia\.edu/">arXiv</a>}, resume)
+
+    project = papers[%r{<article class="publication"[^>]*>\s*<a[^>]*href="https://smell\.cs\.columbia\.edu/".*?</article>}m]
+    refute_nil project
+    assert_includes project, '<div class="publication-meta">Project page</div>'
+    refute_includes project, '<div class="publication-meta">arXiv</div>'
   end
 
   def test_every_internal_html_reference_resolves_inside_public
