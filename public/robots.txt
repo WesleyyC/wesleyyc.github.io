@@ -1,22 +1,6 @@
+# This is a public portfolio: allow search engines, AI search and retrieval,
+# and model-development crawlers to access every public page.
 User-agent: *
 Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: Claude-SearchBot
-Allow: /
-
-User-agent: Claude-User
-Allow: /
-
-User-agent: GPTBot
-Disallow: /
-
-User-agent: ClaudeBot
-Disallow: /
 
 Sitemap: https://drq.ai/sitemap.xml

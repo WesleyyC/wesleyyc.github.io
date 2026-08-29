@@ -321,13 +321,11 @@ class StaticPublicContractTest < Minitest::Test
     assert_equal "600", html[/\.role-step__title\s*\{[^}]*font-weight:\s*(\d+)/m, 1]
   end
 
-  def test_search_and_agent_discovery_publish_only_canonical_routes
+  def test_search_and_agent_discovery_allow_all_crawlers_and_publish_only_canonical_routes
     robots = public_read("robots.txt")
-    assert_includes robots, "User-agent: *\nAllow: /"
-    assert_includes robots, "User-agent: OAI-SearchBot\nAllow: /"
-    assert_includes robots, "User-agent: Claude-SearchBot\nAllow: /"
-    assert_includes robots, "User-agent: GPTBot\nDisallow: /"
-    assert_includes robots, "User-agent: ClaudeBot\nDisallow: /"
+    assert_equal ["*"], robots.scan(/^User-agent:\s*(\S+)/).flatten
+    assert_includes robots, "Allow: /"
+    refute_includes robots, "Disallow:"
     assert_includes robots, "Sitemap: https://drq.ai/sitemap.xml"
 
     sitemap = REXML::Document.new(public_read("sitemap.xml"))
