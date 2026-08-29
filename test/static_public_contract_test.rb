@@ -155,6 +155,21 @@ class StaticPublicContractTest < Minitest::Test
     assert_match(/\.page-break-before\s*\{\s*padding-top:\s*0\.35in;\s*\}/, html)
   end
 
+  def test_resume_publications_and_services_are_flush_and_markerless
+    html = public_read("resume/index.html")
+
+    assert_match(/\.pub\s*\{[^}]*margin-bottom:\s*0\.05in;[^}]*\}/m, html)
+    refute_match(/\.pub\s*\{[^}]*padding-left:/m, html)
+    refute_match(/\.pub::before\s*\{/, html)
+
+    assert_match(/\.bullets\s*\{[^}]*list-style:\s*none;[^}]*padding-left:\s*0;[^}]*\}/m, html)
+    refute_match(/\.bullets li\s*\{[^}]*padding-left:/m, html)
+    refute_match(/\.bullets li::before\s*\{/, html)
+
+    assert_match(/\.role-timeline\s*\{[^}]*padding-left:\s*0\.15in;[^}]*\}/m, html)
+    assert_match(/<ul class="bullets service-bullets">/, html)
+  end
+
   def test_every_internal_html_reference_resolves_inside_public
     broken = []
 

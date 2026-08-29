@@ -42,7 +42,6 @@
             --resume-muted: #6e6e6e;
             --resume-paper: #ffffff;
             --resume-hairline: rgba(17, 17, 17, 0.14);
-            --resume-bullet: #8a8a8a;
             --resume-osmo: #ff763b;
             --resume-google-blue: #4285f4;
             --resume-google-red: #ea4335;
@@ -203,26 +202,16 @@
             color: var(--resume-text);
         }
 
-        /* --- Bullet Lists (Experience) --- */
+        /* --- Lists --- */
         .bullets {
             list-style: none;
-            padding-left: 0.15in;
+            padding-left: 0;
             margin-bottom: 0.04in;
         }
 
         .bullets li {
-            position: relative;
-            padding-left: 0.15in;
             margin-bottom: 1pt;
             text-align: left;
-        }
-
-        .bullets li::before {
-            content: "\2022";
-            position: absolute;
-            left: 0;
-            color: var(--resume-bullet);
-            font-size: 8pt;
         }
 
         .bullets a {
@@ -240,17 +229,6 @@
         /* --- Publications --- */
         .pub {
             margin-bottom: 0.05in;
-            padding-left: 0.15in;
-            position: relative;
-        }
-
-        .pub::before {
-            content: "\2022";
-            position: absolute;
-            left: 0;
-            color: var(--resume-bullet);
-            font-size: 8pt;
-            top: 1pt;
         }
 
         .pub .pub-title { color: var(--resume-ink); font-weight: 600; }
@@ -291,14 +269,6 @@
             letter-spacing: normal;
         }
 
-        /* --- Services (grey bullets, match publication indent) --- */
-        .service-bullets { padding-left: 0; }
-        .service-bullets li::before {
-            content: "\2022";
-            color: var(--resume-bullet);
-            font-size: 8pt;
-        }
-
         /* --- Page Break Helpers --- */
         .page-break-before { break-before: page; }
         .no-break { break-inside: avoid; }
@@ -326,7 +296,6 @@
             .header h1 { font-size: 34px; }
             .contact { text-align: left; }
             .entry-date { margin-top: 2px; }
-            .bullets { padding-left: 0; }
             .role-timeline { padding-left: 0; }
             .role-step { display: block; }
             .role-step__date { margin: 1px 0 2px; }
@@ -345,7 +314,6 @@
                 --resume-muted: #666666;
                 --resume-paper: #ffffff;
                 --resume-hairline: rgba(17, 17, 17, 0.14);
-                --resume-bullet: #888888;
                 --resume-osmo: #ff763b;
                 --resume-google-blue: #4285f4;
                 --resume-google-red: #ea4335;
@@ -374,7 +342,6 @@
 
             .page-break-before { padding-top: 0.35in; }
             h2.page-break-before { margin-top: 0; }
-            .pub.page-break-before::before { top: calc(0.35in + 1pt); }
 
         }
     </style>
