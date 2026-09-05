@@ -8,4 +8,7 @@ else
 fi
 
 "$RUBY_BIN" test/static_public_contract_test.rb
+node --check public/js/site.js
+node --check public/js/studio-video.js
 node test/menu_scroll_behavior_test.js
+node --test test/studio_video_behavior_test.js

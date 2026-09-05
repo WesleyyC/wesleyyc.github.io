@@ -4,6 +4,7 @@
     const links = menu?.querySelector("[data-menu-links]");
     const label = menu?.querySelector("[data-menu-label]");
     const menuInner = menu?.querySelector(".floating-menu__inner");
+    if (!menu || !trigger || !links || !label || !menuInner) return;
     let resizeTimer;
     let lastScrollY = window.scrollY;
     let upwardDistance = 0;
@@ -11,6 +12,8 @@
     const mobileMenuQuery = window.matchMedia?.("(max-width: 720px)");
 
     const isMobileMenu = () => mobileMenuQuery?.matches ?? window.innerWidth <= 720;
+    const isNearPageEnd = () => window.scrollY + window.innerHeight
+        >= document.documentElement.scrollHeight - 48;
 
     const randomizeMenuTiming = () => {
         if (!menu) return;
@@ -60,8 +63,16 @@
         closeMenu();
     };
 
-    trigger?.addEventListener("click", () => {
-        setMenu(!menu.classList.contains("is-open"));
+    trigger.addEventListener("click", (event) => {
+        const open = !menu.classList.contains("is-open");
+        setMenu(open);
+        if (open && event.detail === 0) {
+            (links.querySelector('[aria-current="page"]') || links.querySelector("a"))?.focus();
+        }
+    });
+
+    menu.addEventListener("focusout", (event) => {
+        if (!menu.contains(event.relatedTarget)) closeMenu();
     });
 
     links?.addEventListener("click", (event) => {
@@ -74,6 +85,10 @@
     }, true);
     document.addEventListener("keydown", (event) => {
         keyboardInteraction = true;
+        if (event.key === "Tab") {
+            upwardDistance = 0;
+            setScrollHidden(false);
+        }
         if (event.key === "Escape" && menu?.classList.contains("is-open")) {
             closeMenu(true);
         }
@@ -87,6 +102,7 @@
         if (
             menu?.classList.contains("is-open")
             || currentScrollY <= 80
+            || isNearPageEnd()
             || (keyboardInteraction && menu?.contains(document.activeElement))
         ) {
             upwardDistance = 0;
@@ -103,11 +119,15 @@
         }
     }, { passive: true });
 
+    // The HTML navigation remains usable until initialization succeeds.
+    menu.classList.add("is-enhanced");
+    trigger.hidden = false;
+    setMenu(false);
     measureMenu();
 
     window.addEventListener("resize", () => {
         menu?.classList.add("floating-menu--no-motion");
-        if (!isMobileMenu()) setScrollHidden(false);
+        if (!isMobileMenu() || isNearPageEnd()) setScrollHidden(false);
         measureMenu();
         window.clearTimeout(resizeTimer);
         resizeTimer = window.setTimeout(() => menu?.classList.remove("floating-menu--no-motion"), 150);

@@ -48,8 +48,9 @@ const element = (properties = {}) => {
 };
 
 const label = element({ textContent: "Menu" });
-const trigger = element({ focus() {} });
-const links = element();
+const trigger = element({ focus() { fakeDocument.activeElement = trigger; } });
+const currentLink = element({ focus() { fakeDocument.activeElement = currentLink; } });
+const links = element({ querySelector() { return currentLink; } });
 const menuInner = element({ scrollHeight: 198 });
 const menu = element({
     querySelector(selector) {
@@ -61,7 +62,7 @@ const menu = element({
         }[selector];
     },
     contains(candidate) {
-        return [menu, trigger, links, label, menuInner].includes(candidate);
+        return [menu, trigger, links, currentLink, label, menuInner].includes(candidate);
     },
 });
 
@@ -70,6 +71,7 @@ let isMobileViewport = true;
 const fakeWindow = {
     scrollY: 0,
     innerWidth: 390,
+    innerHeight: 844,
     matchMedia() {
         return {
             get matches() {
@@ -89,6 +91,7 @@ const fakeWindow = {
 const documentListeners = new Map();
 const fakeDocument = {
     activeElement: null,
+    documentElement: { scrollHeight: 2408 },
     querySelector(selector) {
         return selector === "[data-floating-menu]" ? menu : null;
     },
@@ -153,4 +156,45 @@ scroll(400);
 assert.equal(menu.classList.contains("scroll-hidden"), false, "desktop keeps the visible menu free of mobile hidden state");
 assert.equal(menu.inert, false, "desktop menu remains interactive after scrolling");
 
-console.log("menu scroll behavior: 14 assertions passed");
+// Keyboard and pointer opening intentionally have different focus behavior.
+fakeDocument.activeElement = trigger;
+trigger.dispatch("click", { detail: 0 });
+assert.equal(fakeDocument.activeElement, currentLink, "keyboard opening focuses the current route");
+assert.equal(links.inert, false, "open links enter the interaction order");
+
+menu.dispatch("focusout", { relatedTarget: trigger });
+assert.equal(menu.classList.contains("is-open"), true, "moving within the menu keeps it open");
+menu.dispatch("focusout", { relatedTarget: null });
+assert.equal(menu.classList.contains("is-open"), false, "leaving the menu dismisses it");
+assert.equal(links.inert, true, "dismissed links leave the interaction order");
+
+fakeDocument.activeElement = trigger;
+trigger.dispatch("click", { detail: 1 });
+assert.equal(fakeDocument.activeElement, trigger, "pointer opening does not move focus");
+fakeDocument.activeElement = currentLink;
+fakeDocument.dispatch("keydown", { key: "Escape" });
+assert.equal(fakeDocument.activeElement, trigger, "Escape returns focus to the trigger");
+assert.equal(menu.classList.contains("is-open"), false, "Escape closes the menu");
+
+// Switching from pointer scrolling to a keyboard must restore the Tab destination.
+isMobileViewport = true;
+fakeDocument.activeElement = null;
+fakeDocument.dispatch("pointerdown");
+scroll(900);
+fakeDocument.dispatch("keydown", { key: "Tab" });
+assert.equal(menu.classList.contains("scroll-hidden"), false, "Tab restores navigation hidden by pointer scrolling");
+assert.equal(menu.inert, false, "Tab restores the menu to the focus order before focus advances");
+
+fakeDocument.dispatch("pointerdown");
+scroll(1000);
+assert.equal(menu.classList.contains("scroll-hidden"), true, "pointer scrolling can hide the menu again");
+scroll(1520);
+assert.equal(menu.classList.contains("scroll-hidden"), false, "finishing a page reveals navigation within 48px of the bottom");
+assert.equal(menu.inert, false, "navigation at the page ending is interactive");
+scroll(1530);
+assert.equal(menu.classList.contains("scroll-hidden"), false, "further downward travel near the bottom keeps navigation visible");
+scroll(1400);
+scroll(1410);
+assert.equal(menu.classList.contains("scroll-hidden"), true, "normal downward hiding resumes away from the page ending");
+
+console.log("menu behavior: 29 assertions passed");

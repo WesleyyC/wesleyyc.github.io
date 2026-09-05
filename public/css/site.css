@@ -168,6 +168,54 @@ img {
 
 .home-intro__links a {
     color: var(--heading);
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+/* Optional film: the native dialog owns focus containment and Escape. */
+html:has(.studio-dialog[open]) { overflow: hidden; }
+.studio-dialog:not([open]) { display: none; }
+
+.studio-dialog {
+    width: min(960px, calc(100vw - 32px), calc((100dvh - 32px) * 16 / 9));
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+    border-radius: 16px;
+    background: #111;
+}
+
+.studio-dialog::backdrop { background: rgba(0, 0, 0, 0.65); }
+
+.studio-dialog__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    cursor: pointer;
+}
+
+.studio-dialog__close:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+
+.studio-dialog video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: calc(100dvh - 32px);
+    background: #111;
+    object-fit: contain;
 }
 
 /* Reading pages */
@@ -190,6 +238,14 @@ img {
 
 .editorial-main h1 {
     margin: 0 0 26px;
+}
+
+.editorial-more { margin: 40px 0 0; }
+
+.editorial-more a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
 }
 
 .editorial-main h2 {
@@ -240,7 +296,6 @@ img {
 
 .publication a {
     display: inline;
-    text-decoration-color: transparent;
 }
 
 .publication a:hover {
@@ -255,7 +310,7 @@ img {
 /* Floating primary menu */
 .floating-menu {
     --menu-open-width: 149px;
-    --menu-open-height: 216px;
+    --menu-open-height: 240px;
     --menu-collapsed-width: 82px;
     --menu-collapsed-height: 48px;
     --menu-width-spring-expand: linear(0, 0.0238 4.43%, 0.0917 8.86%, 0.3441 17.71%, 0.6533 26.57%, 0.9054 35.43%, 1.0638 41.51%, 1.1471 47.59%, 1.1629 50.92%, 1.1595 54.43%, 1.1389 60.69%, 1.0914 67.69%, 1.0452 73.96%, 1.0135 80.22%, 0.9975 87.04%, 0.9953 93.85%, 1);
@@ -316,7 +371,7 @@ img {
     display: flex;
     width: var(--menu-open-width);
     flex-direction: column;
-    padding: 6px 22px;
+    padding: 2px 22px;
     transform: translateX(-4px);
     transition: transform var(--menu-width-duration-active) var(--menu-width-spring-active), bottom var(--menu-height-duration-active) var(--menu-height-spring-active);
 }
@@ -334,7 +389,7 @@ img {
 .floating-menu__trigger {
     display: block;
     width: 100%;
-    padding: 4px 0;
+    padding: 8px 0;
     color: var(--menu-link);
     font: inherit;
     font-size: 17px;
@@ -392,12 +447,20 @@ img {
 }
 
 .floating-menu__trigger:focus-visible {
+    /* The shell owns the ring so the collapsed pill cannot clip it. */
     outline: none;
     color: var(--menu-link-active);
 }
 
+.floating-menu:has(.floating-menu__trigger:focus-visible) {
+    outline: 2px solid var(--heading);
+    outline-offset: 4px;
+}
+
 .floating-menu__links a:focus-visible {
-    outline: none;
+    outline: 2px solid var(--heading);
+    outline-offset: -2px;
+    border-radius: 6px;
     color: var(--menu-link-active);
     text-decoration: underline;
     text-decoration-thickness: 2px;
@@ -506,6 +569,11 @@ img {
         margin-top: 48px;
     }
 
+    .publication-year h2 {
+        font-size: 19px;
+        line-height: 32px;
+    }
+
     .floating-menu {
         right: auto;
         bottom: max(20px, env(safe-area-inset-bottom));
@@ -555,6 +623,54 @@ img {
     }
 
 }
+
+/* Keep identity and introduction together on short, wide screens. */
+@media (min-width: 600px) and (max-width: 880px) and (max-height: 500px) {
+    .home-main { padding-top: 32px; padding-bottom: 48px; }
+    .home-intro { flex-direction: row; gap: 28px; }
+    .home-intro__portrait-frame { flex: 0 0 144px; width: 144px; height: 144px; }
+    .home-intro__copy { flex: 1; min-width: 0; }
+}
+
+/* Progressive enhancement: ordinary links survive blocked or failed scripts. */
+.floating-menu:not(.is-enhanced) {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0 24px 32px;
+    overflow: visible;
+    contain: none;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    transform: none;
+    transition: none;
+}
+
+.floating-menu:not(.is-enhanced) .floating-menu__inner {
+    position: static;
+    width: auto;
+    padding: 0;
+    transform: none;
+}
+
+.floating-menu:not(.is-enhanced) .floating-menu__links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 24px;
+}
+
+.floating-menu:not(.is-enhanced) .floating-menu__links a {
+    width: auto;
+    opacity: 1;
+    pointer-events: auto;
+    text-decoration: underline;
+}
+
+.floating-menu:not(.is-enhanced) .floating-menu__divider,
+.floating-menu:not(.is-enhanced) .floating-menu__trigger { display: none; }
 
 @media (prefers-color-scheme: dark) {
     :root {

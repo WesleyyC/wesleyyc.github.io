@@ -7,10 +7,10 @@
     <meta name="description" content="Experience, education, publications, and service by Wesley Wei Qian.">
     <meta name="color-scheme" content="light">
     <meta name="theme-color" content="#ffffff">
-    <link rel="canonical" href="https://drq.ai/resume">
+    <link rel="canonical" href="https://drq.ai/resume/">
     <meta property="og:title" content="Resume — Wesley Wei Qian">
     <meta property="og:description" content="Experience, education, publications, and service by Wesley Wei Qian.">
-    <meta property="og:url" content="https://drq.ai/resume">
+    <meta property="og:url" content="https://drq.ai/resume/">
     <meta property="og:type" content="profile">
     <meta property="og:image" content="https://drq.ai/img/profile/wesley-home.jpg">
     <meta name="twitter:card" content="summary_large_image">
@@ -20,20 +20,24 @@
     <link rel="icon" type="image/svg+xml" href="/img/logo/favicon.svg">
     <link rel="alternate icon" type="image/x-icon" href="/favicon.ico">
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfilePage",
-      "@id": "https://drq.ai/resume#page",
-      "url": "https://drq.ai/resume",
-      "name": "Resume — Wesley Wei Qian",
-      "mainEntity": {
-        "@type": "Person",
-        "@id": "https://drq.ai/#wesley",
-        "name": "Wesley Wei Qian",
-        "url": "https://drq.ai/"
-      }
-    }
-    </script>
+{
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "https://drq.ai/resume/#page",
+  "url": "https://drq.ai/resume/",
+  "name": "Resume — Wesley Wei Qian",
+  "mainEntity": {
+    "@type": "Person",
+    "@id": "https://drq.ai/#wesley",
+    "name": "Wesley Wei Qian",
+    "url": "https://drq.ai/",
+    "alternateName": [
+      "Wesley W. Qian",
+      "Wesley Qian"
+    ]
+  }
+}
+</script>
     <style>
         /* --- Design Tokens --- */
         :root {
@@ -296,14 +300,35 @@
         .page-break-before { break-before: page; }
         .no-break { break-inside: avoid; }
 
+        .resume-tools { display: none; }
+
+        /* Screen reading is independent of the compact print typography. */
+        @media screen {
+            body.resume-page { font-size: 16px; line-height: 1.55; }
+            .header { gap: 24px; margin-bottom: 24px; }
+            .header h1 { font-size: 36px; line-height: 1.1; }
+            .contact, .entry-date, .role-step__date, .pub-note,
+            .pub .pub-authors { font-size: 14px; }
+            .pub .pub-authors { line-height: 1.5; }
+            h2 { font-size: 22px; margin-top: 36px; margin-bottom: 16px; scroll-margin-top: 24px; }
+            .entry-title { font-size: 18px; }
+            .company-entry, .edu-entry, .pub { margin-bottom: 24px; }
+            .role-timeline { gap: 12px; }
+            .service-entry { margin-bottom: 12px; }
+            .resume-tools { display: block; margin-bottom: 28px; font-size: 14px; }
+            .resume-tools nav { display: flex; flex-wrap: wrap; gap: 0 20px; }
+            .resume-tools a { display: inline-flex; align-items: center; min-height: 44px; color: var(--resume-ink); text-underline-offset: 3px; }
+            .resume-tools p { color: var(--resume-muted); margin-top: 8px; }
+        }
+
     @media screen and (max-width: 760px) {
             :root {
                 --resume-detail-indent: 8px;
-                --resume-mobile-meta-size: 13px;
+                --resume-mobile-meta-size: 14px;
             }
 
             body.resume-page {
-                font-size: 15px;
+                font-size: 16px;
                 line-height: 1.55;
             }
 
@@ -407,6 +432,16 @@
             </div>
         </header>
 
+        <div class="resume-tools">
+            <nav aria-label="Resume sections">
+                <a href="#experience-heading">Experience</a>
+                <a href="#education-heading">Education</a>
+                <a href="#publications-heading">Publications</a>
+                <a href="#services-heading">Services</a>
+            </nav>
+            <p>Use your browser’s Print command to save a PDF.</p>
+        </div>
+
         <section aria-labelledby="experience-heading">
         <h2 id="experience-heading">Experience</h2>
 
@@ -415,22 +450,22 @@
                 <h3 class="entry-title"><a class="osmo-red" target="_blank" rel="noopener noreferrer" href="https://www.osmo.ai/">Osmo</a></h3>
             </div>
             <div class="role-timeline">
-                <div class="role-step" data-role-step="true">
+                <div class="role-step" data-role-step="true" id="osmo-vp-engineering-research">
                     <div class="role-step__title">VP, Engineering &amp; Research</div>
                     <div class="role-step__date">Jan 2026 - Present</div>
                     <div class="role-step__summary">We built a factory with many robots and turned scent prompting into a fragrance business, powered by software and AI from my team.</div>
                 </div>
-                <div class="role-step" data-role-step="true">
+                <div class="role-step" data-role-step="true" id="osmo-director-applied-research">
                     <div class="role-step__title">Director, Applied Research</div>
                     <div class="role-step__date">Jan 2025 - Jan 2026</div>
                     <div class="role-step__summary">I worked with machine learning researchers and human-data experts to land our first multimillion-dollar enterprise deal with one of the world's largest CPG companies.</div>
                 </div>
-                <div class="role-step" data-role-step="true">
+                <div class="role-step" data-role-step="true" id="osmo-manager-machine-learning">
                     <div class="role-step__title">Manager, Machine Learning</div>
                     <div class="role-step__date">Jan 2024 - Jan 2025</div>
                     <div class="role-step__summary">2024 was a wild year for new capabilities: I invented scent prompting, taught an LLM to write fragrance formulas, and worked with researchers and chemists to teleport the scent of a plum from headspace GC-MS.</div>
                 </div>
-                <div class="role-step" data-role-step="true">
+                <div class="role-step" data-role-step="true" id="osmo-founding-research-engineer">
                     <div class="role-step__title">Founding Research Engineer</div>
                     <div class="role-step__date">Sep 2022 - Jan 2024</div>
                     <div class="role-step__summary">After spinning Osmo out of Google, I rebuilt our ML stack with PyTorch, PyG, W&amp;B, and GCP and developed a GNN that powered ingredient discovery. I learned rating data is a scam, but a fixable one.</div>
@@ -443,17 +478,17 @@
                 <h3 class="entry-title"><a target="_blank" rel="noopener noreferrer" href="https://research.google/"><span class="google-g">G</span><span class="google-o1">o</span><span class="google-o2">o</span><span class="google-g2">g</span><span class="google-l">l</span><span class="google-e">e</span></a></h3>
             </div>
             <div class="role-timeline">
-                <div class="role-step" data-role-step="true">
+                <div class="role-step" data-role-step="true" id="google-olfaction">
                     <div class="role-step__title">Student Researcher, Olfaction</div>
                     <div class="role-step__date">Jun 2020 - Aug 2022</div>
                     <div class="role-step__summary">I decided that finding &ldquo;drugs&rdquo; for the human nose sounded cool, so I joined Google Brain to discover new smells, explore olfaction across the animal kingdom, and find bad-smelling molecules for mosquitoes.</div>
                 </div>
-                <div class="role-step" data-role-step="true">
+                <div class="role-step" data-role-step="true" id="google-genomics">
                     <div class="role-step__title">Student Researcher, Genomics</div>
                     <div class="role-step__date">May 2019 - May 2020</div>
                     <div class="role-step__summary">I worked with god-tier software engineers to build a genomics algorithm that ran structural variant calling across many CPUs in parallel, 100x faster than the state of the art.</div>
                 </div>
-                <div class="role-step" data-role-step="true">
+                <div class="role-step" data-role-step="true" id="google-cellular-imaging">
                     <div class="role-step__title">Research Intern, Cellular Imaging</div>
                     <div class="role-step__date">May 2018 - Aug 2018</div>
                     <div class="role-step__summary">Instead of translating a photo into a Van Gogh, I built a GAN to teleport high-content cell imaging between labs and seasons, removing batch effects from the data.</div>
@@ -466,7 +501,7 @@
                 <h3 class="entry-title"><a target="_blank" rel="noopener noreferrer" href="https://deepmind.google/" class="deepmind-blue">DeepMind</a></h3>
             </div>
             <div class="role-timeline">
-                <div class="role-step" data-role-step="true">
+                <div class="role-step" data-role-step="true" id="deepmind-intern">
                     <div class="role-step__title">Intern</div>
                     <div class="role-step__date">Sep 2021 - Dec 2021</div>
                     <div class="role-step__summary">I worked with the AlphaFold team to translate structural representations into functional predictions, the closest I have come to working with Nobel laureates.</div>
@@ -479,12 +514,12 @@
                 <h3 class="entry-title"><a target="_blank" rel="noopener noreferrer" href="https://www.uber.com/en-US/blog/engineering/">Uber</a></h3>
             </div>
             <div class="role-timeline">
-                <div class="role-step" data-role-step="true">
+                <div class="role-step" data-role-step="true" id="uber-machine-learning">
                     <div class="role-step__title">Software Engineer Intern, Machine Learning</div>
                     <div class="role-step__date">May 2017 - Aug 2017</div>
                     <div class="role-step__summary">I built a sequence model that fused sensor data, gyroscope, GPS, and Wi-Fi to infer Uber Eats delivery events and won first place at Uber's first internal ML poster session.</div>
                 </div>
-                <div class="role-step" data-role-step="true">
+                <div class="role-step" data-role-step="true" id="uber-mobile">
                     <div class="role-step__title">Software Engineering Intern, Mobile</div>
                     <div class="role-step__date">May 2016 - Aug 2016</div>
                     <div class="role-step__summary">I built a web forensics tool that synchronized mobile UI test logs with video, then posted error logs and screenshots to failing code changes. I should have learned more about product management.</div>
@@ -523,91 +558,91 @@
         <section aria-labelledby="publications-heading">
         <h2 id="publications-heading" class="page-break-before">Publications <span class="pub-note">(*equal contribution)</span></h2>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="foundation-models-chemical-space">
             <h3 class="pub-title">Foundation models for discovery and exploration in chemical space</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://arxiv.org/abs/2510.18900">arXiv</a></span> <span class="pub-year">(2025)</span></div>
             <div class="pub-authors">Alexius Wadell, Anoushka Bhutani, Victor Azumah, Austin R. Ellis-Mohr, Andrew J. Stier, Kareem Hegazy, Alexander Brace, Hancheng Zhao, Celia Kelly, Anuj K. Nayak, Yuhan Chen, Dimitrios Simatos, Hongyi Lin, Murali Emani, Venkatram Vishwanath, Kevin Gering, Melisa Alkan, Tom Gibbs, Jack Wells, <span class="me">Wesley W. Qian</span>, Richard C. Gerkin, Benjamin Amorelli, Alexander B. Wiltschko, Lav R. Varshney, Bharath Ramsundar, Karthik Duraisamy, Michael W. Mahoney, Arvind Ramanathan, Venkatasubramanian Viswanathan</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="mosquito-repellent-discovery">
             <h3 class="pub-title">A deep learning and digital archaeology approach for mosquito repellent discovery</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://academic.oup.com/chemse/article/doi/10.1093/chemse/bjaf021/8180865">Chemical Senses</a></span> <span class="pub-year">(2025)</span></div>
             <div class="pub-authors">Jennifer N. Wei*, Carlos Ruiz*, Marnix Vlot*, Benjamin Sanchez-Lengeling, Brian K. Lee, Luuk Berning, Martijn W. Vos, Rob WM Henderson, <span class="me">Wesley W. Qian</span>, Jacob N. Sanders, D. Michael Ando, Kurt M. Groetsch, Richard C. Gerkin, Alexander B. Wiltschko, Jeffrey A. Riffell, Koen J. Dechering</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="new-york-smells">
             <h3 class="pub-title">New York Smells: a large multimodal dataset for olfaction</h3>
-            <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://smell.cs.columbia.edu/">Project page</a></span> <span class="pub-year">(2025)</span></div>
+            <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://arxiv.org/abs/2511.20544">arXiv</a> · <a target="_blank" rel="noopener noreferrer" href="https://smell.cs.columbia.edu/">project page</a></span> <span class="pub-year">(2025)</span></div>
             <div class="pub-authors">Ege Ozguroglu, Junbang Liang, Ruoshi Liu, Mia Chiquier, Michael DeTienne, <span class="me">Wesley W. Qian</span>, Alexandra Horowitz, Andrew Owens, Carl Vondrick</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="pathogenic-variant-mislocalization">
             <h3 class="pub-title">Pervasive mislocalization of pathogenic coding variants underlying human disorders</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://www.cell.com/cell/fulltext/S0092-8674(24)01021-3">Cell</a></span> <span class="pub-year">(2024)</span></div>
             <div class="pub-authors">Jessica Lacoste, Marzieh Haghighi, Shahan Haider, Chloe Reno, Zhen-Yuan Lin, Dmitri Segal, <span class="me">Wesley W. Qian</span>, Xueting Xiong, Tanisha Teelucksingh, Esteban Miglietta, Hamdah Shafqat-Abbasi, Pearl V. Ryder, Rebecca Senft, Beth A. Cimini, Ryan R. Murray, Chantal Nyirakanani, Tong Hao, Gregory G. McClain, Frederick P. Roth, Michael A. Calderwood, David E. Hill, Marc Vidal, S Stephen Yi, Nidhi Sahni, Jian Peng, Anne-Claude Gingras, Shantanu Singh, Anne E. Carpenter, Mikko Taipale</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="principal-odor-map">
             <h3 class="pub-title">A principal odor map unifies diverse tasks in human olfactory perception</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://www.science.org/doi/10.1126/science.ade4401">Science</a></span> <span class="pub-year">(2023)</span></div>
             <div class="pub-authors">Brian K. Lee*, Emily J. Mayhew*, Benjamin Sanchez-Lengeling, Jennifer N. Wei, <span class="me">Wesley W. Qian</span>, Kelsie A. Little, Matthew Andres, Britney B. Nguyen, Theresa Moloy, Jacob Yasonik, Jane K. Parker, Richard C. Gerkin, Joel D. Mainland, Alexander B. Wiltschko</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="target-aware-molecule-generation">
             <h3 class="pub-title">3D equivariant diffusion for target-aware molecule generation and affinity prediction</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://iclr.cc/virtual/2023/poster/11022">ICLR</a></span> <span class="pub-year">(2023)</span></div>
             <div class="pub-authors">Jiaqi Guan*, <span class="me">Wesley W. Qian</span>*, Xingang Peng, Yufeng Su, Jian Peng, Jianzhu Ma</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="olfactory-representations">
             <h3 class="pub-title">Metabolic activity organizes olfactory representations</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://elifesciences.org/articles/82502">eLife</a></span> <span class="pub-year">(2023)</span></div>
             <div class="pub-authors"><span class="me">Wesley W. Qian</span>, Jennifer N. Wei, Benjamin Sanchez-Lengeling, Brian K. Lee, Yunan Luo, Marnix Vlot, Koen Dechering, Jian Peng, Richard C. Gerkin, Alexander B. Wiltschko</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="14-3-3-proteins">
             <h3 class="pub-title">A central chaperone-like role for 14-3-3 proteins in human cells</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://www.cell.com/molecular-cell/fulltext/S1097-2765(23)00121-1">Molecular Cell</a></span> <span class="pub-year">(2023)</span></div>
             <div class="pub-authors">Dmitri Segal, Stefan Maier, Giovanni J Mastromarco, <span class="me">Wesley W. Qian</span>, Syed Nabeel-Shah, Hyunmin Lee, Gaelen Moore, Jessica Lacoste, Brett Larsen, Zhen-Yuan Lin, Abeeshan Selvabaskaran, Karen Liu, Craig Smibert, Zhaolei Zhang, Jack Greenblatt, Jian Peng, Hyun O Lee, Anne-Claude Gingras, Mikko Taipale</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="molecular-conformation-optimization">
             <h3 class="pub-title">Energy-inspired molecular conformation optimization</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://iclr.cc/virtual/2022/poster/6692">ICLR</a></span> <span class="pub-year">(2022)</span></div>
             <div class="pub-authors">Jiaqi Guan*, <span class="me">Wesley W. Qian</span>*, Qiang Liu, Wei-Ying Ma, Jianzhu Ma, Jian Peng</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="ecnet">
             <h3 class="pub-title">ECNet is an evolutionary context-integrated deep learning framework for protein engineering</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://www.nature.com/articles/s41467-021-25976-8">Nature Communications</a></span> <span class="pub-year">(2021)</span></div>
             <div class="pub-authors">Yunan Luo*, Guangde Jiang*, Tianhao Yu, Yang Liu, Lam Vo, Hantian Ding, Yufeng Su, <span class="me">Wesley W. Qian</span>, Huimin Zhao, Jian Peng</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="hsp70-network">
             <h3 class="pub-title">Comprehensive interactome profiling of the human Hsp70 network highlights functional differentiation of J domains</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://www.cell.com/molecular-cell/fulltext/S1097-2765(21)00317-8">Molecular Cell</a></span> <span class="pub-year">(2021)</span></div>
             <div class="pub-authors">Benjamin L. Piette, Nader Alerasool, Zhen-Yuan Lin, Jessica Lacoste, Mandy Hiu Yi Lam, <span class="me">Wesley W. Qian</span>, Stephanie Tran, Brett Larsen, Eric Campos, Jian Peng, Anne-Claude Gingras, Mikko Taipale</div>
         </article>
 
-        <article class="pub no-break page-break-before">
+        <article class="pub no-break page-break-before" id="graph-neural-network-attribution">
             <h3 class="pub-title">Evaluating attribution for graph neural networks</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://papers.nips.cc/paper/2020/hash/417fbbf2e9d5a28a855a11894b2e795a-Abstract.html">NeurIPS</a></span> <span class="pub-year">(2020)</span></div>
             <div class="pub-authors">Benjamin Sanchez-Lengeling, Jennifer Wei, Brian Lee, Emily Reif, Peter Wang, <span class="me">Wesley W. Qian</span>, Kevin McCloskey, Lucy Colwell, Alexander B. Wiltschko</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="batch-equalization">
             <h3 class="pub-title">Batch equalization with a generative adversarial network</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://academic.oup.com/bioinformatics/article/36/Supplement_2/i875/6055901">Bioinformatics</a></span> <span class="pub-year">(2020)</span></div>
             <div class="pub-authors"><span class="me">Wesley W. Qian</span>, Cassandra Xia, Subhashini Venugopalan, Arunachalam Narayanaswamy, Michelle Dimon, George W. Ashdown, Jake Baum, Jian Peng, D Michael Ando</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="deep-sequence-protein-engineering">
             <h3 class="pub-title">Evolutionary context-integrated deep sequence modeling for protein engineering</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://dl.acm.org/doi/10.1007/978-3-030-45257-5_30">RECOMB</a></span> <span class="pub-year">(2020)</span></div>
             <div class="pub-authors">Yunan Luo, Lam Vo, Hantian Ding, Yufeng Su, Yang Liu, <span class="me">Wesley W. Qian</span>, Huimin Zhao, Jian Peng</div>
         </article>
 
-        <article class="pub no-break">
+        <article class="pub no-break" id="organic-reactivity-prediction">
             <h3 class="pub-title">Integrating deep neural networks and symbolic inference for organic reactivity prediction</h3>
             <div class="pub-meta"><span class="pub-venue"><a target="_blank" rel="noopener noreferrer" href="https://chemrxiv.org/doi/full/10.26434/chemrxiv.11659563.v1">ChemRxiv</a></span> <span class="pub-year">(2020)</span> · <span class="pub-venue">presented at ACS National Meeting (2021)</span></div>
             <div class="pub-authors"><span class="me">Wesley W. Qian</span>*, Nathan T. Russell*, Claire L. W. Simons, Yunan Luo, Martin D. Burke, Jian Peng</div>

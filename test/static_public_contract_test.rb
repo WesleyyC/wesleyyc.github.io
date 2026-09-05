@@ -13,16 +13,16 @@ class StaticPublicContractTest < Minitest::Test
   GA_ID = "G-Y2HPVMHTRR"
 
   PORTFOLIO_ROUTES = {
-    "index.html" => ["Wesley Wei Qian", "https://drq.ai/", "Home"],
-    "experience/index.html" => ["Experience — Wesley Qian", "https://drq.ai/experience/", "Experience"],
-    "papers/index.html" => ["Papers — Wesley Qian", "https://drq.ai/papers/", "Papers"]
+    "index.html" => ["Wesley Wei Qian — AI, Engineering &amp; Research at Osmo", "https://drq.ai/", "Home"],
+    "experience/index.html" => ["Experience — Wesley Wei Qian", "https://drq.ai/experience/", "Experience"],
+    "papers/index.html" => ["Papers — Wesley Wei Qian", "https://drq.ai/papers/", "Papers"]
   }.freeze
 
   CANONICAL_SITEMAP_URLS = %w[
     https://drq.ai/
     https://drq.ai/experience/
     https://drq.ai/papers/
-    https://drq.ai/resume
+    https://drq.ai/resume/
   ].freeze
 
   def read(relative_path)
@@ -90,9 +90,28 @@ class StaticPublicContractTest < Minitest::Test
     assert_empty missing, "Missing public artifacts: #{missing.join(', ')}"
     refute PUBLIC_DIR.join("work").exist?, "Retired /work/ route must not ship"
 
-    shipped_bytes = PUBLIC_DIR.glob("**/*").select(&:file?).sum(&:size)
-    assert_operator shipped_bytes, :<, 500_000,
-                    "Static public artifact is #{shipped_bytes} bytes; expected less than 500 KB"
+    files = PUBLIC_DIR.glob("**/*").select(&:file?)
+    optional_video = PUBLIC_DIR.join("media/osmo-studio-launch.mp4")
+    core_bytes = files.reject { |path| path == optional_video }.sum(&:size)
+    assert_operator core_bytes, :<, 500_000,
+                    "Core site is #{core_bytes} bytes; expected less than 500 KB"
+    assert_operator files.sum(&:size), :<, 2_000_000,
+                    "Site plus the on-demand film must stay below 2 MB"
+  end
+
+  def test_studio_film_is_available_on_demand_with_a_direct_link_fallback
+    html = public_read("index.html")
+    assert PUBLIC_DIR.join("media/osmo-studio-launch.mp4").file?, "The Studio link must resolve to a shipped film"
+    link = html[/<a\b[^>]*data-studio-video[^>]*>/]
+    refute_nil link, "Home must expose the optional Studio film"
+    assert_match(%r{href="/media/osmo-studio-launch\.mp4"}, link)
+    video = html[/<video\b[^>]*>/]
+    refute_nil video
+    refute_match(/\bsrc=|\bautoplay\b/, video, "The film must not load or play before activation")
+    assert_match(/\bpreload="none"/, video)
+    assert_match(/\bcontrols\b/, video)
+    assert_match(/\bplaysinline\b/, video)
+    refute_match(%r{<link\b[^>]*href="[^"]+\.mp4"}, head(html))
   end
 
   def test_portfolio_pages_ship_complete_metadata_navigation_and_analytics
@@ -143,12 +162,53 @@ class StaticPublicContractTest < Minitest::Test
     assert_equal 15, papers.fetch("itemListElement").length
   end
 
+  def test_navigation_is_available_before_javascript_initializes
+    PORTFOLIO_ROUTES.each_key do |route|
+      html = public_read(route)
+      links = html[/<div\b[^>]*data-menu-links[^>]*>/]
+      refute_nil links, route
+      refute_match(/\binert\b|aria-hidden=["']true["']/, links, route)
+      assert_match(/<button\b[^>]*\bhidden\b[^>]*data-menu-trigger/, html, route)
+    end
+  end
+
+  def test_paper_urls_and_titles_match_the_resume_and_structured_data
+    papers = public_read("papers/index.html")
+    visible = papers.scan(/<a\b[^>]*data-paper-link="true"[^>]*href="([^"]+)"[^>]*>(.*?)<\/a>/m)
+                    .map { |url, title| [CGI.unescapeHTML(text_content(title)), CGI.unescapeHTML(url)] }.sort
+    records = structured_data(papers).first.fetch("mainEntity").fetch("itemListElement")
+    assert_equal visible, records.map { |entry| entry.fetch("item").values_at("name", "url") }.sort
+    records.each do |entry|
+      assert_equal PERSON_ID, entry.fetch("item").fetch("author").fetch("@id")
+      fragment = entry.fetch("item").fetch("@id").delete_prefix("https://drq.ai/papers/#")
+      assert_equal 1, papers.scan(/\bid="#{Regexp.escape(fragment)}"/).length
+      assert_equal 1, public_read("resume/index.html").scan(/\bid="#{Regexp.escape(fragment)}"/).length
+    end
+    resume = public_read("resume/index.html")
+    resume_records = resume.scan(/<article class="pub no-break(?: page-break-before)?" id="[^"]+">(.*?)<\/article>/m).flatten.map do |entry|
+      title = CGI.unescapeHTML(text_content(entry[/<h3 class="pub-title">(.*?)<\/h3>/m, 1]))
+      venue = entry[/<span class="pub-venue">(.*?)<\/span>/m, 1].to_s
+      url = CGI.unescapeHTML(venue[/href="([^"]+)"/, 1].to_s)
+      [title, url]
+    end
+    assert_equal visible, resume_records.sort
+  end
+
+  def test_resume_section_links_have_destinations
+    html = public_read("resume/index.html")
+    nav = html[/<nav aria-label="Resume sections">(.*?)<\/nav>/m, 1]
+    refute_nil nav
+    targets = nav.scan(/href="#([^"]+)"/).flatten
+    assert_equal %w[experience-heading education-heading publications-heading services-heading], targets
+    targets.each { |id| assert_equal 1, html.scan(/\bid="#{Regexp.escape(id)}"/).length }
+  end
+
   def test_resume_is_standalone_white_metadata_rich_and_untracked
     html = public_read("resume/index.html")
     page_head = head(html)
 
     assert_includes page_head, "<title>Resume — Wesley Wei Qian</title>"
-    assert_match(%r{<link\b[^>]*rel=["']canonical["'][^>]*href=["']https://drq\.ai/resume["']}, page_head)
+    assert_match(%r{<link\b[^>]*rel=["']canonical["'][^>]*href=["']https://drq\.ai/resume/["']}, page_head)
     assert_match(%r{<meta\b[^>]*property=["']og:title["'][^>]*content=["']Resume — Wesley Wei Qian["']}, page_head)
     assert_match(%r{<meta\b[^>]*name=["']twitter:card["'][^>]*content=["']summary_large_image["']}, page_head)
     assert_equal "ProfilePage", structured_data(html).first.fetch("@type")
@@ -212,7 +272,7 @@ class StaticPublicContractTest < Minitest::Test
     mobile_styles = html[/@media screen and \(max-width: 760px\)\s*\{(.*?)\/\* --- Print --- \*\//m, 1]
 
     refute_nil mobile_styles
-    assert_match(/:root\s*\{[^}]*--resume-mobile-meta-size:\s*13px;/m, mobile_styles)
+    assert_match(/:root\s*\{[^}]*--resume-mobile-meta-size:\s*14px;/m, mobile_styles)
     assert_match(/\.contact,\s*\.entry-date,\s*\.role-step__date,\s*\.pub-note\s*\{[^}]*font-size:\s*var\(--resume-mobile-meta-size\);/m,
                  mobile_styles)
     assert_match(/\.pub \.pub-authors\s*\{[^}]*font-size:\s*var\(--resume-mobile-meta-size\);[^}]*line-height:\s*1\.4;/m,
@@ -255,24 +315,41 @@ class StaticPublicContractTest < Minitest::Test
 
     assert_equal 4, html.scan(/<article class="company-entry no-break" data-company-entry="true">/).length
     assert_equal 2, html.scan(/<article class="edu-entry no-break">/).length
-    assert_equal 15, html.scan(/<article class="pub no-break(?: page-break-before)?">/).length
+    assert_equal 15, html.scan(/<article class="pub no-break(?: page-break-before)?" id="[^"]+">/).length
     assert_equal 6, html.scan('<h3 class="entry-title">').length
     assert_equal 15, html.scan('<h3 class="pub-title">').length
     assert_equal 2, html.scan('<h3 class="service-title">').length
     assert_equal 2, html.scan('<div class="service-detail">').length
   end
 
-  def test_project_page_destination_is_labeled_consistently_across_resume_and_papers
-    resume = public_read("resume/index.html")
-    papers = public_read("papers/index.html")
+  def test_new_york_smells_lists_arxiv_before_the_project_page
+    expected = [
+      ["https://arxiv.org/abs/2511.20544", "arXiv"],
+      ["https://smell.cs.columbia.edu/", "project page"]
+    ]
 
-    assert_match(%r{href="https://smell\.cs\.columbia\.edu/">Project page</a>}, resume)
-    refute_match(%r{href="https://smell\.cs\.columbia\.edu/">arXiv</a>}, resume)
+    %w[papers/index.html resume/index.html].each do |path|
+      entry = public_read(path)[%r{<article\b[^>]*id="new-york-smells"[^>]*>(.*?)</article>}m, 1]
+      refute_nil entry, "Missing New York Smells in #{path}"
+      metadata = entry[%r{<div class="(?:publication-meta|pub-meta)">(.*?)</div>}m, 1]
+      refute_nil metadata, "Missing New York Smells metadata in #{path}"
+      links = metadata.scan(%r{<a\b[^>]*href="([^"]+)"[^>]*>(.*?)</a>}m)
+      assert_equal expected, links, "New York Smells link order in #{path}"
+    end
+  end
 
-    project = papers[%r{<article class="publication"[^>]*>\s*<a[^>]*href="https://smell\.cs\.columbia\.edu/".*?</article>}m]
-    refute_nil project
-    assert_includes project, '<div class="publication-meta">Project page</div>'
-    refute_includes project, '<div class="publication-meta">arXiv</div>'
+  def test_published_assets_do_not_link_to_a_local_server
+    assert_equal "drq.ai", public_read("CNAME").strip
+    local_urls = []
+    local_host = %r{(?:https?:)?//(?:(?:[\w-]+\.)*localhost\.?|127(?:\.\d{1,3}){3}|\[::1\]|0\.0\.0\.0)(?=[:/?#\s"'<>]|$)}i
+
+    PUBLIC_DIR.glob("**/*.{html,css,js,txt,xml,svg,json}").each do |file|
+      file.read.scan(local_host).each do |url|
+        local_urls << "#{file.relative_path_from(PUBLIC_DIR)}: #{url}"
+      end
+    end
+
+    assert_empty local_urls, "Local URLs would ship to drq.ai: #{local_urls.join(', ')}"
   end
 
   def test_every_internal_html_reference_resolves_inside_public
@@ -297,14 +374,13 @@ class StaticPublicContractTest < Minitest::Test
   def test_home_content_portrait_credit_and_resume_link_are_preserved
     html = public_read("index.html")
 
-    assert_includes html, "I build machines that can smell"
     assert_includes html, "across AI, product engineering, science, and data operation."
-    assert_includes html, "Previously, I worked on olfaction, genomics, and high-content cell imaging at Google, protein structure at DeepMind, and machine learning on sensor data at Uber."
+    assert_includes text_content(html), "Previously, I worked on olfaction, genomics, and high-content cell imaging at Google, protein structure at DeepMind, and machine learning on sensor data at Uber."
 
     links = html[/<p\b[^>]*class=["']home-intro__links["'][^>]*>(.*?)<\/p>/m, 1]
     assert_equal ["LinkedIn", "Scholar", "Resume", "Email"], links.scan(/<a\b[^>]*>(.*?)<\/a>/m).flatten.map { |label| text_content(label) }
     resume_link = links[/<a\b[^>]*>Resume<\/a>/]
-    assert_match(%r{href=["']https://drq\.ai/resume["']}, resume_link)
+    assert_match(%r{href=["']/resume/["']}, resume_link)
     assert_match(/target=["']_blank["']/, resume_link)
     assert_match(/rel=["'][^"']*noopener[^"']*noreferrer[^"']*["']/, resume_link)
 
@@ -336,13 +412,16 @@ class StaticPublicContractTest < Minitest::Test
     assert_match(/@media \(max-width: 720px\).*?\.site-credit\s*\{[^}]*justify-self:\s*stretch[^}]*margin:\s*0 24px max\(96px, calc\(72px \+ env\(safe-area-inset-bottom\)\)\)[^}]*padding:\s*0/m, css)
   end
 
-  def test_every_shared_css_route_uses_the_current_deployment_cache_key
+  def test_every_shared_asset_route_uses_the_current_deployment_cache_key
     (PORTFOLIO_ROUTES.keys + ["404.html"]).each do |route|
-      assert_match(%r{href=["']/css/site\.css\?v=20260829["']}, head(public_read(route)), route)
+      assert_match(%r{href=["']/css/site\.css\?v=20260904-6["']}, head(public_read(route)), route)
+      if PORTFOLIO_ROUTES.key?(route)
+        assert_match(%r{src=["']/js/site\.js\?v=20260904-2["']}, public_read(route), route)
+      end
     end
   end
 
-  def test_retired_photo_feature_and_duplicate_resume_link_stay_removed
+  def test_retired_photo_feature_stays_removed
     %w[photo img/photo js/photo-selection.js test/photo_selection_test.js].each do |path|
       refute PROJECT_DIR.join(path).exist?, "Retired Photo artifact returned: #{path}"
       refute PUBLIC_DIR.join(path).exist?, "Retired Photo artifact shipped: #{path}"
@@ -353,7 +432,6 @@ class StaticPublicContractTest < Minitest::Test
     end
     refute_includes public_read("css/site.css"), ".photo-main"
     refute_includes public_read("js/site.js"), "data-photo-feed"
-    refute_match(%r{href=["']/resume["']}, public_read("experience/index.html"))
   end
 
   def test_experience_and_paper_records_preserve_approved_content
@@ -364,7 +442,7 @@ class StaticPublicContractTest < Minitest::Test
     assert_includes experience, "University of Illinois Urbana-Champaign"
     assert_includes experience, "Brandeis University"
 
-    dates_by_company = experience.scan(%r{<article class="work-entry" data-work-entry="true">(.*?)</article>}m).flatten.to_h do |article|
+    dates_by_company = experience.scan(%r{<article class="work-entry" data-work-entry="true" id="[^"]+">(.*?)</article>}m).flatten.to_h do |article|
       company = text_content(article[/<h3>(.*?)<\/h3>/m, 1])
       date = CGI.unescapeHTML(text_content(article[/<div class="entry-date">(.*?)<\/div>/m, 1]))
       [company, date]
@@ -402,12 +480,12 @@ class StaticPublicContractTest < Minitest::Test
   def test_resume_uses_canonical_publication_authors_and_contribution_markers
     resume = public_read("resume/index.html")
 
-    principal_odor_map = resume[/<article class="pub no-break">\s*<h3 class="pub-title">A principal odor map.*?<\/article>/m]
+    principal_odor_map = resume[/<article class="pub no-break" id="[^"]+">\s*<h3 class="pub-title">A principal odor map.*?<\/article>/m]
     assert_includes principal_odor_map, "Emily J. Mayhew*"
     assert_includes principal_odor_map, "Kelsie A. Little"
     refute_includes principal_odor_map, "Emily E Mayhew"
 
-    ecnet = resume[/<article class="pub no-break">\s*<h3 class="pub-title">ECNet is an evolutionary context-integrated deep learning framework for protein engineering.*?<\/article>/m]
+    ecnet = resume[/<article class="pub no-break" id="[^"]+">\s*<h3 class="pub-title">ECNet is an evolutionary context-integrated deep learning framework for protein engineering.*?<\/article>/m]
     assert_includes ecnet, "Yunan Luo*, Guangde Jiang*"
   end
 
@@ -423,7 +501,7 @@ class StaticPublicContractTest < Minitest::Test
     assert_includes CGI.unescapeHTML(text_content(papers_2020)),
                     "ChemRxiv · presented at ACS National Meeting (2021)"
 
-    resume_entry = resume[/<article class="pub no-break">\s*<h3 class="pub-title">#{Regexp.escape(title)}.*?<\/article>/m]
+    resume_entry = resume[/<article class="pub no-break" id="[^"]+">\s*<h3 class="pub-title">#{Regexp.escape(title)}.*?<\/article>/m]
     assert_includes CGI.unescapeHTML(text_content(resume_entry)),
                     "ChemRxiv (2020) · presented at ACS National Meeting (2021)"
   end
@@ -453,7 +531,7 @@ class StaticPublicContractTest < Minitest::Test
   def test_resume_preserves_approved_content_hierarchy_and_brand_details
     html = public_read("resume/index.html")
 
-    assert_equal 15, html.scan(/<article class="pub no-break(?: page-break-before)?">/).length
+    assert_equal 15, html.scan(/<article class="pub no-break(?: page-break-before)?" id="[^"]+">/).length
     assert_equal 4, html.scan('data-company-entry="true"').length
     assert_equal 10, html.scan('data-role-step="true"').length
     assert_equal 10, html.scan('class="role-step__date"').length
@@ -479,7 +557,7 @@ class StaticPublicContractTest < Minitest::Test
 
     assert_equal 2, html.scan(/--resume-osmo:\s*#[0-9a-f]{6};/i).length
     assert_match(%r{href="https://deepmind\.google/"[^>]*class="deepmind-blue"[^>]*>DeepMind</a>}, html)
-    assert_match(%r{<article class="pub no-break page-break-before">\s*<h3 class="pub-title">Evaluating attribution for graph neural networks</h3>}m, html)
+    assert_match(%r{<article class="pub no-break page-break-before" id="graph-neural-network-attribution">\s*<h3 class="pub-title">Evaluating attribution for graph neural networks</h3>}m, html)
 
     assert_equal "11.5", html[/\.entry-title\s*\{[^}]*font-size:\s*([\d.]+)pt/m, 1]
     assert_equal "700", html[/\.entry-title\s*\{[^}]*font-weight:\s*(\d+)/m, 1]
@@ -517,8 +595,8 @@ class StaticPublicContractTest < Minitest::Test
   def test_retired_pdf_is_unavailable_and_uncited
     refute PUBLIC_DIR.join("rsc/resume.pdf").exist?
 
-    PUBLIC_DIR.glob("**/*").select(&:file?).each do |path|
-      refute_includes path.read, "/rsc/resume.pdf", path.relative_path_from(PUBLIC_DIR).to_s unless path.extname == ".ico"
+    PUBLIC_DIR.glob("**/*.{html,css,js,txt,xml}").each do |path|
+      refute_includes path.read, "/rsc/resume.pdf", path.relative_path_from(PUBLIC_DIR).to_s
     end
   end
 
