@@ -15,8 +15,8 @@ class StaticPublicContractTest < Minitest::Test
 
   PORTFOLIO_ROUTES = {
     "index.html" => ["Wesley Qian", "https://drq.ai/", "Home"],
-    "experience/index.html" => ["Experience — Wesley Wei Qian", "https://drq.ai/experience/", "Experience"],
-    "papers/index.html" => ["Papers — Wesley Wei Qian", "https://drq.ai/papers/", "Papers"]
+    "experience/index.html" => ["Experience — Wesley Qian", "https://drq.ai/experience/", "Experience"],
+    "papers/index.html" => ["Papers — Wesley Qian", "https://drq.ai/papers/", "Papers"]
   }.freeze
 
   CANONICAL_SITEMAP_URLS = %w[
@@ -210,9 +210,9 @@ class StaticPublicContractTest < Minitest::Test
     html = public_read("resume/index.html")
     page_head = head(html)
 
-    assert_includes page_head, "<title>Resume — Wesley Wei Qian</title>"
+    assert_includes page_head, "<title>Resume — Wesley Qian</title>"
     assert_match(%r{<link\b[^>]*rel=["']canonical["'][^>]*href=["']https://drq\.ai/resume/["']}, page_head)
-    assert_match(%r{<meta\b[^>]*property=["']og:title["'][^>]*content=["']Resume — Wesley Wei Qian["']}, page_head)
+    assert_match(%r{<meta\b[^>]*property=["']og:title["'][^>]*content=["']Resume — Wesley Qian["']}, page_head)
     assert_match(%r{<meta\b[^>]*name=["']twitter:card["'][^>]*content=["']summary_large_image["']}, page_head)
     assert_equal "ProfilePage", structured_data(html).first.fetch("@type")
     assert_equal PERSON_ID, structured_data(html).first.fetch("mainEntity").fetch("@id")

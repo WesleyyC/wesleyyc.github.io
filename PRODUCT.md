@@ -35,7 +35,7 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 
 ## Brand Commitments
 
-- Public name: Wesley Wei Qian; professional title may use Dr. Wesley Wei Qian where context calls for it. The homepage browser and sharing title is simply Wesley Qian; the visible heading and résumé retain the full name.
+- Public name: Wesley Wei Qian; professional title may use Dr. Wesley Wei Qian where context calls for it. Browser and sharing titles use Wesley Qian: the homepage uses the name alone, and other pages prefix their page label (for example, Papers — Wesley Qian). The visible homepage heading and résumé content retain the full name.
 - Voice: playful, curious, technically precise, and not overly serious.
 - Approved homepage statement: “I lead engineering and research at Osmo, where my team works across AI, product engineering, science, and data operation. Together, we’re turning scent prompting into a product that helps brands scale their fragrance businesses.”
 - The visual and interaction reference is Charlie Deets's personal site, especially its restrained editorial layout and floating bottom menu.
