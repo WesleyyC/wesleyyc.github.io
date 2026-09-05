@@ -14,7 +14,7 @@ class StaticPublicContractTest < Minitest::Test
   GA_ID = "G-Y2HPVMHTRR"
 
   PORTFOLIO_ROUTES = {
-    "index.html" => ["Wesley Wei Qian — AI, Engineering &amp; Research at Osmo", "https://drq.ai/", "Home"],
+    "index.html" => ["Wesley Qian", "https://drq.ai/", "Home"],
     "experience/index.html" => ["Experience — Wesley Wei Qian", "https://drq.ai/experience/", "Experience"],
     "papers/index.html" => ["Papers — Wesley Wei Qian", "https://drq.ai/papers/", "Papers"]
   }.freeze
@@ -152,6 +152,7 @@ class StaticPublicContractTest < Minitest::Test
     assert_equal "Person", person.fetch("@type")
     assert_equal PERSON_ID, person.fetch("@id")
     assert_equal "Wesley Wei Qian", person.fetch("name")
+    assert_includes person.fetch("alternateName"), "Wesley Qian"
 
     assert_equal 1, experience_data.length
     assert_equal "WebPage", experience_data.first.fetch("@type")
