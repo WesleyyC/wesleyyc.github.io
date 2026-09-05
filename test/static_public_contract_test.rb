@@ -324,20 +324,12 @@ class StaticPublicContractTest < Minitest::Test
     assert_equal 2, html.scan('<div class="service-detail">').length
   end
 
-  def test_new_york_smells_lists_arxiv_before_the_project_page
-    expected = [
-      ["https://arxiv.org/abs/2511.20544", "arXiv"],
-      ["https://smell.cs.columbia.edu/", "project page"]
-    ]
-
-    %w[papers/index.html resume/index.html].each do |path|
-      entry = public_read(path)[%r{<article\b[^>]*id="new-york-smells"[^>]*>(.*?)</article>}m, 1]
-      refute_nil entry, "Missing New York Smells in #{path}"
-      metadata = entry[%r{<div class="(?:publication-meta|pub-meta)">(.*?)</div>}m, 1]
-      refute_nil metadata, "Missing New York Smells metadata in #{path}"
-      links = metadata.scan(%r{<a\b[^>]*href="([^"]+)"[^>]*>(.*?)</a>}m)
-      assert_equal expected, links, "New York Smells link order in #{path}"
-    end
+  def test_new_york_smells_uses_the_standard_papers_metadata_format
+    entry = public_read("papers/index.html")[%r{<article\b[^>]*id="new-york-smells"[^>]*>(.*?)</article>}m, 1]
+    refute_nil entry
+    assert_match(%r{<a\b[^>]*data-paper-link="true"[^>]*href="https://arxiv.org/abs/2511\.20544"}, entry)
+    assert_equal "arXiv", entry[%r{<div class="publication-meta">(.*?)</div>}m, 1]
+    refute_includes entry, "smell.cs.columbia.edu"
   end
 
   def test_published_assets_do_not_link_to_a_local_server
