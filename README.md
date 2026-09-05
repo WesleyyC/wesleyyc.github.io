@@ -45,7 +45,7 @@ The runner prefers Homebrew Ruby at `/opt/homebrew/opt/ruby/bin/ruby` when prese
 - Bump a changed CSS or JavaScript asset’s `?v=` key on every page that loads it and update the cache-key test. The custom 404 page loads shared CSS too.
 - Use root-relative internal links and absolute canonical URLs. Keep retired routes and the old PDF out of `public/`.
 
-The core public artifact stays below 500,000 bytes. The approved Studio film is the only exception; the total stays below 2,000,000 bytes. The film loads only after activation. Keep screenshots, review reports, and temporary files in ignored `output/`, outside `public/`.
+The core public artifact stays below 500,000 bytes. The approved Studio film is the only exception; the total stays below 3,000,000 bytes. The film loads only after activation. Keep screenshots, review reports, and temporary files in ignored `output/`, outside `public/`.
 
 ## Verification and publishing
 

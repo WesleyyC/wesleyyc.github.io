@@ -155,7 +155,7 @@ The first viewport is the system's clearest expression: a 300px monochrome portr
 - One shared, bottom-left navigation object across the three portfolio routes; the résumé has no portfolio chrome.
 - Native system typography and small, understandable static-HTML/CSS/vanilla-JavaScript primitives.
 
-**Reference baseline.** The canonical runner covers every shipped route, the responsive portrait, navigation, analytics placement, the standalone résumé boundary, content records, résumé print contracts, and a sub-500 KB core budget plus one optional film within a 2 MB total artifact budget. The only static content image is Wesley's supplied portrait plus its responsive derivatives under `public/img/profile/`; repository-only records and retired artifacts never ship.
+**Reference baseline.** The canonical runner covers every shipped route, the responsive portrait, navigation, analytics placement, the standalone résumé boundary, content records, résumé print contracts, and a sub-500 KB core budget plus one optional film within a 3 MB total artifact budget. The only static content image is Wesley's supplied portrait plus its responsive derivatives under `public/img/profile/`; repository-only records and retired artifacts never ship.
 
 ## Colors
 
@@ -261,7 +261,7 @@ Home links the phrase “turning scent prompting into a product” within the Os
 
 `public/js/studio-video.js` is loaded on Home only. The film has no `src` until activation, starts from the user’s click, and is paused and unloaded when the dialog closes. Native dialog behavior contains focus and handles Escape; closing returns focus to the linked product phrase. Modified clicks and no-JavaScript visits retain the direct MP4 link. Playback errors use the browser’s native video interface.
 
-The approved 1.3 MB MP4 lives in `public/media/`; its provenance is recorded in `docs/media-sources.md`. This is an explicit exception to the old all-assets 500 KB cap: the core site still stays below 500 KB, and the total artifact is capped at 2 MB. Do not preload the film or turn it into a background animation.
+The approved 2.23 MB MP4 lives in `public/media/`; its provenance is recorded in `docs/media-sources.md`. This is an explicit exception to the old all-assets 500 KB cap: the core site still stays below 500 KB, and the total artifact is capped at 3 MB. Do not preload the film or turn it into a background animation.
 
 ### Editorial entries
 

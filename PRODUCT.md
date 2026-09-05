@@ -25,7 +25,7 @@ The site is a public personal portfolio reached through `drq.ai`. Visitors may a
 ## Capabilities and Constraints
 
 - Plain static HTML hosted through a direct GitHub Pages artifact deployment; no site generator or runtime build is required.
-- The core site stays below 500 KB. The user-approved Osmo Studio film is a separate on-demand asset; the total deploy artifact stays below 2 MB. Repository-only files, retired media, and obsolete routes remain excluded.
+- The core site stays below 500 KB. The user-approved Osmo Studio film is a separate on-demand asset; the total deploy artifact stays below 3 MB. Repository-only files, retired media, and obsolete routes remain excluded.
 - Primary navigation contains Home, Experience, and Papers; Experience lives at `/experience/`, Papers lives at `/papers/`, and the retired `/work/` and `/publications/` routes are intentionally absent.
 - Home introduces the person, with quiet contextual links into Experience and Papers. The phrase “turning scent prompting into a product” opens the 27-second Osmo Studio film only on request. Writing and expanded case studies are deferred.
 - Semantic HTML is authoritative for people, search engines, and agents. Canonical URLs, the sitemap, `llms.txt`, and structured data describe the same four public pages.

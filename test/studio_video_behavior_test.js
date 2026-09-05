@@ -19,7 +19,7 @@ function setup({ supported = true, rejectPlay = false } = {}) {
         focus() { document.activeElement = this; }
     }
     const link = new Element();
-    link.href = "http://localhost/media/osmo-studio-launch.mp4";
+    link.href = "http://localhost/media/osmo-studio-launch.mp4?v=example";
     const dialog = new Element();
     const video = new Element();
     const close = new Element();
@@ -65,7 +65,7 @@ test("loads and plays the film only after normal link activation", () => {
     assert.equal(video.playRequests, 0);
     assert.equal(click(link).defaultPrevented, true);
     assert.equal(dialog.open, true);
-    assert.equal(video.src, "http://localhost/media/osmo-studio-launch.mp4");
+    assert.equal(video.src, "http://localhost/media/osmo-studio-launch.mp4?v=example");
     assert.equal(video.playRequests, 1);
 });
 
@@ -119,5 +119,5 @@ test("a rejected play request leaves the dialog available for native controls", 
     click(link);
     await Promise.resolve();
     assert.equal(dialog.open, true);
-    assert.equal(video.src, "http://localhost/media/osmo-studio-launch.mp4");
+    assert.equal(video.src, "http://localhost/media/osmo-studio-launch.mp4?v=example");
 });

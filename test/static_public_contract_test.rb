@@ -5,6 +5,7 @@ require "minitest/autorun"
 require "pathname"
 require "rexml/document"
 require "cgi"
+require "digest"
 
 class StaticPublicContractTest < Minitest::Test
   PROJECT_DIR = Pathname.new(__dir__).parent.expand_path
@@ -95,8 +96,8 @@ class StaticPublicContractTest < Minitest::Test
     core_bytes = files.reject { |path| path == optional_video }.sum(&:size)
     assert_operator core_bytes, :<, 500_000,
                     "Core site is #{core_bytes} bytes; expected less than 500 KB"
-    assert_operator files.sum(&:size), :<, 2_000_000,
-                    "Site plus the on-demand film must stay below 2 MB"
+    assert_operator files.sum(&:size), :<, 3_000_000,
+                    "Site plus the on-demand film must stay below 3 MB"
   end
 
   def test_studio_film_is_available_on_demand_with_a_direct_link_fallback
@@ -104,14 +105,15 @@ class StaticPublicContractTest < Minitest::Test
     assert PUBLIC_DIR.join("media/osmo-studio-launch.mp4").file?, "The Studio link must resolve to a shipped film"
     link = html[/<a\b[^>]*data-studio-video[^>]*>/]
     refute_nil link, "Home must expose the optional Studio film"
-    assert_match(%r{href="/media/osmo-studio-launch\.mp4"}, link)
+    video_version = Digest::SHA256.file(PUBLIC_DIR.join("media/osmo-studio-launch.mp4")).hexdigest[0, 12]
+    assert_includes link, %(href="/media/osmo-studio-launch.mp4?v=#{video_version}")
     video = html[/<video\b[^>]*>/]
     refute_nil video
     refute_match(/\bsrc=|\bautoplay\b/, video, "The film must not load or play before activation")
     assert_match(/\bpreload="none"/, video)
     assert_match(/\bcontrols\b/, video)
     assert_match(/\bplaysinline\b/, video)
-    refute_match(%r{<link\b[^>]*href="[^"]+\.mp4"}, head(html))
+    refute_match(%r{<link\b[^>]*href="[^"]+\.mp4(?:\?[^"]*)?"}, head(html))
   end
 
   def test_portfolio_pages_ship_complete_metadata_navigation_and_analytics
